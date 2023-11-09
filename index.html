@@ -8,6 +8,15 @@
     <script type="module" crossorigin src="/vuepage/assets/index-5be085a0.js"></script>
     <link rel="stylesheet" href="/vuepage/assets/index-b49c7807.css">
   </head>
+  <script>
+    (function(){
+      let redirect = sessionStorage.redirect;
+      delete sessionStorage.redirect;
+      if (redirect && redirect !== location.href) {
+        history.replaceState(null, null, redirect);
+      }
+    })();
+  </script>
   <body>
     <div id="app"></div>
     
