@@ -9,6 +9,15 @@
     <script type="module" crossorigin src="/vuepage/assets/index-8a9688b0.js"></script>
     <link rel="stylesheet" href="/vuepage/assets/index-e90b732f.css">
   </head>
+  <script>
+    (function(){
+      let redirect = sessionStorage.redirect;
+      delete sessionStorage.redirect;
+      if (redirect && redirect !== location.href) {
+        history.replaceState(null, null, redirect);
+      }
+    })();
+  </script>
   <body>
     <div id="app"></div>
     
