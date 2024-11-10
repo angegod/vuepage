@@ -1,1 +1,0 @@
-import{_ as e,o,c as t,a as c}from"./index.0a0c6ffe.js";const n={},s=c("span",null,"這個頁面不存在 稍後會跳轉至主頁",-1),a=[s];function _(r,d){return o(),t("div",null,a)}const f=e(n,[["render",_]]);export{f as default};
