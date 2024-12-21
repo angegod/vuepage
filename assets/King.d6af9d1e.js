@@ -1,4 +1,4 @@
-import{_ as I,o as m,c as r,F as x,f,a as e,t as i,d as t,i as b,u as w,q as _,b as D,e as l,p as C,g as j}from"./index.c66a4661.js";const v=[{id:1,color:"purple",mainImage:"/images/number1/mainImage.jpg",hideImage:"/images/number1/hideImage.jpg",monsterTitle:"野望滅絕.薩魯曼",monsterOthers:{belong:"暗屬性妖精",rarity:"8星",howtoget:"一封王分歧潛解",material:{m1:"/images/number1/m1.jpg",m2:"/images/3011i.jpg"},relic:"/images/number1/relic.jpg"},mainDescription:"在這次上修後，放寬了技一的回血條件、技二解盾條件，但整體技能泛用性仍不高，現在的技能組比較像是妖精特定對策卡，不會是先發等級。",skill:[{CD:6,title:"蝕靈",description:`I. 當前生命力變為
+import{_ as I,o as m,c as r,F as x,f,a as e,t as i,d as t,i as b,u as w,q as _,b as D,e as l,p as C,g as j}from"./index.830a57a9.js";const v=[{id:1,color:"purple",mainImage:"/images/number1/mainImage.jpg",hideImage:"/images/number1/hideImage.jpg",monsterTitle:"野望滅絕.薩魯曼",monsterOthers:{belong:"暗屬性妖精",rarity:"8星",howtoget:"一封王分歧潛解",material:{m1:"/images/number1/m1.jpg",m2:"/images/3011i.jpg"},relic:"/images/number1/relic.jpg"},mainDescription:"在這次上修後，放寬了技一的回血條件、技二解盾條件，但整體技能泛用性仍不高，現在的技能組比較像是妖精特定對策卡，不會是先發等級。",skill:[{CD:6,title:"蝕靈",description:`I. 當前生命力變為
 =>總生命力 100% 
 
 1 回合內
