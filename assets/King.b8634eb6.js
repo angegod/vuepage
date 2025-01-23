@@ -1,4 +1,4 @@
-import{_ as f,o as l,c as m,F as x,f as I,a as e,t as i,d as n,i as b,u as w,q as _,b as D,e as a,p as C,g as j}from"./index.e87906d3.js";const v=[{id:1,color:"purple",mainImage:"/images/number1/mainImage.jpg",hideImage:"/images/number1/hideImage.jpg",monsterTitle:"野望滅絕.薩魯曼",monsterOthers:{belong:"暗屬性妖精",rarity:"8星",howtoget:"一封王分歧潛解",material:{m1:"/images/number1/m1.jpg",m2:"/images/3011i.jpg"},relic:"/images/number1/relic.jpg"},mainDescription:`技一放寬作用對象以及破盾條件以及調整成可以無視紅綠燈的回血。
+import{_ as f,o as l,c as m,F as x,f as I,a as e,t as i,d as n,i as b,u as w,q as _,b as D,e as a,p as C,g as j}from"./index.f804c884.js";const v=[{id:1,color:"purple",mainImage:"/images/number1/mainImage.jpg",hideImage:"/images/number1/hideImage.jpg",monsterTitle:"野望滅絕.薩魯曼",monsterOthers:{belong:"暗屬性妖精",rarity:"8星",howtoget:"一封王分歧潛解",material:{m1:"/images/number1/m1.jpg",m2:"/images/3011i.jpg"},relic:"/images/number1/relic.jpg"},mainDescription:`技一放寬作用對象以及破盾條件以及調整成可以無視紅綠燈的回血。
 技二把固版指定對象增加了黑化卡，但整體使用上並沒有變化。
 整體而言調整幅度算是偏小，定位仍不變，加上攻前拼圖的手段不少，現在傾向是妖精對策卡，不見得是先發級別的。`,skill:[{CD:6,title:"蝕靈",description:`I. 當前生命力變為
 =>總生命力 100% 
