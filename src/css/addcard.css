@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.removeBtn,.addBtn{
+    color:theme('colors.gray.600');
+    border-color: theme('borderColor.gray.600');
+    border-radius: theme('borderRadius.md');
+    border-width: theme('borderWidth.2');
+    border-style: solid;
+    font-weight: theme('fontWeight.bold');
+}
+
+.removeBtn:hover,.addBtn:hover{
+    color: theme('colors.amber.900');
+    border-color: theme('borderColor.amber.900');
+}
+
+.selfInput{
+    max-width: 250px;
+    background-color: theme('colors.gray.600');
+    border-radius:theme('borderRadius.lg');
+    padding-left: theme('padding.2');
+    padding-right: theme('padding.2');
+    color: theme('colors.white');   
+}
+
+.inputNum{
+    width: 70px;
+    outline: none;
+    border-bottom: 1px solid gray;
+    text-align: center;
+    background-color: inherit;
+}
+
+.colorSelect{
+    background-color: rgb(105, 13, 13);
+    color: white;
+    border:theme('borderRadius.lg');
+    width: theme('width.1/10');
+    min-width: 150px;
+}
+
+
+.step-enter-active, .step-leave-active {
+  transition: transform 0.5s ease;
+}
+
+/* 進入的初始狀態：從左側滑入 */
+.step-enter {
+  transform: translateX(-100%);
+}
+
+/* 離開的最終狀態：滑向右側 */
+.step-leave-to {
+  transform: translateX(100%);
+}
+
+.imgbox1{
+    animation: rarity1_blink infinite 3s ease-in;
+}
+
+.imgbox2{
+    animation: rarity2_blink infinite 3s ease-in;
+}
+
+.imgbox3{
+    animation: rarity3_blink infinite 3s ease-in;
+}
+
+.spread{
+    width: 240px; /* 棋子盘宽度压缩到200px */
+    height: 200px; /* 按比例设定的高度 */
+    background-image: url('https://angegod.github.io/vuepage/images/card/spread/base.png');
+    background-size: 160px 160px;
+    background-repeat: repeat;
+}
+
+
+@keyframes rarity3_blink{
+    0%{
+        box-shadow:0px 1px 5px 5px orange ;
+    }
+    50%{
+        box-shadow:0px 1px 5px 8px rgba(255, 166, 0, 0.61);
+    }
+
+    100%{
+        box-shadow:0px 1px 5px 5px orange ;
+    }
+}
+
+@keyframes rarity2_blink{
+    0%{
+        box-shadow:0px 1px 10px 5px  rgba(84, 80, 80, 0.79);
+    }
+    50%{
+        box-shadow:0px 1px 3px 8px rgba(84, 80, 80,0);
+    }
+
+    100%{
+        box-shadow:0px 1px 10px 5px rgba(84, 80, 80,0.79 );
+    }
+}
+@keyframes rarity1_blink{
+    0%{
+        box-shadow:0px 1px 5px 5px  brown;
+    }
+    50%{
+        box-shadow:0px 1px 5px 8px rgba(165, 42, 42, 0.384);
+    }
+
+    100%{
+        box-shadow:0px 1px 5px 5px brown ;
+    }
+}
+
+/*隱藏input number旁邊的調整按鈕*/
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

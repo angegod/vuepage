@@ -1,0 +1,36 @@
+[
+    {
+        "id":1,
+        "name":"換取生命的代價",
+        "image":"/images/u1/Icon.jpg",
+        "limit":"以單一屬性成員進場",
+        "background":"每回合混沌值 +20%"
+    },
+    {
+        "id":2,
+        "name":"焰火下的護佑",
+        "image":"/images/u2/Icon.jpg",
+        "limit":"只有獸族、神族與機械族才可進場",
+        "background":"每回合混沌值 +20%"
+    },
+    {
+        "id":3,
+        "name":"孤身獨戰的無畏",
+        "image":"/images/u3/Icon.jpg",
+        "limit":"只限神族、獸類、妖精類成員進場",
+        "background":"戰力點限制，進場1000。戰力點歸0則不能開技。"
+    },
+    {
+        "id":4,
+        "name":"名叫征服的遊戲",
+        "image":"/images/u4/Icon.jpg",
+        "limit":"需要 5 屬性成員進場",
+        "background":"於單層數時，移動符石時觸碰的符石及周邊範圍陷入漆黑。於雙層數時，移動符石時漆黑一片，照亮移動符石時觸碰的符石範圍。於王關時每回合限制 50 步。"
+    },{
+        "id":5,
+        "name":"龍的訓服者",
+        "image":"/images/u5/Icon.jpg",
+        "limit":"需以 3 個不同種族成員進場",
+        "background":"戰力點限制，進場1000。戰力點歸0則不能開技。"
+    }
+]

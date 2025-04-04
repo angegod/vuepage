@@ -1,0 +1,149 @@
+.battle{
+    width:100%;
+    height: auto;
+    padding-bottom: 40px;
+    background-image: linear-gradient(to bottom,rgb(27, 25, 25) 0%,rgb(65, 28, 28) 70%,rgb(102, 12, 12) 90%);
+}
+
+.main{
+    width: 80%;
+    margin-left:auto;
+    margin-right: auto;
+    height: calc(100% + 100px);
+}
+
+.monster_images_total{
+    width:100%;
+    margin-top: 20px;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+}   
+
+.monster_images{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 12%;
+    min-width: 100px;
+    text-align: center;
+    height: 100px;
+    margin: 10px 15px;
+}
+
+.monster_images img:hover{
+    border: 7px solid rgb(65, 28, 28);
+    border-radius: 10px;
+    animation-duration: 0.5s;
+    animation-name: ImgBlink;
+    animation-iteration-count: infinite;
+    cursor: pointer;
+    
+}
+
+.monster_images.isChoose img{
+    border:7px solid rgb(198, 30, 30);
+    border-radius: 10px;
+    
+}
+
+.battle_totals{
+    width: 100%;
+    height: auto;
+    padding-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.battle_totals img{
+    width: 100%;
+}
+
+.battle_totals img.errors{
+    width: 40%;
+}
+
+.battle_description{
+    width: 100%;
+}
+
+.battle_name{
+    color: rgb(198, 49, 49);
+}
+.battle_limit{
+    color: rgb(135, 47, 47);
+}
+
+.errors_text{
+    font-size: 20px;
+    font-weight: bold;
+    color: brown;
+}
+
+.achievement p span{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.achievement p span:nth-child(1){
+    color: brown;
+}
+.achievement p span:nth-child(3){
+    color: silver;
+}
+.achievement p span:nth-child(5){
+    color: goldenrod;
+}
+
+/* 滚动条的背景轨道 */
+.monster_images_total::-webkit-scrollbar {
+    height: 10px !important;
+    border: none;
+    background-color: transparent;
+}
+
+/* 滚动条的滑块部分 */
+.monster_images_total::-webkit-scrollbar-thumb {
+    background: #888 !important; /* 颜色 */
+    border-radius: 5px !important;/* 圆角 */
+}
+
+/* 滑块部分的悬停效果 */
+::-webkit-scrollbar-thumb:active {
+    background: #333; /* 拖动时滑块颜色 */
+}
+
+@keyframes ImgBlink{
+    0%{
+        border-color: none;
+    }
+
+    50%{
+       border-color: rgb(198, 30, 30);
+       
+    }
+    100%{
+        border-color: none;
+    }
+}
+
+@media(max-width:576px){
+    .battle_description .battle_name{
+        font-size: 25px;
+    }
+    .battle_description .battle_limit{
+        font-size: 18px;
+    }
+    .battle_description .achievement p span{
+        font-size: 18px;
+    }
+    .monster_images_total{
+        justify-content: space-evenly;
+    }
+
+   
+    #hidden_image{
+        max-height: 300px;
+    }
+    
+}

@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.header{
+  background-color: rgb(67, 47, 47);
+  position: sticky;
+  top: 0;
+  width: 100% ;
+  z-index: 600;  
+ 
+}
+
+
+
+.menu{
+  color: gray;
+  list-style: none;
+  margin-top:0px;
+  padding-left: 40px;
+  padding-bottom: 5px;
+  
+}
+
+
+.link,.sublink{
+    margin-left:20px;
+    margin-right:20px;
+    font-weight: bold;
+    width: fit-content;
+    height: 30px;
+    color:gray;
+    text-decoration: none;
+    word-break: keep-all;
+}
+
+.link.redText,
+.sublink.redText{
+  color: rgb(129, 5, 5);
+}
+
+/*hover顯示 */
+a:hover{
+  color: white;
+}
+
+
+.subMenu{
+  height: 0;
+  opacity: 0;
+  transition: none;
+  pointer-events: none; /* 禁止鼠標事件 */
+}
+
+.subMenu.expand{
+  height: 25vh;
+  min-height: 140px;
+  opacity: 1;
+  /*transition: height 0.5s ease-out;*/
+  pointer-events: auto; /* 禁止鼠標事件 */
+}
+
+
+
+.hidden{
+  display: none;
+}
+
+#headerMenu{
+    position: absolute;
+    top: 0%;
+    left:6%;
+    z-index: 9999;
+    background-color: rgb(67, 47, 47);
+}
+
+
+
+
+
