@@ -115,7 +115,7 @@
         <div class="w-3/5 mt-[20vh]">
            <div class="w-3/5 mx-auto mt-30 [&>p]:mb-3 max-md:mt-15 " >
                 <p class="text-white font-bold text-2xl max-md:text-xl">近期隆重推出時光牌圖鑑篩選器功能</p>
-                <p class="text-white text-2xl max-md:text-xl font-bold ">歡迎有需要的 點選下方連結使用!</p>
+                <p class="text-white text-2xl max-md:text-xl font-bold ">歡迎點選下方連結使用!</p>
            </div>
             <div class="button">
                 <button><router-link to="/card/" class="px-3 text-lg py-1"><span>更多</span></router-link></button>

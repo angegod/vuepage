@@ -44,7 +44,7 @@
 
             target.value=myFile[number-1];
         }else{
-            var newpath=isAddable+'/images/u'+number+'/battle_details.jpg';
+            var newpath=isAddable+'/images/ultimate/u'+number+'/battle_details.jpg';
 
             detailImages.src=newpath;
 
@@ -119,7 +119,7 @@
                     <img :src="isAddable + `/images/number${number+1}/hideImage.jpg`" alt="5555" v-on:click="imgClick(number+1)" @error="showDefaultImg"/>
                 </div>
                 <div class="monster_images" v-for="(battle,number) in ultimate" v-else>
-                    <img :src="isAddable + `/images/u${number+1}/Icon.png`" alt="5555" v-on:click="imgClick(number+1)" @error="showDefaultImg"/>
+                    <img :src="isAddable + `/images/ultimate/u${number+1}/Icon.png`" alt="5555" v-on:click="imgClick(number+1)" @error="showDefaultImg"/>
                 </div>
             </div>
             <div class="battle_description" v-if="showable">

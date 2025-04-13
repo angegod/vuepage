@@ -1,0 +1,249 @@
+{
+    "id":6,
+    "stageName":"以砲響拉開帷幕 災厄級",
+    "stageLimit":"必須以單一種族成員進場",
+    "backgroundSkill":"無法提升當前生命力",
+    "wave":[
+    {
+        "waveId":1,
+        "monsterDetails":[{
+            "monsterId":258,
+            "Details":[{
+                "monsterATK":990000,
+                "CD":3,
+                "StartCD":3,
+                "HP": "66兆",
+                "DEF":"1.6億",
+                "Skill":["轉珠技無效","反首消木符石盾-反擊100%","無法控制"]
+            }]
+        },{
+            "monsterId":260,
+            "Details":[{
+                "monsterATK":990000,
+                "CD":3,
+                "StartCD":3,
+                "HP": "66兆",
+                "DEF":"1.6億",
+                "Skill":["六重軌跡隱藏","反首消暗符石盾-反擊100%","無法控制"]
+            }]
+        },{
+            "monsterId":259,
+            "Details":[{
+                "monsterATK":990000,
+                "CD":3,
+                "StartCD":3,
+                "HP": "66兆",
+                "DEF":"1.6億",
+                "Skill":["始終盾","反首消光符石盾-反擊100%","無法控制"]
+            }]
+            
+        }]
+    },{
+        "waveId":2,
+        "monsterDetails":[{
+            "monsterId":10567,
+            "Details":[{
+                "monsterATK": 760000,
+                "CD": 2,
+                "StartCD": 2,
+                "HP": "94兆",
+                "DEF": "6.5億",
+                "Skill": ["黑白符石","首消≥3組5顆T字盾", "無視減傷"]
+            }]
+        }]
+    },{
+        "waveId":3,
+        "monsterDetails":[{
+            "monsterId":10565,
+            "Details":[{
+                "monsterATK": 450000,
+                "CD": 1,
+                "StartCD": 1,
+                "HP": "83兆",
+                "DEF": "9.1億",
+                "Skill": ["1回弱攻99%", "首消光追擊零化", "雙下角複製轉光"]
+            },{
+                "monsterATK": 820000,
+                "CD": 1,
+                "StartCD": 1,
+                "HP": "145兆",
+                "DEF": "9.1億",
+                "Skill": ["3重角色符石地型", "首消五屬Combo相等盾", "無法控制"]
+            }]
+        }]
+    },{
+        "waveId":4,
+        "monsterDetails":[{
+            "monsterId":10562,
+            "Details":[{
+                "monsterATK": 590000,
+                "CD": 1,
+                "StartCD": 1,
+                "HP": "78兆",
+                "DEF": "5.3億",
+                "Skill": [
+                  "進場⇒10層陰之氣 陰之氣⏵全體拘束",
+                  "首消23顆符石追擊盾",
+                  "轉珠技無效",
+                  "淨化印記-心"
+                ]
+            }]
+        }]
+    },{
+        "waveId":5,
+        "monsterDetails":[{
+            "monsterId":702,
+            "Details":[{
+                "monsterATK": 460000,
+                "CD": 2,
+                "StartCD": 2,
+                "HP": "51兆",
+                "DEF": "4.3億",
+                "Skill": [
+                  "黑白符石",
+                  "剋敵初級拼圖盾-限",
+                  "暗外最少屬轉暗"
+                ]
+            }]
+        },{
+            "monsterId":738,
+            "Details":[{
+                "monsterATK": 680000,
+                "CD": 3,
+                "StartCD": 3,
+                "HP": "51兆",
+                "DEF": "4.3億",
+                "Skill": [
+                  "50%盾",
+                  "0%減傷抗性盾︰消暗增抗50%",
+                  "14+Combo盾"
+                ]
+            }]
+        }]
+    },{
+        "waveId":6,
+        "monsterDetails":[{
+            "monsterId":10568,
+            "Details":[{
+                "monsterATK": 710000,
+                "CD": 2,
+                "StartCD": 2,
+                "HP": "89兆",
+                "DEF": "7.2億",
+                "Skill": [
+                  "✕型燃燒20%",
+                  "首消≥3組5顆十字盾",
+                  "無視減傷"
+                ]
+            }]
+        }]
+    },{
+        "waveId":7,
+        "monsterDetails":[{
+            "monsterId":10564,
+            "Details":[{
+                "monsterATK": 530000,
+                "CD": 1,
+                "StartCD": 1,
+                "HP": "171兆",
+                "DEF": "8.7億",
+                "Skill": [
+                  "進場&每回⇒木符石加護",
+                  "強化五屬盾",
+                  "始終盾",
+                  "無法控制"
+                ]
+            },{
+                "monsterATK": 680000,
+                "CD": 1,
+                "StartCD": 1,
+                "HP": "126兆",
+                "DEF": "8.7億",
+                "Skill": [
+                  "結界地型圍城",
+                  "17+Combo追擊盾",
+                  "亡命⇒木圍城"
+                ]
+            }]
+        }]
+    },{
+        "waveId":8,
+        "monsterDetails":[{
+            "monsterId":10569,
+            "Details":[{
+                "monsterATK": 590000,
+                "CD": 1,
+                "StartCD": 1,
+                "HP": "73兆",
+                "DEF": "5.8億",
+                "Skill": [
+                  "2格瘴氣20% ‧ 附加失效",
+                  "首消≥6組屬性符石盾",
+                  "開技消耗50%"
+                ]
+            }]
+        }]
+    },{
+        "waveId":9,
+        "monsterDetails":[{
+            "monsterId":10563,
+            "Details":[{
+                "monsterATK": 730000,
+                "CD": 2,
+                "StartCD": 2,
+                "HP": "96兆",
+                "DEF": "7.1億",
+                "Skill": [
+                  "1回弱攻99%",
+                  "2格火焰地型200000",
+                  "首消不同屬或心珠5Combo盾",
+                  "無視減傷"
+                ]
+            }]
+        }]
+    },{
+        "waveId":10,
+        "monsterDetails":[{
+            "monsterId":10566,
+            "Details":[{
+                "monsterATK": 670000,
+                "CD": 1,
+                "StartCD": 1,
+                "HP": "157兆",
+                "DEF": "9.6億",
+                "Skill": [
+                    "進場⇒附加消除重置",
+                    "首消全光暗盾",
+                    "移形換影︰心幻暗",
+                    "無法控制"
+                ]
+            },
+            {
+                "monsterATK": 480000,
+                "CD": 1,
+                "StartCD": 1,
+                "HP": "135兆",
+                "DEF": "9.6億",
+                "Skill": [
+                    "左上附加⇒2回暗禁消",
+                    "暗起手始終盾",
+                    "首消≥3組5顆L字盾",
+                    "無視減傷"
+                ]
+            },
+            {
+                "monsterATK": 850000,
+                "CD": 1,
+                "StartCD": 1,
+                "HP": "184兆",
+                "DEF": "9.6億",
+                "Skill": [
+                    "首消10Combo盾",
+                    "首消多種減傷盾50%",
+                    "【左下】暗幻界",
+                    "【右下】火幻界"
+                ]
+            }]
+        }]
+    }]
+}

@@ -11,6 +11,8 @@
     "@jambonn/vue-lazyload": "^1.0.10",
     "@vueuse/head": "^2.0.0",
     "axios": "^1.7.3",
+    "html-to-image": "^1.11.13",
+    "html2canvas": "^1.4.1",
     "mitt": "^3.0.1",
     "prerender-spa-plugin-next": "^4.2.3",
     "vue": "^3.3.4",

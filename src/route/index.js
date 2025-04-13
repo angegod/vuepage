@@ -73,6 +73,10 @@ const routes = [
       title: '時光牌圖鑑--琉璃計算器',
       description: '計算所需的琉璃'
     }
+  },{
+    path: '/ImageMaker/', 
+    name:'ImageMaker',
+    component: () => import('../components/ImageMaker.vue') 
   },
   { 
     path: '/:catchAll(.*)/', 
