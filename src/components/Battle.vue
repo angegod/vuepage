@@ -146,7 +146,7 @@
             <div class="battle_totals max-w-[800px]"  v-lazy-container="{ selector: 'img' }">
                 <img id="battle_details_image"  :data-src="isAddable+'/images/number1/battle_details.jpg'" class="hidden"
                     alt="not found" @error="showDefaultImg"  @load="imgloadStatus" />
-                <img id="hidden_image" :data-src="isAddable+'/images/u3/question.gif'" class="max-w-[300px] " />
+                <img id="hidden_image" :data-src="isAddable+'/images/question.gif'" class="max-w-[300px] " />
             </div>          
         </div>
 
