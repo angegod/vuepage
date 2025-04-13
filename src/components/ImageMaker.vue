@@ -3,7 +3,7 @@ import { inject,ref,provide} from 'vue';
 import stage from '../assets/UltimateTest.json';
 import { toPng } from 'html-to-image';
 
-//只在測試版本才能允許進入
+//只在測試版本進入
 const isAddable=inject('frontpath');
 if(isAddable!==''){
     var currentpath=window.location.href;
