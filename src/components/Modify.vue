@@ -97,6 +97,9 @@
 
             
             changeCard(1);
+        }).catch((error)=>{
+            alert('伺服器尚未開啟請稍後再試!!');
+            window.location=window.location.origin+'/vuepage/';
         });
     }
 
@@ -557,7 +560,7 @@
             <div class="ml-5 mb-3">
                 <span class="text-white">請輸入要卡片編號:</span>
                 <div class="flex flex-row">
-                    <input type="number" class="w-[100px] rounded-md" @change="event=>slideItem(event,CardArray.length)"/>
+                    <input type="number" class="w-[100px] rounded-md text-center" @change="event=>slideItem(event,CardArray.length)"/>
                     <button class="addBtn ml-3 px-3" @click="addCard">添加卡片</button>
                 </div>
             </div>

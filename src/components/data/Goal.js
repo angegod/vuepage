@@ -4,13 +4,13 @@ let Goal=[{
     count:0,
     bind:750,
     goal:15,
-    open:16
+    open:17
 },{
     rarity:2,
     count:0,
     bind:1000,
     goal:10,
-    open:16,
+    open:18,
 },{
     rarity:3,
     count:0,

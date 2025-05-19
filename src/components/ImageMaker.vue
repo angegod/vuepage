@@ -121,7 +121,6 @@ function savePng() {
 }
 
 span{
-    color: theme('colors.white');
     font-weight: theme('fontWeight.bold');
 }
 

@@ -58,7 +58,7 @@
     <div class="">
         <div class="w-5/6 mx-auto">
             <div >
-                <span class="text-red-500 font-bold text-[28px]">琉璃計算器Beta</span>
+                <span class="text-amber-900 font-bold text-[28px]">琉璃計算器</span>
             </div>
             <div>
                 <div class="flex flex-col">

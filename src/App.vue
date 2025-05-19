@@ -137,7 +137,7 @@ export default {
                 <div class="mt-2 sublink" @click="addDash(3)">
                   <router-link to="/battle/" >關卡資訊</router-link>
                 </div>
-                <div class="mt-2 sublink" @click="addDash(4)">
+                <div class="mt-2 sublink" @click="addDash(4)" >
                   <router-link to="/card/" >時光牌</router-link>
                 </div>
             </div>

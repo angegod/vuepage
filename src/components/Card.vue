@@ -1,13 +1,17 @@
 <script setup>
     import { inject,ref,provide,nextTick } from 'vue';
+    import { onMounted, onUnmounted } from 'vue';
     import { useHead } from '@vueuse/head';
+    
     import funcData from './data/funcData';
     import Card from './data/Card';
     import Switch from '../components/Switch.vue';
     import LazyImage from './LazyImage.vue';
-    import { onMounted, onUnmounted } from 'vue';
-    import { eventBus } from './data/eventBus';
     import Calculator from './Calculator.vue';
+    import CardHint from './CardHint.vue';
+    
+    import { eventBus } from './data/eventBus';
+
     
 
     const isAddable=inject('frontpath');//圖片默認路徑，要配合之後有可能上線
@@ -418,19 +422,12 @@
         </div>
         <div v-else class="flex flex-col">
             <span class="text-white">請輸入時光牌名稱關鍵字:</span>
-            <div class="flex flex-row">
+            <div class="flex flex-row items-center">
                 <input type="text" placeholder="Keyword" class="rounded-md max-w-[200px] pl-3 max-h-[25px]" @keyup="event=>CardByText(event)" :disabled="gifShow"/>
+                <CardHint />
                 <img :src="isAddable+'/images/loading.gif'" alt="555" class="w-[50px] h-[30px]" v-if="gifShow"/>
             </div>
-            <div class="mt-5 flex flex-col">
-                <span class="text-amber-600 font-bold text-xl">簡單說明:</span>
-                <ul class="[&>li]:text-white list-decimal pl-5">
-                    <li>使用方式:輸入所想要篩選的關鍵字，按下enter鍵即可看到對應結果</li>
-                    <li>"關鍵字"範圍包括:時光牌名稱、技能敘述關鍵字、玩家常見暱稱</li>
-                    <li>例如:換取生命的代價=>可以透過夏馬西、十字等字眼搜尋出來</li>
-                    <li>關鍵字會不定期更新</li>
-                </ul>
-            </div>
+
         </div>
         
         <div class="flex flex-col flex-wrap mt-5" id="searchCard" v-show="isSearch">

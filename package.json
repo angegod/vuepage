@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@jambonn/vue-lazyload": "^1.0.10",
+    "@popperjs/core": "^2.11.8",
     "@vueuse/head": "^2.0.0",
     "axios": "^1.7.3",
     "html-to-image": "^1.11.13",
@@ -18,8 +19,8 @@
     "vue": "^3.3.4",
     "vue-carousel": "^0.11.0",
     "vue-router": "^4.2.5",
-    "vue-router-sitemap": "^0.0.4",
-    "vue3-carousel": "^0.3.1"
+    "vue3-carousel": "^0.3.1",
+    "vue3-popper": "^1.5.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.4.0",

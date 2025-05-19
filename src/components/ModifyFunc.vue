@@ -291,6 +291,9 @@ function saveFunc(){
 
         //將動作紀錄清空
         funcMove.value=[];
+    }).catch((error)=>{
+        alert('伺服器尚未開啟請稍後再試!!');
+        window.location=window.location.origin+'/vuepage/';
     });
 }    
 

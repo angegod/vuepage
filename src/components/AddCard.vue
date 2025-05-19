@@ -182,8 +182,8 @@
             console.log(response1.data);
 
             //如果有必要需要丟盤面分布
-
-            if(spreadInput.value!==null||spreadInput.value!==undefined){
+            console.log(spreadInput);
+            if(spreadInput.value!==null&&spreadInput.value!==undefined){
                 console.log('開始上傳盤面');
                 let formData2=new FormData();
                 formData2.append('image', spreadInput.value.realFile);
@@ -205,6 +205,7 @@
                 series:1,
                 card:card.value
             }
+            console.log(json);
             await axios.post('http://localhost:5000/card/add',json).then((response)=>{
                 console.log(response.data);
                 step.value = 1;
