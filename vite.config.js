@@ -15,8 +15,7 @@ export default defineConfig({
         '/about', 
         '/battle', 
         '/card', 
-        '/King',
-        '/calculator'
+        '/King'
       ]
     })
   ],

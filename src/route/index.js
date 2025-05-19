@@ -64,15 +64,6 @@ const routes = [
       title: '時光牌圖鑑--技能後台',
       description: '管理時光牌技能的後台'
     }
-  },
-  {
-    path: '/calculator/',
-    name: 'Calculator',
-    component: () => import('../components/Calculator.vue'),
-    meta: {
-      title: '時光牌圖鑑--琉璃計算器',
-      description: '計算所需的琉璃'
-    }
   },{
     path: '/ImageMaker/', 
     name:'ImageMaker',
