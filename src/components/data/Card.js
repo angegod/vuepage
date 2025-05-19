@@ -1151,6 +1151,10 @@ let Card = [
         "PointConsume": 3,
         "PointGet": 2,
         "fullimage": "/images/card/image/1_37.png",
+        "spread": {
+          "image": "/images/card/spread/1_37.png",
+          "index": 1
+        },
         "keyword": [
           "大魔女"
         ],
@@ -1247,7 +1251,9 @@ let Card = [
         "PointConsume": 1,
         "PointGet": 2,
         "fullimage": "/images/card/image/1_40.png",
-        "keyword": [],
+        "keyword": [
+          ""
+        ],
         "PointEnter": 4
       },
       {
@@ -1258,6 +1264,7 @@ let Card = [
         "tag": [
           16,
           25,
+          32,
           42,
           63,
           73,
@@ -1279,6 +1286,10 @@ let Card = [
         "PointConsume": 3,
         "PointGet": 2,
         "fullimage": "/images/card/image/1_41.png",
+        "spread": {
+          "image": "/images/card/spread/1_41.png",
+          "index": 1
+        },
         "keyword": [
           "德古拉"
         ],
