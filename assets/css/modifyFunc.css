@@ -1,0 +1,85 @@
+.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.list-leave-active {
+  position: absolute;
+}
+
+
+.type-move, /* apply transition to moving elements */
+.type-enter-active,
+.type-leave-active {
+  transition: all 0.5s ease;
+}
+
+.type-enter-from,
+.type-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.type-leave-active {
+  position: absolute;
+}
+
+
+
+/*彈出視窗*/
+.overlay {
+  height: auto;
+  position:fixed;
+  display:none;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  background:rgba(0, 0, 0, 0.8);
+  z-index:9999;
+
+}
+.close {
+  position: sticky;
+  top: 2px;
+  left: 100%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  color: black;
+  display: inline-block;
+}
+.popup {
+  position:absolute;
+  width:40%;
+  max-height: 500px;
+  top:10%;
+  left:0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  background:rgb(240,240,240);
+  box-shadow: 0px 0px 10px 0px black;
+  animation: slideshow 0.3s ease-in;
+  min-width: 450px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+
+}
+
+@keyframes slideshow{
+  from {height: 0;}
+  to {height: 100%;}
+}

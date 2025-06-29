@@ -1,0 +1,185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html{
+    font-size: 30px;
+}
+
+div{
+    position: relative;
+}
+a.subpagesLink{
+    font-size: min(max(2.5vw,20px),30px);
+    text-decoration: none;
+    color:rgb(222, 156, 156);
+}
+a.subpagesLink:hover{
+    color: rgb(132, 117, 117);
+    cursor: pointer;
+}
+.carouselImg{
+    width: 80%;
+    height: 300px;
+    margin-top: 40px;
+}
+.lists{
+    background-color: rgb(53, 14, 14);
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoQGK1KhzU0jjyGefYVLrL2ATeFbmzDNORqg&usqp=CAU');
+    background-blend-mode: color;
+    background-repeat: repeat;
+    background-size: 130%;
+    max-height: calc(600px + 2rem);
+}
+.hidden{
+    display: block;
+}
+
+.noneDecoration::-webkit-scrollbar {
+    width: 0 !important;
+}
+
+.noneDecoration{
+    list-style: none;
+    font-size: 30px;
+    overflow-y: scroll;
+    height: 50vw;
+    max-height: calc(600px + 2rem);
+}
+
+.noneDecoration li{
+    margin-top:20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    width: 60%;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    letter-spacing: 10px;
+    text-align: center;    
+}
+
+.noneDecoration li:hover{
+    color: rgb(72, 64, 64);
+    cursor: pointer;
+}
+
+/*carousel css */
+.carImg{
+    width: 100%;
+    max-height: calc(600px);
+    height: 50vw;
+}
+
+.carousel__slide{
+    width: 100%;
+}
+
+/*主頁簡短介紹 */
+.introduction{
+    height:600px;
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    background-image: linear-gradient(to right,rgb(23, 23, 23),rgb(42, 30, 30));
+}
+
+.images:before {
+    display: block;
+    position: absolute;
+    content: "";
+    width: 100%;
+    min-width: 300px;
+    height: 100%;
+    box-shadow: 0px -2px 20px 50px rgb(23,23,23) inset;
+}
+
+.introduction .images{
+    width: 40%;
+    margin-left: 10%;
+}
+.introduction .images img{
+    width: -webkit-fill-available;
+}
+
+.introduction .par{
+    width: 60%;
+    margin: 50px 100px 50px 100px;
+}
+.introduction .par p{
+    color: azure;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 50px;
+    margin-left: 10px;
+}
+
+/*在大視窗的狀況下無須顯示 */
+.material-symbols-outlined{
+    display: none;
+}
+
+.button {
+    margin-top: 100px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.button button{
+    border: none;    
+    background-color: transparent;
+}
+
+
+
+.button button a{
+    border:5px solid white;
+    border-radius: 5px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color:  white;
+    font-size: 25px;
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+.button button a:hover{
+    color:rgb(222, 156, 156);
+    border-color: rgb(222, 156, 156);
+}
+    
+@media(max-width: 1000px){
+    .lists{
+        width: 20%;
+        max-width: 200px;
+        min-width: 100px;
+        z-index: 50;
+        height: 50vw;
+    }
+    .hidden{
+        display: none;
+    }
+    .carouselImg{
+        width: 100%;
+        height: 300px;
+    }
+
+    .noneDecoration{
+        padding-left:0.5em;
+    }
+
+    .noneDecoration > li {
+        width: 95%;
+        padding-left:0;
+        letter-spacing: 0.1em;
+    }
+
+    /*小視窗予以顯示 */
+    .material-symbols-outlined{
+        display: block;
+        color: rgb(222, 156, 156);
+        cursor: pointer;
+        z-index: 101;
+        position: absolute;
+    }
+
+}
+

@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.section{
+    width: 100%;
+    height:auto;
+    background-image: linear-gradient(to bottom,rgb(16, 15, 15) 0%,rgb(65, 28, 28) 70%,rgb(102, 12, 12) 90%);
+   
+}
+.content{
+    width:80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top:50px;
+    height: calc(100% + 50px);
+}
+.monster_title label:nth-child(1){
+    font-size: 30px;
+    font-weight: bold;
+    color: blueviolet;
+    margin-bottom: 20px;
+}
+.monster_main_images .max{
+    display: block;
+}
+.monster_main_images .min{
+    display: none;
+}
+.monster_others{
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+}
+.monster_details,.weapons_main .details{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.weapons_main .description{
+    width: 70%;
+}
+
+.images{
+    width: 60%;
+}
+.images.max{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.images.min{
+    width: 20%;
+    min-width: 200px;
+}
+.images.max img{
+    width: 50%;
+} 
+.monster_details .description{
+    width: 40%;
+    margin-left:30px;
+}
+.description{
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+span img{
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+}
+
+
+
+.title{
+    font-size: 25px;
+    color: rgb(172, 21, 21);
+    font-weight: bold;    
+}
+
+.score{
+    font-size: 25px;
+    color: rgb(222, 187, 30);
+    font-weight: bold;
+}
+
+.main_details{
+    color: rgb(117, 110, 110);
+    font-weight: bold;
+    font-size: 25px;
+}
+
+@media(max-width:1220px){
+    .monster_details{
+        display: flex;
+        flex-direction: column;
+    }
+    .monster_details .description{
+        width: 60%;
+        margin-left:10px;
+    }
+    .images.max{
+        flex-direction: column;
+    }
+    .images.max img{
+        width: 100%;
+    }
+
+    .weapons_main .details{
+        flex-wrap: wrap;
+    }
+
+    .description.table{
+        width: 100%;
+    }
+    
+}
+
+@media(max-width:1200px){
+    .weapons_main .details .description{
+        margin-top:20px;
+        margin-bottom: 20px;
+        
+    } 
+    .images.min{
+        width: 15%;
+        min-width: 200px;
+    }
+}
+
+@media(max-width:900px){
+    .weapons_main > .details > .images > img{
+        width: 100px;
+        height: 100px;
+    }
+
+    .weapons_main > .details > .images.min{
+        width: 10%;
+        margin-top:30px;
+        min-width: 100px;
+    }
+}
+
+@media(max-width:850px){
+     body{
+        font-size: 15px;
+    }
+
+    .monster_details{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .monster_main_images{
+        width: 40%;
+    }
+    .monster_details .description{
+        width: 100%;
+    }
+
+    .monster_main_images .max{
+        display: none;
+    }
+    .monster_main_images .min{
+        display: block;
+        width: 150px;
+
+    }
+    ._monster_details{
+        display: flex;
+        flex-direction: row;
+    }
+
+}
+
+@media(max-width:680px){
+    .monster_details{
+        display: flex;
+        flex-direction: column;
+    }
+
+    
+    .monster_details .description{
+       margin-left: auto;
+       margin-right: auto;
+    }
+
+    .weapons_main .details{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    
+
+    .weapons_main .details .description:nth-child(2){
+        margin-top:20px;
+        margin-bottom: 20px;
+        width: 75%;
+        margin-left: 10px;
+        
+        
+    } 
+
+}

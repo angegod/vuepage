@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.Card {
+  position: relative;
+  width: 100%;
+  min-height: 800px;
+  height: calc(100% + 50px);
+  padding-bottom: 40px;
+  background-image: linear-gradient(to bottom, rgb(27, 25, 25) 0%, rgb(65, 28, 28) 70%, rgb(102, 12, 12) 90%);
+}
+
+.rarity {
+  opacity: 0.6;
+}
+
+.rarity:hover,
+.rarity.clicked {
+  opacity: 1;
+}
+
+.rarity img:nth-child(2) {
+  display: none;
+}
+
+.rarity.clicked img:nth-child(2) {
+  display: block;
+}
+
+
+  .btn {
+    color: gray;
+    font-size: 1.25rem; /* theme('fontSize.xl') */
+    border-color: #9ca3af; /* theme('colors.gray.400') */
+    border: 2px solid;
+    border-radius: 0.375rem; /* theme('borderRadius.md') */
+  }
+
+  .searchBtn {
+    color: #000000; /* theme('colors.black') */
+    font-size: 1.25rem; /* theme('fontSize.xl') */
+    border: 2px solid;
+    border-radius: 0.375rem; /* theme('borderRadius.md') */
+  }
+
+  .small {
+    font-size: 1rem; /* theme('fontSize.base') */
+  }
+
+  .btn:hover {
+    color: #ffffff; /* theme('colors.white') */
+    border-color: #ffffff; /* theme('colors.white') */
+  }
+
+  .btn.clicked {
+    color: #f59e0b; /* theme('colors.amber.500') */
+    border-color: #f59e0b; /* theme('colors.amber.500') */
+  }
+
+  .condBtn {
+    font-size: 20px;
+    color: #78350f; /* theme('colors.amber.900') */
+    background-color: #ffffff; /* theme('colors.white') */
+    border-radius: 0.375rem; /* theme('borderRadius.md') */
+    transition: 0.3s linear;
+    font-weight: 500;
+    font-family: "Gill Sans", sans-serif;
+  }
+
+  .condBtn:hover,
+  .condBtn.clicked {
+    background-color: #78350f; /* theme('colors.amber.900') */
+    color: #ffffff; /* theme('colors.white') */
+  }
+
+
+
+.overlay {
+    height: auto;
+    position:fixed;
+    display:none;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    background:rgba(0, 0, 0, 0.8);
+    z-index:999;
+
+}
+
+
+.close {
+    position: sticky;
+    top: 2px;
+    left: 100%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    color: black;
+    display: inline-block;
+}
+.popup {
+    position:absolute;
+    width:40%;
+    height: 500px;
+    top:10%;
+    left:0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    background:rgb(240,240,240);
+    box-shadow: 0px 0px 10px 0px black;
+    animation: slideshow 0.3s ease-in;
+    min-width: 450px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+ 
+}
+
+.spread{
+    width: 240px; /* 棋子盘宽度压缩到200px */
+    height: 200px; /* 按比例设定的高度 */
+    background-image: url('https://angegod.github.io/vuepage/images/card/spread/base.png');
+    background-size: 160px 160px;
+    background-repeat: repeat;
+}
+
+.line::after{
+    display: flex;
+    content: "";
+    width: 90%;
+    border-top: 2px dotted rgba(0, 0, 0, 0.12);
+    align-items: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 5px;
+
+}
+
+.imgbox1{
+    animation: rarity1_blink infinite 3s ease-in;
+}
+
+.imgbox2{
+    animation: rarity2_blink infinite 3s ease-in;
+}
+
+.imgbox3{
+    animation: rarity3_blink infinite 3s ease-in;
+}
+
+@media (max-width:600px){
+    .btn{
+        font-size: 1rem;
+    }
+}
+
+
+@keyframes slideshow{
+    from {height: 0;}
+    to {height: 500px;}
+}
+
+@keyframes rarity3_blink{
+    0%{
+        box-shadow:0px 1px 5px 5px orange ;
+    }
+    50%{
+        box-shadow:0px 1px 5px 8px rgba(255, 166, 0, 0.61);
+    }
+
+    100%{
+        box-shadow:0px 1px 5px 5px orange ;
+    }
+}
+
+@keyframes rarity2_blink{
+    0%{
+        box-shadow:0px 1px 10px 5px  rgba(84, 80, 80, 0.79);
+    }
+    50%{
+        box-shadow:0px 1px 3px 8px rgba(84, 80, 80,0);
+    }
+
+    100%{
+        box-shadow:0px 1px 10px 5px rgba(84, 80, 80,0.79 );
+    }
+}
+@keyframes rarity1_blink{
+    0%{
+        box-shadow:0px 1px 5px 5px  brown;
+    }
+    50%{
+        box-shadow:0px 1px 5px 8px rgba(165, 42, 42, 0.384);
+    }
+
+    100%{
+        box-shadow:0px 1px 5px 5px brown ;
+    }
+}
