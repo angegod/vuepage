@@ -293,7 +293,7 @@ function saveFunc(){
         funcMove.value=[];
     }).catch((error)=>{
         alert('伺服器尚未開啟請稍後再試!!');
-        window.location=window.location.origin+'/vuepage/';
+        window.location=window.location.origin+'/TestNuxtPage/';
     });
 }    
 

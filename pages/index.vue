@@ -96,15 +96,15 @@ useHead({
   meta: [
     { name: 'description', content: '統合神魔災厄級相關資訊與時光牌' },
     { property: 'og:title', content: '侵蝕封王--主頁' },
-    { property: 'og:description', content: '統合神魔災厄級相關資訊與時光牌' }
+    { property: 'og:description', content: '統合神魔災厄級相關資訊與時光牌搜尋圖鑑' }
   ]
 });
 
 // 動態設定圖片前綴
 onMounted(() => {
     const currentPath = window.location.href;
-    if (currentPath.includes('https://angegod.github.io/vuepage/')) {
-      isAddable.value = '/vuepage';
+    if (currentPath.includes('https://angegod.github.io/TestNuxtPage/')) {
+      isAddable.value = '/TestNuxtPage';
     } else {
       isAddable.value = '';
     }

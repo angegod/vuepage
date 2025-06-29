@@ -45,10 +45,10 @@ onMounted(() => {
         alert('該頁面正在施工中，敬請見諒');
 
         const currentPath = window.location.href;
-        if (currentPath.includes("https://angegod.github.io/vuepage"))
-            window.location.href = "https://angegod.github.io/vuepage/";
+        if (currentPath.includes("https://angegod.github.io/TestNuxtPage"))
+            window.location.href = "https://angegod.github.io/TestNuxtPage/";
         else
-            window.location.href = "http://localhost:5173/vuepage/";
+            window.location.href = "http://localhost:5173/TestNuxtPage/";
             return;
     }
 

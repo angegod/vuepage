@@ -9,7 +9,8 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  ssr: false, // 避免使用 SSR
   app: {
-    baseURL: process.env.NODE_ENV === 'production' ? '/vuepage/' : '/',
+    baseURL: process.env.NODE_ENV === 'production' ? '/TestNuxtPage/' : '/',
   },
 })

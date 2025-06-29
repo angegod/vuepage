@@ -10,8 +10,8 @@ const route = useRoute();
 // 圖片前綴 (避免 SSR 錯誤)
 const isAddable = ref('')
 onMounted(() => {
-    if (location.href.includes('https://angegod.github.io/vuepage/')) {
-        isAddable.value = '/vuepage'
+    if (location.href.includes('https://angegod.github.io/TestNuxtPage/')) {
+        isAddable.value = '/TestNuxtPage'
     }
 })
 provide('frontpath', isAddable);
