@@ -4,7 +4,7 @@
     import ultimate from '../pages/data/Ultimate.json';
     import Switch from '../components/Switch.vue';
 
-    const isAddable= '';
+    const isAddable=inject('frontpath');//圖片默認路徑，要配合之後有可能上線
 
     const target=ref(myFile[0]);
     console.log(target.value.name);

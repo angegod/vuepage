@@ -470,7 +470,7 @@
         </div>
         <div>
             <div className='overlay' id="overlay">
-                <div class='popup hidden max-[500px]:w-[80%] max-[500px]:min-w-[200px]' v-if="mode==='card'">
+                <div class='popup max-[500px]:w-[80%] max-[500px]:min-w-[200px]' v-if="mode==='card'">
                     <div className='close' v-on:click="closeHandle">&#10006;</div>
                     <div class="w-5/6 mx-auto mt-5 flex flex-row flex-wrap justify-between mb-5 max-[450px]:justify-center">
                         <div class="w-2/5 min-w-[150px] max-[500px]:w-[100%]">
