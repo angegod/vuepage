@@ -14,7 +14,7 @@ onMounted(() => {
         isAddable.value = '/TestNuxtPage'
     }
 })
-provide('frontpath', isAddable);
+provide('frontpath', isAddable.value);
 
 // 選單狀態與卡片按鈕狀態
 const show = ref(false)

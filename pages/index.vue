@@ -118,7 +118,6 @@ const menuclick = () => {
   menu.classList.toggle('lists');
 };
 </script>
-
 <style scoped>
 @import '../assets/css/home.css';
 </style>

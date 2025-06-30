@@ -14,6 +14,7 @@
     
 
     const isAddable=inject('frontpath');//圖片默認路徑，要配合之後有可能上線
+    console.log(isAddable);
 
     let seriesIndex=ref([]);//時光牌系列代號
     let selectFunc=ref([]);//將被點選的解盾選項加入在此 默認使用And
