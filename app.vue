@@ -9,12 +9,13 @@ const route = useRoute();
 
 // 圖片前綴 (避免 SSR 錯誤)
 const isAddable = ref('')
-onMounted(() => {
-    if (location.href.includes('https://angegod.github.io/TestNuxtPage/')) {
-        isAddable.value = '/TestNuxtPage'
-    }
-})
+
+if (location.href.includes('https://angegod.github.io/TestNuxtPage/')) {
+    isAddable.value = '/TestNuxtPage'
+}
 provide('frontpath', isAddable.value);
+
+
 
 // 選單狀態與卡片按鈕狀態
 const show = ref(false)
