@@ -8,7 +8,7 @@
     import Switch from '../components/Switch.vue';
     import LazyImage from './LazyImage.vue';
     import Calculator from './Calculator.vue';
-    import CardHint from './CardHint.vue';
+    import CardHint from './hint/Cardhint.vue';
     
     import { eventBus } from './data/eventBus';
 
@@ -64,14 +64,13 @@
 
     }
 
-    checkData();
+
 
     //篩選器點選
     function clicked(text){
 
         var targetClass=text.split('_')[0];
         var targetBtnIndex=text.split('_')[1];
-        //console.log(targetClass);
         
         if(targetClass!=='func'&&!targetClass==''){
             var targetBtn=document.querySelectorAll(`.${targetClass}`)[targetBtnIndex-1];
@@ -126,7 +125,10 @@
         targetCard.value=[];
 
         //搜尋條件 這邊就會篩選掉不符合的系列
-        if(seriesIndex.value.length===0) return;
+        if(seriesIndex.value.length===0) {
+            alert("請點選任一時光牌系列!!");
+            return;
+        }
         seriesIndex.value.forEach((s)=>{
             if(Card[s-1].card===undefined) return;
             Card[s-1].card.forEach((item)=>{
@@ -367,6 +369,7 @@
     };
 
     onMounted(() => {
+        checkData();
         eventBus.on('callsetData', callsetData);
     });
 
@@ -376,12 +379,12 @@
 </script>
 <template>
     <div class="Card [&>div]:w-4/5 [&>div]:mx-auto max-[500px]:[&>div]:w-5/6 pt-3" >
-        <div class="flex flex-row justify-between max-[500px]:flex-col">
+        <div class="flex flex-row flex-wrap justify-between max-[400px]:flex-col">
             <div class="flex flex-row max-[450px]:flex-col">
                 <h1 class="text-[28px] font-bold text-red-600 mr-3">時光牌圖鑑</h1>
-                <Switch ref="b1" @refresh="TextOrCondition" :text1="'使用條件搜尋'" :text2="'使用文字搜尋'"/>
+                <Switch ref="b1" @refresh="TextOrCondition" :text1="'條件搜尋'" :text2="'文字搜尋'"/>
             </div>
-            <div>
+            <div class="max-[500px]:w-[100%]">
                 <button class="text-white border-b-white border-b-[1px]" @click="callcalculator">琉璃計算器</button>
             </div>
         </div>
@@ -420,7 +423,7 @@
                 </div>
             </div>
         </div>
-        <div v-else class="flex flex-col">
+        <div v-else class="flex flex-col mt-3">
             <span class="text-white">請輸入時光牌名稱關鍵字:</span>
             <div class="flex flex-row items-center">
                 <input type="text" placeholder="Keyword" class="rounded-md max-w-[200px] pl-3 max-h-[25px]" @keyup="event=>CardByText(event)" :disabled="gifShow"/>
@@ -611,7 +614,7 @@
                     </div>
                 </div>
                 <div class='popup max-[500px]:w-[80%] max-[500px]:min-w-[200px]' v-else-if="mode==='calculator'">
-                    <div className='close' v-on:click="closeHandle">&#10006;</div>
+                    <div class='close text-black' v-on:click="closeHandle">&#10006;</div>
                     <Calculator />
                 </div>
             </div>

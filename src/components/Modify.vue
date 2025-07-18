@@ -63,6 +63,9 @@
     },{
         name:"圖片管理",
         mode:"edit_img"
+    },{
+        name:"刪除卡片",
+        mode:"delete"
     }]);
 
     //當前編輯模式
@@ -189,8 +192,6 @@
         }
         //將資料推送後端 該系列全部直接全部覆蓋
         try{            
-            console.log(CardArray.value);
-            console.log(Card);
             
             let json={
                 getId:seriesId.value,//告訴他要覆蓋哪個系列的?
@@ -225,6 +226,28 @@
                     showSkill.value.push(targetskill);
                 }
             });
+        });
+    }
+
+    function deleteCard(){
+
+        let data ={
+            series:seriesId.value,
+            id:selectCardId.value
+        };
+
+
+        axios.post('http://localhost:5000/card/delete',data).then((response)=>{
+            console.log(response);
+            
+            CardArray.value=CardArray.value.filter((c)=>c.id!==selectCardId.value);
+            console.log(CardArray.value);
+            //將提交上去的資料做備份 使用深拷貝
+            Card=JSON.parse(JSON.stringify(CardArray.value));
+
+            changeCard(CardArray.value[0].id);
+            alert("卡片刪除成功!");
+            
         });
     }
 
@@ -468,7 +491,8 @@
                     <div class="flex flex-col">
                         <div v-for="f in editFunc" class="my-2 flex flex-row cursor-pointer" @click="changeEditMode(f.mode)">
                             <img :src="isAddable+'/images/arrow_right.png'" width="20" height="20"/>
-                            <span class="text-white text-md">{{f.name}}</span>
+                            <span class="text-red-500 text-md" v-if="f.mode==='delete'">{{f.name}}</span>
+                            <span class="text-white text-md" v-else>{{f.name}}</span>
                         </div>
                     </div>
                 </div>
@@ -548,6 +572,15 @@
                         <span class="text-white font-bold" v-on:dblclick="showInputBox">{{ effect }}</span>
                         <textarea  class="hidden bg-gray-600 text-white h-auto rounded-sm min-h-[50px]" v-on:keydown="event=>descModify(event,'combo',index)">{{ effect }}</textarea>
                     </div>
+                </div>
+            </div>
+            <div class="w-2/5 pl-3 right mt-5 h-[500px] relative " v-if="editMode == 'delete'">
+                <div>
+                    <span class="text-amber-800 text-[18px]">刪除卡片</span>
+                </div>
+                <div class="flex flex-col mt-2 justify-start">
+                    <span class="text-white">經過此操作後，該筆資料將永久刪除，按下下面按鈕以確認操作</span>
+                    <button class="removeBtn w-[100px]" @click="deleteCard">確認刪除</button>
                 </div>
             </div>
             

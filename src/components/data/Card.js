@@ -11,7 +11,7 @@ let Card = [
         "tag": [
           2,
           21,
-          32
+          33
         ],
         "instantEffect": [
           "自身技能 CD -2"
@@ -39,7 +39,7 @@ let Card = [
         "tag": [
           7,
           21,
-          32
+          33
         ],
         "instantEffect": [
           "自身技能 CD -2"
@@ -67,7 +67,7 @@ let Card = [
         "tag": [
           1,
           21,
-          32
+          33
         ],
         "instantEffect": [
           "自身技能 CD -2"
@@ -122,8 +122,8 @@ let Card = [
         "tag": [
           2,
           18,
-          51,
-          60
+          52,
+          61
         ],
         "instantEffect": [
           "該回合增加 2 連擊 (Combo)"
@@ -153,7 +153,7 @@ let Card = [
           7,
           18,
           21,
-          47
+          48
         ],
         "instantEffect": [
           "該回合增加 2 連擊 (Combo)"
@@ -182,8 +182,8 @@ let Card = [
         "tag": [
           7,
           18,
-          50,
-          60
+          51,
+          61
         ],
         "instantEffect": [
           "該回合增加 2 連擊 (Combo)"
@@ -212,8 +212,8 @@ let Card = [
         "tag": [
           1,
           18,
-          46,
-          61
+          47,
+          62
         ],
         "instantEffect": [
           "該回合增加 2 連擊 (Combo)"
@@ -242,8 +242,8 @@ let Card = [
         "tag": [
           18,
           24,
-          32,
-          61
+          33,
+          62
         ],
         "instantEffect": [
           "該回合增加 2 連擊 (Combo)"
@@ -273,8 +273,8 @@ let Card = [
           8,
           21,
           27,
-          53,
-          66
+          54,
+          68
         ],
         "instantEffect": [
           "自身進入 2 回合亢奮狀態"
@@ -302,9 +302,9 @@ let Card = [
         "rarity": 1,
         "image": "/images/card/icon/1_11.png",
         "tag": [
-          32,
-          52,
-          67
+          33,
+          53,
+          69
         ],
         "instantEffect": [
           "自身技能 CD -2"
@@ -331,8 +331,8 @@ let Card = [
         "image": "/images/card/icon/1_12.png",
         "tag": [
           3,
-          32,
-          69
+          33,
+          71
         ],
         "instantEffect": [
           "自身技能 CD -2"
@@ -358,9 +358,9 @@ let Card = [
         "rarity": 1,
         "image": "/images/card/icon/1_13.png",
         "tag": [
-          32,
-          50,
-          70
+          33,
+          51,
+          72
         ],
         "instantEffect": [
           "自身技能 CD -2"
@@ -388,9 +388,9 @@ let Card = [
         "tag": [
           3,
           9,
-          32,
-          37,
-          48
+          33,
+          38,
+          49
         ],
         "instantEffect": [
           "自身為龍類成員，自身技能 CD -3"
@@ -418,10 +418,10 @@ let Card = [
         "image": "/images/card/icon/1_15.png",
         "tag": [
           1,
-          32,
-          36,
-          57,
-          55
+          33,
+          37,
+          58,
+          56
         ],
         "instantEffect": [
           "自身為獸類成員，自身技能 CD -3"
@@ -452,7 +452,7 @@ let Card = [
           10,
           21,
           27,
-          47
+          48
         ],
         "instantEffect": [
           "自身進入 2 回合亢奮狀態"
@@ -483,7 +483,7 @@ let Card = [
           1,
           11,
           18,
-          55
+          56
         ],
         "instantEffect": [
           "該回合增加 2 連擊 (Combo)"
@@ -512,8 +512,8 @@ let Card = [
         "tag": [
           7,
           19,
-          58,
-          65
+          59,
+          66
         ],
         "instantEffect": [
           "提升 100% 龍脈儀能量"
@@ -542,7 +542,7 @@ let Card = [
         "tag": [
           7,
           20,
-          32
+          33
         ],
         "instantEffect": [
           "發動攻擊前自身對敵方全體造成 500000000 點無屬性傷害 1 次"
@@ -572,10 +572,10 @@ let Card = [
           12,
           21,
           27,
-          63,
-          73,
-          76,
-          78
+          64,
+          75,
+          78,
+          80
         ],
         "instantEffect": [
           "自身進入 2 回合亢奮狀態"
@@ -610,7 +610,7 @@ let Card = [
         "tag": [
           10,
           21,
-          30
+          31
         ],
         "instantEffect": [
           "解除自身休眠狀態"
@@ -638,7 +638,7 @@ let Card = [
         "tag": [
           3,
           21,
-          31
+          32
         ],
         "instantEffect": [
           "解除自身風壓狀態"
@@ -666,8 +666,8 @@ let Card = [
         "tag": [
           9,
           15,
-          28,
-          63
+          29,
+          64
         ],
         "instantEffect": [
           "解除自身疲憊狀態"
@@ -698,8 +698,8 @@ let Card = [
           3,
           21,
           24,
-          30,
-          32,
+          31,
+          33,
           33
         ],
         "instantEffect": [
@@ -732,9 +732,9 @@ let Card = [
           2,
           10,
           21,
-          32,
-          34,
-          40
+          33,
+          35,
+          41
         ],
         "instantEffect": [
           "自身為神族成員，自身技能 CD -4"
@@ -771,7 +771,7 @@ let Card = [
           13,
           21,
           27,
-          49
+          50
         ],
         "instantEffect": [
           "自身增加 2 回合亢奮狀態"
@@ -804,7 +804,7 @@ let Card = [
           20,
           18,
           25,
-          60
+          61
         ],
         "instantEffect": [
           "發動攻擊前自身對敵方全體造成 50000000 點無屬性傷害 10 次"
@@ -833,11 +833,11 @@ let Card = [
         "image": "/images/card/icon/1_28.png",
         "tag": [
           23,
+          71,
           69,
-          69,
-          74,
-          75,
-          78
+          76,
+          77,
+          80
         ],
         "instantEffect": [
           "完全回復生命力"
@@ -870,7 +870,7 @@ let Card = [
         "tag": [
           3,
           19,
-          54,
+          55,
           54
         ],
         "instantEffect": [
@@ -930,12 +930,12 @@ let Card = [
         "tag": [
           10,
           21,
-          32,
-          44,
-          63,
-          75,
+          33,
+          45,
+          64,
           77,
-          78
+          77,
+          80
         ],
         "instantEffect": [
           "自身為光屬性成員，自身技能 CD -4"
@@ -971,8 +971,8 @@ let Card = [
           21,
           25,
           25,
-          52,
-          80
+          53,
+          82
         ],
         "instantEffect": [
           "自身增加 2 回合亢奮狀態"
@@ -1003,7 +1003,7 @@ let Card = [
         "tag": [
           20,
           21,
-          59
+          60
         ],
         "instantEffect": [
           "自身發動攻擊前對敵方造成 10000000 點光屬性傷害 10 次"
@@ -1032,11 +1032,11 @@ let Card = [
           2,
           16,
           21,
-          32,
-          43,
-          74,
-          77,
-          79
+          33,
+          44,
+          76,
+          79,
+          81
         ],
         "instantEffect": [
           "自身為木屬性成員，自身技能 CD -4"
@@ -1070,8 +1070,8 @@ let Card = [
         "tag": [
           18,
           21,
-          51,
-          71
+          52,
+          73
         ],
         "instantEffect": [
           "增加 3 連擊 (Combo)"
@@ -1099,8 +1099,8 @@ let Card = [
         "image": "/images/card/icon/1_36.png",
         "tag": [
           21,
-          32,
-          62
+          33,
+          63
         ],
         "instantEffect": [
           "解除自身被封鎖主動技能 ( 此技能無視封鎖技能 )"
@@ -1127,13 +1127,13 @@ let Card = [
         "image": "/images/card/icon/1_37.png",
         "tag": [
           18,
-          32,
-          45,
-          60,
+          33,
+          46,
           61,
-          75,
-          76,
-          79
+          61,
+          77,
+          78,
+          81
         ],
         "instantEffect": [
           "自身為暗屬性成員，自身技能 CD -4"
@@ -1171,7 +1171,7 @@ let Card = [
           17,
           21,
           27,
-          48
+          49
         ],
         "instantEffect": [
           "自身增加 2 回合亢奮狀態"
@@ -1203,8 +1203,8 @@ let Card = [
           10,
           18,
           21,
-          32,
-          60
+          33,
+          61
         ],
         "instantEffect": [
           "該回合增加 4 連擊 (Combo)"
@@ -1264,12 +1264,12 @@ let Card = [
         "tag": [
           16,
           25,
-          32,
-          42,
-          63,
-          73,
-          77,
-          79
+          33,
+          43,
+          64,
+          75,
+          79,
+          81
         ],
         "instantEffect": [
           "自身為火屬性成員，自身技能 CD -4"
@@ -1294,6 +1294,105 @@ let Card = [
           "德古拉"
         ],
         "PointEnter": 6
+      },
+      {
+        "id": 42,
+        "name": "諄諄龍語",
+        "rarity": 1,
+        "image": "/images/card/icon/1_42.png",
+        "tag": [
+          1,
+          21,
+          31,
+          49,
+          50
+        ],
+        "instantEffect": [
+          "解除自身休眠狀態"
+        ],
+        "comboEffect": [
+          "自身攻擊力提升 100%"
+        ],
+        "roundEffect": [
+          "自身無視「指定形狀盾」",
+          "自身以 50% 攻擊力追打木屬性攻擊 1 次",
+          "自身以 50% 攻擊力追打光屬性攻擊 1 次"
+        ],
+        "PointMax": 4,
+        "PointConsume": 2,
+        "PointGet": 2,
+        "fullimage": "/images/card/image/1_42.png",
+        "keyword": [],
+        "PointEnter": 4
+      },
+      {
+        "id": 43,
+        "name": "墓碑前的誓言",
+        "rarity": 1,
+        "image": "/images/card/icon/1_43.png",
+        "tag": [
+          10,
+          21,
+          33,
+          55
+        ],
+        "instantEffect": [
+          "自身技能 CD -2"
+        ],
+        "comboEffect": [
+          "自身攻擊力提升 100%"
+        ],
+        "roundEffect": [
+          "所有成員以 100% 攻擊力追打火屬性攻擊 1 次",
+          "自身無視「攻前盾」"
+        ],
+        "PointMax": 4,
+        "PointConsume": 1,
+        "PointGet": 2,
+        "fullimage": "/images/card/image/1_43.png",
+        "keyword": [],
+        "PointEnter": 4
+      },
+      {
+        "id": 44,
+        "name": "誓守北域",
+        "rarity": 3,
+        "image": "/images/card/icon/1_44.png",
+        "tag": [
+          9,
+          28,
+          66,
+          67,
+          77,
+          78,
+          80,
+          83
+        ],
+        "instantEffect": [
+          "自身增加 2 回合暴怒狀態"
+        ],
+        "comboEffect": [
+          "回合結束時，將單數直行的符石轉化為光強化符石，將雙數直行的符石轉化為暗強化符石",
+          "自身擊中敵人後使敵人置身刀傷狀態：每回合所受傷害 4 倍，持續 3 回合"
+        ],
+        "roundEffect": [
+          "自身無視「符石連擊零化」",
+          "「灼熱地型」傷害減少 100%",
+          "場上位置不受「結界地型」技能影響"
+        ],
+        "PointMax": 8,
+        "PointConsume": 4,
+        "PointGet": 2,
+        "fullimage": "/images/card/image/1_44.png",
+        "spread": {
+          "image": "/images/card/spread/1_44.png",
+          "index": 1
+        },
+        "keyword": [
+          "零覓牌",
+          "一願牌"
+        ],
+        "PointEnter": 8
       }
     ]
   }

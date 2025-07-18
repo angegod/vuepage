@@ -1,21 +1,20 @@
 <script setup>
-    import { inject,ref,provide,nextTick } from 'vue';
+    import { inject,ref,provide,nextTick, onMounted } from 'vue';
     import Goal from './data/Goal';
+    import CalculatorHint from './hint/CalculatorHint.vue';
     const isAddable=inject('frontpath');//圖片默認路徑，要配合之後有可能上線
 
     let data=ref();
     let result=ref(undefined);
-    let detailShow=ref(true);
-    let slideBtn=ref([0,0]);
 
-    init();
 
     function init(){
-        data.value=Goal;
+        data.value=Goal.map(item => ({ ...item })); // 簡單淺拷貝（已足夠）
+        console.log(data.value);
+        result.value = undefined;
     }
 
     function changeData(event,num){
-        console.log(event.target.value);
 
         //防呆
         if(parseInt(event.target.value)<0){
@@ -33,32 +32,22 @@
     function calData(){
         let count=0;
         data.value.forEach(d => {
-            count += d.count*d.bind;
+            if(d.count > 0)
+                count += d.count*d.bind;
         });
         result.value=count;
     }
 
-    function operateInfo(num){
-        let targetInfo = document.getElementById('info'+num);
-
-        if(targetInfo.classList.contains('open')){
-            targetInfo.classList.remove('open');
-            slideBtn.value[num-1]=0;
-        }
-        else{
-            targetInfo.classList.add('open');
-            slideBtn.value[num-1]=1;
-        } 
-            
-        
-    }
-
+    onMounted(()=>{
+        init();
+    });
 </script>
 <template>
     <div class="">
         <div class="w-5/6 mx-auto">
-            <div >
-                <span class="text-amber-900 font-bold text-[28px]">琉璃計算器</span>
+            <div class="flex flex-row items-center">
+                <span class="text-amber-900 font-bold text-[28px] max-[500px]:text-[24px]">琉璃計算器</span>
+                <CalculatorHint />
             </div>
             <div>
                 <div class="flex flex-col">
@@ -76,38 +65,6 @@
                                             @change="(event)=>changeData(event,i)" min="0"/>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="w-1/2 max-[500px]:w-[100%] mt-2 pl-1" v-if="detailShow">
-                            <div>
-                                <div class="flex">
-                                    <button @click="operateInfo(1)">
-                                        <img :src="isAddable+'/images/arrow_drop_down.png'" width="20" height="20" v-if="slideBtn[0]===1"/>
-                                        <img :src="isAddable+'/images/arrow_drop_up.png'" width="20" height="20" v-else/>
-                                    </button>
-                                    <span class="text-black font-bold text-md">2025時光牌bingo目標:</span>
-                                </div>
-                                <ul class="[&>li]:font-bold [&>li]:my-1 slide pl-5" id="info1">
-                                    <li class="text-amber-800 ">練滿1星[晨曦塔]時光牌&#215;{{ data[0].goal }}</li>
-                                    <li class="text-gray-600">練滿2星[晨曦塔]時光牌&#215;{{ data[1].goal }}</li>
-                                    <li class="text-yellow-600">練滿3星[晨曦塔]時光牌&#215;{{ data[2].goal }}</li>
-                                </ul>
-                            </div>
-                            <div class="my-2">
-                                <div class="flex">
-                                    <button @click="operateInfo(2)">
-                                        <img :src="isAddable+'/images/arrow_drop_down.png'" width="20" height="20" v-if="slideBtn[1]===1"/>
-                                        <img :src="isAddable+'/images/arrow_drop_up.png'" width="20" height="20" v-else/>
-                                    </button>
-                                    <span class="text-black font-bold text-md">目前開放的時光牌數量:</span>
-                                </div>
-                                <ul class="[&>li]:font-bold [&>li]:my-1 [&>li]:text-md slide pl-5" id="info2">
-                                    <li class="text-amber-800 ">1星[晨曦塔]時光牌&#215;{{ data[0].open }}</li>
-                                    <li class="text-gray-600">2星[晨曦塔]時光牌&#215;{{ data[1].open }}</li>
-                                    <li class="text-yellow-600">3星[晨曦塔]時光牌&#215;{{ data[2].open }}</li>
-                                </ul>
-                            </div>
-                            
                         </div>
                     </div>
                     <div class="mt-2 flex flex-row">

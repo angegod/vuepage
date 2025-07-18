@@ -23,13 +23,13 @@
 
 </script>
 <template>
-  <div class="flex max-[450px]:flex-row mb-3 pt-1.5">
+  <div class="flex max-[450px]:flex-row mb-3 pt-1.5 items-center">
     <label class="switch max-w-[300px] mr-3">
         <input type="checkbox" @click="toggle()">
         <div class="slider round"></div>
     </label>
     <div class="max-w-[150px]">
-        <span class="text-xl text-white hint" v-if="!props.hideable">{{ (p)?props.text2:props.text1 }}</span>
+        <span class="text-xl text-white hint max-[400px]:text-base" v-if="!props.hideable">{{ (p)?props.text2:props.text1 }}</span>
     </div>
   </div>
   

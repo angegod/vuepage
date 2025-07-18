@@ -124,11 +124,34 @@
 
             card.value.keyword.push(event.target.value);
             event.target.value='';
+            console.log(card.value.keyword)
         }
     }
 
+    //設定盤面圖
+    function setSpreadImg(){
+        let spreadIndex = event.data.value;
+
+        if(Number(spreadIndex)>0){
+            let spreadData = {
+                image:`/images/card/image/1_${card.value.id}.png`,
+                index:spreadIndex
+            }
+
+            card.value.spread=spreadData;
+        }
+    }
+
+    //步驟進行
     async function nextStep(){
-        console.log(step.value)
+        console.log(step.value);
+
+        if(step.value <3){
+            step.value +=1;
+            return;
+        }
+            
+
         //如果漏掉輸入資訊 則不予進入下一步
         if(step.value===3){
             if(card.value.PointMax===undefined||
@@ -138,19 +161,19 @@
                 
                 alert('請輸入對應資料!!');
                 return;       
+            }else{
+                setCardPreview();
+                step.value +=1;
+                return;
             }
         }
         
-        step.value+=1;
-        //如果進行到第四步 則展示預覽
         
-        if(step.value===4){
-            console.log(card.value);
-            setCardPreview();
-        }
         //送出資料 由於有兩張照片 所以會先分批跟api溝通
-        if(step.value===5){
-            
+        if(step.value===4){
+            console.log('step4');
+            step.value+=1;
+
             //先上傳縮圖
             let formData=new FormData();
             formData.append('image', iconInput.value.realFile);
@@ -204,7 +227,7 @@
             let json={
                 series:1,
                 card:card.value
-            }
+            };
             console.log(json);
             await axios.post('http://localhost:5000/card/add',json).then((response)=>{
                 console.log(response.data);
@@ -230,13 +253,16 @@
         //設定圖片路徑
         card.value.image=`/images/card/icon/1_${card.value.id}.png`;
         card.value.fullimage=`/images/card/image/1_${card.value.id}.png`;
-        card.value.spread={
-            id:parseInt(document.getElementById('spreadIndex').value),
-            image:`/images/card/image/${card.value.id}.png`
-        };
+        
+        if(document.getElementById('spreadIndex').value === null){
+            card.value.spread={
+                id:parseInt(document.getElementById('spreadIndex').value),
+                image:`/images/card/image/${card.value.id}.png`
+            };
+        }
+       
 
         //將技能儲存縮短成只有編號
-
         let tag=[];
 
         showSkill.value.forEach((s)=>{
@@ -262,7 +288,7 @@
             tag:card.value.tag,
             fullimage:card.value.fullimage,
             keyword:card.value.keyword,
-            spread:card.value.spread
+            ...(card.value.spread ? { spread: card.value.spread } : {})
         };
 
         card.value=tempCard;
@@ -290,9 +316,10 @@
                         <span class="text-lg">卡片名稱:</span>
                         <input type="text" class="selfInput" placeholder="卡片名子" @change="event=>card.name=event.target.value"/>
                     </div>
-                    <div class="mt-3 flex flex-row">
+                    <div class="mt-3 flex flex-row items-baseline">
                         <span class="text-lg mr-1">卡片編號:</span>
-                        <input type="number" class="inputNum" readonly :value="max" @change="event=>card.id=parseInt(event.target.value)"/>
+                        <span>{{ max }}</span>
+                        
                     </div>
                     <div class="flex flex-col mt-5">
                         <span class="text-lg">稀有度:</span>
@@ -346,7 +373,7 @@
                             <button class="addBtn ml-3 px-3" @click="delEffect('combo')" v-if="comboEffect.length>1">刪除</button>
                         </div>
                         <textarea v-for="(effect,i) in comboEffect" 
-                            class="selfInput mt-1 mb-1" 
+                            class="selfInput mt-1 mb-1 min-h-[25px] max-h-[50px]" 
                             :placeholder="`連動效果${i+1}`" 
                             v-model="comboEffect[i]" ></textarea>
                     </div>
@@ -418,7 +445,7 @@
                     </div>
                     <div class="my-2">
                         <span>圖片標示位置:</span>
-                        <input type="number" class="selfInput"  id="spreadIndex" :min="1" />
+                        <input type="number" class="selfInput"  id="spreadIndex" :min="1" @click="setSpreadImg" />
                     </div>
                     <div class="mt-2">
                         <button class="addBtn pl-2 pr-2" @click="nextStep">下一步</button>
@@ -426,7 +453,7 @@
                 </div>
                 
             </div>
-            <div v-if="step===4" class="min-w-[500px]" :key="'step4'">
+            <div v-if="step===4 || step ===5" class="min-w-[500px]" :key="'step4'">
                 <div class="w-5/6 mx-auto mt-5 flex flex-row flex-wrap justify-between mb-5 max-[450px]:justify-center">
                     <div class="w-2/5 min-w-[150px] max-[450px]:w-[100%]">
                         <div class="[&>span]:text-[20px] mb-3 text-center">
@@ -448,7 +475,13 @@
                     <div class="w-1/2 flex flex-col min-w-[150px] ml-2 max-[450px]:ml-0 max-[450px]:w-[100%]">
                         <div class="flex flex-col mt-5 min-h-[10vh]">
                             <div class="flex flex-row line">
-                                <div class="flex bg-blue-400 text-white rounded-md w-1/5 min-w-[100px] justify-center" >
+                                <div class="flex bg-amber-900 text-white rounded-md w-1/5 min-w-[100px] justify-center" v-if="card.rarity===1">
+                                    <span>即時效果</span>
+                                </div>
+                                <div class="flex bg-slate-500 text-white rounded-md w-1/5 min-w-[100px] justify-center" v-if="card.rarity===2">
+                                    <span>即時效果</span>
+                                </div>
+                                <div class="flex bg-yellow-600 text-white rounded-md w-1/5 min-w-[100px] justify-center" v-if="card.rarity===3">
                                     <span>即時效果</span>
                                 </div>
                             </div>
@@ -458,16 +491,28 @@
                     
                         </div>
                         <div class="flex flex-col mt-5 min-h-[20vh]">
-                            <div class="flex flex-row line">
-                                <div class="flex bg-blue-400 text-white rounded-md w-1/5 min-w-[100px] justify-center"><span>回合效果</span></div>
+                            <div class="flex bg-amber-900 text-white rounded-md w-1/5 min-w-[100px] justify-center" v-if="card.rarity===1">
+                                <span>回合效果</span>
+                            </div>
+                            <div class="flex bg-slate-500 text-white rounded-md w-1/5 min-w-[100px] justify-center" v-if="card.rarity===2">
+                                <span>回合效果</span>
+                            </div>
+                            <div class="flex bg-yellow-600 text-white rounded-md w-1/5 min-w-[100px] justify-center" v-if="card.rarity===3">
+                                <span>回合效果</span>
                             </div>
                             <div class="flex flex-col">
                                 <span v-for="effect in card.roundEffect" class="text-black">&#8226;{{ effect }}</span>
                             </div>
                         </div>
                         <div class="flex flex-col mt-5 min-h-[10vh]">
-                            <div class="flex flex-row line">
-                                <div class="flex bg-blue-400 text-white rounded-md w-1/5 min-w-[100px] justify-center"><span>連動效果</span></div>
+                            <div class="flex bg-amber-900 text-white rounded-md w-1/5 min-w-[100px] justify-center" v-if="card.rarity===1">
+                                <span>連動效果</span>
+                            </div>
+                            <div class="flex bg-slate-500 text-white rounded-md w-1/5 min-w-[100px] justify-center" v-if="card.rarity===2">
+                                <span>連動效果</span>
+                            </div>
+                            <div class="flex bg-yellow-600 text-white rounded-md w-1/5 min-w-[100px] justify-center" v-if="card.rarity===3">
+                                <span>連動效果</span>
                             </div>
                             <div class="flex flex-col">
                                 <span v-for="effect in card.comboEffect" class="text-black">&#8226;{{ effect }}</span>
