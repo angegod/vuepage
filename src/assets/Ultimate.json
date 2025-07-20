@@ -38,5 +38,12 @@
         "image":"/images/ultimate/u6/Icon.jpg",
         "limit":"必須以單一種族成員進場",
         "background":"無法提升當前生命力"
+    },
+    {
+        "id":7,
+        "name":"誓守北域",
+        "image":"/images/ultimate/u7/Icon.jpg",
+        "limit":"隊伍中只能有 4 個不同種族成員進場",
+        "background":"石牢=>無法發動腳色珠及流光珠相關效果。"
     }
 ]
