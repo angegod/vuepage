@@ -9,8 +9,9 @@
     import Calculator from './Calculator.vue';
     import CardHint from './hint/Cardhint.vue';
     
-    import { eventBus } from './data/eventBus';
+    import { useCardBtnStore } from './data/store';
 
+    const store = useCardBtnStore();
 
     const isAddable=inject('frontpath');//圖片默認路徑，要配合之後有可能上線
 
@@ -225,7 +226,6 @@
         targetCard.value=[];//被選擇的卡片清單
         showCard.value=[];//顯示該卡詳細資訊
 
-        //console.log(b1.value.getBool());
         if(isInput.value)
             eventBus.emit('HideBtn');
         else
@@ -366,13 +366,20 @@
         setData();
     };
 
+    let Watcher = undefined;
+
     onMounted(() => {
         checkData();
-        eventBus.on('callsetData', callsetData);
+
+        Watcher = watch(() => store.isMatch, () => {
+            callsetData();
+            store.StopMatch();
+        });
     });
 
     onUnmounted(() => {
-        eventBus.off('callsetData', callsetData);
+        //eventBus.off('callsetData', callsetData);
+        Watcher();
     });
 </script>
 <template>

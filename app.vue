@@ -1,11 +1,14 @@
 <script setup>
 import { ref, watch, provide, onMounted, computed } from 'vue'
-import { useRoute } from 'vue-router'
-import { eventBus } from '~/pages/data/eventBus'
-import Footers from '~/pages/Footer.vue'
+import { useRoute } from 'vue-router';
+import Footers from '~/pages/Footer.vue';
+import { useCardBtnStore } from './pages/data/store';
 
 // 路由資訊
 const route = useRoute();
+
+//共用狀態
+const store = useCardBtnStore();
 
 // 圖片前綴 (避免 SSR 錯誤)
 const isAddable = ref('')
@@ -15,10 +18,8 @@ if (location.href.includes('https://angegod.github.io/TestNuxtPage/')) {
 }
 provide('frontpath', isAddable.value);
 
-
-
 // 選單狀態與卡片按鈕狀態
-const show = ref(false)
+const show = ref(store.Cardbutton);
 const showCardBtn = ref(false)
 
 onMounted(() => {
@@ -28,8 +29,8 @@ onMounted(() => {
     updateHeader(route.path)
 
     // 事件總線控制按鈕顯示
-    eventBus.on('HideBtn', () => (showCardBtn.value = false))
-    eventBus.on('ShowBtn', () => (showCardBtn.value = true))
+    /*eventBus.on('HideBtn', () => (showCardBtn.value = false))
+    eventBus.on('ShowBtn', () => (showCardBtn.value = true))*/
 })
 
 // 監聽路由變化
@@ -41,22 +42,22 @@ watch(
 )
 
 function updateHeader(path) {
-  show.value = window.innerWidth < 500
-  const map = {
-    '/': 1,
-    '/about/': 2,
-    '/battle/': 3,
-    '/card/': 4
-  }
-  const index = map[path]
-  if (index) addDash(index)
-  showCardBtn.value = path === '/card/'
+    show.value = window.innerWidth < 500
+    const map = {
+        '/': 1,
+        '/about/': 2,
+        '/battle/': 3,
+        '/card/': 4
+    }
+    const index = map[path]
+    if (index) addDash(index)
+    showCardBtn.value = path === '/card/'
 }
 
 function showMenu() {
-  const menu = document.getElementById('headerMenu')
-  show.value = !show.value
-  if (menu) menu.classList.toggle('expand', show.value)
+    const menu = document.getElementById('headerMenu')
+    show.value = !show.value
+    if (menu) menu.classList.toggle('expand', show.value)
 }
 
 function addDash(index) {
@@ -75,12 +76,10 @@ function addDash(index) {
 }
 
 const startMatch = () => {
-  eventBus.emit('callsetData')
+    //eventBus.emit('callsetData');
+    store.StartMatch();
 }
 
-//<div class="[&>a]:text-[25px] options link" @click="addDash(4)">
-//            <NuxtLink to="/card/">時光牌</NuxtLink>
-//         </div>
 </script>
 
 <template>
