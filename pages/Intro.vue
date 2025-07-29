@@ -1,7 +1,6 @@
 <script setup>
     let props = defineProps(['dataText']);
     let skill=props.dataText;
-    console.log(props.dataText.mainSkill1);
 </script>
 <template>
     <div class="flex flex-row  flex-wrap mt-2">

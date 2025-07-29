@@ -19,15 +19,6 @@ let nowTypeId=ref(1);
 let funcMove=ref([]);
 
 
-//初始化資料
-axios.post('http://localhost:5000/func/get').then((response)=>{
-
-    funcData=response.data.func;
-    func.value=JSON.parse(JSON.stringify(funcData));//深拷貝處理
-
-    calSkillId();
-});
-
 //計算新技能或系列ID需要賦予怎樣的值?
 function calSkillId(){
     funcData.forEach((t)=>{
@@ -275,8 +266,6 @@ function init(){
 
 //送出最終修改設定並且更新備份
 function saveFunc(){
-
-
     let data={
         func:func.value,//修改後的技能
         moves:funcMove.value
@@ -287,15 +276,32 @@ function saveFunc(){
         alert(response.data.msg);
         //覆蓋備份
         funcData=JSON.parse(JSON.stringify(func.value));//深拷貝處理
-        console.log(response.data);
-
         //將動作紀錄清空
         funcMove.value=[];
     }).catch((error)=>{
         alert('伺服器尚未開啟請稍後再試!!');
-        window.location=window.location.origin+'/TestNuxtPage/';
+        window.location=window.location.origin+`/${config.public.projectName}/`;
     });
 }    
+
+onMounted(()=>{
+    const config = useRuntimeConfig();
+    if(process.env.NODE_ENV !== "development")
+        window.location=window.location.origin+`/${config.public.projectName}/`;
+
+    //初始化資料
+    axios.post('http://localhost:5000/func/get').then((response)=>{
+
+        funcData=response.data.func;
+        func.value=JSON.parse(JSON.stringify(funcData));//深拷貝處理
+
+        calSkillId();
+    }).catch((error)=>{
+        alert('伺服器尚未開啟請稍後再試!!');
+        window.location=window.location.origin+`/`;
+    });
+
+});
 
 </script>
 <template>

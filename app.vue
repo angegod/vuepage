@@ -13,8 +13,10 @@ const store = useCardBtnStore();
 // 圖片前綴 (避免 SSR 錯誤)
 const isAddable = ref('')
 
-if (location.href.includes('https://angegod.github.io/TestNuxtPage/')) {
-    isAddable.value = '/TestNuxtPage'
+const config = useRuntimeConfig();
+
+if (location.href.includes(`https://angegod.github.io/${config.public.projectName}`)) {
+    isAddable.value = `/${config.public.projectName}`;
 }
 provide('frontpath', isAddable.value);
 

@@ -73,8 +73,7 @@
     // 路徑前綴 from app.vue provide
     const injectedFrontPath = inject('frontpath', ''); // 如果沒有 provide 回傳空字串
     const isAddable = ref(injectedFrontPath); // 不用在 onMounted 裡 inject，直接放頂層
-    
-
+    const config = useRuntimeConfig();
 
     function loadData(){
         //目前先寫找指定找第一個系列的時光牌
@@ -96,7 +95,7 @@
             changeCard(1);
         }).catch((error)=>{
             alert('伺服器尚未開啟請稍後再試!!');
-            window.location=window.location.origin+'/TestNuxtPage/';
+            window.location=window.location.origin+`/`;
         });
     }
 
@@ -431,6 +430,10 @@
 
 
     onMounted(()=>{
+        //僅在測試環境下才回生效
+        if(process.env.NODE_ENV !== "development")
+            window.location=window.location.origin+`/${config.public.projectName}/`;
+
         loadData();
     });
 </script>

@@ -7,7 +7,6 @@
     const isAddable=inject('frontpath');//圖片默認路徑，要配合之後有可能上線
 
     const target=ref(myFile[0]);
-    console.log(target.value.name);
 
     const b1=ref(null);
     const switchs=ref(false);
@@ -60,11 +59,13 @@
 
 
         if(node.complete&&!node.error){
-            console.log(node.src +" is loaded");
 
-            //顯示關卡資訊
-            hiddenImage.classList.add('hidden');
-            node.classList.remove('hidden');
+            setTimeout(()=>{
+            
+                //顯示關卡資訊
+                hiddenImage.classList.add('hidden');
+                node.classList.remove('hidden');
+            },2000);  
         }
         else{
             console.log('fail to loaded')
@@ -81,13 +82,10 @@
             target.value=ultimate[0];
         else
             target.value=myFile[0];
-        imgClick(1);
+        imgClick(1);//預設載入第一張照片
     }
-    //預設載入第一張照片
-   
-
+    
     provide('clicked',clicked);
-
 
     //meta Tag
     useHead({
@@ -147,7 +145,7 @@
             <div class="battle_totals max-w-[800px]"  v-lazy-container="{ selector: 'img' }">
                 <img id="battle_details_image"  :data-src="isAddable+'/images/number1/battle_details.jpg'" class="hidden"
                     alt="not found" @error="showDefaultImg"  @load="imgloadStatus" />
-                <img id="hidden_image" :data-src="isAddable+'/images/question.gif'" class="max-w-[300px] " />
+                <img id="hidden_image" :src="isAddable+'/images/question.gif'" class="max-w-[300px] " />
             </div>          
         </div>
 

@@ -4,6 +4,9 @@ import stage from '../pages/data/UltimateTest.json';
 import { toPng } from 'html-to-image';
 
 //只在測試版本進入
+if(process.env.NODE_ENV !== "development")
+    window.location=window.location.origin+`/${config.public.projectName}/`;
+
 const isAddable=inject('frontpath');
 if(isAddable!==''){
     var currentpath=window.location.href;

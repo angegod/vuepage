@@ -38,6 +38,7 @@ sections.value.push(
 // 路徑前綴 from app.vue provide
 const injectedFrontPath = inject('frontpath', ''); // 如果沒有 provide 回傳空字串
 const isAddable = ref(injectedFrontPath); // 不用在 onMounted 裡 inject，直接放頂層
+const config = useRuntimeConfig();
 
 // 處理錯誤與 meta 設定
 onMounted(() => {
@@ -45,19 +46,19 @@ onMounted(() => {
         alert('該頁面正在施工中，敬請見諒');
 
         const currentPath = window.location.href;
-        if (currentPath.includes("https://angegod.github.io/TestNuxtPage"))
-            window.location.href = "https://angegod.github.io/TestNuxtPage/";
+        if (currentPath.includes(`https://angegod.github.io/${config.public.projectName}`))
+            window.location.href = `https://angegod.github.io/${config.public.projectName}/`;
         else
-            window.location.href = "http://localhost:5173/TestNuxtPage/";
+            window.location.href = "http://localhost:5173/vuepage/";
             return;
     }
 
     useHead({
         title: `侵蝕封王--${details.monsterTitle}`,
         meta: [
-        { name: 'description', content: '異變封王介紹介紹' },
-        { property: 'og:title', content: `侵蝕封王--${details.monsterTitle}` },
-        { property: 'og:description', content: '異變封王簡單介紹' }
+            { name: 'description', content: '異變封王介紹介紹' },
+            { property: 'og:title', content: `侵蝕封王--${details.monsterTitle}` },
+            { property: 'og:description', content: '異變封王簡單介紹' }
         ]
     });
 });

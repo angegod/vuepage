@@ -103,8 +103,8 @@ useHead({
 // 動態設定圖片前綴
 onMounted(() => {
     const currentPath = window.location.href;
-    if (currentPath.includes('https://angegod.github.io/TestNuxtPage/')) {
-      isAddable.value = '/TestNuxtPage';
+    if (currentPath.includes('https://angegod.github.io/vuepage/')) {
+      isAddable.value = '/vuepage';
     } else {
       isAddable.value = '';
     }

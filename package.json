@@ -6,7 +6,8 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "deploy": "npm run generate && npx gh-pages -d .output/public",
+    "predeploy": "nuxt generate",
+    "deploy": "gh-pages -d .output/public -b gh-pages --dotfiles",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
