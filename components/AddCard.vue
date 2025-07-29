@@ -4,21 +4,32 @@
     let props = defineProps(['max','func']);
 
     let card=ref({});
+    let func=ref([]);
+    
     let step=ref(1);//處於哪個步驟 初始為1
     let iconInput=ref(null);//縮圖上傳
     let imageInput=ref(null);//預覽圖上傳
     let spreadInput=ref(null);//盤面圖 如果有必要的話
-    let func=ref([]);
+
     let showSkill=ref([]);
-
-
     let roundEffect=ref(['']);
     let comboEffect=ref(['']);
     let instantEffect=ref(['']);//此區塊暫時默認只寫一個
 
     const emit = defineEmits(['close'])
     
-    console.log(func.value);
+    //初始化 包括還原
+    function init(){
+        step.value = 1;
+        iconInput.value = null;
+        imageInput.value = null;
+        spreadInput.value = null;
+
+        showSkill.value = [];
+        roundEffect.value = [''];
+        comboEffect.value = [''];
+        instantEffect.value = [''];
+    }
 
     function callClick(id){
         document.getElementById(id).value=null;
@@ -37,20 +48,17 @@
                 imageInput.value={file:e.target.result,name:file.name,realFile:file};
             else if(id==='spreadInput')
                 spreadInput.value={file:e.target.result,name:file.name,realFile:file};
-            console.log(spreadInput.value);
         };
-        await reader.readAsDataURL(file); // 读取文件
+        await reader.readAsDataURL(file); // 讀取文件
     }
     //添加技能敘述
     function addEffect(type){
         switch(type){
             case 'combo':
-                comboEffect.value.push('');
-                //console.log(comboEffect.value.length);                
+                comboEffect.value.push('');              
                 break;
             case 'round':
                 roundEffect.value.push('');
-                //console.log(roundEffect.value.length);
                 break;
             case 'instant':
                 instantEffect.value.push('');
@@ -66,18 +74,15 @@
         switch(type){
             case 'combo':
                 if(comboEffect.value.length>1)
-                    comboEffect.value=comboEffect.value.filter((e,i)=>i!==comboEffect.value.length-1);
-                console.log(comboEffect.value.length);                
+                    comboEffect.value=comboEffect.value.filter((e,i)=>i!==comboEffect.value.length-1);          
                 break;
             case 'round':
                 if(roundEffect.value.length>1)
                     roundEffect.value=roundEffect.value.filter((e,i)=>i!==roundEffect.value.length-1);
-                console.log(roundEffect.value.length);
                 break;
             case 'instant':
                 if(instantEffect.value.length>1)
                     instantEffect.value=instantEffect.value.filter((e,i)=>i!==instantEffect.value.length-1);
-                console.log(instantEffect.value.length);
                 break;
             default:
                 break;
@@ -86,7 +91,6 @@
 
     //新增技能
     function addTag(){
-        console.log(func.value);
         var tagIndex=parseInt(document.getElementById('tagSelect2').value);
         var targetTag={};
 
@@ -97,26 +101,27 @@
             targetTag=t;
 
         });
-        console.log(tagIndex);
         if(showSkill.value.includes(targetTag)||tagIndex===0){
             return;
         }
-
-        
-
         showSkill.value.push(targetTag);
-        console.log(showSkill.value);
-
         showSkill.value=showSkill.value.sort((a,b)=>{return a.id-b.id});
-
+        
+        if(card.value.tag===undefined){
+            card.value.tag=[];
+        }
         card.value.tag.push(tagIndex);
-
         card.value.tag=card.value.tag.sort((a,b)=>{return a-b});
-
-        console.log(showSkill.value);
-
     }
 
+    //移除技能
+    function removeTag(tagId){
+        card.value.tag = card.value.tag.filter((t)=>t!==tagId);
+        showSkill.value = showSkill.value.filter((t)=>t.id!==tagId);
+        console.log(showSkill);
+    }
+
+    //新增關鍵字
     function addKeyword(event){
         if(event.key==='Enter'){
             if(card.value.keyword===undefined)
@@ -128,15 +133,27 @@
         }
     }
 
-    async function nextStep(){
-        console.log(step.value);
+    //設定盤面圖
+    function setSpreadImg(){
+        let spreadIndex = event.data.value;
 
+        if(Number(spreadIndex)>0){
+            let spreadData = {
+                image:`/images/card/image/1_${card.value.id}.png`,
+                index:spreadIndex
+            }
+
+            card.value.spread=spreadData;
+        }
+    }
+
+    //步驟進行
+    async function nextStep(){
         if(step.value <3){
             step.value +=1;
             return;
         }
             
-
         //如果漏掉輸入資訊 則不予進入下一步
         if(step.value===3){
             if(card.value.PointMax===undefined||
@@ -187,7 +204,6 @@
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            console.log(response1.data);
 
             //如果有必要需要丟盤面分布
             console.log(spreadInput);
@@ -198,7 +214,6 @@
                 formData2.append('oldName',spreadInput.value.name.split('.')[0]);
                 formData2.append('newName',`1_${card.value.id}`);
                 
-                console.log(spreadInput.value);
                 //上傳照片
                 const response2 = await axios.post('http://localhost:5000/card/spread', formData2, {
                     headers: {
@@ -213,18 +228,18 @@
                 series:1,
                 card:card.value
             };
-            console.log(json);
             await axios.post('http://localhost:5000/card/add',json).then((response)=>{
                 console.log(response.data);
-                step.value = 1;
                 alert('新卡片已添加');
                 emit('close','');
                 emit('updateCard',response.data)              
                
-            })
+                init();
+            });
         }
     }
 
+    //設置卡片預覽
     function setCardPreview(){
         //設定編號
         if(card.value.id===undefined)
@@ -288,12 +303,12 @@
 
     defineExpose({
         setFunc
-    })
+    });
     
 
 </script>
 <template>
-    <div class="h-[500px] pl-5 ">
+    <div class="h-[450px] pl-5 ">
         <TransitionGroup  name="step" tag="div" class="flex flex-row">
             <div v-if="step===1" class="flex flex-row min-w-[500px]" :key="'step1'">
                 <div class="pl-2 pr-2 w-1/2">
@@ -335,7 +350,7 @@
             </div>
             <div v-if="step===2" :key="'step2'" class="flex flex-row min-w-[500px]">
                 <div class="w-1/2 pl-2 pr-2 flex flex-col" >
-                    <div class="flex flex-col mt-5">
+                    <div class="flex flex-col">
                         <div class="flex flex-row mb-1">
                             <span class="text-lg">即時效果:</span>
                             <button class="addBtn ml-3 px-3" @click="addEffect('instant')">添加</button>
@@ -378,7 +393,10 @@
                             <button class="rounded-sm bg-gray-600 min-w-[50px] text-white" @click="addTag()">新增</button>
                         </div>
                         <div class="flex flex-col">
-                            <span v-for="skill in showSkill">{{skill.id +" "+skill.name }}</span>
+                            <div class="flex flex-row justify-between" v-for="skill in showSkill">
+                                <span>{{skill.id +" "+skill.name }}</span>
+                                <button class="removeBtn" @click="removeTag(skill.id)">移除</button>
+                            </div> 
                         </div>
                     </div>
                     <div>
@@ -430,7 +448,7 @@
                     </div>
                     <div class="my-2">
                         <span>圖片標示位置:</span>
-                        <input type="number" class="selfInput"  id="spreadIndex" :min="1" />
+                        <input type="number" class="selfInput"  id="spreadIndex" :min="1" @click="setSpreadImg" />
                     </div>
                     <div class="mt-2">
                         <button class="addBtn pl-2 pr-2" @click="nextStep">下一步</button>
