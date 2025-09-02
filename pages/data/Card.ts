@@ -1,4 +1,6 @@
-let Card = [
+import type { CardSeriesItem } from "@/interface/card";
+
+let Card :CardSeriesItem[] = [
   {
     "seriesId": 1,
     "seriesName": "晨曦塔",

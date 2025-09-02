@@ -1,12 +1,12 @@
-<script setup>
+<script lang="ts" setup>
     import { inject,ref,provide } from 'vue';
     import { computed } from 'vue';
     let props = defineProps(['card']);
     const emit = defineEmits(["update:card"]);
 
     // 路徑前綴 from app.vue provide
-    const injectedFrontPath = inject('frontpath', ''); // 如果沒有 provide 回傳空字串
-    const isAddable = ref(injectedFrontPath); // 不用在 onMounted 裡 inject，直接放頂層
+    const injectedFrontPath = inject<string>('frontpath', ''); // 如果沒有 provide 回傳空字串
+    const isAddable = ref<string>(injectedFrontPath); // 不用在 onMounted 裡 inject，直接放頂層
 
     let FP = computed(() => [
         { name: "進場FP", mode: "PointEnter", value: props.card.PointEnter },
@@ -16,7 +16,7 @@
     ]);
 
 
-    function changeRarity(rarity){
+    function changeRarity(rarity:number){
         emit("update:card", {
             ...props.card, // 保留其他屬性
             "rarity": rarity // 只修改對應的 mode 值
@@ -25,26 +25,30 @@
 
     //更改編輯名稱模式
     function changeEditNameMode(){
-        
-        document.getElementById('nameSpan').style.display='none';
-        document.getElementById('nameInput').style.display='block';
+        let nameSpan = document.getElementById('nameSpan') as HTMLSpanElement;
+        nameSpan.style.display='none';
+        nameSpan.style.display='block';
     }
 
     //編輯卡片名稱
-    function editCardName(event){
-        console.log(event.key);
+    function editCardName(event:KeyboardEvent){
         if(event.key==='Enter'){
-            console.log('55555');  
-            props.card.name=event.target.value;
-            document.getElementById('nameSpan').style.display='block';
-            document.getElementById('nameInput').style.display='none';
+            let input = event.target as HTMLInputElement;
+            props.card.name =input.value;
+
+            let nameSpan = document.getElementById('nameSpan') as HTMLSpanElement;
+            
+            nameSpan.style.display='block';
+            nameSpan.style.display='none';
         }
     }
 
     //改變點數
-    const changePoint = (event, mode) => {
-        const newValue = parseInt(event.target.value);
-        FP.value.find((f)=>f.mode===mode).value=newValue;
+    const changePoint = (event:Event, mode:string) => {
+        const input = event.target as HTMLInputElement;
+        const newValue = parseInt(input.value);
+
+        FP.value.find((f)=>f.mode===mode)!.value=newValue;
         console.log(FP.value);
         // 透過 emit 來更新父元件的 targetCard
         emit("update:card", {
@@ -94,6 +98,7 @@
     
 </template>
 <style scoped>
+    @import '../../assets/css/modify.css';
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button {
         -webkit-appearance: none;
@@ -103,4 +108,6 @@
     .rarity:hover,.rarity.clicked{
         opacity: 1;
     }
+
+
 </style>

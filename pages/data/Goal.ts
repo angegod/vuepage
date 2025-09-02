@@ -1,5 +1,5 @@
 //顯示該年度的bingo目標
-let Goal=[{
+let Goal:GoalItem[]=[{
     rarity:1,
     count:0,
     bind:750,
@@ -15,6 +15,13 @@ let Goal=[{
     bind:1250,
     goal:8,
 }];
+
+export interface GoalItem{
+    rarity:number,
+    count:number,
+    bind:number,
+    goal:number
+}
 
 export default Goal;
 

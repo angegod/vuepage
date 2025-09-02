@@ -1,32 +1,36 @@
-<script setup>
+<script lang="ts" setup>
     import { inject,ref,provide,nextTick, onMounted } from 'vue';
-    import Goal from './data/Goal';
+    import Goal from './data/Goal.ts';
     import CalculatorHint from './hint/CalculatorHint.vue';
+    import type { GoalItem } from './data/Goal';
     const isAddable=inject('frontpath');//圖片默認路徑，要配合之後有可能上線
 
-    let data=ref();
-    let result=ref(undefined);
+    let data =ref<GoalItem[]>(Goal);
+    let result=ref<number|undefined>(undefined);
 
 
     function init(){
         data.value=Goal.map(item => ({ ...item })); // 簡單淺拷貝（已足夠）
-        console.log(data.value);
         result.value = undefined;
     }
 
-    function changeData(event,num){
+    function changeData(event: Event, num: number):void{
+        const input = event.target as HTMLInputElement;
+        const value = parseInt(input.value);
 
-        //防呆
-        if(parseInt(event.target.value)<0){
-            event.target.value=0;
+        // 防呆：負數變 0
+        if (value < 0) {
+            input.value = '0';
             return;
         }
 
-        let old=data.value;
-        old.find((d)=>d.rarity===num).count=parseInt(event.target.value);
+        const old = [...data.value!] as GoalItem[]; // 先複製一份陣列
+        const target = old.find(d => d.rarity === num);
+        if (target) {
+            target.count = value;
+        }
 
-        data.value=old;
-        console.log(data.value);
+        data.value = old;
     }
 
     function calData(){

@@ -1,18 +1,19 @@
-<script setup>
+<script lang="ts" setup>
 import { inject, ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import Data from './data/King_details.json';
 import Intro from './Intro.vue';
+import type { MonsterItem, relicSubItem } from '@/interface/King';
 
 
 // 取得目前路由資訊
 const route = useRoute();
 const targetId = route.query.id
 
-const sections = ref([]); //將json部分資料加工處理 使其更易維護
+const sections = ref<relicSubItem[]>([]); //將json部分資料加工處理 使其更易維護
 
 // 找到對應資料
-const details = Data.find((d) => d.id.toString() === targetId);
+const details = Data.find((d) => d.id.toString() === targetId) as MonsterItem;
 
 
 //將特定資料整理至sections中

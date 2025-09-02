@@ -1,22 +1,26 @@
-<script setup>
-import { inject,ref,provide,defineModel } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import '../assets/css/modifyFunc.css';
 import axios from 'axios';
+import type { funcDataItem, skillItem } from '@/interface/funcData';
+import type { movement } from '@/interface/modifyFunc';
 
-let func=ref([]);//從api抓到的資料
-let mode=ref('');//模式 add代表新增 edit代表編輯
+let func=ref<funcDataItem[]>([]);//從api抓到的資料
+let mode=ref<string>('');//模式 add代表新增 edit代表編輯
 
-let funcData=[];//從func複製過來的 有用深拷貝
-let selectTId=ref(0);//技能系列編號
-let selectSId=ref(0);//技能編號
-let SIndex=ref(null);//技能在陣列中的索引(位置)
-let SMaxIndex=ref(null);
-let showSkill=ref(null);
-let nowSkillId=ref(1);//如果有新增技能標籤 要賦予甚麼ID
-let nowTypeId=ref(1);
+let funcData=[] as funcDataItem[];//從func複製過來的 有用深拷貝
+let selectTId=ref<number>(0);//技能系列編號
+let selectSId=ref<number>(0);//技能編號
+
+let SIndex=ref<number|null>(null);//技能在陣列中的索引(位置)
+let SMaxIndex=ref<number|null>(null);
+let showSkill=ref<skillItem|null>(null);
+
+let nowSkillId=ref<number>(1);//如果有新增技能標籤 要賦予甚麼ID
+let nowTypeId=ref<number>(1);
 
 //紀錄每個標籤的相關紀錄
-let funcMove=ref([]);
+let funcMove=ref<movement[]>([]);
 
 
 //計算新技能或系列ID需要賦予怎樣的值?
@@ -32,23 +36,24 @@ function calSkillId(){
 }
 
 
-function addSeries(event){
+function addSeries(event:KeyboardEvent){
     if(event.key=='Enter'){
+        let input = event.target as HTMLInputElement;
+
         let newSeries={
             typeId:nowTypeId.value,
-            typeName:event.target.value,
+            typeName:input.value,
             data:[]
         };
 
         func.value.push(newSeries);
-        console.log(func.value);
 
         //紀錄
         let movement={
             method:"addSeries",
             data:{
                 typeId:nowTypeId.value,
-                typeName:event.target.value
+                typeName:input.value
             }
         }
 
@@ -60,10 +65,8 @@ function addSeries(event){
         //遞增系列id增加
         nowTypeId.value+=1;
 
-        let skill=document.getElementById('skill');
+        let skill=document.getElementById('skill') as HTMLDivElement;
         skill.scrollTo(0,skill.scrollHeight);
-
-        
     }
 }
 
@@ -76,29 +79,33 @@ function RecoverClick(){
 }
 
 //呼叫新增視窗
-function callAdd(seriesId){
+function callAdd(seriesId:number){
     selectTId.value=seriesId;
     
     //將變動位置限制在一定範圍內
     
     mode.value='add';
-    SMaxIndex.value=func.value.find((t)=>t.typeId==selectTId.value).data.length+1;
+    let targetFunc = func.value.find((t)=>t.typeId==selectTId.value) as funcDataItem;
+    SMaxIndex.value=targetFunc.data.length+1;
 }
 
 //添加指定系列技能標籤
 function addTag(){
-    let inputText=document.getElementById('input1').value;
-    let insertPos=document.getElementById('addPos').value;
+    let inputText=(document.getElementById('input1') as HTMLInputElement).value;
+    let insertPos=(document.getElementById('addPos') as HTMLInputElement).value;
 
-    let newSkill={
+    let targetFunc = func.value.find((s)=>s.typeId===selectTId.value) as funcDataItem;  
+    let newSkill:skillItem={
+        typeId:targetFunc.typeId,
         id:nowSkillId.value,//之後要送出才會替換成可用的值
         name:inputText
-    }
-    console.log(func.value.find((s)=>s.typeId===selectTId.value));
+    };
+    //console.log(func.value.find((s)=>s.typeId===selectTId.value));
 
 
-    //func.value.find((s)=>s.typeId===selectTId.value).data.push(newSkill);  
-    func.value.find((s)=>s.typeId===selectTId.value).data.splice(insertPos-1,0,newSkill);  
+    //func.value.find((s)=>s.typeId===selectTId.value).data.push(newSkill);
+   
+    targetFunc.data.splice(parseInt(insertPos)-1, 0 ,newSkill);  
     alert('技能標籤已加入');
 
 
@@ -109,7 +116,7 @@ function addTag(){
     nowSkillId.value+=1;
 }
 
-function editTag(tId,sId){
+function editTag(tId:number,sId:number){
     //將右邊視窗切換成編輯模式
     mode.value='edit';
 
@@ -118,21 +125,23 @@ function editTag(tId,sId){
     selectTId.value=tId;
     selectSId.value=sId;
 
-    let targetSkill=func.value.find((t)=>t.typeId===tId).data.find((s)=>s.id===sId);
-    let targetIndex=func.value.find((t)=>t.typeId===tId).data.findIndex((s)=>s.id===sId);
-    SMaxIndex.value=func.value.find((t)=>t.typeId===tId).data.length+1;
-    showSkill.value=targetSkill;
-    SIndex.value=targetIndex;
-    
+    let targetFunc = func.value.find((t)=>t.typeId===tId) as funcDataItem;
+
+    let targetSkill = targetFunc.data.find((s)=>s.id===sId) as skillItem;
+    let targetIndex = targetFunc.data.findIndex((s)=>s.id===sId) as number;
+    SMaxIndex.value = targetFunc.data.length+1;
+    showSkill.value = targetSkill;
+    SIndex.value = targetIndex;
+
 }
 
 //刪除技能
-function removeTag(tId,sId){
-    let targetType=func.value.find((type)=>type.typeId===tId);
-    targetType.data=targetType.data.filter((c)=>c.id!==sId);
+function removeTag(tId:number,sId:number){
+    let targetType = func.value.find((type)=>type.typeId === tId) as funcDataItem;
+    targetType.data = targetType.data.filter((c)=>c.id!==sId);
 
     //動作資料:刪除 後台會去認這個資料將card裡有這個標籤的先拿掉
-    let movement={
+    let movement:movement={
         method:"deleteTag",
         data:{
             type:tId,
@@ -147,40 +156,45 @@ function removeTag(tId,sId){
 
 //儲存修改
 function saveTag(){
-    let newSkill={
-        id:selectSId.value,
-        name:document.getElementById('editname').value
-    }
-
     //一律先拿掉原本的 再加入指定位置
 
-    function moveElement(oldPos, fromIndex,newPos, toIndex,skill) {//傳入舊位置 舊索引 新位置跟新索引
+    function moveElement(oldPos:number, fromIndex:number, newPos:number , toIndex:number, skill:skillItem) {//傳入舊位置 舊索引 新位置跟新索引
 
         //先原本的技能加入並改成新版本的之後，再移除掉舊的
-        let oldSkill= func.value.find((type)=>type.typeId===oldPos).data.find((s,pos)=>pos===fromIndex);
-        let newData = func.value.find((type)=>type.typeId==newPos).data;
+        let oldSkill= (func.value.find((type)=>type.typeId===oldPos) as funcDataItem).data.find((s,pos)=>pos===fromIndex) as skillItem;
+        let newData = (func.value.find((type)=>type.typeId===newPos) as funcDataItem).data;
 
         //標記舊的地方需要刪除
         oldSkill.delete=true;
 
         //加入並當場改寫 標記舊的刪除
         newData.splice(toIndex, 0, skill);
-        func.value.find((type)=>type.typeId==newPos).data=newData;
+        (func.value.find((type)=>type.typeId==newPos) as funcDataItem).data=newData;
         console.log(func.value);
 
         //最後再把舊的移除掉
-        let oldData = func.value.find((type)=>type.typeId===oldPos).data;
-        oldData = oldData.filter((s,pos)=>s.delete!==true);
+        let oldData = (func.value.find((type)=>type.typeId===oldPos) as funcDataItem).data;
+        oldData = oldData.filter((s,pos)=>s.delete!==true) ;
         
         console.log(oldData);
-        func.value.find((type)=>type.typeId===oldPos).data=oldData;
+        (func.value.find((type)=>type.typeId===oldPos) as funcDataItem).data=oldData;
     }
     
+    let editname = document.getElementById('editname') as HTMLInputElement;
 
     let oldPos=selectTId.value;
-    let newPos=document.getElementById('beyond').value;
+    let newPos=(document.getElementById('beyond') as HTMLSelectElement).value;
+    let toIndex =  parseInt((document.getElementById('editPos') as HTMLInputElement).value)-1;
+
+    let newSkill={
+        typeId: parseInt(newPos),
+        id:selectSId.value,
+        name:editname.value
+    }
+
     
-    moveElement(oldPos,SIndex.value ,newPos, document.getElementById('editPos').value-1,newSkill);
+    
+    moveElement(oldPos,SIndex.value! ,parseInt(newPos), toIndex,newSkill);
 
     console.log(func.value);
 
@@ -197,7 +211,7 @@ function cancelModify(){
 }
 
 //刪除整個技能系列 包刮內部技能標籤
-function deleteType(tId){
+function deleteType(tId:number){
     let msg='確定刪除這個系列嗎?如果誤刪可以透過還原恢復\n但如果送出儲存成功則無法恢復\n確定刪除嗎?';
     if(confirm(msg)){
         func.value=func.value.filter((t)=>t.typeId!==tId);
@@ -221,37 +235,48 @@ function deleteType(tId){
 
 //更改選擇位置最大值 透過select change監聽事件觸發
 function changeMax(){
-    let tId=parseInt(document.getElementById('beyond').value);
-    document.getElementById('editPos').max=func.value.find((t)=>t.typeId===tId).data.length+1;
-    document.getElementById('editPos').value=1;
+    let beyond = document.getElementById('beyond') as HTMLSelectElement;
+    let editPos = document.getElementById('editPos') as HTMLInputElement;
+
+    let tId = parseInt(beyond.value);
+    editPos.max= ((func.value.find((t)=>t.typeId===tId) as funcDataItem).data.length+1).toString();
+    editPos.value= "1";
 
 }
 //指定技能存放位置為最前面
 function setPosMin(){
+    let editPos = document.getElementById('editPos') as HTMLInputElement;
+    let addPos = document.getElementById('addPos') as HTMLInputElement;
+
     if(mode.value==='edit')
-        document.getElementById('editPos').value=parseInt(document.getElementById('editPos').min);
+        editPos.value = parseInt(editPos.min).toString();
     else if(mode.value==='add')
-        document.getElementById('addPos').value=parseInt(document.getElementById('addPos').min);
+        addPos.value=parseInt(addPos.min).toString();
     else 
         return
 }
 
 //指定技能存放位置為最後面
 function setPosMax(){
+    let editPos = document.getElementById('editPos') as HTMLInputElement;
+    let addPos = document.getElementById('addPos') as HTMLInputElement;
+
     if(mode.value==='edit')
-        document.getElementById('editPos').value=parseInt(document.getElementById('editPos').max);
+        editPos.value=parseInt(editPos.max).toString();
     else if(mode.value === 'add')
-        document.getElementById('addPos').value=parseInt(document.getElementById('addPos').max);
+        addPos.value=parseInt(addPos.max).toString();
     else
         return
 }
 
-function showBtn(event){
-    event.target.classList.remove('hideBtn');
+function showBtn(event:MouseEvent){
+    let targetDiv = event.target as HTMLDivElement;
+    targetDiv.classList.remove('hideBtn');
 }
 
-function hideBtn(event){
-    event.target.classList.add('hideBtn');
+function hideBtn(event:MouseEvent){
+    let targetDiv = event.target as HTMLDivElement;
+    targetDiv.classList.add('hideBtn');
 }
 
 function init(){
@@ -266,6 +291,7 @@ function init(){
 
 //送出最終修改設定並且更新備份
 function saveFunc(){
+    const config = useRuntimeConfig();
     let data={
         func:func.value,//修改後的技能
         moves:funcMove.value
@@ -280,14 +306,17 @@ function saveFunc(){
         funcMove.value=[];
     }).catch((error)=>{
         alert('伺服器尚未開啟請稍後再試!!');
-        window.location=window.location.origin+`/${config.public.projectName}/`;
+        window.location.assign(window.location.origin+`/${config.public.projectName}/`);
+        //window.location=window.location.origin+`/${config.public.projectName}/`;
     });
 }    
 
 onMounted(()=>{
     const config = useRuntimeConfig();
     if(process.env.NODE_ENV !== "development")
-        window.location=window.location.origin+`/${config.public.projectName}/`;
+        window.location.assign(window.location.origin+`/${config.public.projectName}/`);
+    
+    //window.location=window.location.origin+`/${config.public.projectName}/`;
 
     //初始化資料
     axios.post('http://localhost:5000/func/get').then((response)=>{
@@ -298,7 +327,8 @@ onMounted(()=>{
         calSkillId();
     }).catch((error)=>{
         alert('伺服器尚未開啟請稍後再試!!');
-        window.location=window.location.origin+`/`;
+        window.location.assign(window.location.origin+`/`);
+        //window.location=window.location.origin+`/`;
     });
 
 });
@@ -318,15 +348,15 @@ onMounted(()=>{
             <div class="flex flex-row">
                 <div class="max-h-[450px] overflow-y-scroll w-1/3" id="skill">
                     <TransitionGroup tag="div" name="type">
-                        <div class="mt-5 mb-5" v-for="t in func" :key="'type'+t.id">
+                        <div class="mt-5 mb-5" v-for="t in func" :key="'type'+t.typeId">
                             <div class="flex flex-row sticky top-2 bg-black">
                                 <span class="text-amber-800 text-lg font-bold pl-3">{{t.typeName}}</span>
                                 <button class="addBtn" @click="callAdd(t.typeId)">添加技能</button>
                                 <button class="addBtn" @click="deleteType(t.typeId)">刪除</button>
                             </div>
                             <div class="flex flex-col">
-                                <TransitionGroup tag="div" name="list" :key="t">
-                                    <div class="flex flex-row hideBtn mt-1 mb-1 "  v-for="skill in t.data" :key="skill"  @mouseenter="showBtn" @mouseleave="hideBtn">
+                                <TransitionGroup tag="div" name="list" :key="t.typeId">
+                                    <div class="flex flex-row hideBtn mt-1 mb-1 "  v-for="skill in t.data" :key="skill.id"  @mouseenter="showBtn" @mouseleave="hideBtn">
                                         <span class="text-white h-[30px] flex items-center" >{{ skill.id+" "+skill.name }}</span>
                                         <button class="addBtn" @click="editTag(t.typeId,skill.id)">修改</button>
                                         <button class="removeBtn" @click="removeTag(t.typeId,skill.id)">刪除</button>
@@ -337,7 +367,7 @@ onMounted(()=>{
                     </TransitionGroup>
                 </div>
                 <div class="w-2/3 pl-5">
-                    <div v-if="mode==='add'">
+                    <div v-if="mode==='add' && SMaxIndex">
                         <div>
                             <div>
                                 <span class="text-red-500 font-bold text-lg">新增技能</span>
@@ -364,13 +394,13 @@ onMounted(()=>{
                             </div>
                         </div>
                     </div>
-                    <div v-if="mode==='edit'">
+                    <div v-if="mode==='edit' && SIndex && SMaxIndex">
                         <div>
                             <span class="text-red-500 font-bold text-lg">修改技能標籤設定</span>
                         </div>
                         <div class="mt-5 mb-5">
                             <span class="text-white font-bold">修改技能名稱</span><br/>
-                            <input type="text" :value="showSkill.name" placeholder="技能描述" class="rounded bg-gray-600 text-white" id="editname"/>
+                            <input type="text" :value="showSkill!.name" placeholder="技能描述" class="rounded bg-gray-600 text-white" id="editname"/>
                         </div>
                         <div class="mt-5 mb-5">
                             <span class="text-white font-bold">歸屬於</span>

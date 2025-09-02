@@ -1,50 +1,46 @@
-<script>
+<script lang="ts">
+    import { ref } from 'vue';
     import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
     import 'vue3-carousel/dist/carousel.css';
-    import { ref } from 'vue';
-    let cardSlide=ref(null);
 
-    export default {
-        name: 'App',
-        components: {
-            Carousel,
-            Slide,
-            Pagination,
-            Navigation,
-        },methods:{
-            slideItem:function(event,length){
-                if(event.target.value>length||event.target.value<0){
-                    alert("該編號卡片資料沒有找到!!");
-                }else{
-                    let val=event.target.value;
-                    cardSlide.value.data.slideTo(val-1);
-                }
-            }        
+    import type { CardItem } from '@/interface/card';
+    import type { funcDataItem, skillItem } from '@/interface/funcData';
+
+    // Carousel 實例
+    const cardSlide = ref<any>(null);
+
+    // 處理跳頁
+    function slideItem(event: Event, length: number) {
+        const target = event.target as HTMLInputElement;
+        const val = Number(target.value);
+
+        if (isNaN(val) || val > length || val <= 0) {
+            alert("該編號卡片資料沒有找到!!");
+            return;
         }
-        ,data(){
-            
-        }
+
+        // 呼叫 carousel 的 slideTo 方法
+        cardSlide.value?.slideTo(val - 1);
     }
 </script>
-<script setup>
-    import { inject,ref,provide,defineModel,watch } from 'vue';
-    import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
+<script lang="ts" setup>
+    import { inject,provide,defineModel,watch } from 'vue';
     import axios from 'axios';
     import AddCard from '../components/AddCard.vue';
     import EditBasic from './editfunc/EditBasic.vue';
     import EditKeyword from './editfunc/EditKeyword.vue';
 
-    let Card=[];//原始資料
-    let funcData=[];
-    let seriesId=ref(1);//系列ID
-    let showSkill=ref([]);
-    let func=ref([]);//避免因為篩選導致原本遺失
-    let CardArray=ref([]);//更動過後的資料(暫存)
-    let selectCardId=ref(1);
+    let Card = [] as CardItem[];//原始資料
+    let funcData = [] as funcDataItem[];
+    let seriesId=ref<number>(1);//系列ID
+    let showSkill=ref<skillItem[]>([]);
+    let func=ref<funcDataItem[]>([]);//避免因為篩選導致原本遺失
+    let CardArray=ref<CardItem[]>([]);//更動過後的資料(暫存)
+    let selectCardId=ref<number>(1);
     let keyword='';
     let searchWord='';
-    let popup=ref(null);
-    let targetCard=ref({});
+    let popup=ref<InstanceType<typeof AddCard>>();
+    let targetCard=ref<CardItem|undefined>(undefined);
 
     //功能列表
     let editFunc=ref([{
@@ -91,70 +87,81 @@
             func.value=JSON.parse(JSON.stringify(funcData));
             CardArray.value=JSON.parse(JSON.stringify(Card));
 
-            
             changeCard(1);
         }).catch((error)=>{
             alert('伺服器尚未開啟請稍後再試!!');
-            window.location=window.location.origin+`/`;
+
+            window.location.assign(window.location.origin+`/`);
         });
     }
 
     
-    function changeSeries(index){
+    function changeSeries(index:number){
 
-        let target=document.getElementById('series'+index);
+        let target=document.getElementById('series'+index) as HTMLButtonElement;
         if(target.classList.contains('clicked'))
             target.classList.remove('clicked')
         else
             target.classList.add('clicked');
 
-        seriesId.value=parseInt(index);
+        seriesId.value=index;
         loadData();
     }
     
-    function removeTag(index){
+    //移除技能標籤
+    function removeTag(index:number){
         showSkill.value=showSkill.value.filter((t,i)=>i!==index);
-        
+        let targetCard = CardArray.value.find((c)=>c.id===selectCardId.value) as CardItem;
            
         //將更正合併到原本資料中
-        let oldTag=CardArray.value.find((c)=>c.id===parseInt(selectCardId.value)).tag;
-        CardArray.value.find((c)=>c.id===parseInt(selectCardId.value)).tag=oldTag.filter((f,i)=>i!==index);
-        console.log(CardArray.value.find((c)=>c.id===parseInt(selectCardId.value)));
+        let oldTag=targetCard.tag;
+        targetCard.tag=oldTag.filter((f,i)=>i!==index);
+        console.log(CardArray.value.find((c)=>c.id===selectCardId.value));
     }
 
+    //添加技能標籤
     function addTag(){
-        var tagIndex=parseInt(document.getElementById('tagSelect').value);
-        var targetTag={};
+        const tagSelect = document.getElementById('tagSelect') as HTMLSelectElement;
+        if (!tagSelect) return;
+
+        const tagIndex = parseInt(tagSelect.value);
+        if (tagIndex === 0) return;
+
+
+        let targetTag :skillItem | undefined;
 
         func.value.forEach((type)=>{
-            let t=type.data.find((f)=>f.id===tagIndex);
+            let t=type.data.find((f)=>f.id===tagIndex) as skillItem;
             if(t===undefined)
                 return;
             targetTag=t;
 
         });
 
-        if(showSkill.value.includes(targetTag)||tagIndex===0){
+        if(!targetTag||showSkill.value.includes(targetTag)||tagIndex===0){
             return;
         }
 
-        //console.log(targetTag);
 
         showSkill.value.push(targetTag);
-        //console.log(showSkill.value);
 
         showSkill.value=showSkill.value.sort((a,b)=>{return a.id-b.id});
 
-        CardArray.value.find((c)=>c.id===selectCardId.value).tag.push(tagIndex);
+        let targetCard = CardArray.value.find((c)=>c.id===selectCardId.value) as CardItem;
 
-        CardArray.value.find((c)=>c.id===selectCardId.value).tag=CardArray.value.find((c)=>c.id===selectCardId.value).tag.sort((a,b)=>{return a-b});
-        console.log(Card.find((c)=>c.id===selectCardId.value).tag);//備份的
-        console.log(CardArray.value.find((c)=>c.id===selectCardId.value).tag);//有更動過的
+        targetCard.tag.push(tagIndex);
+
+        targetCard.tag= targetCard.tag.sort((a,b)=>{return a-b});
+        
+        
+        /*console.log(Card.find((c)=>c.id===selectCardId.value).tag);//備份的
+        console.log(CardArray.value.find((c)=>c.id===selectCardId.value).tag);//有更動過的*/
 
     }
     //新增搜尋關鍵字
     function addWord(){
-        let target=CardArray.value.find((c)=>c.id===selectCardId.value).keyword;
+        let targetCard = CardArray.value.find((c)=>c.id===selectCardId.value) as CardItem;
+        let target = targetCard.keyword;
 
         //避免原本就沒有關鍵字生成
         if(target===undefined||target===null){
@@ -162,21 +169,19 @@
         }
         
         target.push(searchWord);
-        console.log(target);
         //清除先前輸入結果
-        CardArray.value.find((c)=>c.id===selectCardId.value).keyword=target;
-        console.log(CardArray.value.find((c)=>c.id===selectCardId.value).keyword);
+        targetCard.keyword=target;
+        console.log(targetCard.keyword);
         searchWord='';
     }
 
-    function removeWord(index){
-        let target=CardArray.value.find((c)=>c.id===selectCardId.value).keyword;
+    function removeWord(index:number){
+        let targetCard = CardArray.value.find((c)=>c.id===selectCardId.value) as CardItem;
+        let target = targetCard.keyword;
 
         target=target.filter((k,i)=>i!==index);
 
-        CardArray.value.find((c)=>c.id===selectCardId.value).keyword=target;
-
-        console.log(CardArray.value.find((c)=>c.id===selectCardId.value).keyword);
+        targetCard.keyword=target;
     }
 
     function SaveClick(){
@@ -204,10 +209,9 @@
         }
     }
 
-    function changeCard(index){
-        //console.log(index);
+    function changeCard(index:number){
         selectCardId.value=index;
-        targetCard.value=CardArray.value.find((c)=>c.id===selectCardId.value);
+        targetCard.value = CardArray.value.find((c)=>c.id===selectCardId.value) as CardItem;
 
         //清空
         showSkill.value=[];
@@ -246,26 +250,28 @@
 
 
     //關鍵字搜尋
-    function keywordChange(event){
-        keyword = event.target.value
-        console.log(keyword);
+    function keywordChange(event:Event){
+        let input = event.target as HTMLInputElement;
+        keyword = input.value;
 
         if(keyword===''){
             func.value=funcData;//復原
             return;
         }
 
-        let filterArr=[];
+        //技能搜尋結果
+        let filterArr = [] as funcDataItem[];
+        
         funcData.forEach((type)=>{
-            let result=[];
+            let result=[] as skillItem[];
             type.data.forEach((f)=>{
                 if(f.name.includes(keyword))
                     result.push(f);
-            })            
+            });
+
             if(result.length!==0){
-                console.log(result);
-                let insertType=type;
-                insertType.data=result;
+                let insertType = type;
+                insertType.data = result;
                 filterArr.push(insertType);
             }
         });
@@ -276,27 +282,24 @@
             func.value=[];
     }
 
-    function searchWordChange(event){
+    /*function searchWordChange(event:Event){
         searchWord=event.target.value;
-
-        console.log(searchWord);
-    }
+    }*/
 
     function RecoverClick(){
-        let target=Card.find((c)=>c.id===selectCardId.value);
-        if(target===undefined||target===null)
+        let target=Card.find((c)=>c.id===selectCardId.value) as CardItem;
+        if(!target)
             return;
 
-        //將原先的資料叫出來 使用深拷貝copy出來避免有任何倍更動過的風險
-        let oldData=JSON.parse(JSON.stringify(target));
-        
+        //將原先的資料叫出來 使用深拷貝copy出來避免有任何被更動過的風險
+        let oldData=JSON.parse(JSON.stringify(target)) as CardItem;
         
         //清空
         showSkill.value=[];
         
         oldData.tag.forEach((t)=>{
             funcData.forEach((type)=>{
-                let targetskill=type.data.find((data)=>data.id===t);
+                let targetskill=type.data.find((data)=>data.id===t) as skillItem;
                 if(targetskill!==undefined){
                     showSkill.value.push(targetskill);
                 }
@@ -311,40 +314,48 @@
 
 
     //雙擊label顯示該input
-    function showInputBox(event){
-        let targetInputBox=event.target.parentElement.querySelector('textarea');
+    function showInputBox(event: Event) {
+        const target = event.target as HTMLElement | null;
+        if (!target || !target.parentElement) return;
+
+        const targetInputBox = target.parentElement.querySelector('textarea') as HTMLTextAreaElement | null;
+        if (!targetInputBox) return;
+
         targetInputBox.classList.remove('hidden');
-        event.target.classList.add('hidden');
+        target.classList.add('hidden');
     }
 
     //敘述修改
-    function descModify(event,type,index=undefined){
-        console.log(event.key);
+    function descModify(event:KeyboardEvent,type:string,index?:number){
+        let targetCard = CardArray.value[selectCardId.value-1] as CardItem;
+
         //如果是按下Enter 則儲存
-        if(event.key==="Enter"){
-            
+        if(event.key==="Enter" && index !== undefined){
+            const input = event.target as HTMLInputElement;
+            const inputValue = input.value;
+
             switch(type){
                 case 'instant':
-                    CardArray.value[selectCardId.value-1].instantEffect[index]=event.target.value;
+                    targetCard.instantEffect[index] = inputValue;
                     break;
                 case 'round' :
-                    CardArray.value[selectCardId.value-1].roundEffect[index]=event.target.value;
+                    targetCard.roundEffect[index]= inputValue;
                     break;
                 case 'combo' :
-                    CardArray.value[selectCardId.value-1].comboEffect[index]=event.target.value;
+                    targetCard.comboEffect[index] = inputValue;
                     break;
             }
 
-            console.log(CardArray.value.find((c)=>c.id===selectCardId.value));
+            //console.log(CardArray.value.find((c)=>c.id===selectCardId.value));
 
-            let targetSpan=event.target.parentElement.querySelector('span');
+            let targetSpan= input.parentElement?.querySelector('span') as HTMLSpanElement;
             targetSpan.classList.remove('hidden');
-            event.target.classList.add('hidden');
+            input.classList.add('hidden');
             return;
         }
 
         //如果是按下Esc 則還原
-        if(event.key==="Esc"){
+        if(event.key==="Escape"){
             
         }
 
@@ -353,18 +364,18 @@
                 case 'instant':
                     break;
                 case 'round' :
-                    CardArray.value.find((c)=>c.id===selectCardId.value).roundEffect=CardArray.value.find((c)=>c.id===selectCardId.value).roundEffect.filter((d,i)=>i!==index);
+                    targetCard.roundEffect = targetCard.roundEffect.filter((d,i)=>i!==index);
                     break;
                 case 'combo' :
-                    CardArray.value.find((c)=>c.id===selectCardId.value).comboEffect=CardArray.value.find((c)=>c.id===selectCardId.value).comboEffect.filter((d,i)=>i!==index);
+                    targetCard.comboEffect=targetCard.comboEffect.filter((d,i)=>i!==index);
                     break;
             }
         }
         
     }
 
-    function addDesc(type){
-        let t=CardArray.value.find((c)=>c.id===selectCardId.value);
+    function addDesc(type:string){
+        let t=CardArray.value.find((c)=>c.id===selectCardId.value) as CardItem;
         switch(type){
             case 'round':
                 t.roundEffect.push('回合效果');
@@ -379,8 +390,8 @@
     }
 
     //移除敘述 目前默認移除最後一個，並且一定會至少保留一段敘述
-    function removeDesc(type){
-        let t=CardArray.value.find((c)=>c.id===selectCardId.value);
+    function removeDesc(type:string){
+        let t=CardArray.value.find((c)=>c.id===selectCardId.value) as CardItem;
 
         switch(type){
             case 'round':
@@ -403,36 +414,42 @@
    
 
     function addCard(){
-        document.getElementById('overlay').style.display='block';
-        popup.value.setFunc(func.value);
+        if(popup.value){
+            let overlay = document.getElementById('overlay') as HTMLDivElement;
+
+            overlay.style.display='block';
+            popup.value.setFunc(func.value);
+        }
     }
 
     function closeHandle(){
-        document.getElementById('overlay').style.display='none';
+        let overlay = document.getElementById('overlay') as HTMLDivElement;
+        overlay.style.display='none';
     }
 
-    function changeEditMode(modeName){
+    function changeEditMode(modeName:string){
         editMode.value=modeName;
     }
 
-    function changeCardDataFromChild(data){
-        Card=data;
-        CardArray.value=JSON.parse(JSON.stringify(Card));
+    function changeCardDataFromChild(data:CardItem[]){
+        Card = data;
+        CardArray.value=JSON.parse(JSON.stringify(Card)) as CardItem[];
     }
 
     //監聽targetCard在任一子物件中是否有被修改過?
-    watch(targetCard, (newValue, oldValue) => {
-        
-        CardArray.value[newValue.id-1]=newValue;
-        
-    }, { deep: true }); 
+    watch(targetCard,(newValue, oldValue) => {
+        if (!newValue) return; // 確保不是 undefined
+
+        CardArray.value[newValue.id - 1] = newValue
+    },{ deep: true })
+
     provide('close',closeHandle);//提供關閉彈出視窗方法
 
 
     onMounted(()=>{
         //僅在測試環境下才回生效
         if(process.env.NODE_ENV !== "development")
-            window.location=window.location.origin+`/${config.public.projectName}/`;
+            window.location.assign(`${window.location.origin}/${config.public.projectName}/`);
 
         loadData();
     });
@@ -442,7 +459,7 @@
         <div class="w-4/5 mx-auto mb-2">
             <span class="text-white text-xl">系列</span>
             <div class="flex flex-row">
-                <button class="addBtn mr-5 w-[100px]" @click="(event)=>changeSeries(1)" id="series1">晨曦塔</button>
+                <button class="addBtn mr-5 w-[100px]" @click="changeSeries(1)" id="series1">晨曦塔</button>
                 <button class="addBtn mr-5 w-[100px]" @click="changeSeries(2)" id="series2">測試塔</button>
             </div>
         </div>
@@ -498,10 +515,10 @@
                     </div>
                 </div>
             </div>
-            <div v-if=" editMode == 'edit_basic'" class="w-2/5 pl-3 right mt-5 h-[500px] relative ">
+            <div v-if=" editMode == 'edit_basic' && targetCard" class="w-2/5 pl-3 right mt-5 h-[500px] relative ">
                 <EditBasic  v-model:card="targetCard" />
             </div>
-            <div class="w-2/5 pl-3 right mt-5 h-[500px] relative " v-if="editMode == 'edit_tag' ">
+            <div class="w-2/5 pl-3 right mt-5 h-[500px] relative " v-if="editMode == 'edit_tag' && targetCard">
                 <div class="flex-col">
                     <span class="standwardLabel">自身技能標籤</span>
                     <div class="mb-3">
@@ -534,10 +551,10 @@
                     </div>
                 </div>
             </div>
-            <div class="w-2/5 pl-3 right mt-5 h-[500px] relative " v-if="editMode == 'edit_keyword'">
+            <div class="w-2/5 pl-3 right mt-5 h-[500px] relative " v-if="editMode == 'edit_keyword' && targetCard">
                 <EditKeyword v-model:card="targetCard"/>
             </div>
-            <div class="w-2/5 pl-3 right mt-5 h-[500px] relative " v-if="editMode == 'edit_description'">
+            <div class="w-2/5 pl-3 right mt-5 h-[500px] relative " v-if="editMode == 'edit_description' && targetCard">
                 <div>
                     <span class="text-amber-800 text-[18px]">效果敘述</span>
                 </div>
@@ -575,7 +592,7 @@
                     </div>
                 </div>
             </div>
-            <div class="w-2/5 pl-3 right mt-5 h-[500px] relative " v-if="editMode == 'delete'">
+            <div class="w-2/5 pl-3 right mt-5 h-[500px] relative " v-if="editMode == 'delete' && targetCard">
                 <div>
                     <span class="text-amber-800 text-[18px]">刪除卡片</span>
                 </div>

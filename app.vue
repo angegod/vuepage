@@ -1,7 +1,7 @@
-<script setup>
+<script lang="ts" setup>
 import { ref, watch, provide, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router';
-import Footers from '~/pages/Footer.vue';
+import Footers from './pages/Footer.vue';
 import { useCardBtnStore } from './pages/data/store';
 
 // 路由資訊
@@ -28,12 +28,9 @@ onMounted(() => {
     show.value = window.innerWidth < 500
 
     // 根據初始路由設置
-    updateHeader(route.path)
+    updateHeader(route.path);
 
-    // 事件總線控制按鈕顯示
-    /*eventBus.on('HideBtn', () => (showCardBtn.value = false))
-    eventBus.on('ShowBtn', () => (showCardBtn.value = true))*/
-})
+});
 
 // 監聽路由變化
 watch(
@@ -43,17 +40,22 @@ watch(
   }
 )
 
-function updateHeader(path) {
-    show.value = window.innerWidth < 500
-    const map = {
+function updateHeader(path: string) {
+    show.value = window.innerWidth < 500;
+
+    const map: Record<string, number> = {
         '/': 1,
         '/about/': 2,
         '/battle/': 3,
         '/card/': 4
+    };
+
+    const index = map[path];
+    if (index !== undefined) {
+        addDash(index);
     }
-    const index = map[path]
-    if (index) addDash(index)
-    showCardBtn.value = path === '/card/'
+
+    showCardBtn.value = path === '/card/';
 }
 
 function showMenu() {
@@ -62,7 +64,7 @@ function showMenu() {
     if (menu) menu.classList.toggle('expand', show.value)
 }
 
-function addDash(index) {
+function addDash(index:number) {
     const menuLink = document.querySelectorAll('.link')
     const menuLink2 = document.querySelectorAll('.sublink');
 

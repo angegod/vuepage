@@ -1,40 +1,44 @@
-<script setup>
+<script lang="ts" setup>
     import { inject,ref,provide,nextTick } from 'vue';
     import { onMounted, onUnmounted } from 'vue';
     
-    import funcData from './data/funcData';
-    import Card from './data/Card';
-    import Switch from '../components/Switch.vue';
-    import LazyImage from '../components/LazyImage.vue';
+    import funcData from './data/funcData.ts';
+    import Card from './data/Card.ts';
+    import Switch from '@/components/Switch.vue';
+    import LazyImage from '@/components/LazyImage.vue';
     import Calculator from './Calculator.vue';
     import CardHint from './hint/Cardhint.vue';
+    import CardSection from '@/components/CardSection.vue';
+    import CardEffectBlock from '@/components/CardEffectBlock.vue';
     
     import { useCardBtnStore } from './data/store';
+    import type { CardByTextResultItem, CardItem, CardSeriesItem, SortConditionItem } from '@/interface/card.ts';
+    import type { skillItem } from '@/interface/funcData.ts';
 
     const store = useCardBtnStore();
 
-    const isAddable=inject('frontpath');//圖片默認路徑，要配合之後有可能上線
+    const isAddable=inject<string>('frontpath');//圖片默認路徑，要配合之後有可能上線
 
-    let seriesIndex=ref([]);//時光牌系列代號
-    let selectFunc=ref([]);//將被點選的解盾選項加入在此 默認使用And
-    let selectRarity=ref([]);//被選擇的稀有度
-    let targetCard=ref([]);//被選擇的卡片清單
-    let showCard=ref({});//顯示該卡詳細資訊
+    let seriesIndex=ref<number[]>([]);//時光牌系列代號
+    let selectFunc=ref<skillItem[]>([]);//將被點選的解盾選項加入在此 默認使用And
+    let selectRarity=ref<number[]>([]);//被選擇的稀有度
+    let targetCard=ref<CardItem[]>([]);//被選擇的卡片清單
+    let showCard=ref<CardItem|null>(null);//顯示該卡詳細資訊
 
-    let b1=ref(null);
-    let b2=ref(false);
-    let isInput=ref(false);
-    let gifShow=ref(false);//是否顯示載入動畫
-    let isSearch=ref(false);//是否有搜尋過 避免不必要的顯示
-    let mode=ref(null);//彈出視窗顯示的內容種類
+    let b1=ref<InstanceType<typeof Switch>>();
+    let b2=ref<InstanceType<typeof Switch>>();
+    let isInput=ref<boolean>(false); //是否為輸入模式
+    let gifShow=ref<boolean>(false);//是否顯示載入動畫
+    let isSearch=ref<boolean>(false);//是否有搜尋過 避免不必要的顯示
+    let mode=ref<string|null>(null);//彈出視窗顯示的內容種類
 
     //排序方式
-    let sortCond=ref([{type:'Rarity',sort:false},{type:'Id',sort:false}]);//新增sort條件順序
+    let sortCond=ref<SortConditionItem[]>([{type:'Rarity',sort:false},{type:'Id',sort:false}]);//新增sort條件順序
 
 
     function checkData(){//避免資料更新時需要改動，預設檢查機制
         let count=0;
-        let array=[];//改動的array
+        let array=[] as number[][];//改動的array
 
         //將功能作序位
         funcData.forEach((typeData)=>{
@@ -49,7 +53,7 @@
 
         Card.forEach(series => {
             series.card.forEach((c)=>{
-                let modfiedNum=[];//避免二度修改
+                let modfiedNum=[] as number[];//避免二度修改
                 array.forEach((m)=>{
                     //如果卡片標籤有自更動過編號 且先前沒有更動紀錄
                     if(c.tag.includes(m[0])&&!modfiedNum.includes(m[0])){
@@ -64,51 +68,50 @@
     }
 
 
-
     //篩選器點選
-    function clicked(text){
-
-        var targetClass=text.split('_')[0];
-        var targetBtnIndex=text.split('_')[1];
+    function clicked(text:string){
+        let targetClass=text.split('_')[0];
+        let targetBtnIndex = Number(text.split('_')[1]);
         
-        if(targetClass!=='func'&&!targetClass==''){
+        if(targetClass!=='func'&&!(targetClass=='')){
             var targetBtn=document.querySelectorAll(`.${targetClass}`)[targetBtnIndex-1];
             (!targetBtn.classList.contains('clicked'))?targetBtn.classList.add('clicked'):targetBtn.classList.remove('clicked');
         }
         if(targetClass==='func'){
-            var targetBtn=document.getElementById('btn'+targetBtnIndex);
+            let targetBtn=document.getElementById('btn'+targetBtnIndex) as HTMLDivElement;
             (!targetBtn.classList.contains('clicked'))?targetBtn.classList.add('clicked'):targetBtn.classList.remove('clicked');
-            if(selectFunc.value.find((item)=>item.id.toString()===targetBtnIndex)===undefined){//新增
+            
+            if(selectFunc.value.find((item)=>item.id===targetBtnIndex)===undefined){//新增
                 funcData.forEach((t)=>{
-                    var target=t.data.find((d)=>d.id.toString()===targetBtnIndex);
+                    var target=t.data.find((d)=>d.id===targetBtnIndex);
                     if(target!==undefined)
                         selectFunc.value.push(target);
                 })
             }
             else//刪除
-                selectFunc.value=selectFunc.value.filter((item)=>item.id.toString()!==targetBtnIndex);
+                selectFunc.value=selectFunc.value.filter((item)=>item.id!==targetBtnIndex);
         }
 
         //時光牌系列篩選
-        if(targetClass==='series'&&!seriesIndex.value.includes(parseInt(targetBtnIndex))){
-            seriesIndex.value.push(parseInt(targetBtnIndex));
+        if(targetClass==='series'&&!seriesIndex.value.includes(targetBtnIndex)){
+            seriesIndex.value.push(targetBtnIndex);
         }else if(targetClass==='series')
-            seriesIndex.value=seriesIndex.value.filter((num)=>num!==parseInt(targetBtnIndex));//刪除
+            seriesIndex.value=seriesIndex.value.filter((num)=>num!==targetBtnIndex);//刪除
 
         //稀有度用篩選 篩選方式使用or
-        if(targetClass==='rarity'&&!selectRarity.value.includes(parseInt(targetBtnIndex)))//新增
-            selectRarity.value.push(parseInt(targetBtnIndex));
+        if(targetClass==='rarity'&&!selectRarity.value.includes(targetBtnIndex))//新增
+            selectRarity.value.push(targetBtnIndex);
         else if(targetClass==='rarity')
-            selectRarity.value=selectRarity.value.filter((num)=>num!==parseInt(targetBtnIndex));//刪除
+            selectRarity.value=selectRarity.value.filter((num)=>num!==targetBtnIndex);//刪除
 
 
         //排序方式
         if(targetClass==='sort'){
             let targetType = targetBtnIndex == 1 ? 'Id' : targetBtnIndex == 2 ? 'Rarity' : '';
 
-            var t=sortCond.value.find((c)=>c.type==targetType);
+            let t=sortCond.value.find((c)=>c.type==targetType) as SortConditionItem;
             
-            sortCond.value=sortCond.value.filter((c)=>c!==t);
+            sortCond.value=sortCond.value.filter((c)=>c!==t) as SortConditionItem[];
             sortCond.value.push({type:targetType,sort:!t.sort});
             console.log(sortCond.value);
             
@@ -116,7 +119,6 @@
             return;
         }
 
-        
     }
 
     function setData(){
@@ -138,9 +140,9 @@
 
                 //解盾篩選 必須符合全部
                 let selectable=true;
-                if(b2.value.getBool()){
+                if(b2.value&&b2.value.getBool()){
                 
-                    if(!selectFunc.value.length==0){//如果有選入功能再做篩選，反之則不用篩選
+                    if(selectFunc.value.length!==0){//如果有選入功能再做篩選，反之則不用篩選
                         selectFunc.value.forEach((f)=>{
                             //如果不符合條件，則不選入最終顯示結果
                             //(!item.tag.includes(f.id))?selectable=false:selectable=selectable;
@@ -153,8 +155,8 @@
                     //如果篩選符合結果則會
                     if(selectable)
                         targetCard.value.push(item);
-                }else if(!b2.value.getBool()){
-                    if(!selectFunc.value.length==0){
+                }else if(b2.value&&!b2.value.getBool()){
+                    if(selectFunc.value.length!==0){
                         selectable=false;
                         selectFunc.value.forEach((f)=>{
                             //如果不符合條件，則不選入最終顯示結果
@@ -181,38 +183,43 @@
         });
     }
 
-    function sortData(){
-        //如果不指定其他排序方式 則不改變顯示直接跳出
-        //根據使用者定義排序條件 做重新排序
-        
-        sortCond.value.forEach((c)=>{
-            targetCard.value=targetCard.value.sort((a,b)=>{
-                let order=(c.sort)?-1:1;
+    function sortData(): void {
+        // 如果不指定其他排序方式 則不改變顯示直接跳出
+        if (sortCond.value.length === 0) return;
 
-                if(c.type==='Id')//稀有度優先排序 再來才是編號
-                    return (a.id-b.id) * order;
-                else if(c.type==='Rarity')
-                    return (a.rarity-b.rarity) * order;
-                
+        // 根據使用者定義排序條件 做重新排序
+        sortCond.value.forEach((c) => {
+            targetCard.value = [...targetCard.value].sort((a: CardItem, b: CardItem) => {
+            const order = c.sort ? -1 : 1;
+
+            if (c.type === 'Id') {
+                // 用 id 排序
+                return (a.id - b.id) * order;
+            } else if (c.type === 'Rarity') {
+                // 用稀有度排序
+                return (a.rarity - b.rarity) * order;
+            }
+
+            return 0; // 🔑 保險 return，避免 TS 報錯
             });
         });
     }
 
     //點擊時光牌資訊時，跳出視窗
-    function clickHandle(cardId){
+    function clickHandle(cardId:number){
         
         Card.forEach((s)=>{
             if(s.card.find((c)=>c.id===cardId))
-                showCard.value=s.card.find((c)=>c.id===cardId);
-        })
+                showCard.value=s.card.find((c)=>c.id===cardId) as CardItem;
+        });
 
-        document.getElementById('overlay').style.display="block";
+        document.getElementById('overlay')!.style.display="block";
         mode.value='card';
     }
 
     //關閉彈出視窗
     function closeHandle(){
-        document.getElementById('overlay').style.display="none";
+        document.getElementById('overlay')!.style.display="none";
         mode.value=null;
     }
 
@@ -224,38 +231,41 @@
         selectFunc.value=[];//將被點選的解盾選項加入在此 默認使用And
         selectRarity.value=[];//被選擇的稀有度
         targetCard.value=[];//被選擇的卡片清單
-        showCard.value=[];//顯示該卡詳細資訊
+        showCard.value=null;//顯示該卡詳細資訊
 
-        if(isInput.value)
+        /*if(isInput.value)
             eventBus.emit('HideBtn');
         else
-            eventBus.emit('ShowBtn');
+            eventBus.emit('ShowBtn');*/
         
         //回歸到初次搜尋階段
         isSearch.value=false;
     }
 
-    function CardByText(event){
+    function CardByText(event:KeyboardEvent){
         if(event.key==="Enter"){
+            const input = event.target as HTMLInputElement; // 斷言成輸入框
+            const keyword = input.value.trim();
             gifShow.value=true;
+
             const start=performance.now();
 
             let p1= new Promise((resolve)=>{
                 
                 let tempArr=[];
-                Card.forEach((series,sIndex)=>{
+                Card.forEach((series:CardSeriesItem,sIndex:number)=>{
                     series.card.forEach((c,cIndex)=>{
                         let added=false;
 
                         //依名稱查詢
-                        if(c.name.includes(event.target.value)){
+                        if(c.name.includes(keyword)){
                             //targetCard.value.push(c);
                             added=true;
                         }
                         //依關鍵字查詢
 
                         if(c.keyword!==undefined){
-                            if(c.keyword.find((k)=>k.includes(event.target.value))!==undefined){
+                            if(c.keyword.find((k)=>k.includes(keyword))!==undefined){
                                 added=true;
                             }
                         }
@@ -264,7 +274,7 @@
                         c.tag.forEach((t)=>{
                             funcData.forEach((typeData)=>{
                                 typeData.data.forEach((d)=>{
-                                   if(d.id===t&&d.name.includes(event.target.value))
+                                   if(d.id===t&&d.name.includes(keyword))
                                         added=true; 
                                    
                                 })
@@ -275,7 +285,7 @@
                             tempArr.push(c);
 
                         //如果該卡片是最後一張的時候
-                        if(cIndex===series.card.length-1||sIndex===series.length-1){
+                        if(cIndex===series.card.length-1||sIndex===Card.length-1){
                             const end=performance.now();
                             resolve({time:end-start,arr:tempArr});
                         }
@@ -286,11 +296,11 @@
 
             
             p1.then((data)=>{
+                let processData = data as CardByTextResultItem;
                 let processTime=2000;
-                console.log(data);
-                if(data.time<2000){
+                if(processData.time<2000){
                     setTimeout(()=>{
-                        targetCard.value=data.arr;
+                        targetCard.value=processData.arr;
                         
                         //關閉loading動畫
                         gifShow.value=false;
@@ -301,12 +311,12 @@
                         //避免初次掛載元件無法正常顯示
                         //最後滾至結果div
                         nextTick(()=>{
-                            const targetElement = document.getElementById("searchCard");
+                            const targetElement = document.getElementById("searchCard") as HTMLDivElement;
                             targetElement.scrollIntoView({ behavior: "smooth" });
-                        })
+                        });
                         
                         
-                    },processTime-data.time)
+                    },processTime-processData.time)
                 }
                     
             })
@@ -314,36 +324,38 @@
         
     }
     //刪除卡片
-    function deleteCard(id){
+    function deleteCard(id:number){
         targetCard.value=targetCard.value.filter((t)=>t.id!==id);
     }
 
     //顯示符石盤面分布
-    function spreadShow(id){
-        const hoverImage=document.getElementById('spread');
+    function spreadShow(){
+        const hoverImage=document.getElementById('spread') as HTMLDivElement;
         hoverImage.style.display = 'block';
     }
 
-    function spreadHide(id){
-        const hoverImage=document.getElementById('spread');
+    function spreadHide(){
+        const hoverImage=document.getElementById('spread') as HTMLDivElement;
         hoverImage.style.display = 'none';
     }
 
-    function spreadMove(event,id){
-        const hoverImage=document.getElementById('spread');
+    function spreadMove(event:MouseEvent){
+        const hoverImage=document.getElementById('spread') as HTMLDivElement;
         hoverImage.style.left = `${event.clientX + 10}px`; 
         hoverImage.style.top = `${event.clientY - 170}px`;
     }
 
     //呼叫琉璃計算器頁面
     function callcalculator(){
+        let overlay = document.getElementById('overlay') as HTMLDivElement;
+
         if(mode.value===null){
             mode.value='calculator';
-            document.getElementById('overlay').style.display="block";
+            overlay.style.display="block";
             return;
         }else{
             mode.value=null;
-            document.getElementById('overlay').style.display="none";
+            overlay.style.display="none";
             return;
         }
     }
@@ -366,20 +378,25 @@
         setData();
     };
 
-    let Watcher = undefined;
+    let stopWatcher: (() => void) | null = null;
 
     onMounted(() => {
         checkData();
 
-        Watcher = watch(() => store.isMatch, () => {
-            callsetData();
-            store.StopMatch();
-        });
+        stopWatcher = watch(
+            () => store.isMatch,
+            () => {
+                callsetData();
+                store.StopMatch();
+            }
+        );
     });
 
     onUnmounted(() => {
-        //eventBus.off('callsetData', callsetData);
-        Watcher();
+        if (stopWatcher) {
+            stopWatcher(); 
+            stopWatcher = null;
+        }
     });
 </script>
 <template>
@@ -446,14 +463,14 @@
             <div class="flex flex-row max-[500px]:flex-col 
                     [&>button]:min-w-[200px]  max-[500px]:[&>button]:small max-[500px]:[&>button]:w-[150px] max-[500px]:[&>button]:min-w-[150px]">
                 <button type="button" class="mr-2 sort px-2 my-2 flex flex-row justify-center items-center btn" @click="clicked('sort_1')">
-                    {{ (!sortCond.find((c)=>c.type==='Id').sort)?'編號:小':'編號:大' }}
+                    {{ (!sortCond.find((c)=>c.type==='Id')!.sort)?'編號:小':'編號:大' }}
                     <img :src="isAddable+'/images/arrow_right.png'" class="w-[30px]" alt="left"/>
-                    {{ (!sortCond.find((c)=>c.type==='Id').sort)?`大`:'小' }}
+                    {{ (!sortCond.find((c)=>c.type==='Id')!.sort)?`大`:'小' }}
                 </button>
                 <button type="button" class="mr-2 sort px-2 my-2 flex flex-row justify-center items-center btn" @click="clicked('sort_2')">
-                    {{ (!sortCond.find((c)=>c.type==='Rarity').sort)?'稀有度:低':'稀有度:高' }}
+                    {{ (!sortCond.find((c)=>c.type==='Rarity')!.sort)?'稀有度:低':'稀有度:高' }}
                     <img :src="isAddable+'/images/arrow_right.png'" class="w-[30px]" alt="left"/>
-                    {{ (!sortCond.find((c)=>c.type==='Rarity').sort)?'高':'低' }}
+                    {{ (!sortCond.find((c)=>c.type==='Rarity')!.sort)?'高':'低' }}
                 </button>
             </div>
             <div class="flex flex-row flex-wrap max-[400px]:justify-evenly" v-if="targetCard.length!==0">
@@ -476,7 +493,7 @@
         </div>
         <div>
             <div className='overlay' id="overlay">
-                <div class='popup max-[500px]:w-[80%] max-[500px]:min-w-[200px]' v-if="mode==='card'">
+                <div class='popup max-[500px]:w-[80%] max-[500px]:min-w-[200px]' v-if="mode==='card'&&showCard">
                     <div className='close' v-on:click="closeHandle">&#10006;</div>
                     <div class="w-5/6 mx-auto mt-5 flex flex-row flex-wrap justify-between mb-5 max-[450px]:justify-center">
                         <div class="w-2/5 min-w-[150px] max-[500px]:w-[100%]">
@@ -498,123 +515,20 @@
                         </div>
                         <div class="w-1/2 flex flex-col min-w-[150px] ml-2 max-[450px]:ml-0 max-[500px]:w-[100%] mt-1">
                             <div class="flex flex-row flex-wrap max-[500px]:mt-2 max-[500px]:justify-center">
-                                <div class="flex flex-row mt-1 w-1/2 max-[500px]:justify-center">
-                                    <div class="flex bg-amber-900 text-white rounded-md w-1/5 min-w-[70px] justify-center" v-if="showCard.rarity===1">
-                                        <span>進場FP</span>
-                                    </div>
-                                    <div class="flex bg-gray-600 text-white rounded-md w-1/5 min-w-[70px] justify-center" v-if="showCard.rarity===2">
-                                        <span>進場FP</span>
-                                    </div>
-                                    <div class="flex bg-yellow-600 text-white rounded-md w-1/5 min-w-[70px] justify-center" v-if="showCard.rarity===3">
-                                        <span>進場FP</span>
-                                    </div>
-                                    <div class="mx-1">
-                                        <span>{{ showCard.PointEnter }}</span>
-                                    </div>
-                                </div>
-                                <div class="flex flex-row mt-1 w-1/2 max-[500px]:justify-center">
-                                    <div class="flex bg-amber-900 text-white rounded-md w-1/5 min-w-[70px] justify-center" v-if="showCard.rarity===1">
-                                        <span>消耗FP</span>
-                                    </div>
-                                    <div class="flex bg-gray-600 text-white rounded-md w-1/5 min-w-[70px] justify-center" v-if="showCard.rarity===2">
-                                        <span>消耗FP</span>
-                                    </div>
-                                    <div class="flex bg-yellow-600 text-white rounded-md w-1/5 min-w-[70px] justify-center" v-if="showCard.rarity===3">
-                                        <span>消耗FP</span>
-                                    </div>
-                                    <div class="mx-1">
-                                        <span>{{ showCard.PointConsume }}</span>
-                                    </div>
-                                </div>
-                                <div class="flex flex-row mt-1 w-1/2 max-[500px]:justify-center">
-                                    <div class="flex bg-amber-900 text-white rounded-md w-1/5 min-w-[70px] justify-center" v-if="showCard.rarity===1">
-                                        <span>補充FP</span>
-                                    </div>
-                                    <div class="flex bg-gray-600 text-white rounded-md w-1/5 min-w-[70px] justify-center" v-if="showCard.rarity===2">
-                                        <span>補充FP</span>
-                                    </div>
-                                    <div class="flex bg-yellow-600 text-white rounded-md w-1/5 min-w-[70px] justify-center" v-if="showCard.rarity===3">
-                                        <span>補充FP</span>
-                                    </div>
-                                    <div class="mx-1">
-                                        <span>{{ showCard.PointGet }}</span>
-                                    </div>
-                                </div>
-                                <div class="flex flex-row mt-1 w-1/2 max-[500px]:justify-center">
-                                    <div class="flex bg-amber-900 text-white rounded-md w-1/5 min-w-[70px] justify-center" v-if="showCard.rarity===1">
-                                        <span>最大FP</span>
-                                    </div>
-                                    <div class="flex bg-gray-600 text-white rounded-md w-1/5 min-w-[70px] justify-center" v-if="showCard.rarity===2">
-                                        <span>最大FP</span>
-                                    </div>
-                                    <div class="flex bg-yellow-600 text-white rounded-md w-1/5 min-w-[70px] justify-center" v-if="showCard.rarity===3">
-                                        <span>最大FP</span>
-                                    </div>
-                                    <div class="mx-1">
-                                        <span>{{ showCard.PointMax }}</span>
-                                    </div>
-                                </div>
+                                <CardSection label="進場FP" :value="showCard.PointEnter" :rarity="showCard.rarity" />
+                                <CardSection label="消耗FP" :value="showCard.PointConsume" :rarity="showCard.rarity" />
+                                <CardSection label="補充FP" :value="showCard.PointGet" :rarity="showCard.rarity" />
+                                <CardSection label="最大FP" :value="showCard.PointMax" :rarity="showCard.rarity" />
+                            </div>
+                            <CardEffectBlock title="即時效果" :effects="showCard.instantEffect" :rarity="showCard.rarity" />
 
-                            </div>
-                            <div class="flex flex-col mt-5 min-h-[10vh] max-[500px]:justify-center">
-                                <div class="flex flex-row line">
-                                    <div class="flex bg-amber-900 text-white rounded-md w-1/5 min-w-[100px] justify-center" v-if="showCard.rarity===1">
-                                        <span>即時效果</span>
-                                    </div>
-                                    <div class="flex bg-gray-600 text-white rounded-md w-1/5 min-w-[100px] justify-center" v-if="showCard.rarity===2">
-                                        <span>即時效果</span>
-                                    </div>
-                                    <div class="flex bg-yellow-600 text-white rounded-md w-1/5 min-w-[100px] justify-center" v-if="showCard.rarity===3">
-                                        <span>即時效果</span>
-                                    </div>
-                                </div>
-                                <div class="flex flex-col">
-                                    <span v-for="effect in showCard.instantEffect" class="text-black">&#8226;{{ effect }}</span>
-                                </div>
-                            </div>
-                            <div class="flex flex-col mt-5 min-h-[15vh] max-[500px]:justify-center">
-                                <div class="flex flex-row line">
-                                    <div class="flex bg-amber-900 text-white rounded-md w-1/5 min-w-[100px] justify-center" v-if="showCard.rarity===1">
-                                        <span>回合效果</span>
-                                    </div>
-                                    <div class="flex bg-gray-600 text-white rounded-md w-1/5 min-w-[100px] justify-center" v-if="showCard.rarity===2">
-                                        <span>回合效果</span>
-                                    </div>
-                                    <div class="flex bg-yellow-600 text-white rounded-md w-1/5 min-w-[100px] justify-center" v-if="showCard.rarity===3">
-                                        <span>回合效果</span>
-                                    </div>
-                                </div>
-                                <div class="flex flex-col">
-                                    <span v-for="effect in showCard.roundEffect" class="text-black">&#8226;{{ effect }}</span>
-                                </div>
-                            </div>
-                            <div class="flex flex-col mt-5 min-h-[10vh]">
-                                <div class="flex flex-row line">
-                                    <div class="flex bg-amber-900 text-white rounded-md w-1/5 min-w-[100px] justify-center" v-if="showCard.rarity===1">
-                                        <span>連動效果</span>
-                                    </div>
-                                    <div class="flex bg-gray-600 text-white rounded-md w-1/5 min-w-[100px] justify-center" v-if="showCard.rarity===2">
-                                        <span>連動效果</span>
-                                    </div>
-                                    <div class="flex bg-yellow-600 text-white rounded-md w-1/5 min-w-[100px] justify-center" v-if="showCard.rarity===3">
-                                        <span>連動效果</span>
-                                    </div>
-                                </div>
-                                <div class="flex flex-col">
-                                    <div v-for="(effect,i) in showCard.comboEffect">
-                                        <span  class="text-black" v-if="showCard.spread===undefined">&#8226;{{ effect }}</span>
-                                        <span  class="text-black cursor-help underline" v-else-if="showCard.spread.index===i+1"
-                                            @mousemove="event=>spreadMove(event,showCard.id)" 
-                                            @mouseenter="spreadShow(showCard.id)" 
-                                            @mouseleave="spreadHide(showCard.id)"
-                                        >&#8226;{{ effect }}</span>
-                                        <span  class="text-black" v-else>&#8226;{{ effect }}</span>
-                                    </div>
-                                    <div  id="spread" style="display: none;" class="spread fixed z-[1000]">
-                                        <img :src="isAddable+showCard.spread.image" class="w-[240px]"   v-if="showCard.spread!==undefined" />
-                                    </div>
-                                </div>
-                            </div>
+                            <CardEffectBlock title="回合效果" :effects="showCard.roundEffect" :rarity="showCard.rarity" />
+
+                            <CardEffectBlock title="連動效果" :effects="showCard.comboEffect" :rarity="showCard.rarity" :spread="showCard.spread" :isAddable="isAddable"
+                                @spreadMove="spreadMove"
+                                @spreadShow="spreadShow"
+                                @spreadHide="spreadHide"
+                                />
                         </div>
                     </div>
                 </div>

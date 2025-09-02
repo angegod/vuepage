@@ -1,4 +1,6 @@
-let funcData = [
+import type { funcDataItem } from "@/interface/funcData";
+
+let funcData:funcDataItem[] = [
   {
     "typeId": 1,
     "typeName": "解盾",
@@ -151,6 +153,7 @@ let funcData = [
         "name": "自身亢奮"
       },
       {
+        "typeId": 3,
         "id": 28,
         "name": "自身暴怒"
       },
@@ -363,6 +366,7 @@ let funcData = [
         "name": "灼熱減傷"
       },
       {
+        "typeId": 6,
         "id": 67,
         "name": "防結界地形"
       }
@@ -460,6 +464,7 @@ let funcData = [
         "name": "凍結狀態"
       },
       {
+        "typeId": 9,
         "id": 83,
         "name": "刀傷狀態"
       }

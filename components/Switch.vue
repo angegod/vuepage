@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     import {ref } from 'vue';
     let props = defineProps(['hideable','text1','text2']);
     let p=ref(false);
@@ -19,7 +19,7 @@
 
     defineExpose({
         getBool
-    })
+    });
 
 </script>
 <template>

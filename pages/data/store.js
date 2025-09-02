@@ -1,4 +1,3 @@
-// stores/counter.ts
 import { defineStore } from 'pinia'
 
 export const useCardBtnStore = defineStore('CardButton', {

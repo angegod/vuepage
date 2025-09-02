@@ -1,6 +1,5 @@
-<script setup>
+<script lang="ts" setup>
     import { inject,ref,provide } from 'vue';
-    import { computed } from 'vue';
     
     //繼承父物件中的targetCard
     let props = defineProps(['card']);
@@ -9,12 +8,13 @@
     let searchWord='';
 
     // 路徑前綴 from app.vue provide
-    const injectedFrontPath = inject('frontpath', ''); // 如果沒有 provide 回傳空字串
-    const isAddable = ref(injectedFrontPath); // 不用在 onMounted 裡 inject，直接放頂層
+    const injectedFrontPath = inject<string>('frontpath', ''); // 如果沒有 provide 回傳空字串
+    const isAddable = ref<string>(injectedFrontPath); // 不用在 onMounted 裡 inject，直接放頂層
 
     //確認抓取關鍵字輸入
-    function searchWordChange(event){
-        searchWord=event.target.value;
+    function searchWordChange(event:Event){
+        let input = event.target as HTMLInputElement;
+        searchWord= input.value;
     }
 
     //新增關鍵字
@@ -22,21 +22,20 @@
         let target=props.card.keyword;
 
         //避免原本就沒有關鍵字生成
-        if(target===undefined||target===null){
+        if(!target){
             target=[];
         }
         
         target.push(searchWord);
-        console.log(target);
         //清除先前輸入結果
         searchWord='';
     }
 
-    function removeWord(index){
+    function removeWord(index:number){
         let target=props.card.keyword;
 
         //過濾指定索引的關鍵字
-        target=target.filter((k,i)=>i!==index);
+        target=target.filter((k:string,i:number)=>i!==index);
 
         props.card.keyword=target;
     }
@@ -57,3 +56,6 @@
         </div>
     </div>
 </template>
+<style scoped>
+    @import '../../assets/css/modify.css';
+</style>

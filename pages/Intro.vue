@@ -1,6 +1,6 @@
-<script setup>
+<script lang="ts" setup>
     let props = defineProps(['dataText']);
-    let skill=props.dataText;
+    let skill = props.dataText;
 </script>
 <template>
     <div class="flex flex-row  flex-wrap mt-2">

@@ -1,6 +1,3 @@
-<script setup>
-
-</script>
 <template>
     <div class="footer [&>span]:m-3">
         <span>&copy; 2025 <a href="https://home.gamer.com.tw/profile/index.php?&owner=ange0733" class="underline">Ange</a></span>

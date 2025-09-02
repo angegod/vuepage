@@ -1,4 +1,21 @@
 {
-  // https://nuxt.com/docs/guide/concepts/typescript
-  "extends": "./.nuxt/tsconfig.json"
+  "extends": "./.nuxt/tsconfig.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "strict": true,               // 建議開啟嚴格模式
+    "baseUrl": ".",
+    "paths": {
+      "#app": [".nuxt/types/pages"],
+      "#imports": [".nuxt/types/imports"],
+      "#build": [".nuxt/types/build"],
+      "@/*": ["./*"]              // 讓你可以用 @ 匯入
+    }
+  },
+  "include": [
+    ".nuxt/types/**/*.d.ts",
+    "**/*.ts",
+    "**/*.vue"
+  ],
+  "exclude": ["node_modules"]
 }
+

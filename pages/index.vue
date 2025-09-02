@@ -83,40 +83,40 @@
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted } from 'vue';
-import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
-import 'vue3-carousel/dist/carousel.css';
+<script lang="ts" setup>
+  import { ref, onMounted } from 'vue';
+  import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
+  import 'vue3-carousel/dist/carousel.css';
 
-const isAddable = ref('');
+  const isAddable = ref('');
 
-// 設定 meta
-useHead({
-  title: '侵蝕封王--主頁',
-  meta: [
-    { name: 'description', content: '統合神魔災厄級相關資訊與時光牌' },
-    { property: 'og:title', content: '侵蝕封王--主頁' },
-    { property: 'og:description', content: '統合神魔災厄級相關資訊與時光牌搜尋圖鑑' }
-  ]
-});
+  // 設定 meta
+  useHead({
+    title: '侵蝕封王--主頁',
+    meta: [
+      { name: 'description', content: '統合神魔災厄級相關資訊與時光牌' },
+      { property: 'og:title', content: '侵蝕封王--主頁' },
+      { property: 'og:description', content: '統合神魔災厄級相關資訊與時光牌搜尋圖鑑' }
+    ]
+  });
 
-// 動態設定圖片前綴
-onMounted(() => {
-    const currentPath = window.location.href;
-    if (currentPath.includes('https://angegod.github.io/vuepage/')) {
-      isAddable.value = '/vuepage';
-    } else {
-      isAddable.value = '';
-    }
-});
+  // 動態設定圖片前綴
+  onMounted(() => {
+      const currentPath = window.location.href;
+      if (currentPath.includes('https://angegod.github.io/vuepage/')) {
+        isAddable.value = '/vuepage';
+      } else {
+        isAddable.value = '';
+      }
+  });
 
-// 側邊選單點擊切換
-const menuclick = () => {
-  const menu = document.getElementById('kingmenu');
-  if (!menu) return;
-  menu.classList.toggle('hidden');
-  menu.classList.toggle('lists');
-};
+  // 側邊選單點擊切換
+  const menuclick = () => {
+      const menu = document.getElementById('kingmenu');
+      if (!menu) return;
+      menu.classList.toggle('hidden');
+      menu.classList.toggle('lists');
+  };
 </script>
 <style scoped>
 @import '../assets/css/home.css';

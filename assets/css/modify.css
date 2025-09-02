@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+span{
+    font-weight: bold;
+}
+
 .overlay {
     height: auto;
     position:fixed;
@@ -66,9 +70,7 @@
     font-size: theme('fontSize.base');
 }
 
-span{
-    font-weight: bold;
-}
+
 
 .right{
     border-left: 2px dotted rgb(164, 95, 21);

@@ -1,64 +1,68 @@
-<script setup>
+<script lang="ts" setup>
     import { inject,ref,provide} from 'vue';
     import myFile from '../pages/data/text.json';
     import ultimate from '../pages/data/Ultimate.json';
     import Switch from '../components/Switch.vue';
+    import type { BattleDetailsItem, UltimateDetailsItem } from '@/interface/battle';
 
     const isAddable=inject('frontpath');//圖片默認路徑，要配合之後有可能上線
 
-    const target=ref(myFile[0]);
+    const target=ref<BattleDetailsItem|UltimateDetailsItem>(myFile[0]);
 
     const b1=ref(null);
-    const switchs=ref(false);
+    const switchs=ref<boolean>(false);
 
     /*顯示狀態*/
-    const showable=ref(true);
+    const showable=ref<boolean>(true);
 
-    function showDefaultImg(event){/*當照片出現錯誤時，則顯示預設照片 */
-        event.preventDefault();
-        event.target.src=isAddable+'/images/images_404.png';
-        
-        showable.value=false;
+    function showDefaultImg(event: Event) {
+        event.preventDefault()
+        const targetImg = event.target as HTMLImageElement | null;
+        if (targetImg && isAddable) {
+            targetImg.src = isAddable + '/images/images_404.png';
+        }
+        showable.value = false;
     }
 
 
-    function imgClick(number){/* 賦予特殊紅框 並且將其他人的紅框給移除*/
+    function imgClick(number:number){/* 賦予特殊紅框 並且將其他人的紅框給移除*/
         showable.value=true;
-        var imagesALL=document.querySelectorAll(".monster_images")
+        let imagesALL=document.querySelectorAll<HTMLImageElement>(".monster_images")
 
         
         imagesALL.forEach((img)=>img.classList.remove('isChoose'));//先清掉所有照片的紅框
 
         imagesALL[number-1].classList.add('isChoose');//再來將所有照片的紅框
 
-        var detailImages=document.getElementById('battle_details_image');
-        if(!switchs.value){
-            
-            var newpath=isAddable+'/images/number'+number+'/battle_details.jpg';
-            detailImages.src=newpath;
+        let detailImages=document.getElementById('battle_details_image') as HTMLImageElement | null;
+        if(detailImages){
+            if(!switchs.value){
+                var newpath=isAddable+'/images/number'+number+'/battle_details.jpg';
+                detailImages.src=newpath;
 
-            target.value=myFile[number-1];
-        }else{
-            var newpath=isAddable+'/images/ultimate/u'+number+'/battle_details.jpg';
+                target.value=myFile[number-1];
+            }else{
+                var newpath=isAddable+'/images/ultimate/u'+number+'/battle_details.jpg';
 
-            detailImages.src=newpath;
+                detailImages.src=newpath;
 
-            target.value=ultimate[number-1];
+                target.value=ultimate[number-1] as UltimateDetailsItem;
+            }
+
         }
 
         //為了預防照片載入過久，這邊會先預設照片隱藏，並且使用loading.gif，直到照片完成loading
-        var loadingGif=document.getElementById('hidden_image');
-        detailImages.classList.add('hidden');
-        loadingGif.classList.remove('hidden');
+        let loadingGif=document.getElementById('hidden_image');
+        detailImages!.classList.add('hidden');
+        loadingGif!.classList.remove('hidden');
 
     }
 
     function imgloadStatus(){
-        var node=document.getElementById('battle_details_image');
-        var hiddenImage=document.getElementById('hidden_image');
+        let node=document.getElementById('battle_details_image') as HTMLImageElement;
+        let hiddenImage=document.getElementById('hidden_image') as HTMLImageElement;
 
-
-        if(node.complete&&!node.error){
+        if(node.complete){
 
             setTimeout(()=>{
             
@@ -79,9 +83,9 @@
         
         //更改讀取檔案的類別
         if(switchs.value)
-            target.value=ultimate[0];
+            target.value=ultimate[0] as UltimateDetailsItem;
         else
-            target.value=myFile[0];
+            target.value=myFile[0] as BattleDetailsItem;
         imgClick(1);//預設載入第一張照片
     }
     
@@ -133,9 +137,9 @@
                 </div>
                 <div class="achievement" v-if="!switchs">
                     <p>
-                        <span class="newfont">{{ (target!=null)?target.achievement.first:'' }}</span><br/>
-                        <span class="newfont">{{ (target!=null)?target.achievement.second:'' }}</span><br/>
-                        <span class="newfont">{{ (target!=null)?target.achievement.third:'' }}</span><br/>
+                        <span class="newfont">{{ 'achievement' in target ? target.achievement?.first ?? '' : '' }}</span><br/>
+                        <span class="newfont">{{ 'achievement' in target ? target.achievement?.second ?? '' : '' }}</span><br/>
+                        <span class="newfont">{{ 'achievement' in target ? target.achievement?.third ?? '' : '' }}</span><br/>
                     </p>
                 </div>
             </div>
