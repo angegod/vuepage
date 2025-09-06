@@ -3,18 +3,7 @@ import { inject,ref,provide} from 'vue';
 import stage from '../components/data/UltimateTest.json';
 import { toPng } from 'html-to-image';
 
-//只在測試版本進入
-if(process.env.NODE_ENV !== "development")
-    window.location=window.location.origin+`/${config.public.projectName}/`;
-
 const isAddable=inject('frontpath');
-if(isAddable!==''){
-    var currentpath=window.location.href;
-    if(currentpath.includes("https://angegod.github.io/vuepage"))
-        window.location.href = "https://angegod.github.io/vuepage";
-    else
-        window.location.href = "http://localhost:5173/vuepage";
-}
 
 function savePng() {
     console.log('saving image');
@@ -38,6 +27,22 @@ function savePng() {
         console.error('Failed to export:', err);
     });
 }
+
+onMounted(()=>{
+    //只在測試版本進入
+    if(process.env.NODE_ENV !== "development")
+        window.location=window.location.origin+`/${config.public.projectName}/`;
+
+    if(isAddable && isAddable !== ''){
+        const currentPath = window.location.href;
+        if (currentPath.includes("https://angegod.github.io/vuepage")) {
+            window.location.href = "https://angegod.github.io/vuepage";
+        } else {
+            window.location.href = "http://localhost:5173/vuepage";
+        }
+    }
+});
+
 </script>
 <template>
     <div class="main">

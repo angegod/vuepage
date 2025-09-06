@@ -1,8 +1,8 @@
 <script lang="ts" setup>
     import { inject,ref,provide,nextTick, onMounted } from 'vue';
-    import Goal from '../components/data/Goal.ts';
+    import Goal from './data/Goal.ts';
     import CalculatorHint from '@/components/hint/CalculatorHint.vue';
-    import type { GoalItem } from '../components/data/Goal.ts';
+    import type { GoalItem } from './data/Goal.ts';
     const isAddable=inject('frontpath');//圖片默認路徑，要配合之後有可能上線
 
     let data =ref<GoalItem[]>(Goal);

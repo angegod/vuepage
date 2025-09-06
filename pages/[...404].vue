@@ -3,10 +3,10 @@ import "../assets/css/404.css";
 import { onMounted } from 'vue'
 
 onMounted(() => {
-  /*setTimeout(() => {
-    window.location.href = "http://localhost:3000"
-  }, 3000)*/
-})
+    setTimeout(() => {
+        window.location.href = "http://localhost:3000"
+    }, 3000)
+});
 
 </script>
 <template>

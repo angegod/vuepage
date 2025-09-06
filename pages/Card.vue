@@ -6,7 +6,7 @@
     import Card from '../components/data/Card.ts';
     import Switch from '@/components/Switch.vue';
     import LazyImage from '@/components/LazyImage.vue';
-    import Calculator from './Calculator.vue';
+    import Calculator from '../components/Calculator.vue';
     import Cardhint from '@/components/hint/Cardhint.vue';
     import CardSection from '@/components/CardSection.vue';
     import CardEffectBlock from '@/components/CardEffectBlock.vue';
@@ -527,8 +527,7 @@
                             <CardEffectBlock title="連動效果" :effects="showCard.comboEffect" :rarity="showCard.rarity" :spread="showCard.spread" :isAddable="isAddable"
                                 @spreadMove="spreadMove"
                                 @spreadShow="spreadShow"
-                                @spreadHide="spreadHide"
-                                />
+                                @spreadHide="spreadHide"/>
                         </div>
                     </div>
                 </div>

@@ -8,42 +8,46 @@ import type { MonsterItem, relicSubItem } from '@/interface/King';
 
 // 取得目前路由資訊
 const route = useRoute();
-const targetId = route.query.id
+const targetId = process.client ? route.query.id : null;
+
+//找到對應資料
+const details = targetId ? Data.find(d => d.id.toString() === targetId) as MonsterItem : null;
 
 const sections = ref<relicSubItem[]>([]); //將json部分資料加工處理 使其更易維護
 
-// 找到對應資料
-const details = Data.find((d) => d.id.toString() === targetId) as MonsterItem;
 
 
 //將特定資料整理至sections中
-sections.value.push(
-    {
-        title:"隊長龍刻能力",
-        effect:[
-            details.relic.leaderEffect.e1,
-            details.relic.leaderEffect.e2,
-            details.relic.leaderEffect.e3,
-        ]
-    },{
-        title:"武裝龍刻被動",
-        effect:[
-            details.relic.equipEffect.e1,
-            details.relic.equipEffect.e2,
-            details.relic.equipEffect.e3,
-        ]
-    }
-);
+if(details){
+    sections.value.push(
+        {
+            title:"隊長龍刻能力",
+            effect:[
+                details.relic.leaderEffect.e1,
+                details.relic.leaderEffect.e2,
+                details.relic.leaderEffect.e3,
+            ]
+        },{
+            title:"武裝龍刻被動",
+            effect:[
+                details.relic.equipEffect.e1,
+                details.relic.equipEffect.e2,
+                details.relic.equipEffect.e3,
+            ]
+        }
+    );
+}
+
 
 
 // 路徑前綴 from app.vue provide
 const injectedFrontPath = inject('frontpath', ''); // 如果沒有 provide 回傳空字串
-const isAddable = ref(injectedFrontPath); // 不用在 onMounted 裡 inject，直接放頂層
+const isAddable = ref(process.client ? injectedFrontPath : '');
 const config = useRuntimeConfig();
 
 // 處理錯誤與 meta 設定
 onMounted(() => {
-    if (!details) {
+    if (!details && process.client) {
         alert('該頁面正在施工中，敬請見諒');
 
         const currentPath = window.location.href;
@@ -54,18 +58,20 @@ onMounted(() => {
             return;
     }
 
-    useHead({
-        title: `侵蝕封王--${details.monsterTitle}`,
-        meta: [
-            { name: 'description', content: '異變封王介紹介紹' },
-            { property: 'og:title', content: `侵蝕封王--${details.monsterTitle}` },
-            { property: 'og:description', content: '異變封王簡單介紹' }
-        ]
-    });
+    if (details) {
+        useHead({
+            title: `侵蝕封王--${details.monsterTitle}`,
+            meta: [
+                { name: 'description', content: '異變封王介紹介紹' },
+                { property: 'og:title', content: `侵蝕封王--${details.monsterTitle}` },
+                { property: 'og:description', content: '異變封王簡單介紹' }
+            ]
+        });
+    }
 });
 </script>
 <template>
-    <div class="section">
+    <div class="section" v-if="details">
         <div class="content pb-5 [&>div]:w-4/5 [&>div]:mx-auto max-[600px]:[&>div]:w-full">
             <div class="flex flex-col justify-center">
                 <div class="mb-5 flex flex-row max-[1000px]:flex-col justify-evenly max-[850px]:mx-0">
