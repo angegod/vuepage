@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { inject, ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import Data from './data/King_details.json';
+import Data from '../components/data/King_details.json';
 import Intro from './Intro.vue';
 import type { MonsterItem, relicSubItem } from '@/interface/King';
 

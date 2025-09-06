@@ -1,6 +1,6 @@
 <script setup>
 import { inject,ref,provide} from 'vue';
-import stage from '../pages/data/UltimateTest.json';
+import stage from '../components/data/UltimateTest.json';
 import { toPng } from 'html-to-image';
 
 //只在測試版本進入

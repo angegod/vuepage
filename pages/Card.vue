@@ -2,16 +2,16 @@
     import { inject,ref,provide,nextTick } from 'vue';
     import { onMounted, onUnmounted } from 'vue';
     
-    import funcData from './data/funcData.ts';
-    import Card from './data/Card.ts';
+    import funcData from '../components/data/funcData.ts';
+    import Card from '../components/data/Card.ts';
     import Switch from '@/components/Switch.vue';
     import LazyImage from '@/components/LazyImage.vue';
     import Calculator from './Calculator.vue';
-    import CardHint from './hint/Cardhint.vue';
+    import Cardhint from '@/components/hint/Cardhint.vue';
     import CardSection from '@/components/CardSection.vue';
     import CardEffectBlock from '@/components/CardEffectBlock.vue';
     
-    import { useCardBtnStore } from './data/store';
+    import { useCardBtnStore } from '../components/data/store.js';
     import type { CardByTextResultItem, CardItem, CardSeriesItem, SortConditionItem } from '@/interface/card.ts';
     import type { skillItem } from '@/interface/funcData.ts';
 

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     import { inject,ref,provide} from 'vue';
-    import myFile from '../pages/data/text.json';
-    import ultimate from '../pages/data/Ultimate.json';
+    import myFile from '../components/data/text.json';
+    import ultimate from '../components/data/Ultimate.json';
     import Switch from '../components/Switch.vue';
     import type { BattleDetailsItem, UltimateDetailsItem } from '@/interface/battle';
 

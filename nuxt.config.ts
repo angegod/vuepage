@@ -1,3 +1,5 @@
+import { defineNuxtConfig } from "nuxt/config";
+
 // nuxt.config.ts
 export default defineNuxtConfig({
     compatibilityDate: '2025-06-15',
@@ -15,7 +17,7 @@ export default defineNuxtConfig({
           autoprefixer: {},
         },
     },
-    ssr: false, // 避免使用 SSR
+    ssr: true, 
     app: {
         baseURL: process.env.NODE_ENV === 'production' ? '/vuepage/' : '/',
         head: {

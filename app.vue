@@ -2,7 +2,7 @@
 import { ref, watch, provide, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router';
 import Footers from './pages/Footer.vue';
-import { useCardBtnStore } from './pages/data/store';
+import { useCardBtnStore } from './components/data/store';
 
 // 路由資訊
 const route = useRoute();
@@ -11,14 +11,19 @@ const route = useRoute();
 const store = useCardBtnStore();
 
 // 圖片前綴 (避免 SSR 錯誤)
-const isAddable = ref('')
+const isAddable = ref('');
 
 const config = useRuntimeConfig();
 
-if (location.href.includes(`https://angegod.github.io/${config.public.projectName}`)) {
+if (process.client && location.href.includes(`https://angegod.github.io/${config.public.projectName}`)) {
     isAddable.value = `/${config.public.projectName}`;
+
+}else{
+    isAddable.value = ``;
 }
+
 provide('frontpath', isAddable.value);
+
 
 // 選單狀態與卡片按鈕狀態
 const show = ref(store.Cardbutton);
@@ -59,6 +64,7 @@ function updateHeader(path: string) {
 }
 
 function showMenu() {
+    if (!process.client) return
     const menu = document.getElementById('headerMenu')
     show.value = !show.value
     if (menu) menu.classList.toggle('expand', show.value)
@@ -88,7 +94,7 @@ const startMatch = () => {
 
 <template>
    <header class="header">
-         <div class="menu hidden flex-row  min-[600px]:flex [&>div]:my-2 [&>div]:pb-1" id="biggerHeader">
+        <div class="menu hidden flex-row  min-[600px]:flex [&>div]:my-2 [&>div]:pb-1" id="biggerHeader">
             <div class="[&>a]:text-[25px] options link redText" @click="addDash(1)">
                 <NuxtLink to="/" >主頁</NuxtLink>
             </div>
@@ -105,8 +111,8 @@ const startMatch = () => {
                 <button class="searchBtn bg-amber-800 
                 text-white border-amber-800 w-[100px] rounded-md text-[20px]" @click="startMatch">開始匹配</button>
             </div>
-         </div>
-         <div class="flex flex-row min-[600px]:hidden w-[100%] justify-between" id="smallHeader">
+        </div>
+        <div class="flex flex-row min-[600px]:hidden w-[100%] justify-between" id="smallHeader">
             <div class="mt-2 ml-2">
                 <button @click="showMenu"><img :src="isAddable+'/images/menu.svg'" alt="menu" style="width: 25px;"/></button>
             </div>
@@ -129,12 +135,12 @@ const startMatch = () => {
                 text-white border-amber-800 w-[100px] rounded-md text-[20px]" @click="startMatch">開始匹配</button>
             </div>
         </div>
-      </header>
+    </header>
     
-      <div class="app">
-         <NuxtPage />
-      </div>
-      <Footers />
+    <div class="app">
+        <NuxtPage />
+    </div>
+    <Footers />
 </template>
 
 <style scoped>

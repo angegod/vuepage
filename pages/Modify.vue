@@ -27,8 +27,8 @@
     import { inject,provide,defineModel,watch } from 'vue';
     import axios from 'axios';
     import AddCard from '../components/AddCard.vue';
-    import EditBasic from './editfunc/EditBasic.vue';
-    import EditKeyword from './editfunc/EditKeyword.vue';
+    import EditBasic from '@/components/editfunc/EditBasic.vue';
+    import EditKeyword from '@/components/editfunc/EditKeyword.vue';
 
     let Card = [] as CardItem[];//原始資料
     let funcData = [] as funcDataItem[];
