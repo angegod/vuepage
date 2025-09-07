@@ -7,7 +7,7 @@
     import Switch from '@/components/Switch.vue';
     import LazyImage from '@/components/LazyImage.vue';
     import Calculator from '../components/Calculator.vue';
-    import Cardhint from '@/components/hint/Cardhint.vue';
+    import CardHint from '@/components/hint/Cardhint.vue';
     import CardSection from '@/components/CardSection.vue';
     import CardEffectBlock from '@/components/CardEffectBlock.vue';
     
@@ -207,19 +207,22 @@
 
     //點擊時光牌資訊時，跳出視窗
     function clickHandle(cardId:number){
-        
+        console.log(cardId);
         Card.forEach((s)=>{
             if(s.card.find((c)=>c.id===cardId))
                 showCard.value=s.card.find((c)=>c.id===cardId) as CardItem;
         });
-
-        document.getElementById('overlay')!.style.display="block";
         mode.value='card';
+        let overlay = document.getElementById('overlay') as HTMLDivElement;
+        console.log(overlay.style);
+        overlay.style.display="block";
+        
     }
 
     //關閉彈出視窗
     function closeHandle(){
-        document.getElementById('overlay')!.style.display="none";
+        let overlay = document.getElementById('overlay') as HTMLDivElement;
+        overlay.style.display="none";
         mode.value=null;
     }
 
@@ -452,9 +455,7 @@
                 <CardHint />
                 <img :src="isAddable+'/images/loading.gif'" alt="555" class="w-[50px] h-[30px]" v-if="gifShow"/>
             </div>
-
         </div>
-        
         <div class="flex flex-col flex-wrap mt-5" id="searchCard" v-show="isSearch">
             <div class="flex flex-row">
                 <span class="text-white font-bold text-xl">搜尋結果</span>
@@ -479,9 +480,15 @@
                         <div @click="clickHandle(card.id)">
                             <LazyImage :imageLink="card.image" :id="card.id" @deleteCard="deleteCard"/>
                         </div>
-                        <span class="w-[100%] text-center bg-amber-900 text-white" v-if="card.rarity===1">{{ card.id }}</span>
-                        <span class="w-[100%] text-center bg-slate-500 text-white" v-if="card.rarity===2">{{ card.id }}</span>
-                        <span class="w-[100%] text-center bg-yellow-600 text-white" v-if="card.rarity===3">{{ card.id }}</span>
+                        <span 
+                            class="w-[100%] text-center text-white"
+                            :class="{
+                                'bg-amber-900': card.rarity === 1,
+                                'bg-slate-500': card.rarity === 2,
+                                'bg-yellow-600': card.rarity === 3
+                            }">
+                            {{ card.id }}
+                        </span>                        
                     </div>
                 </div>
             </div>
@@ -492,25 +499,36 @@
             </div>
         </div>
         <div>
-            <div className='overlay' id="overlay">
+            <div class='overlay' id="overlay">
                 <div class='popup max-[500px]:w-[80%] max-[500px]:min-w-[200px]' v-if="mode==='card'&&showCard">
-                    <div className='close' v-on:click="closeHandle">&#10006;</div>
+                    <div class='close' v-on:click="closeHandle">&#10006;</div>
                     <div class="w-5/6 mx-auto mt-5 flex flex-row flex-wrap justify-between mb-5 max-[450px]:justify-center">
                         <div class="w-2/5 min-w-[150px] max-[500px]:w-[100%]">
                             <div class="[&>span]:text-[20px] mb-3 text-center">
-                                <span class="w-[100%] text-center text-amber-900 font-bold" v-if="showCard.rarity===1">{{ showCard.name }}</span>
-                                <span class="w-[100%] text-center text-slate-500 font-bold" v-if="showCard.rarity===2">{{ showCard.name }}</span>
-                                <span class="w-[100%] text-center text-yellow-600 font-bold" v-if="showCard.rarity===3">{{ showCard.name }}</span>
+                                <span
+                                    class="w-[100%] text-center font-bold"
+                                    :class="{
+                                        'text-amber-900': showCard.rarity === 1,
+                                        'text-slate-500': showCard.rarity === 2,
+                                        'text-yellow-600': showCard.rarity === 3
+                                    }">{{ showCard.name }}
+                                </span>
                             </div>
-                            <div class="imgbox1 max-w-[150px] mx-auto" v-if="showCard.rarity===1">
-                                <img :src="isAddable+showCard.fullimage" :alt="showCard.name" class="h-[40vh] min-w-[150px] max-[400px]:h-[45vh]"/>
+                            <div
+                                class="max-w-[150px] mx-auto"
+                                :class="{
+                                    'imgbox1': showCard.rarity === 1,
+                                    'imgbox2': showCard.rarity === 2,
+                                    'imgbox3': showCard.rarity === 3
+                                }"
+                                v-if="showCard.rarity">
+                                <img
+                                    :src="isAddable + showCard.fullimage"
+                                    :alt="showCard.name"
+                                    class="h-[40vh] min-w-[150px] max-[400px]:h-[45vh]"
+                                />
                             </div>
-                            <div class="imgbox2 max-w-[150px] mx-auto" v-if="showCard.rarity===2">
-                                <img :src="isAddable+showCard.fullimage" :alt="showCard.name" class="h-[40vh] min-w-[150px] max-[400px]:h-[45vh]"/>
-                            </div>
-                            <div class="imgbox3 max-w-[150px] mx-auto" v-if="showCard.rarity===3">
-                                <img :src="isAddable+showCard.fullimage" :alt="showCard.name" class="h-[40vh] min-w-[150px] max-[400px]:h-[45vh]"/>
-                            </div>
+
                             
                         </div>
                         <div class="w-1/2 flex flex-col min-w-[150px] ml-2 max-[450px]:ml-0 max-[500px]:w-[100%] mt-1">

@@ -31,7 +31,7 @@ function init(){
             <span class="text-white cursor-help bg-black w-[20px] h-[20px] text-center rounded-xl">?</span>
         </div>
         <template #content>
-             <div class="max-[500px]:w-[100%] mt-2 p-2 rounded-md bg-black" v-if="data !==null ">
+             <div class="max-[500px]:w-[100%] mt-2 p-2 rounded-md bg-black/80" v-if="data !==null ">
                 <div>
                     <div class="flex">
                         <span class="text-white font-bold text-md">2025時光牌bingo目標:</span>
