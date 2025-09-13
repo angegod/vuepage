@@ -1,6 +1,6 @@
 import type { CardSeriesItem } from "@/interface/card";
 
-let Card :CardSeriesItem[] = [
+let Card :CardSeriesItem[]= [
   {
     "seriesId": 1,
     "seriesName": "晨曦塔",
@@ -124,8 +124,8 @@ let Card :CardSeriesItem[] = [
         "tag": [
           2,
           18,
-          52,
-          61
+          53,
+          62
         ],
         "instantEffect": [
           "該回合增加 2 連擊 (Combo)"
@@ -155,7 +155,7 @@ let Card :CardSeriesItem[] = [
           7,
           18,
           21,
-          48
+          49
         ],
         "instantEffect": [
           "該回合增加 2 連擊 (Combo)"
@@ -184,8 +184,8 @@ let Card :CardSeriesItem[] = [
         "tag": [
           7,
           18,
-          51,
-          61
+          52,
+          62
         ],
         "instantEffect": [
           "該回合增加 2 連擊 (Combo)"
@@ -214,8 +214,8 @@ let Card :CardSeriesItem[] = [
         "tag": [
           1,
           18,
-          47,
-          62
+          48,
+          63
         ],
         "instantEffect": [
           "該回合增加 2 連擊 (Combo)"
@@ -245,7 +245,7 @@ let Card :CardSeriesItem[] = [
           18,
           24,
           33,
-          62
+          63
         ],
         "instantEffect": [
           "該回合增加 2 連擊 (Combo)"
@@ -275,8 +275,8 @@ let Card :CardSeriesItem[] = [
           8,
           21,
           27,
-          54,
-          68
+          55,
+          69
         ],
         "instantEffect": [
           "自身進入 2 回合亢奮狀態"
@@ -305,8 +305,8 @@ let Card :CardSeriesItem[] = [
         "image": "/images/card/icon/1_11.png",
         "tag": [
           33,
-          53,
-          69
+          54,
+          70
         ],
         "instantEffect": [
           "自身技能 CD -2"
@@ -334,7 +334,7 @@ let Card :CardSeriesItem[] = [
         "tag": [
           3,
           33,
-          71
+          72
         ],
         "instantEffect": [
           "自身技能 CD -2"
@@ -361,8 +361,8 @@ let Card :CardSeriesItem[] = [
         "image": "/images/card/icon/1_13.png",
         "tag": [
           33,
-          51,
-          72
+          52,
+          73
         ],
         "instantEffect": [
           "自身技能 CD -2"
@@ -392,7 +392,7 @@ let Card :CardSeriesItem[] = [
           9,
           33,
           38,
-          49
+          50
         ],
         "instantEffect": [
           "自身為龍類成員，自身技能 CD -3"
@@ -422,8 +422,8 @@ let Card :CardSeriesItem[] = [
           1,
           33,
           37,
-          58,
-          56
+          59,
+          57
         ],
         "instantEffect": [
           "自身為獸類成員，自身技能 CD -3"
@@ -454,7 +454,7 @@ let Card :CardSeriesItem[] = [
           10,
           21,
           27,
-          48
+          49
         ],
         "instantEffect": [
           "自身進入 2 回合亢奮狀態"
@@ -485,7 +485,7 @@ let Card :CardSeriesItem[] = [
           1,
           11,
           18,
-          56
+          57
         ],
         "instantEffect": [
           "該回合增加 2 連擊 (Combo)"
@@ -514,8 +514,8 @@ let Card :CardSeriesItem[] = [
         "tag": [
           7,
           19,
-          59,
-          66
+          60,
+          67
         ],
         "instantEffect": [
           "提升 100% 龍脈儀能量"
@@ -574,10 +574,10 @@ let Card :CardSeriesItem[] = [
           12,
           21,
           27,
-          64,
-          75,
-          78,
-          80
+          65,
+          76,
+          79,
+          81
         ],
         "instantEffect": [
           "自身進入 2 回合亢奮狀態"
@@ -669,7 +669,7 @@ let Card :CardSeriesItem[] = [
           9,
           15,
           29,
-          64
+          65
         ],
         "instantEffect": [
           "解除自身疲憊狀態"
@@ -700,9 +700,8 @@ let Card :CardSeriesItem[] = [
           3,
           21,
           24,
-          31,
           33,
-          33
+          34
         ],
         "instantEffect": [
           "自身為人類成員，自身技能 CD -4"
@@ -773,7 +772,7 @@ let Card :CardSeriesItem[] = [
           13,
           21,
           27,
-          50
+          51
         ],
         "instantEffect": [
           "自身增加 2 回合亢奮狀態"
@@ -806,7 +805,7 @@ let Card :CardSeriesItem[] = [
           20,
           18,
           25,
-          61
+          62
         ],
         "instantEffect": [
           "發動攻擊前自身對敵方全體造成 50000000 點無屬性傷害 10 次"
@@ -835,11 +834,11 @@ let Card :CardSeriesItem[] = [
         "image": "/images/card/icon/1_28.png",
         "tag": [
           23,
-          71,
-          69,
-          76,
+          72,
+          70,
           77,
-          80
+          77,
+          81
         ],
         "instantEffect": [
           "完全回復生命力"
@@ -873,7 +872,7 @@ let Card :CardSeriesItem[] = [
           3,
           19,
           55,
-          54
+          55
         ],
         "instantEffect": [
           "提升 100% 龍脈儀能量"
@@ -934,10 +933,10 @@ let Card :CardSeriesItem[] = [
           21,
           33,
           45,
-          64,
+          65,
+          78,
           77,
-          77,
-          80
+          81
         ],
         "instantEffect": [
           "自身為光屬性成員，自身技能 CD -4"
@@ -973,8 +972,8 @@ let Card :CardSeriesItem[] = [
           21,
           25,
           25,
-          53,
-          82
+          54,
+          83
         ],
         "instantEffect": [
           "自身增加 2 回合亢奮狀態"
@@ -1005,7 +1004,7 @@ let Card :CardSeriesItem[] = [
         "tag": [
           20,
           21,
-          60
+          61
         ],
         "instantEffect": [
           "自身發動攻擊前對敵方造成 10000000 點光屬性傷害 10 次"
@@ -1036,9 +1035,9 @@ let Card :CardSeriesItem[] = [
           21,
           33,
           44,
-          76,
-          79,
-          81
+          77,
+          80,
+          82
         ],
         "instantEffect": [
           "自身為木屬性成員，自身技能 CD -4"
@@ -1072,8 +1071,8 @@ let Card :CardSeriesItem[] = [
         "tag": [
           18,
           21,
-          52,
-          73
+          53,
+          74
         ],
         "instantEffect": [
           "增加 3 連擊 (Combo)"
@@ -1102,7 +1101,7 @@ let Card :CardSeriesItem[] = [
         "tag": [
           21,
           33,
-          63
+          64
         ],
         "instantEffect": [
           "解除自身被封鎖主動技能 ( 此技能無視封鎖技能 )"
@@ -1132,10 +1131,10 @@ let Card :CardSeriesItem[] = [
           33,
           46,
           61,
-          61,
-          77,
+          62,
           78,
-          81
+          79,
+          82
         ],
         "instantEffect": [
           "自身為暗屬性成員，自身技能 CD -4"
@@ -1173,7 +1172,7 @@ let Card :CardSeriesItem[] = [
           17,
           21,
           27,
-          49
+          50
         ],
         "instantEffect": [
           "自身增加 2 回合亢奮狀態"
@@ -1206,7 +1205,7 @@ let Card :CardSeriesItem[] = [
           18,
           21,
           33,
-          61
+          62
         ],
         "instantEffect": [
           "該回合增加 4 連擊 (Combo)"
@@ -1268,10 +1267,10 @@ let Card :CardSeriesItem[] = [
           25,
           33,
           43,
-          64,
-          75,
-          79,
-          81
+          65,
+          76,
+          80,
+          82
         ],
         "instantEffect": [
           "自身為火屬性成員，自身技能 CD -4"
@@ -1306,7 +1305,7 @@ let Card :CardSeriesItem[] = [
           1,
           21,
           31,
-          49,
+          50,
           50
         ],
         "instantEffect": [
@@ -1324,7 +1323,9 @@ let Card :CardSeriesItem[] = [
         "PointConsume": 2,
         "PointGet": 2,
         "fullimage": "/images/card/image/1_42.png",
-        "keyword": [],
+        "keyword": [
+          ""
+        ],
         "PointEnter": 4
       },
       {
@@ -1336,7 +1337,7 @@ let Card :CardSeriesItem[] = [
           10,
           21,
           33,
-          55
+          56
         ],
         "instantEffect": [
           "自身技能 CD -2"
@@ -1352,7 +1353,9 @@ let Card :CardSeriesItem[] = [
         "PointConsume": 1,
         "PointGet": 2,
         "fullimage": "/images/card/image/1_43.png",
-        "keyword": [],
+        "keyword": [
+          ""
+        ],
         "PointEnter": 4
       },
       {
@@ -1363,12 +1366,12 @@ let Card :CardSeriesItem[] = [
         "tag": [
           9,
           28,
-          66,
           67,
-          77,
+          67,
           78,
-          80,
-          83
+          79,
+          81,
+          84
         ],
         "instantEffect": [
           "自身增加 2 回合暴怒狀態"
@@ -1393,6 +1396,103 @@ let Card :CardSeriesItem[] = [
         "keyword": [
           "零覓牌",
           "一願牌"
+        ],
+        "PointEnter": 8
+      },
+      {
+        "id": 45,
+        "name": "殘魂的呼喚",
+        "rarity": 2,
+        "image": "/images/card/icon/1_45.png",
+        "tag": [
+          2,
+          20,
+          21,
+          23
+        ],
+        "instantEffect": [
+          "自身發動攻擊前對敵方造成 50000000 點木屬性傷害 1 次"
+        ],
+        "comboEffect": [
+          "完全回復生命力"
+        ],
+        "roundEffect": [
+          "自身攻擊力提升 100%",
+          "自身無視「固定連擊盾」"
+        ],
+        "PointMax": 6,
+        "PointConsume": 2,
+        "PointGet": 2,
+        "fullimage": "/images/card/image/1_45.png",
+        "keyword": [],
+        "PointEnter": 6
+      },
+      {
+        "id": 46,
+        "name": "血脈的本能",
+        "rarity": 1,
+        "image": "/images/card/icon/1_46.png",
+        "tag": [
+          12,
+          21,
+          27,
+          65
+        ],
+        "instantEffect": [
+          "自身進入 1 回合亢奮狀態"
+        ],
+        "comboEffect": [
+          "自身攻擊力提升 150%",
+          "自身無視指定減傷抗性敵技"
+        ],
+        "roundEffect": [
+          "自身不會被封鎖主動技能"
+        ],
+        "PointMax": 4,
+        "PointConsume": 1,
+        "PointGet": 2,
+        "fullimage": "/images/card/image/1_46.png",
+        "keyword": [
+          "卡蜜拉牌"
+        ],
+        "PointEnter": 4
+      },
+      {
+        "id": 47,
+        "name": "面對未知的勇氣",
+        "rarity": 3,
+        "image": "/images/card/icon/1_47.png",
+        "tag": [
+          4,
+          5,
+          6,
+          7,
+          16,
+          17,
+          20,
+          21,
+          47,
+          85
+        ],
+        "instantEffect": [
+          "所有成員技能 CD -2",
+          "自身發動攻擊前對敵方造成 500000000 點火屬性傷害 2 次"
+        ],
+        "comboEffect": [
+          "自身攻擊力提升 150%",
+          "自身擊中敵人後點燃敵人，持續 3 回合"
+        ],
+        "roundEffect": [
+          "自身攻擊傷害無視「起結有序」",
+          "自身無視「二屬盾」、「三屬盾」、「四屬盾」及「五屬盾」",
+          "自身無視「首消組數屬性符石盾」"
+        ],
+        "PointMax": 8,
+        "PointConsume": 2,
+        "PointGet": 2,
+        "fullimage": "/images/card/image/1_47.png",
+        "keyword": [
+          "阿圖姆牌"
         ],
         "PointEnter": 8
       }

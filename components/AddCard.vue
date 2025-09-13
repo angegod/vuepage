@@ -29,6 +29,8 @@
         roundEffect.value = [''];
         comboEffect.value = [''];
         instantEffect.value = [''];
+
+        card.value={};
     }
 
     function callClick(id){
@@ -129,7 +131,6 @@
 
             card.value.keyword.push(event.target.value);
             event.target.value='';
-            console.log(card.value.keyword)
         }
     }
 
@@ -229,12 +230,12 @@
                 card:card.value
             };
             await axios.post('http://localhost:5000/card/add',json).then((response)=>{
-                console.log(response.data);
                 alert('新卡片已添加');
                 emit('close','');
                 emit('updateCard',response.data)              
                
                 init();
+                console.log(card.value);
             });
         }
     }

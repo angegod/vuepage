@@ -1,6 +1,6 @@
 import type { funcDataItem } from "@/interface/funcData";
 
-let funcData:funcDataItem[] = [
+let funcData:funcDataItem[]= [
   {
     "typeId": 1,
     "typeName": "解盾",
@@ -252,6 +252,11 @@ let funcData:funcDataItem[] = [
         "typeId": 4,
         "id": 46,
         "name": "自身減CD(暗)"
+      },
+      {
+        "typeId": 4,
+        "id": 47,
+        "name": "全隊減CD"
       }
     ]
   },
@@ -261,72 +266,72 @@ let funcData:funcDataItem[] = [
     "data": [
       {
         "typeId": 5,
-        "id": 47,
+        "id": 48,
         "name": "自身水屬追打"
       },
       {
         "typeId": 5,
-        "id": 48,
+        "id": 49,
         "name": "自身火屬追打"
       },
       {
         "typeId": 5,
-        "id": 49,
+        "id": 50,
         "name": "自身木屬追打"
       },
       {
         "typeId": 5,
-        "id": 50,
+        "id": 51,
         "name": "自身光屬追打"
       },
       {
         "typeId": 5,
-        "id": 51,
+        "id": 52,
         "name": "自身暗屬追打"
       },
       {
         "typeId": 5,
-        "id": 52,
+        "id": 53,
         "name": "自身無屬追打"
       },
       {
         "typeId": 5,
-        "id": 53,
+        "id": 54,
         "name": "自身五屬追打"
       },
       {
         "typeId": 5,
-        "id": 54,
+        "id": 55,
         "name": "全隊水屬追打"
       },
       {
         "typeId": 5,
-        "id": 55,
+        "id": 56,
         "name": "全隊火屬追打"
       },
       {
         "typeId": 5,
-        "id": 56,
+        "id": 57,
         "name": "全隊木屬追打"
       },
       {
         "typeId": 5,
-        "id": 57,
+        "id": 58,
         "name": "全隊光屬追打"
       },
       {
         "typeId": 5,
-        "id": 58,
+        "id": 59,
         "name": "全隊暗屬追打"
       },
       {
         "typeId": 5,
-        "id": 59,
+        "id": 60,
         "name": "全隊無屬追打"
       },
       {
         "typeId": 5,
-        "id": 60,
+        "id": 61,
         "name": "全隊五屬追打"
       }
     ]
@@ -337,37 +342,37 @@ let funcData:funcDataItem[] = [
     "data": [
       {
         "typeId": 6,
-        "id": 61,
+        "id": 62,
         "name": "無視燃燒"
       },
       {
         "typeId": 6,
-        "id": 62,
+        "id": 63,
         "name": "無視黏腐"
       },
       {
         "typeId": 6,
-        "id": 63,
+        "id": 64,
         "name": "解鎖"
       },
       {
         "typeId": 6,
-        "id": 64,
+        "id": 65,
         "name": "防鎖"
       },
       {
         "typeId": 6,
-        "id": 65,
+        "id": 66,
         "name": "防爆破炸彈"
       },
       {
         "typeId": 6,
-        "id": 66,
+        "id": 67,
         "name": "灼熱減傷"
       },
       {
         "typeId": 6,
-        "id": 67,
+        "id": 68,
         "name": "防結界地形"
       }
     ]
@@ -378,32 +383,32 @@ let funcData:funcDataItem[] = [
     "data": [
       {
         "typeId": 7,
-        "id": 68,
+        "id": 69,
         "name": "自身直行轉水"
       },
       {
         "typeId": 7,
-        "id": 69,
+        "id": 70,
         "name": "自身直行轉火"
       },
       {
         "typeId": 7,
-        "id": 70,
+        "id": 71,
         "name": "自身直行轉木"
       },
       {
         "typeId": 7,
-        "id": 71,
+        "id": 72,
         "name": "自身直行轉光"
       },
       {
         "typeId": 7,
-        "id": 72,
+        "id": 73,
         "name": "自身直行轉暗"
       },
       {
         "typeId": 7,
-        "id": 73,
+        "id": 74,
         "name": "自身直行轉心"
       }
     ]
@@ -414,42 +419,42 @@ let funcData:funcDataItem[] = [
     "data": [
       {
         "typeId": 8,
-        "id": 74,
+        "id": 75,
         "name": "含水"
       },
       {
         "typeId": 8,
-        "id": 75,
+        "id": 76,
         "name": "含火"
       },
       {
         "typeId": 8,
-        "id": 76,
+        "id": 77,
         "name": "含木"
       },
       {
         "typeId": 8,
-        "id": 77,
+        "id": 78,
         "name": "含光"
       },
       {
         "typeId": 8,
-        "id": 78,
+        "id": 79,
         "name": "含暗"
       },
       {
         "typeId": 8,
-        "id": 79,
+        "id": 80,
         "name": "含心"
       },
       {
         "typeId": 8,
-        "id": 80,
+        "id": 81,
         "name": "直行排列"
       },
       {
         "typeId": 8,
-        "id": 81,
+        "id": 82,
         "name": "橫行排列"
       }
     ]
@@ -460,13 +465,18 @@ let funcData:funcDataItem[] = [
     "data": [
       {
         "typeId": 9,
-        "id": 82,
+        "id": 83,
         "name": "凍結狀態"
       },
       {
         "typeId": 9,
-        "id": 83,
+        "id": 84,
         "name": "刀傷狀態"
+      },
+      {
+        "typeId": 9,
+        "id": 85,
+        "name": "點燃狀態"
       }
     ]
   }

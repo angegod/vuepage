@@ -21,13 +21,22 @@
 
 
 .link,.sublink{
-    margin-left:20px;
-    margin-right:20px;
+    margin-left: 20px;
+    margin-right: 20px;
     font-weight: bold;
     height: 30px;
     color:gray;
     text-decoration: none;
     word-break: keep-all;
+}
+
+.sublink {
+    border-bottom: 1px dotted gray;
+}
+
+/* 排除最後一個 .sublink */
+.sublink:last-child {
+    border-bottom: none;
 }
 
 .link.redText,
@@ -54,8 +63,6 @@ a:hover{
     pointer-events: auto; /* 禁止鼠標事件 */
     background-color: rgb(67, 47, 47);
 }
-
-
 
 .hidden{
   display: none;

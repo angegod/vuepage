@@ -45,5 +45,12 @@
         "image":"/images/ultimate/u7/Icon.jpg",
         "limit":"隊伍中只能有 4 個不同種族成員進場",
         "background":"石牢=>無法發動腳色珠及流光珠相關效果。"
+    },
+    {
+        "id":8,
+        "name":"面對未知的勇氣",
+        "image":"/images/ultimate/u8/Icon.jpg",
+        "limit":"必須以 2 種屬性以及 2 個或以上神族成員進場",
+        "background":"進場時，每有 1 個神族以外成員，扣除召喚師 20% 生命力，最多扣除 100%"
     }
 ]
