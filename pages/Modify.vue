@@ -619,9 +619,13 @@
                 <Slide v-for="(c,index) in CardArray" :key="index">
                     <div class="flex-col [&>span]:block cursor-pointer" v-on:click="changeCard(c.id)">
                         <img :src="isAddable+c.image" width="160" alt="not found"/>
-                        <span class="w-[100%] text-center bg-amber-900 text-white rounded-md" v-if="c.rarity===1">{{ c.id }}</span>
-                        <span class="w-[100%] text-center bg-slate-500 text-white rounded-md" v-if="c.rarity===2">{{ c.id }}</span>
-                        <span class="w-[100%] text-center bg-yellow-600 text-white rounded-md" v-if="c.rarity===3">{{ c.id }}</span>
+                        <span 
+                            class="w-full text-center text-white rounded-md" 
+                            :class="{
+                                'bg-amber-900': c.rarity === 1,
+                                'bg-slate-500': c.rarity === 2,
+                                'bg-yellow-600': c.rarity === 3
+                            }">{{ c.id }}</span>
                     </div>
                 </Slide>
             </Carousel>

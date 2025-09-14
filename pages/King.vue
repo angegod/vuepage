@@ -2,7 +2,7 @@
 import { inject, ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import Data from '../components/data/King_details.json';
-import Intro from './Intro.vue';
+import Intro from '../components/intro.vue';
 import type { MonsterItem, relicSubItem } from '@/interface/King';
 
 

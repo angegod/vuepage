@@ -56,7 +56,7 @@
             <div>
                 <div class="flex flex-col">
                     <div class="flex flex-row flex-wrap">
-                        <div class="mt-3 w-1/2 max-[500px]:w-[100%]">
+                        <div class="mt-3 w-1/2 max-[500px]:w-full">
                             <div v-for="i in 3" class="flex flex-row items-center my-1">
                                 <img :src="isAddable+`/images/rarity${i}.png`" :alt="`rarity${i}`" 
                                 class="max-w-[70px] object-cover object-center"/>

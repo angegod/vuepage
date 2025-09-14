@@ -48,6 +48,9 @@ watch(
 function updateHeader(path: string) {
     show.value = window.innerWidth < 500;
 
+    path = path.toLowerCase(); // 先轉小寫
+    if (!path.endsWith('/')) path += '/';
+    
     const map: Record<string, number> = {
         '/': 1,
         '/about/': 2,

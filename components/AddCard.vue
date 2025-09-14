@@ -1,22 +1,41 @@
-<script setup>
+<script lang="ts" setup>
     import { inject,ref,provide } from 'vue';
     import axios from 'axios';
+    import type { CardItem } from '@/interface/card';
+    import type { funcDataItem, skillItem } from '@/interface/funcData';
+    import type { fileDataItem } from '@/interface/modify';
+    
     let props = defineProps(['max','func']);
 
-    let card=ref({});
-    let func=ref([]);
+    let card=ref<CardItem>({
+        id: 0,
+        name: '',
+        rarity: 1,
+        image: '',
+        tag: [],
+        instantEffect: [],
+        comboEffect: [],
+        roundEffect:[],
+        PointMax: 2,
+        PointConsume: 2,
+        PointGet: 2,
+        fullimage: '',
+        keyword: [],
+        PointEnter: 2,
+    });
+    let func=ref<funcDataItem[]>([]);
     
-    let step=ref(1);//處於哪個步驟 初始為1
-    let iconInput=ref(null);//縮圖上傳
-    let imageInput=ref(null);//預覽圖上傳
-    let spreadInput=ref(null);//盤面圖 如果有必要的話
+    let step=ref<number>(1);//處於哪個步驟 初始為1
+    let iconInput=ref<fileDataItem|null>(null);//縮圖上傳
+    let imageInput=ref<fileDataItem|null>(null);//預覽圖上傳
+    let spreadInput=ref<fileDataItem|null>(null);//盤面圖 如果有必要的話
 
-    let showSkill=ref([]);
-    let roundEffect=ref(['']);
-    let comboEffect=ref(['']);
-    let instantEffect=ref(['']);//此區塊暫時默認只寫一個
+    let showSkill=ref<skillItem[]>([]);
+    let roundEffect=ref<string[]>(['']);
+    let comboEffect=ref<string[]>(['']);
+    let instantEffect=ref<string[]>(['']);//此區塊暫時默認只寫一個
 
-    const emit = defineEmits(['close'])
+    const emit = defineEmits(['close','updateCard']);
     
     //初始化 包括還原
     function init(){
@@ -30,31 +49,64 @@
         comboEffect.value = [''];
         instantEffect.value = [''];
 
-        card.value={};
-    }
-
-    function callClick(id){
-        document.getElementById(id).value=null;
-        document.getElementById(id).click();
-    }
-
-    async function imageUpload(id){
-        let file=document.getElementById(id).files[0];
-        
-        const reader=new FileReader();
-
-        reader.onload = (e) => {
-            if(id==='iconInput')
-                iconInput.value = {file:e.target.result,name:file.name,realFile:file}; // 设置图片的 base64 URL
-            else if(id==='imageInput')
-                imageInput.value={file:e.target.result,name:file.name,realFile:file};
-            else if(id==='spreadInput')
-                spreadInput.value={file:e.target.result,name:file.name,realFile:file};
+        card.value={
+            id: 0,
+            name: '',
+            rarity: 1,
+            image: '',
+            tag: [],
+            instantEffect: [],
+            comboEffect: [],
+            roundEffect:[],
+            PointMax: 2,
+            PointConsume: 2,
+            PointGet: 2,
+            fullimage: '',
+            keyword: [],
+            PointEnter: 2,
         };
-        await reader.readAsDataURL(file); // 讀取文件
+    }
+
+    function callClick(id:string){
+        let imageInput = document.getElementById(id) as HTMLInputElement;
+
+        imageInput.value= '';
+        imageInput.click();
+    }
+
+    async function imageUpload(id: string): Promise<void> {
+        const input = document.getElementById(id) as HTMLInputElement | null;
+        if (!input || !input.files || input.files.length === 0) {
+            console.error("No file selected.");
+            return;
+        }
+
+        const file: File = input.files[0];
+        const reader = new FileReader();
+
+        reader.onload = (e: ProgressEvent<FileReader>) => {
+            const result = e.target?.result as string | null;
+            if (!result) return;
+
+            const fileData = {
+                file: result, // base64 URL
+                name: file.name,
+                realFile: file
+            };
+
+            if (id === "iconInput") {
+                iconInput.value = fileData;
+            } else if (id === "imageInput") {
+                imageInput.value = fileData;
+            } else if (id === "spreadInput") {
+                spreadInput.value = fileData;
+            }
+        };
+
+        reader.readAsDataURL(file);
     }
     //添加技能敘述
-    function addEffect(type){
+    function addEffect(type:string){
         switch(type){
             case 'combo':
                 comboEffect.value.push('');              
@@ -72,7 +124,7 @@
     }
 
     //刪除技能敘述 但每項敘述須至少保留一個
-    function delEffect(type){
+    function delEffect(type:string){
         switch(type){
             case 'combo':
                 if(comboEffect.value.length>1)
@@ -93,8 +145,9 @@
 
     //新增技能
     function addTag(){
-        var tagIndex=parseInt(document.getElementById('tagSelect2').value);
-        var targetTag={};
+        let tagSelect = document.getElementById('tagSelect2') as HTMLSelectElement;
+        let tagIndex=parseInt(tagSelect.value);
+        let targetTag = {} as skillItem;
 
         func.value.forEach((type)=>{
             let t=type.data.find((f)=>f.id===tagIndex);
@@ -107,7 +160,7 @@
             return;
         }
         showSkill.value.push(targetTag);
-        showSkill.value=showSkill.value.sort((a,b)=>{return a.id-b.id});
+        showSkill.value=showSkill.value.sort((a:skillItem,b:skillItem)=>{return a.id-b.id});
         
         if(card.value.tag===undefined){
             card.value.tag=[];
@@ -117,26 +170,28 @@
     }
 
     //移除技能
-    function removeTag(tagId){
+    function removeTag(tagId:number){
         card.value.tag = card.value.tag.filter((t)=>t!==tagId);
         showSkill.value = showSkill.value.filter((t)=>t.id!==tagId);
         console.log(showSkill);
     }
 
     //新增關鍵字
-    function addKeyword(event){
+    function addKeyword(event:KeyboardEvent){
         if(event.key==='Enter'){
+            let keywordInput = event.target as HTMLInputElement;
             if(card.value.keyword===undefined)
-                card.value.keyword=[]
+                card.value.keyword=[];
 
-            card.value.keyword.push(event.target.value);
-            event.target.value='';
+            card.value.keyword.push(keywordInput.value);
+            keywordInput.value='';
         }
     }
 
     //設定盤面圖
-    function setSpreadImg(){
-        let spreadIndex = event.data.value;
+    function setSpreadImg(event:Event){
+        let spreadIndexInput = event.target as HTMLInputElement;
+        let spreadIndex = parseInt(spreadIndexInput.value);
 
         if(Number(spreadIndex)>0){
             let spreadData = {
@@ -173,7 +228,7 @@
         
         
         //送出資料 由於有兩張照片 所以會先分批跟api溝通
-        if(step.value===4){
+        if(step.value===4 && iconInput.value && imageInput.value && spreadInput.value){
             console.log('step4');
             step.value+=1;
 
@@ -255,20 +310,22 @@
         card.value.image=`/images/card/icon/1_${card.value.id}.png`;
         card.value.fullimage=`/images/card/image/1_${card.value.id}.png`;
         
-        if(document.getElementById('spreadIndex').value === null){
+        let spreadIndexInput = document.getElementById('spreadIndex') as HTMLInputElement;
+
+        if(spreadIndexInput.value === null){
             card.value.spread={
-                id:parseInt(document.getElementById('spreadIndex').value),
+                index:parseInt(spreadIndexInput.value),
                 image:`/images/card/image/${card.value.id}.png`
             };
         }
        
 
         //將技能儲存縮短成只有編號
-        let tag=[];
+        let tag=[] as number[];
 
-        showSkill.value.forEach((s)=>{
-            tag.push(parseInt(s.id));
-        })
+        showSkill.value.forEach((s:skillItem)=>{
+            tag.push(s.id);
+        });
 
         card.value.tag=tag;
 
@@ -282,10 +339,10 @@
             instantEffect:card.value.instantEffect,
             roundEffect:card.value.roundEffect,
             comboEffect:card.value.comboEffect,
-            PointMax:parseInt(card.value.PointMax),
-            PointEnter:parseInt(card.value.PointEnter),
-            PointConsume:parseInt(card.value.PointConsume),
-            PointGet:parseInt(card.value.PointGet),
+            PointMax:card.value.PointMax,
+            PointEnter:card.value.PointEnter,
+            PointConsume:card.value.PointConsume,
+            PointGet:card.value.PointGet,
             tag:card.value.tag,
             fullimage:card.value.fullimage,
             keyword:card.value.keyword,
@@ -298,7 +355,7 @@
         
     }
 
-    function setFunc(data){
+    function setFunc(data:funcDataItem[]){
         func.value=data;
     }
 
@@ -315,7 +372,7 @@
                 <div class="pl-2 pr-2 w-1/2">
                     <div class="flex flex-col">
                         <span class="text-lg">卡片名稱:</span>
-                        <input type="text" class="selfInput" placeholder="卡片名子" @change="event=>card.name=event.target.value"/>
+                        <input type="text" class="selfInput" placeholder="卡片名子" @change="event=>card.name=(event.target as HTMLInputElement).value"/>
                     </div>
                     <div class="mt-3 flex flex-row items-baseline">
                         <span class="text-lg mr-1">卡片編號:</span>
@@ -325,7 +382,7 @@
                     <div class="flex flex-col mt-5">
                         <span class="text-lg">稀有度:</span>
                         <div v-for="n in 3">
-                            <input type="radio" name="rarity" :value="n" @change="event=>card.rarity=parseInt(event.target.value)"/>
+                            <input type="radio" name="rarity" :value="n" @change="event=>card.rarity = parseInt((event.target as HTMLInputElement).value)"/>
                             <span>{{ n+"星" }}</span> 
                         </div>
                     </div>
@@ -411,25 +468,25 @@
                         <div class="w-[120px]">
                             <span>回合累積能量:</span>
                         </div>
-                        <input type="number" id="pointGet" class="inputNum" :min="1" :max="8" required @change="event=>card.PointGet=event.target.value"/>
+                        <input type="number" id="pointGet" class="inputNum" :min="1" :max="8" required @change="event=>card.PointGet = parseInt((event.target as HTMLInputElement).value)"/>
                     </div>
                     <div class="flex flex-row">
                         <div class="w-[120px]">
                             <span>總儲存能量:</span>
                         </div>
-                        <input type="number" id="pointMax" class="inputNum" :min="1" :max="8" required @change="event=>card.PointMax=event.target.value"/>
+                        <input type="number" id="pointMax" class="inputNum" :min="1" :max="8" required @change="event=>card.PointMax = parseInt((event.target as HTMLInputElement).value)"/>
                     </div>
                     <div class="flex flex-row">
                         <div class="w-[120px]">
                             <span>回合消耗能量:</span>
                         </div>
-                        <input type="number" id="pointConsume" class="inputNum" :min="1" :max="8" required @change="event=>card.PointConsume=event.target.value"/>
+                        <input type="number" id="pointConsume" class="inputNum" :min="1" :max="8" required @change="event=>card.PointConsume = parseInt((event.target as HTMLInputElement).value)"/>
                     </div>
                     <div class="flex flex-row">
                         <div class="w-[120px]">
                             <span>進場能量:</span>
                         </div>
-                        <input type="number" id="pointEnter" class="inputNum" :min="1" :max="8" required @change="event=>card.PointEnter=event.target.value"/>
+                        <input type="number" id="pointEnter" class="inputNum" :min="1" :max="8" required @change="event=>card.PointEnter = parseInt((event.target as HTMLInputElement).value)"/>
                     </div>
                 </div>
                 <div class="w-1/2">
@@ -449,7 +506,7 @@
                     </div>
                     <div class="my-2">
                         <span>圖片標示位置:</span>
-                        <input type="number" class="selfInput"  id="spreadIndex" :min="1" @click="setSpreadImg" />
+                        <input type="number" class="selfInput"  id="spreadIndex" :min="1" @change="(event)=>setSpreadImg(event)" />
                     </div>
                     <div class="mt-2">
                         <button class="addBtn pl-2 pr-2" @click="nextStep">下一步</button>
@@ -465,13 +522,13 @@
                             <span class="w-[100%] text-center text-slate-500 font-bold" v-if="card.rarity===2">{{ card.name }}</span>
                             <span class="w-[100%] text-center text-yellow-600 font-bold" v-if="card.rarity===3">{{ card.name }}</span>
                         </div>
-                        <div class="imgbox1 max-w-[150px] mx-auto" v-if="card.rarity===1">
+                        <div class="imgbox1 max-w-[150px] mx-auto" v-if="card.rarity===1 && imageInput">
                             <img :src="imageInput.file" :alt="card.name" class="h-[40vh] min-w-[150px]"/>
                         </div>
-                        <div class="imgbox2 max-w-[150px] mx-auto" v-if="card.rarity===2">
+                        <div class="imgbox2 max-w-[150px] mx-auto" v-if="card.rarity===2 && imageInput">
                             <img :src="imageInput.file" :alt="card.name" class="h-[40vh] min-w-[150px]"/>
                         </div>
-                        <div class="imgbox3 max-w-[150px] mx-auto" v-if="card.rarity===3">
+                        <div class="imgbox3 max-w-[150px] mx-auto" v-if="card.rarity===3 && imageInput">
                             <img :src="imageInput.file" :alt="card.name" class="h-[40vh] min-w-[150px]"/>
                         </div>
                         

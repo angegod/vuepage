@@ -48,7 +48,7 @@ const props = defineProps<Props>();
 
         <!-- spread圖片 -->
         <div id="spread" style="display: none;" class="spread fixed z-[1000]" v-if="props.spread">
-            <img :src="isAddable + props.spread.image" class="w-[240px]" />
+            <img :src="(props.isAddable ?? '') + props.spread.image" class="w-[240px]" />
         </div>
     </div>
   </div>
