@@ -17,7 +17,8 @@
 
     const store = useCardBtnStore();
 
-    const isAddable=ref('');
+    //圖片前綴字串
+    const isAddable=ref<string>('');
 
     let seriesIndex=ref<number[]>([]);//時光牌系列代號
     let selectFunc=ref<skillItem[]>([]);//將被點選的解盾選項加入在此 默認使用And
@@ -384,12 +385,7 @@
     let stopWatcher: (() => void) | null = null;
 
     onMounted(() => {
-        const currentPath = window.location.href;
-        if (currentPath.includes('https://angegod.github.io/vuepage/')) {
-            isAddable.value = '/vuepage';
-        } else {
-            isAddable.value = '';
-        }
+        isAddable.value = inject('frontpath') as string;
 
         checkData();
 

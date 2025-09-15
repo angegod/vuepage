@@ -12,7 +12,6 @@ const store = useCardBtnStore();
 
 // 圖片前綴 (避免 SSR 錯誤)
 const isAddable = ref('');
-
 const config = useRuntimeConfig();
 
 if (process.client && location.href.includes(`https://angegod.github.io/${config.public.projectName}`)) {
@@ -22,6 +21,7 @@ if (process.client && location.href.includes(`https://angegod.github.io/${config
     isAddable.value = ``;
 }
 
+//往下提供前綴字串
 provide('frontpath', isAddable.value);
 
 

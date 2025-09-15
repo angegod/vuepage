@@ -67,8 +67,7 @@
     let editMode=ref('edit_basic');
 
     // 路徑前綴 from app.vue provide
-    const injectedFrontPath = inject('frontpath', ''); // 如果沒有 provide 回傳空字串
-    const isAddable = ref(injectedFrontPath); // 不用在 onMounted 裡 inject，直接放頂層
+    const isAddable = ref(''); 
     const config = useRuntimeConfig();
 
     function loadData(){
@@ -450,6 +449,8 @@
         //僅在測試環境下才回生效
         if(process.env.NODE_ENV !== "development")
             window.location.assign(`${window.location.origin}/${config.public.projectName}/`);
+
+        isAddable.value = inject('frontpath') as string;
 
         loadData();
     });

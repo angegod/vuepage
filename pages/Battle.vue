@@ -5,7 +5,7 @@
     import Switch from '../components/Switch.vue';
     import type { BattleDetailsItem, UltimateDetailsItem } from '@/interface/battle';
 
-    const isAddable=inject('frontpath');//圖片默認路徑，要配合之後有可能上線
+    const isAddable=ref('');
 
     const target=ref<BattleDetailsItem|UltimateDetailsItem>(myFile[0]);
 
@@ -102,6 +102,8 @@
     });
 
     onMounted(()=>{
+        isAddable.value = inject('frontpath') as string;
+
         //初始化載入 第一個
         imgClick(1);
     })

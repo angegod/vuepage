@@ -3,8 +3,8 @@
     import Goal from './data/Goal.ts';
     import CalculatorHint from '@/components/hint/CalculatorHint.vue';
     import type { GoalItem } from './data/Goal.ts';
-    const isAddable=inject('frontpath');//圖片默認路徑，要配合之後有可能上線
-
+    
+    const isAddable = ref<string>('');
     let data =ref<GoalItem[]>(Goal);
     let result=ref<number|undefined>(undefined);
 
@@ -42,7 +42,10 @@
         result.value=count;
     }
 
+    //元件掛載時
     onMounted(()=>{
+        isAddable.value = inject('frontpath') as string;
+
         init();
     });
 </script>

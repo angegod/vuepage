@@ -2,7 +2,7 @@
 import { inject, ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import Data from '../components/data/King_details.json';
-import Intro from '../components/intro.vue';
+import Intro from '@/components/Intro.vue';
 import type { MonsterItem, relicSubItem } from '@/interface/King';
 
 
@@ -41,12 +41,13 @@ if(details){
 
 
 // 路徑前綴 from app.vue provide
-const injectedFrontPath = inject('frontpath', ''); // 如果沒有 provide 回傳空字串
-const isAddable = ref(process.client ? injectedFrontPath : '');
+const isAddable = ref('');
 const config = useRuntimeConfig();
 
 // 處理錯誤與 meta 設定
 onMounted(() => {
+    isAddable.value = inject('frontpath') as string;
+
     if (!details && process.client) {
         alert('該頁面正在施工中，敬請見諒');
 
