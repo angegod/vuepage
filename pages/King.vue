@@ -15,6 +15,9 @@ const details = targetId ? Data.find(d => d.id.toString() === targetId) as Monst
 
 const sections = ref<relicSubItem[]>([]); //將json部分資料加工處理 使其更易維護
 
+// 路徑前綴 from app.vue provide
+const isAddable = ref('');
+const config = useRuntimeConfig();
 
 
 //將特定資料整理至sections中
@@ -40,9 +43,6 @@ if(details){
 
 
 
-// 路徑前綴 from app.vue provide
-const isAddable = ref('');
-const config = useRuntimeConfig();
 
 // 處理錯誤與 meta 設定
 onMounted(() => {

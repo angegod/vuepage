@@ -5,7 +5,7 @@
     import Switch from '../components/Switch.vue';
     import type { BattleDetailsItem, UltimateDetailsItem } from '@/interface/battle';
 
-    const isAddable=ref('');
+    const isAddable = ref('');
 
     const target=ref<BattleDetailsItem|UltimateDetailsItem>(myFile[0]);
 
@@ -37,12 +37,12 @@
         let detailImages=document.getElementById('battle_details_image') as HTMLImageElement | null;
         if(detailImages){
             if(!switchs.value){
-                var newpath=isAddable+'/images/number'+number+'/battle_details.jpg';
+                let newpath=isAddable.value+'/images/number'+number+'/battle_details.jpg';
                 detailImages.src=newpath;
 
                 target.value=myFile[number-1];
             }else{
-                var newpath=isAddable+'/images/ultimate/u'+number+'/battle_details.jpg';
+                let newpath=isAddable.value+'/images/ultimate/u'+number+'/battle_details.jpg';
 
                 detailImages.src=newpath;
 
@@ -102,7 +102,7 @@
     });
 
     onMounted(()=>{
-        isAddable.value = inject('frontpath') as string;
+        isAddable.value = inject('frontpath')??'' as string;
 
         //初始化載入 第一個
         imgClick(1);
@@ -149,7 +149,7 @@
                 <span class="errors_text">尚未有相關資訊，敬請期待</span>
             </div>
             <div class="battle_totals max-w-[800px]"  v-lazy-container="{ selector: 'img' }">
-                <img id="battle_details_image"  :data-src="isAddable+'/images/number1/battle_details.jpg'" class="hidden"
+                <img id="battle_details_image"  :src="isAddable+'/images/number1/battle_details.jpg'" class="hidden"
                     alt="not found" @error="showDefaultImg"  @load="imgloadStatus" />
                 <img id="hidden_image" :src="isAddable+'/images/question.gif'" class="max-w-[300px] " />
             </div>          
