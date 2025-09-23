@@ -1,6 +1,6 @@
-import type { CardSeriesItem } from "@/interface/card";
+import type { CardItem, CardSeriesItem } from "@/interface/card";
 
-let Card :CardSeriesItem[]= [
+let Card:CardSeriesItem[] = [
   {
     "seriesId": 1,
     "seriesName": "晨曦塔",
@@ -96,7 +96,7 @@ let Card :CardSeriesItem[]= [
         "image": "/images/card/icon/1_4.png",
         "tag": [
           22,
-          20
+          23
         ],
         "instantEffect": [
           "回復 250000 點生命力"
@@ -409,7 +409,7 @@ let Card :CardSeriesItem[]= [
         "PointGet": 2,
         "fullimage": "/images/card/image/1_14.png",
         "keyword": [
-          "樺曦牌"
+          "華曦牌"
         ],
         "PointEnter": 6
       },
@@ -422,8 +422,7 @@ let Card :CardSeriesItem[]= [
           1,
           33,
           37,
-          59,
-          57
+          60
         ],
         "instantEffect": [
           "自身為獸類成員，自身技能 CD -3"
@@ -803,7 +802,7 @@ let Card :CardSeriesItem[]= [
         "tag": [
           1,
           20,
-          18,
+          21,
           25,
           62
         ],
@@ -835,9 +834,8 @@ let Card :CardSeriesItem[]= [
         "tag": [
           23,
           72,
-          70,
           77,
-          77,
+          78,
           81
         ],
         "instantEffect": [
@@ -871,8 +869,8 @@ let Card :CardSeriesItem[]= [
         "tag": [
           3,
           19,
-          55,
-          55
+          56,
+          58
         ],
         "instantEffect": [
           "提升 100% 龍脈儀能量"
@@ -901,8 +899,8 @@ let Card :CardSeriesItem[]= [
         "tag": [
           18,
           26,
-          24,
-          26
+          27,
+          29
         ],
         "instantEffect": [
           "解除自身疲憊狀態",
@@ -935,7 +933,7 @@ let Card :CardSeriesItem[]= [
           45,
           65,
           78,
-          77,
+          80,
           81
         ],
         "instantEffect": [
@@ -971,7 +969,7 @@ let Card :CardSeriesItem[]= [
           3,
           21,
           25,
-          25,
+          27,
           54,
           83
         ],
@@ -1128,10 +1126,11 @@ let Card :CardSeriesItem[]= [
         "image": "/images/card/icon/1_37.png",
         "tag": [
           18,
+          21,
           33,
           46,
-          61,
           62,
+          63,
           78,
           79,
           82
@@ -1306,7 +1305,7 @@ let Card :CardSeriesItem[]= [
           21,
           31,
           50,
-          50
+          51
         ],
         "instantEffect": [
           "解除自身休眠狀態"
@@ -1367,7 +1366,7 @@ let Card :CardSeriesItem[]= [
           9,
           28,
           67,
-          67,
+          68,
           78,
           79,
           81,
@@ -1424,7 +1423,9 @@ let Card :CardSeriesItem[]= [
         "PointConsume": 2,
         "PointGet": 2,
         "fullimage": "/images/card/image/1_45.png",
-        "keyword": [],
+        "keyword": [
+          ""
+        ],
         "PointEnter": 6
       },
       {
@@ -1499,4 +1500,5 @@ let Card :CardSeriesItem[]= [
     ]
   }
 ] ;
+
 export default Card;

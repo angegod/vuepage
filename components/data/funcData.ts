@@ -1,6 +1,6 @@
 import type { funcDataItem } from "@/interface/funcData";
 
-let funcData:funcDataItem[]= [
+let funcData:funcDataItem[] = [
   {
     "typeId": 1,
     "typeName": "解盾",
@@ -481,4 +481,6 @@ let funcData:funcDataItem[]= [
     ]
   }
 ];
+
+
 export default funcData;
