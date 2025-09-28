@@ -11,7 +11,6 @@
         //呼叫父物件重整
         emit('refresh','');
     }
-  
     //抓到目前該物件的狀態，這個方法會給父物件呼叫作使用
     function getBool(){
         return p.value;

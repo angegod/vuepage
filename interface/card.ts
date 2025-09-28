@@ -3,7 +3,6 @@ export interface CardItem{
     name: string,
     rarity: number,
     image: string,
-    tag: number[],
     instantEffect: string[],
     comboEffect: string[],
     roundEffect:string[],
@@ -13,7 +12,10 @@ export interface CardItem{
     fullimage: string,
     keyword: string[],
     PointEnter: number,
-    spread?:CardSpread
+    spread?:CardSpread,
+    tag: number[],
+    comboTag:number[],
+    roundTag:number[]
 }
 
 export interface CardSeriesItem{

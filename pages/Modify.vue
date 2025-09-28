@@ -29,18 +29,28 @@
     import AddCard from '../components/AddCard.vue';
     import EditBasic from '@/components/editfunc/EditBasic.vue';
     import EditKeyword from '@/components/editfunc/EditKeyword.vue';
+    import EditTag from '@/components/editfunc/EditTag.vue';
 
-    let Card = [] as CardItem[];//原始資料
+    import {useModifyStore} from '@/components/store/modifyData.ts';
+
+    const modifyStore = useModifyStore();
+
+    /*let Card = [] as CardItem[];//原始資料
     let funcData = [] as funcDataItem[];
+    
     let seriesId=ref<number>(1);//系列ID
     let showSkill=ref<skillItem[]>([]);
     let func=ref<funcDataItem[]>([]);//避免因為篩選導致原本遺失
     let CardArray=ref<CardItem[]>([]);//更動過後的資料(暫存)
-    let selectCardId=ref<number>(1);
+    let selectCardId=ref<number>(1);*/
+
+    let {func,funcData,CardArray,Card,selectCardId,targetCard,showSkill,seriesId} = storeToRefs(modifyStore); 
+
+
     let keyword='';
     let searchWord='';
+
     let popup=ref<InstanceType<typeof AddCard>>();
-    let targetCard=ref<CardItem|undefined>(undefined);
 
     //功能列表
     let editFunc=ref([{
@@ -50,8 +60,14 @@
         name:"效果敘述",
         mode:"edit_description"
     },{
-        name:"技能標籤",
+        name:"即時效果標籤",
         mode:"edit_tag"
+    },{
+        name:"回合效果標籤",
+        mode:"edit_roundTag"
+    },{
+        name:"連動效果標籤",
+        mode:"edit_comboTag"
     },{
         name:"關鍵字",
         mode:"edit_keyword"
@@ -73,24 +89,28 @@
     function loadData(){
         //目前先寫找指定找第一個系列的時光牌
         axios.post('http://localhost:5000/card/get',{get:seriesId.value}).then((response)=>{
-            console.log(response.data);
-            Card=response.data.card;
-            funcData=response.data.func;
-
             if(response.data=="發生錯誤"){
                 console.log('沒有發現相關資料');
                 return;
             }
-                
+
             //需要將原有資料跟會更動的分開
-            func.value=JSON.parse(JSON.stringify(funcData));
-            CardArray.value=JSON.parse(JSON.stringify(Card));
+
+            let initData = {
+                Card:response.data.card,
+                funcData:response.data.func,
+                func:JSON.parse(JSON.stringify(response.data.func)),
+                CardArray:JSON.parse(JSON.stringify(response.data.card))
+            }
+
+            modifyStore.init(initData);
 
             changeCard(1);
         }).catch((error)=>{
+            console.log(error);
             alert('伺服器尚未開啟請稍後再試!!');
 
-            window.location.assign(window.location.origin+`/`);
+            //window.location.assign(window.location.origin+`/`);
         });
     }
 
@@ -107,56 +127,7 @@
         loadData();
     }
     
-    //移除技能標籤
-    function removeTag(index:number){
-        showSkill.value=showSkill.value.filter((t,i)=>i!==index);
-        let targetCard = CardArray.value.find((c)=>c.id===selectCardId.value) as CardItem;
-           
-        //將更正合併到原本資料中
-        let oldTag=targetCard.tag;
-        targetCard.tag=oldTag.filter((f,i)=>i!==index);
-        console.log(CardArray.value.find((c)=>c.id===selectCardId.value));
-    }
 
-    //添加技能標籤
-    function addTag(){
-        const tagSelect = document.getElementById('tagSelect') as HTMLSelectElement;
-        if (!tagSelect) return;
-
-        const tagIndex = parseInt(tagSelect.value);
-        if (tagIndex === 0) return;
-
-
-        let targetTag :skillItem | undefined;
-
-        func.value.forEach((type)=>{
-            let t=type.data.find((f)=>f.id===tagIndex) as skillItem;
-            if(t===undefined)
-                return;
-            targetTag=t;
-
-        });
-
-        if(!targetTag||showSkill.value.includes(targetTag)||tagIndex===0){
-            return;
-        }
-
-
-        showSkill.value.push(targetTag);
-
-        showSkill.value=showSkill.value.sort((a,b)=>{return a.id-b.id});
-
-        let targetCard = CardArray.value.find((c)=>c.id===selectCardId.value) as CardItem;
-
-        targetCard.tag.push(tagIndex);
-
-        targetCard.tag= targetCard.tag.sort((a,b)=>{return a-b});
-        
-        
-        /*console.log(Card.find((c)=>c.id===selectCardId.value).tag);//備份的
-        console.log(CardArray.value.find((c)=>c.id===selectCardId.value).tag);//有更動過的*/
-
-    }
     //新增搜尋關鍵字
     function addWord(){
         let targetCard = CardArray.value.find((c)=>c.id===selectCardId.value) as CardItem;
@@ -209,20 +180,10 @@
     }
 
     function changeCard(index:number){
-        selectCardId.value=index;
+        selectCardId.value = index;
         targetCard.value = CardArray.value.find((c)=>c.id===selectCardId.value) as CardItem;
 
-        //清空
-        showSkill.value=[];
-        //console.log(func.value);
-        targetCard.value.tag.forEach((t)=>{
-            funcData.forEach((type)=>{
-                let targetskill=type.data.find((data)=>data.id===t);
-                if(targetskill!==undefined){
-                    showSkill.value.push(targetskill);
-                }
-            });
-        });
+        changeShowSkill();
     }
 
     function deleteCard(){
@@ -247,68 +208,41 @@
         });
     }
 
+    function RecoverClick(){
+        CardArray.value = JSON.parse(JSON.stringify(Card.value));
+        funcData.value = JSON.parse(JSON.stringify(funcData.value));
 
-    //關鍵字搜尋
-    function keywordChange(event:Event){
-        let input = event.target as HTMLInputElement;
-        keyword = input.value;
+        targetCard.value = CardArray.value.find((c)=>c.id === selectCardId.value) as CardItem;
 
-        if(keyword===''){
-            func.value=funcData;//復原
-            return;
-        }
-
-        //技能搜尋結果
-        let filterArr = [] as funcDataItem[];
         
-        funcData.forEach((type)=>{
-            let result=[] as skillItem[];
-            type.data.forEach((f)=>{
-                if(f.name.includes(keyword))
-                    result.push(f);
-            });
-
-            if(result.length!==0){
-                let insertType = type;
-                insertType.data = result;
-                filterArr.push(insertType);
-            }
-        });
-
-        if(filterArr.length!==0)
-            func.value=filterArr;
-        else
-            func.value=[];
+        changeShowSkill();
     }
 
-    /*function searchWordChange(event:Event){
-        searchWord=event.target.value;
-    }*/
-
-    function RecoverClick(){
-        let target=Card.find((c)=>c.id===selectCardId.value) as CardItem;
-        if(!target)
-            return;
-
+    function changeShowSkill(){
         //將原先的資料叫出來 使用深拷貝copy出來避免有任何被更動過的風險
-        let oldData=JSON.parse(JSON.stringify(target)) as CardItem;
-        
+        let oldData=JSON.parse(JSON.stringify(targetCard.value)) as CardItem;
+
         //清空
         showSkill.value=[];
-        
-        oldData.tag.forEach((t)=>{
-            funcData.forEach((type)=>{
+
+        let targetTagLst = [] as number[];
+        if(editMode.value === 'edit_tag'){
+            targetTagLst = oldData.tag;
+        }else if(editMode.value === 'edit_comboTag'){
+            targetTagLst = oldData.comboTag ?? [];
+        }else if(editMode.value === 'edit_roundTag'){
+            targetTagLst = oldData.roundTag ?? [];
+        }
+
+        //最後加入到顯示技能列表內
+        targetTagLst.forEach((t)=>{
+            funcData.value.forEach((type)=>{
                 let targetskill=type.data.find((data)=>data.id===t) as skillItem;
                 if(targetskill!==undefined){
                     showSkill.value.push(targetskill);
                 }
             });
         });
-        targetCard.value=oldData;
-
-        //覆蓋原本修改過
-        //CardArray.value.find((c)=>c.id===selectCardId.value)=oldData;
-        Object.assign(target,oldData);
     }
 
 
@@ -344,8 +278,6 @@
                     targetCard.comboEffect[index] = inputValue;
                     break;
             }
-
-            //console.log(CardArray.value.find((c)=>c.id===selectCardId.value));
 
             let targetSpan= input.parentElement?.querySelector('span') as HTMLSpanElement;
             targetSpan.classList.remove('hidden');
@@ -431,7 +363,7 @@
     }
 
     function changeCardDataFromChild(data:CardItem[]){
-        Card = data;
+        Card.value = data;
         CardArray.value=JSON.parse(JSON.stringify(Card)) as CardItem[];
     }
 
@@ -519,38 +451,14 @@
             <div v-if=" editMode == 'edit_basic' && targetCard" class="w-2/5 pl-3 right mt-5 h-[500px] relative ">
                 <EditBasic  v-model:card="targetCard" />
             </div>
-            <div class="w-2/5 pl-3 right mt-5 h-[500px] relative " v-if="editMode == 'edit_tag' && targetCard">
-                <div class="flex-col">
-                    <span class="standwardLabel">自身技能標籤</span>
-                    <div class="mb-3">
-                        <input type="text" v-bind:value="keyword" placeholder="技能關鍵字" @input=" event=>keywordChange(event)" class="colorSelect"/>
-                    </div>
-                    <div v-if="func?.length!==0">
-                        <select class="colorSelect w-[150px]" id="tagSelect">
-                            <option :value="0">{{'請選擇'}}</option>
-                            <optgroup v-for="types in func" :label="types.typeName">
-                                <option v-for="f in types.data" :value="f.id" class="bg-amber-900">{{ f.name }}</option>
-                            </optgroup>
-                        </select>
-                        <button class="rounded-sm bg-gray-600 min-w-[50px] text-white" v-on:click="addTag()">新增</button>
-                    </div>
-                    <div v-else>
-                        <span class="text-yellow-500 font-bold text-lg">沒有找到匹配技能標籤</span>
-                    </div>
-                </div>
-                <div class="mb-2 flex-col" >
-                    <div class="overflow-y-scroll hiddenScrollbar">
-                        <div class="flex flex-col">
-                            <div v-for="(skill,i) in showSkill" class="flex flex-row my-1">
-                                <div class="w-1/5"><span class="text-white">{{ skill.id }}</span></div>
-                                <div class="w-2/5"><span class="text-white">{{ skill.name }}</span></div>
-                                <div class="w-2/5">
-                                    <button class="removeBtn" :id="'btns'+i" v-on:click="removeTag(i)">移除</button>
-                                </div>
-                            </div> 
-                        </div>
-                    </div>
-                </div>
+            <div v-if="editMode == 'edit_tag' && targetCard" class="w-2/5 pl-3 right mt-5 h-[500px] relative ">
+                <EditTag  :title="'即時技能標籤'" :tag-type="'instant'" />
+            </div>
+            <div v-if="editMode == 'edit_roundTag' && targetCard" class="w-2/5 pl-3 right mt-5 h-[500px] relative ">
+                <EditTag  :title="'回合技能標籤'" :tag-type="'round'" />
+            </div>
+            <div v-if="editMode == 'edit_comboTag' && targetCard" class="w-2/5 pl-3 right mt-5 h-[500px] relative ">
+                <EditTag  :title="'連動技能標籤'" :tag-type="'combo'" />
             </div>
             <div class="w-2/5 pl-3 right mt-5 h-[500px] relative " v-if="editMode == 'edit_keyword' && targetCard">
                 <EditKeyword v-model:card="targetCard"/>
