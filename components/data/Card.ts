@@ -1,4 +1,4 @@
-import type { CardItem, CardSeriesItem } from "@/interface/card";
+import type { CardSeriesItem } from "@/interface/card";
 
 let Card:CardSeriesItem[] = [
   {
@@ -10,11 +10,6 @@ let Card:CardSeriesItem[] = [
         "name": "力量的呼喚",
         "rarity": 1,
         "image": "/images/card/icon/1_1.png",
-        "tag": [
-          2,
-          21,
-          33
-        ],
         "instantEffect": [
           "自身技能 CD -2"
         ],
@@ -31,6 +26,15 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          33
+        ],
+        "roundTag": [
+          21
+        ],
+        "comboTag": [
+          2
+        ],
         "PointEnter": 4
       },
       {
@@ -38,11 +42,6 @@ let Card:CardSeriesItem[] = [
         "name": "五色璀璨",
         "rarity": 1,
         "image": "/images/card/icon/1_2.png",
-        "tag": [
-          7,
-          21,
-          33
-        ],
         "instantEffect": [
           "自身技能 CD -2"
         ],
@@ -59,6 +58,15 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          33
+        ],
+        "roundTag": [
+          21
+        ],
+        "comboTag": [
+          7
+        ],
         "PointEnter": 4
       },
       {
@@ -66,11 +74,6 @@ let Card:CardSeriesItem[] = [
         "name": "對未知的探索",
         "rarity": 1,
         "image": "/images/card/icon/1_3.png",
-        "tag": [
-          1,
-          21,
-          33
-        ],
         "instantEffect": [
           "自身技能 CD -2"
         ],
@@ -87,6 +90,15 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          33
+        ],
+        "roundTag": [
+          21
+        ],
+        "comboTag": [
+          1
+        ],
         "PointEnter": 4
       },
       {
@@ -94,10 +106,6 @@ let Card:CardSeriesItem[] = [
         "name": "樹下的緣份",
         "rarity": 1,
         "image": "/images/card/icon/1_4.png",
-        "tag": [
-          22,
-          23
-        ],
         "instantEffect": [
           "回復 250000 點生命力"
         ],
@@ -114,6 +122,15 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           "全補"
         ],
+        "tag": [
+          23
+        ],
+        "roundTag": [
+          22
+        ],
+        "comboTag": [
+          23
+        ],
         "PointEnter": 4
       },
       {
@@ -121,12 +138,6 @@ let Card:CardSeriesItem[] = [
         "name": "擷取瑪那的術式",
         "rarity": 2,
         "image": "/images/card/icon/1_5.png",
-        "tag": [
-          2,
-          18,
-          53,
-          62
-        ],
         "instantEffect": [
           "該回合增加 2 連擊 (Combo)"
         ],
@@ -144,6 +155,16 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          18
+        ],
+        "roundTag": [
+          53,
+          62
+        ],
+        "comboTag": [
+          2
+        ],
         "PointEnter": 6
       },
       {
@@ -151,12 +172,6 @@ let Card:CardSeriesItem[] = [
         "name": "徬徨呢喃",
         "rarity": 2,
         "image": "/images/card/icon/1_6.png",
-        "tag": [
-          7,
-          18,
-          21,
-          49
-        ],
         "instantEffect": [
           "該回合增加 2 連擊 (Combo)"
         ],
@@ -174,6 +189,16 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          18
+        ],
+        "roundTag": [
+          7,
+          49
+        ],
+        "comboTag": [
+          21
+        ],
         "PointEnter": 6
       },
       {
@@ -181,12 +206,6 @@ let Card:CardSeriesItem[] = [
         "name": "微光下的洞悉",
         "rarity": 2,
         "image": "/images/card/icon/1_7.png",
-        "tag": [
-          7,
-          18,
-          52,
-          62
-        ],
         "instantEffect": [
           "該回合增加 2 連擊 (Combo)"
         ],
@@ -204,6 +223,16 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          18
+        ],
+        "roundTag": [
+          52,
+          62
+        ],
+        "comboTag": [
+          7
+        ],
         "PointEnter": 6
       },
       {
@@ -211,12 +240,6 @@ let Card:CardSeriesItem[] = [
         "name": "命中的子彈",
         "rarity": 2,
         "image": "/images/card/icon/1_8.png",
-        "tag": [
-          1,
-          18,
-          48,
-          63
-        ],
         "instantEffect": [
           "該回合增加 2 連擊 (Combo)"
         ],
@@ -234,6 +257,16 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          18
+        ],
+        "roundTag": [
+          48,
+          63
+        ],
+        "comboTag": [
+          1
+        ],
         "PointEnter": 6
       },
       {
@@ -241,12 +274,6 @@ let Card:CardSeriesItem[] = [
         "name": "降臨的龍翼",
         "rarity": 2,
         "image": "/images/card/icon/1_9.png",
-        "tag": [
-          18,
-          24,
-          33,
-          63
-        ],
         "instantEffect": [
           "該回合增加 2 連擊 (Combo)"
         ],
@@ -264,6 +291,16 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           "蒼壁"
         ],
+        "tag": [
+          18
+        ],
+        "roundTag": [
+          24,
+          63
+        ],
+        "comboTag": [
+          33
+        ],
         "PointEnter": 6
       },
       {
@@ -271,13 +308,6 @@ let Card:CardSeriesItem[] = [
         "name": "換取生命的代價",
         "rarity": 3,
         "image": "/images/card/icon/1_10.png",
-        "tag": [
-          8,
-          21,
-          27,
-          55,
-          69
-        ],
         "instantEffect": [
           "自身進入 2 回合亢奮狀態"
         ],
@@ -296,6 +326,17 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           "夏馬西牌"
         ],
+        "tag": [
+          27
+        ],
+        "roundTag": [
+          8,
+          48,
+          69
+        ],
+        "comboTag": [
+          21
+        ],
         "PointEnter": 8
       },
       {
@@ -303,11 +344,6 @@ let Card:CardSeriesItem[] = [
         "name": "書頁上的記事",
         "rarity": 1,
         "image": "/images/card/icon/1_11.png",
-        "tag": [
-          33,
-          54,
-          70
-        ],
         "instantEffect": [
           "自身技能 CD -2"
         ],
@@ -324,6 +360,15 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          33
+        ],
+        "roundTag": [
+          70
+        ],
+        "comboTag": [
+          54
+        ],
         "PointEnter": 4
       },
       {
@@ -331,11 +376,6 @@ let Card:CardSeriesItem[] = [
         "name": "大魔女與她的使魔",
         "rarity": 1,
         "image": "/images/card/icon/1_12.png",
-        "tag": [
-          3,
-          33,
-          72
-        ],
         "instantEffect": [
           "自身技能 CD -2"
         ],
@@ -352,6 +392,15 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          33
+        ],
+        "roundTag": [
+          72
+        ],
+        "comboTag": [
+          3
+        ],
         "PointEnter": 4
       },
       {
@@ -359,11 +408,6 @@ let Card:CardSeriesItem[] = [
         "name": "剔透的凝視",
         "rarity": 1,
         "image": "/images/card/icon/1_13.png",
-        "tag": [
-          33,
-          52,
-          73
-        ],
         "instantEffect": [
           "自身技能 CD -2"
         ],
@@ -380,6 +424,15 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          33
+        ],
+        "roundTag": [
+          73
+        ],
+        "comboTag": [
+          52
+        ],
         "PointEnter": 4
       },
       {
@@ -387,13 +440,6 @@ let Card:CardSeriesItem[] = [
         "name": "悠揚簫頌",
         "rarity": 2,
         "image": "/images/card/icon/1_14.png",
-        "tag": [
-          3,
-          9,
-          33,
-          38,
-          50
-        ],
         "instantEffect": [
           "自身為龍類成員，自身技能 CD -3"
         ],
@@ -411,6 +457,16 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           "華曦牌"
         ],
+        "tag": [
+          38
+        ],
+        "roundTag": [
+          3,
+          9
+        ],
+        "comboTag": [
+          50
+        ],
         "PointEnter": 6
       },
       {
@@ -418,12 +474,6 @@ let Card:CardSeriesItem[] = [
         "name": "婉轉琴音",
         "rarity": 2,
         "image": "/images/card/icon/1_15.png",
-        "tag": [
-          1,
-          33,
-          37,
-          60
-        ],
         "instantEffect": [
           "自身為獸類成員，自身技能 CD -3"
         ],
@@ -441,6 +491,16 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           "緋音牌"
         ],
+        "tag": [
+          37
+        ],
+        "roundTag": [
+          60,
+          66
+        ],
+        "comboTag": [
+          1
+        ],
         "PointEnter": 6
       },
       {
@@ -448,13 +508,6 @@ let Card:CardSeriesItem[] = [
         "name": "焰火下的護佑",
         "rarity": 3,
         "image": "/images/card/icon/1_16.png",
-        "tag": [
-          1,
-          10,
-          21,
-          27,
-          49
-        ],
         "instantEffect": [
           "自身進入 2 回合亢奮狀態"
         ],
@@ -473,6 +526,17 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           "龐貝"
         ],
+        "tag": [
+          27
+        ],
+        "roundTag": [
+          1,
+          10,
+          49
+        ],
+        "comboTag": [
+          21
+        ],
         "PointEnter": 8
       },
       {
@@ -480,12 +544,6 @@ let Card:CardSeriesItem[] = [
         "name": "血脈帶來的悸動",
         "rarity": 2,
         "image": "/images/card/icon/1_17.png",
-        "tag": [
-          1,
-          11,
-          18,
-          57
-        ],
         "instantEffect": [
           "該回合增加 2 連擊 (Combo)"
         ],
@@ -503,6 +561,16 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          18
+        ],
+        "roundTag": [
+          11,
+          57
+        ],
+        "comboTag": [
+          1
+        ],
         "PointEnter": 6
       },
       {
@@ -510,12 +578,6 @@ let Card:CardSeriesItem[] = [
         "name": "真實與夢境的混淆",
         "rarity": 2,
         "image": "/images/card/icon/1_18.png",
-        "tag": [
-          7,
-          19,
-          60,
-          67
-        ],
         "instantEffect": [
           "提升 100% 龍脈儀能量"
         ],
@@ -533,6 +595,17 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           "恩莉兒牌"
         ],
+        "tag": [
+          19
+        ],
+        "roundTag": [
+          53,
+          60,
+          67
+        ],
+        "comboTag": [
+          7
+        ],
         "PointEnter": 6
       },
       {
@@ -540,11 +613,6 @@ let Card:CardSeriesItem[] = [
         "name": "不息的循環",
         "rarity": 1,
         "image": "/images/card/icon/1_19.png",
-        "tag": [
-          7,
-          20,
-          33
-        ],
         "instantEffect": [
           "發動攻擊前自身對敵方全體造成 500000000 點無屬性傷害 1 次"
         ],
@@ -561,6 +629,15 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           "直傷"
         ],
+        "tag": [
+          20
+        ],
+        "roundTag": [
+          7
+        ],
+        "comboTag": [
+          33
+        ],
         "PointEnter": 4
       },
       {
@@ -568,16 +645,6 @@ let Card:CardSeriesItem[] = [
         "name": "孤身獨戰的無畏",
         "rarity": 3,
         "image": "/images/card/icon/1_20.png",
-        "tag": [
-          2,
-          12,
-          21,
-          27,
-          65,
-          76,
-          79,
-          81
-        ],
         "instantEffect": [
           "自身進入 2 回合亢奮狀態"
         ],
@@ -601,6 +668,20 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           "蚩尤"
         ],
+        "tag": [
+          27
+        ],
+        "roundTag": [
+          2,
+          12,
+          65
+        ],
+        "comboTag": [
+          21,
+          76,
+          79,
+          81
+        ],
         "PointEnter": 8
       },
       {
@@ -608,11 +689,6 @@ let Card:CardSeriesItem[] = [
         "name": "安逸的日常",
         "rarity": 1,
         "image": "/images/card/icon/1_21.png",
-        "tag": [
-          10,
-          21,
-          31
-        ],
         "instantEffect": [
           "解除自身休眠狀態"
         ],
@@ -629,6 +705,15 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          31
+        ],
+        "roundTag": [
+          10
+        ],
+        "comboTag": [
+          21
+        ],
         "PointEnter": 4
       },
       {
@@ -636,11 +721,6 @@ let Card:CardSeriesItem[] = [
         "name": "變革的世界",
         "rarity": 1,
         "image": "/images/card/icon/1_22.png",
-        "tag": [
-          3,
-          21,
-          32
-        ],
         "instantEffect": [
           "解除自身風壓狀態"
         ],
@@ -657,6 +737,15 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          32
+        ],
+        "roundTag": [
+          3
+        ],
+        "comboTag": [
+          21
+        ],
         "PointEnter": 4
       },
       {
@@ -664,12 +753,6 @@ let Card:CardSeriesItem[] = [
         "name": "星光灑落之夜",
         "rarity": 1,
         "image": "/images/card/icon/1_23.png",
-        "tag": [
-          9,
-          15,
-          29,
-          65
-        ],
         "instantEffect": [
           "解除自身疲憊狀態"
         ],
@@ -687,6 +770,16 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          29
+        ],
+        "roundTag": [
+          65
+        ],
+        "comboTag": [
+          9,
+          15
+        ],
         "PointEnter": 4
       },
       {
@@ -694,14 +787,6 @@ let Card:CardSeriesItem[] = [
         "name": "悲劇的迴圈",
         "rarity": 2,
         "image": "/images/card/icon/1_24.png",
-        "tag": [
-          1,
-          3,
-          21,
-          24,
-          33,
-          34
-        ],
         "instantEffect": [
           "自身為人類成員，自身技能 CD -4"
         ],
@@ -721,6 +806,17 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           "卑彌呼"
         ],
+        "tag": [
+          34
+        ],
+        "roundTag": [
+          1,
+          24
+        ],
+        "comboTag": [
+          3,
+          21
+        ],
         "PointEnter": 6
       },
       {
@@ -728,14 +824,6 @@ let Card:CardSeriesItem[] = [
         "name": "高舉的聖槍",
         "rarity": 2,
         "image": "/images/card/icon/1_25.png",
-        "tag": [
-          2,
-          10,
-          21,
-          33,
-          35,
-          41
-        ],
         "instantEffect": [
           "自身為神族成員，自身技能 CD -4"
         ],
@@ -755,6 +843,18 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           "涅索伊"
         ],
+        "tag": [
+          35
+        ],
+        "roundTag": [
+          2,
+          33,
+          41
+        ],
+        "comboTag": [
+          10,
+          21
+        ],
         "PointEnter": 6
       },
       {
@@ -762,17 +862,6 @@ let Card:CardSeriesItem[] = [
         "name": "名叫征服的遊戲",
         "rarity": 3,
         "image": "/images/card/icon/1_26.png",
-        "tag": [
-          4,
-          5,
-          6,
-          7,
-          8,
-          13,
-          21,
-          27,
-          51
-        ],
         "instantEffect": [
           "自身增加 2 回合亢奮狀態"
         ],
@@ -792,6 +881,21 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           "拉普牌"
         ],
+        "tag": [
+          27
+        ],
+        "roundTag": [
+          4,
+          5,
+          6,
+          7,
+          13,
+          51
+        ],
+        "comboTag": [
+          8,
+          21
+        ],
         "PointEnter": 8
       },
       {
@@ -799,13 +903,6 @@ let Card:CardSeriesItem[] = [
         "name": "冷冽談判",
         "rarity": 2,
         "image": "/images/card/icon/1_27.png",
-        "tag": [
-          1,
-          20,
-          21,
-          25,
-          62
-        ],
         "instantEffect": [
           "發動攻擊前自身對敵方全體造成 50000000 點無屬性傷害 10 次"
         ],
@@ -824,6 +921,17 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           "刻琿"
         ],
+        "tag": [
+          20
+        ],
+        "roundTag": [
+          25,
+          62
+        ],
+        "comboTag": [
+          1,
+          21
+        ],
         "PointEnter": 6
       },
       {
@@ -831,13 +939,6 @@ let Card:CardSeriesItem[] = [
         "name": "難以割離的念想",
         "rarity": 1,
         "image": "/images/card/icon/1_28.png",
-        "tag": [
-          23,
-          72,
-          77,
-          78,
-          81
-        ],
         "instantEffect": [
           "完全回復生命力"
         ],
@@ -859,6 +960,17 @@ let Card:CardSeriesItem[] = [
           "全補",
           "方荼"
         ],
+        "tag": [
+          23
+        ],
+        "roundTag": [
+          72
+        ],
+        "comboTag": [
+          77,
+          78,
+          81
+        ],
         "PointEnter": 4
       },
       {
@@ -866,12 +978,6 @@ let Card:CardSeriesItem[] = [
         "name": "同盟破敵的決意",
         "rarity": 2,
         "image": "/images/card/icon/1_29.png",
-        "tag": [
-          3,
-          19,
-          56,
-          58
-        ],
         "instantEffect": [
           "提升 100% 龍脈儀能量"
         ],
@@ -889,6 +995,16 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          19
+        ],
+        "roundTag": [
+          56,
+          58
+        ],
+        "comboTag": [
+          3
+        ],
         "PointEnter": 6
       },
       {
@@ -896,12 +1012,6 @@ let Card:CardSeriesItem[] = [
         "name": "星塵爆破",
         "rarity": 1,
         "image": "/images/card/icon/1_30.png",
-        "tag": [
-          18,
-          26,
-          27,
-          29
-        ],
         "instantEffect": [
           "解除自身疲憊狀態",
           "自身增加 1 回合亢奮狀態"
@@ -919,6 +1029,16 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           "瑪米圖"
         ],
+        "tag": [
+          27,
+          29
+        ],
+        "roundTag": [
+          18
+        ],
+        "comboTag": [
+          26
+        ],
         "PointEnter": 4
       },
       {
@@ -926,16 +1046,6 @@ let Card:CardSeriesItem[] = [
         "name": "英靈的感召",
         "rarity": 2,
         "image": "/images/card/icon/1_31.png",
-        "tag": [
-          10,
-          21,
-          33,
-          45,
-          65,
-          78,
-          80,
-          81
-        ],
         "instantEffect": [
           "自身為光屬性成員，自身技能 CD -4"
         ],
@@ -958,6 +1068,19 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           "雪萊"
         ],
+        "tag": [
+          45
+        ],
+        "roundTag": [
+          10,
+          65
+        ],
+        "comboTag": [
+          21,
+          78,
+          80,
+          81
+        ],
         "PointEnter": 6
       },
       {
@@ -965,14 +1088,6 @@ let Card:CardSeriesItem[] = [
         "name": "龍的馴服者",
         "rarity": 3,
         "image": "/images/card/icon/1_32.png",
-        "tag": [
-          3,
-          21,
-          25,
-          27,
-          54,
-          83
-        ],
         "instantEffect": [
           "自身增加 2 回合亢奮狀態"
         ],
@@ -992,6 +1107,18 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           "司路域"
         ],
+        "tag": [
+          27
+        ],
+        "roundTag": [
+          3,
+          25,
+          54
+        ],
+        "comboTag": [
+          21,
+          83
+        ],
         "PointEnter": 8
       },
       {
@@ -999,11 +1126,6 @@ let Card:CardSeriesItem[] = [
         "name": "晨曦中的憶念",
         "rarity": 1,
         "image": "/images/card/icon/1_33.png",
-        "tag": [
-          20,
-          21,
-          61
-        ],
         "instantEffect": [
           "自身發動攻擊前對敵方造成 10000000 點光屬性傷害 10 次"
         ],
@@ -1020,6 +1142,15 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          20
+        ],
+        "roundTag": [
+          61
+        ],
+        "comboTag": [
+          21
+        ],
         "PointEnter": 4
       },
       {
@@ -1027,16 +1158,6 @@ let Card:CardSeriesItem[] = [
         "name": "疾速前行",
         "rarity": 2,
         "image": "/images/card/icon/1_34.png",
-        "tag": [
-          2,
-          16,
-          21,
-          33,
-          44,
-          77,
-          80,
-          82
-        ],
         "instantEffect": [
           "自身為木屬性成員，自身技能 CD -4"
         ],
@@ -1059,6 +1180,19 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          44
+        ],
+        "roundTag": [
+          2,
+          21
+        ],
+        "comboTag": [
+          16,
+          77,
+          80,
+          82
+        ],
         "PointEnter": 6
       },
       {
@@ -1066,12 +1200,6 @@ let Card:CardSeriesItem[] = [
         "name": "命定儀式的異動",
         "rarity": 1,
         "image": "/images/card/icon/1_35.png",
-        "tag": [
-          18,
-          21,
-          53,
-          74
-        ],
         "instantEffect": [
           "增加 3 連擊 (Combo)"
         ],
@@ -1089,6 +1217,16 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          18
+        ],
+        "roundTag": [
+          53,
+          74
+        ],
+        "comboTag": [
+          21
+        ],
         "PointEnter": 4
       },
       {
@@ -1096,11 +1234,6 @@ let Card:CardSeriesItem[] = [
         "name": "少女們與巧克力",
         "rarity": 1,
         "image": "/images/card/icon/1_36.png",
-        "tag": [
-          21,
-          33,
-          64
-        ],
         "instantEffect": [
           "解除自身被封鎖主動技能 ( 此技能無視封鎖技能 )"
         ],
@@ -1117,6 +1250,15 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          64
+        ],
+        "roundTag": [
+          33
+        ],
+        "comboTag": [
+          21
+        ],
         "PointEnter": 4
       },
       {
@@ -1124,17 +1266,6 @@ let Card:CardSeriesItem[] = [
         "name": "大魔女的加護",
         "rarity": 2,
         "image": "/images/card/icon/1_37.png",
-        "tag": [
-          18,
-          21,
-          33,
-          46,
-          62,
-          63,
-          78,
-          79,
-          82
-        ],
         "instantEffect": [
           "自身為暗屬性成員，自身技能 CD -4"
         ],
@@ -1158,6 +1289,20 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           "大魔女"
         ],
+        "tag": [
+          46
+        ],
+        "roundTag": [
+          18,
+          62,
+          63
+        ],
+        "comboTag": [
+          21,
+          78,
+          79,
+          82
+        ],
         "PointEnter": 6
       },
       {
@@ -1165,14 +1310,6 @@ let Card:CardSeriesItem[] = [
         "name": "以炮響拉開帷幕",
         "rarity": 3,
         "image": "/images/card/icon/1_38.png",
-        "tag": [
-          11,
-          14,
-          17,
-          21,
-          27,
-          50
-        ],
         "instantEffect": [
           "自身增加 2 回合亢奮狀態"
         ],
@@ -1192,6 +1329,18 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           "砲響牌"
         ],
+        "tag": [
+          27
+        ],
+        "roundTag": [
+          11,
+          14,
+          50
+        ],
+        "comboTag": [
+          17,
+          21
+        ],
         "PointEnter": 8
       },
       {
@@ -1199,13 +1348,6 @@ let Card:CardSeriesItem[] = [
         "name": "守護的羽翼",
         "rarity": 2,
         "image": "/images/card/icon/1_39.png",
-        "tag": [
-          10,
-          18,
-          21,
-          33,
-          62
-        ],
         "instantEffect": [
           "該回合增加 4 連擊 (Combo)"
         ],
@@ -1224,6 +1366,17 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           "卡西爾"
         ],
+        "tag": [
+          18
+        ],
+        "roundTag": [
+          33,
+          62
+        ],
+        "comboTag": [
+          10,
+          21
+        ],
         "PointEnter": 6
       },
       {
@@ -1231,12 +1384,6 @@ let Card:CardSeriesItem[] = [
         "name": "彩球競逐",
         "rarity": 1,
         "image": "/images/card/icon/1_40.png",
-        "tag": [
-          9,
-          15,
-          21,
-          27
-        ],
         "instantEffect": [
           "自身進入 1 回合亢奮狀態"
         ],
@@ -1254,6 +1401,16 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          27
+        ],
+        "roundTag": [
+          9,
+          15
+        ],
+        "comboTag": [
+          21
+        ],
         "PointEnter": 4
       },
       {
@@ -1261,16 +1418,6 @@ let Card:CardSeriesItem[] = [
         "name": "無畏航路",
         "rarity": 2,
         "image": "/images/card/icon/1_41.png",
-        "tag": [
-          16,
-          25,
-          33,
-          43,
-          65,
-          76,
-          80,
-          82
-        ],
         "instantEffect": [
           "自身為火屬性成員，自身技能 CD -4"
         ],
@@ -1293,6 +1440,19 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           "德古拉"
         ],
+        "tag": [
+          43
+        ],
+        "roundTag": [
+          25,
+          65
+        ],
+        "comboTag": [
+          16,
+          76,
+          80,
+          82
+        ],
         "PointEnter": 6
       },
       {
@@ -1300,13 +1460,6 @@ let Card:CardSeriesItem[] = [
         "name": "諄諄龍語",
         "rarity": 1,
         "image": "/images/card/icon/1_42.png",
-        "tag": [
-          1,
-          21,
-          31,
-          50,
-          51
-        ],
         "instantEffect": [
           "解除自身休眠狀態"
         ],
@@ -1325,6 +1478,17 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          31
+        ],
+        "roundTag": [
+          1,
+          50,
+          51
+        ],
+        "comboTag": [
+          21
+        ],
         "PointEnter": 4
       },
       {
@@ -1332,12 +1496,6 @@ let Card:CardSeriesItem[] = [
         "name": "墓碑前的誓言",
         "rarity": 1,
         "image": "/images/card/icon/1_43.png",
-        "tag": [
-          10,
-          21,
-          33,
-          56
-        ],
         "instantEffect": [
           "自身技能 CD -2"
         ],
@@ -1355,6 +1513,16 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          33
+        ],
+        "roundTag": [
+          10,
+          56
+        ],
+        "comboTag": [
+          21
+        ],
         "PointEnter": 4
       },
       {
@@ -1362,16 +1530,6 @@ let Card:CardSeriesItem[] = [
         "name": "誓守北域",
         "rarity": 3,
         "image": "/images/card/icon/1_44.png",
-        "tag": [
-          9,
-          28,
-          67,
-          68,
-          78,
-          79,
-          81,
-          84
-        ],
         "instantEffect": [
           "自身增加 2 回合暴怒狀態"
         ],
@@ -1396,6 +1554,20 @@ let Card:CardSeriesItem[] = [
           "零覓牌",
           "一願牌"
         ],
+        "tag": [
+          28
+        ],
+        "roundTag": [
+          9,
+          67,
+          68
+        ],
+        "comboTag": [
+          78,
+          79,
+          81,
+          84
+        ],
         "PointEnter": 8
       },
       {
@@ -1403,12 +1575,6 @@ let Card:CardSeriesItem[] = [
         "name": "殘魂的呼喚",
         "rarity": 2,
         "image": "/images/card/icon/1_45.png",
-        "tag": [
-          2,
-          20,
-          21,
-          23
-        ],
         "instantEffect": [
           "自身發動攻擊前對敵方造成 50000000 點木屬性傷害 1 次"
         ],
@@ -1426,6 +1592,16 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           ""
         ],
+        "tag": [
+          20
+        ],
+        "roundTag": [
+          2,
+          21
+        ],
+        "comboTag": [
+          23
+        ],
         "PointEnter": 6
       },
       {
@@ -1433,12 +1609,6 @@ let Card:CardSeriesItem[] = [
         "name": "血脈的本能",
         "rarity": 1,
         "image": "/images/card/icon/1_46.png",
-        "tag": [
-          12,
-          21,
-          27,
-          65
-        ],
         "instantEffect": [
           "自身進入 1 回合亢奮狀態"
         ],
@@ -1456,6 +1626,16 @@ let Card:CardSeriesItem[] = [
         "keyword": [
           "卡蜜拉牌"
         ],
+        "tag": [
+          27
+        ],
+        "roundTag": [
+          65
+        ],
+        "comboTag": [
+          12,
+          21
+        ],
         "PointEnter": 4
       },
       {
@@ -1463,18 +1643,6 @@ let Card:CardSeriesItem[] = [
         "name": "面對未知的勇氣",
         "rarity": 3,
         "image": "/images/card/icon/1_47.png",
-        "tag": [
-          4,
-          5,
-          6,
-          7,
-          16,
-          17,
-          20,
-          21,
-          47,
-          85
-        ],
         "instantEffect": [
           "所有成員技能 CD -2",
           "自身發動攻擊前對敵方造成 500000000 點火屬性傷害 2 次"
@@ -1494,6 +1662,22 @@ let Card:CardSeriesItem[] = [
         "fullimage": "/images/card/image/1_47.png",
         "keyword": [
           "阿圖姆牌"
+        ],
+        "tag": [
+          20,
+          47
+        ],
+        "roundTag": [
+          4,
+          5,
+          6,
+          7,
+          16,
+          17
+        ],
+        "comboTag": [
+          21,
+          85
         ],
         "PointEnter": 8
       }

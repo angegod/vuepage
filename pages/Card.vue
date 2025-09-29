@@ -8,6 +8,7 @@
     import LazyImage from '@/components/LazyImage.vue';
     import Calculator from '../components/Calculator.vue';
     import CardHint from '@/components/hint/Cardhint.vue';
+    import EffectHint from '@/components/hint/EffectHint.vue';
     import CardSection from '@/components/CardSection.vue';
     import CardEffectBlock from '@/components/CardEffectBlock.vue';
     
@@ -25,6 +26,9 @@
     let selectRarity=ref<number[]>([]);//被選擇的稀有度
     let targetCard=ref<CardItem[]>([]);//被選擇的卡片清單
     let showCard=ref<CardItem|null>(null);//顯示該卡詳細資訊
+    type EffectKey = "tag" | "roundTag" | "comboTag";
+
+    let selectEffectType = ref<EffectKey[]>([]);
 
     let b1=ref<InstanceType<typeof Switch>>();
     let b2=ref<InstanceType<typeof Switch>>();
@@ -75,7 +79,7 @@
         let targetBtnIndex = Number(text.split('_')[1]);
         
         if(targetClass!=='func'&&!(targetClass=='')){
-            var targetBtn=document.querySelectorAll(`.${targetClass}`)[targetBtnIndex-1];
+            let targetBtn=document.querySelectorAll(`.${targetClass}`)[targetBtnIndex-1];
             (!targetBtn.classList.contains('clicked'))?targetBtn.classList.add('clicked'):targetBtn.classList.remove('clicked');
         }
         if(targetClass==='func'){
@@ -114,10 +118,34 @@
             
             sortCond.value=sortCond.value.filter((c)=>c!==t) as SortConditionItem[];
             sortCond.value.push({type:targetType,sort:!t.sort});
-            console.log(sortCond.value);
             
             sortData();
             return;
+        }
+
+        if(targetClass==="effect"){
+            let effectType:EffectKey|"" = "";
+
+            switch(targetBtnIndex){
+                case 1:
+                    effectType = "tag";
+                    break;
+                case 2:
+                    effectType = "roundTag";
+                    break;
+                case 3:
+                    effectType = "comboTag";
+                    break;
+                default:
+                    break;
+            }
+
+            if(effectType!==""){
+                if(selectEffectType.value.includes(effectType))
+                    selectEffectType.value = selectEffectType.value.filter((s)=>s !== effectType);
+                else
+                    selectEffectType.value.push(effectType);
+            }
         }
 
     }
@@ -129,6 +157,11 @@
         //搜尋條件 這邊就會篩選掉不符合的系列
         if(seriesIndex.value.length===0) {
             alert('請選擇任一時光牌系列!');
+            return;
+        }
+
+        if(selectEffectType.value.length===0){
+            alert('請至少選擇一個技能位置條件！');
             return;
         }
         seriesIndex.value.forEach((s)=>{
@@ -143,12 +176,13 @@
                 let selectable=true;
                 if(b2.value&&b2.value.getBool()){
                 
-                    if(selectFunc.value.length!==0){//如果有選入功能再做篩選，反之則不用篩選
+                    if(selectFunc.value.length!==0 && selectEffectType.value.length!==0){//如果有選入功能再做篩選，反之則不用篩選
                         selectFunc.value.forEach((f)=>{
-                            //如果不符合條件，則不選入最終顯示結果
-                            //(!item.tag.includes(f.id))?selectable=false:selectable=selectable;
-                            if(!item.tag.includes(f.id)){
-                                selectable=false;
+                            selectable = selectEffectType.value.some(
+                                (key) => (item[key] ?? []).includes(f.id)
+                            );
+
+                            if (!selectable) {
                                 return;
                             }
                         });
@@ -156,12 +190,14 @@
                     //如果篩選符合結果則會
                     if(selectable)
                         targetCard.value.push(item);
+
                 }else if(b2.value&&!b2.value.getBool()){
-                    if(selectFunc.value.length!==0){
+                    if(selectFunc.value.length!==0 && selectEffectType.value.length!==0){
                         selectable=false;
+
                         selectFunc.value.forEach((f)=>{
                             //如果不符合條件，則不選入最終顯示結果
-                            (item.tag.includes(f.id))?selectable=true:selectable=selectable;
+                            selectable = selectEffectType.value.some((key) => (item[key] ?? []).includes(f.id)) || selectable;
                         });
                     }
 
@@ -208,7 +244,6 @@
 
     //點擊時光牌資訊時，跳出視窗
     function clickHandle(cardId:number){
-        console.log(cardId);
         Card.forEach((s)=>{
             if(s.card.find((c)=>c.id===cardId))
                 showCard.value=s.card.find((c)=>c.id===cardId) as CardItem;
@@ -412,19 +447,19 @@
                 <h1 class="text-[28px] font-bold text-red-600 mr-3">時光牌圖鑑</h1>
                 <Switch ref="b1" @refresh="TextOrCondition" :text1="'條件搜尋'" :text2="'文字搜尋'"/>
             </div>
-            <div class="max-[500px]:w-[100%]">
+            <div class="max-[500px]:w-full">
                 <button type="button" class="text-white border-b-white border-b-[1px]" @click="callcalculator">琉璃計算器</button>
             </div>
         </div>
         <div v-if="!isInput">
-            <div class="flex flex-col flex-wrap w-[100%] mt-5">
+            <div class="flex flex-col flex-wrap w-full mt-5">
                 <div><span class="text-white font-bold text-xl">系列</span></div>
                 <div class="[&>button]:mr-2 [&>button]:w-[10%] max-sm:[&>button]:w-[20%] [&>button]:min-w-[100px]
                         max-[500px]:[&>button]:small max-[500px]:[&>button]:min-w-[100px]">
                     <button type="button" class="btn series break-keep" v-on:click="clicked('series_1')">晨曦塔</button>
                 </div>
             </div>
-            <div class="flex flex-col flex-wrap w-[100%] mt-5">
+            <div class="flex flex-col flex-wrap w-full mt-5">
                 <div class="flex flex-row align-middle">
                     <span class="text-white font-bold text-xl mr-3">稀有度</span>           
                 </div>
@@ -435,7 +470,18 @@
                     </button>
                 </div>
             </div>
-            <div class="flex flex-col flex-wrap w-[100%] mt-5 relative">
+            <div class="flex flex-col flex-wrap w-full mt-5">
+                <div class="flex flex-row items-center">
+                    <span class="text-white font-bold text-xl mr-3">功能位置</span>
+                    <EffectHint />           
+                </div>
+                <div class="flex flex-row [&>button]:mx-1">
+                    <button type="button" class="btn effect break-keep min-w-[100px] w-[15%]" v-on:click="clicked('effect_1')">即時效果</button>
+                    <button type="button" class="btn effect break-keep min-w-[100px] w-[15%]" v-on:click="clicked('effect_2')">回合效果</button>
+                    <button type="button" class="btn effect break-keep min-w-[100px] w-[15%]" v-on:click="clicked('effect_3')">連動效果</button>
+                </div>
+            </div>
+            <div class="flex flex-col flex-wrap w-full mt-5 relative">
                 <div class="flex flex-row align-middle">
                     <span class="text-white font-bold text-xl mr-3 pt-1.5">功能</span>
                     <Switch ref="b2" @refresh="" :text1="'使用Or搜尋'" :text2="'使用And搜尋'"/>
@@ -484,7 +530,7 @@
                             <LazyImage :imageLink="card.image" :id="card.id" @deleteCard="deleteCard"/>
                         </div>
                         <span 
-                            class="w-[100%] text-center text-white"
+                            class="w-full text-center text-white"
                             :class="{
                                 'bg-amber-900': card.rarity === 1,
                                 'bg-slate-500': card.rarity === 2,
@@ -506,10 +552,10 @@
                 <div class='popup max-[500px]:w-[80%] max-[500px]:min-w-[200px]' v-if="mode==='card'&&showCard">
                     <div class='close' v-on:click="closeHandle">&#10006;</div>
                     <div class="w-5/6 mx-auto mt-5 flex flex-row flex-wrap justify-between mb-5 max-[450px]:justify-center">
-                        <div class="w-2/5 min-w-[150px] max-[500px]:w-[100%]">
+                        <div class="w-2/5 min-w-[150px] max-[500px]:w-full">
                             <div class="[&>span]:text-[20px] mb-3 text-center">
                                 <span
-                                    class="w-[100%] text-center font-bold"
+                                    class="w-full text-center font-bold"
                                     :class="{
                                         'text-amber-900': showCard.rarity === 1,
                                         'text-slate-500': showCard.rarity === 2,
@@ -534,7 +580,7 @@
 
                             
                         </div>
-                        <div class="w-1/2 flex flex-col min-w-[150px] ml-2 max-[450px]:ml-0 max-[500px]:w-[100%] mt-1">
+                        <div class="w-1/2 flex flex-col min-w-[150px] ml-2 max-[450px]:ml-0 max-[500px]:w-full mt-1">
                             <div class="flex flex-row flex-wrap max-[500px]:mt-2 max-[500px]:justify-center">
                                 <CardSection label="進場FP" :value="showCard.PointEnter" :rarity="showCard.rarity" />
                                 <CardSection label="消耗FP" :value="showCard.PointConsume" :rarity="showCard.rarity" />

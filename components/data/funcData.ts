@@ -482,5 +482,4 @@ let funcData:funcDataItem[] = [
   }
 ];
 
-
 export default funcData;
