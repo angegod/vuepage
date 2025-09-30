@@ -110,52 +110,53 @@
 </script>
 
 <template>
-    <div class="battle">
-        <div class="main relative pt-3">
-            <div class="flex flex-row align-middle">
-                <h1 class="text-red-500 font-bold text-[28px]" v-if="!switchs">封王災厄級</h1>
-                <h1 class="text-red-500 font-bold text-[28px]" v-else="switchs">流光災厄級</h1>
-                <div class="ml-2">
-                    <Switch ref="b1" :hideable="true" @refresh="clicked" />
+    <client-only>
+        <div class="battle">
+            <div class="main relative pt-3">
+                <div class="flex flex-row align-middle">
+                    <h1 class="text-red-500 font-bold text-[28px]" v-if="!switchs">封王災厄級</h1>
+                    <h1 class="text-red-500 font-bold text-[28px]" v-else="switchs">流光災厄級</h1>
+                    <div class="ml-2">
+                        <Switch ref="b1" :hideable="true" @refresh="clicked" />
+                    </div>
                 </div>
+                <div class="monster_images_total overflow-x-scroll flex flex-row mb-5">
+                    <div class="monster_images" v-for="(battle,number) in myFile" v-if="!switchs">
+                        <img :src="isAddable + `/images/number${number+1}/hideImage.jpg`" alt="5555" v-on:click="imgClick(number+1)" @error="showDefaultImg"/>
+                    </div>
+                    <div class="monster_images" v-for="(battle,number) in ultimate" v-else>
+                        <img :src="isAddable + `/images/ultimate/u${number+1}/Icon.png`" alt="5555" v-on:click="imgClick(number+1)" @error="showDefaultImg"/>
+                    </div>
+                </div>
+                <div class="battle_description" v-if="showable">
+                    <div>
+                        <span class="font-bold text-red-800 text-3xl newfont">{{(target!=null)?target.name:''}}</span>
+                    </div>
+                    <div>
+                        <span class="font-bold text-amber-900 text-xl newfont">進關限制:{{ (target!=null)?target.limit:'' }}</span>
+                    </div>
+                    <div class="mt-5">
+                        <span class="font-bold text-white text-xl newfont">場景技能:{{ (target!=null)?target.background:'' }}</span>
+                    </div>
+                    <div class="achievement" v-if="!switchs">
+                        <p>
+                            <span class="newfont">{{ 'achievement' in target ? target.achievement?.first ?? '' : '' }}</span><br/>
+                            <span class="newfont">{{ 'achievement' in target ? target.achievement?.second ?? '' : '' }}</span><br/>
+                            <span class="newfont">{{ 'achievement' in target ? target.achievement?.third ?? '' : '' }}</span><br/>
+                        </p>
+                    </div>
+                </div>
+                <div class="battle_description" v-else>
+                    <span class="errors_text">尚未有相關資訊，敬請期待</span>
+                </div>
+                <div class="battle_totals max-w-[800px]"  v-lazy-container="{ selector: 'img' }">
+                    <img id="battle_details_image"  :src="isAddable+'/images/number1/battle_details.jpg'" class="hidden"
+                        alt="not found" @error="showDefaultImg"  @load="imgloadStatus" />
+                    <img id="hidden_image" :src="isAddable+'/images/question.gif'" class="max-w-[300px] " />
+                </div>          
             </div>
-            <div class="monster_images_total overflow-x-scroll flex flex-row mb-5">
-                <div class="monster_images" v-for="(battle,number) in myFile" v-if="!switchs">
-                    <img :src="isAddable + `/images/number${number+1}/hideImage.jpg`" alt="5555" v-on:click="imgClick(number+1)" @error="showDefaultImg"/>
-                </div>
-                <div class="monster_images" v-for="(battle,number) in ultimate" v-else>
-                    <img :src="isAddable + `/images/ultimate/u${number+1}/Icon.png`" alt="5555" v-on:click="imgClick(number+1)" @error="showDefaultImg"/>
-                </div>
-            </div>
-            <div class="battle_description" v-if="showable">
-                <div>
-                    <span class="font-bold text-red-800 text-3xl newfont">{{(target!=null)?target.name:''}}</span>
-                </div>
-                <div>
-                    <span class="font-bold text-amber-900 text-xl newfont">進關限制:{{ (target!=null)?target.limit:'' }}</span>
-                </div>
-                <div class="mt-5">
-                    <span class="font-bold text-white text-xl newfont">場景技能:{{ (target!=null)?target.background:'' }}</span>
-                </div>
-                <div class="achievement" v-if="!switchs">
-                    <p>
-                        <span class="newfont">{{ 'achievement' in target ? target.achievement?.first ?? '' : '' }}</span><br/>
-                        <span class="newfont">{{ 'achievement' in target ? target.achievement?.second ?? '' : '' }}</span><br/>
-                        <span class="newfont">{{ 'achievement' in target ? target.achievement?.third ?? '' : '' }}</span><br/>
-                    </p>
-                </div>
-            </div>
-            <div class="battle_description" v-else>
-                <span class="errors_text">尚未有相關資訊，敬請期待</span>
-            </div>
-            <div class="battle_totals max-w-[800px]"  v-lazy-container="{ selector: 'img' }">
-                <img id="battle_details_image"  :src="isAddable+'/images/number1/battle_details.jpg'" class="hidden"
-                    alt="not found" @error="showDefaultImg"  @load="imgloadStatus" />
-                <img id="hidden_image" :src="isAddable+'/images/question.gif'" class="max-w-[300px] " />
-            </div>          
-        </div>
-
-    </div> 
+        </div> 
+    </client-only>
 </template>
 <style scoped>
     @import '../assets/css/battle.css';
@@ -174,5 +175,4 @@
         font-family: 'cwTeXYen';
       
     }
-    
 </style>
