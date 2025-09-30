@@ -15,8 +15,8 @@ let description=[{
 </script>
 <template>
     <Popper arrow placement="bottom-start" hover>
-        <div class="flex ml-1">
-            <span class="text-white cursor-help bg-black w-[20px] h-[20px] text-center rounded-xl">?</span>
+        <div class="flex justify-center items-center ml-1 bg-black w-[20px] h-[20px] rounded-xl">
+            <span class="text-white cursor-help">?</span>
         </div>
         <template #content>
             <div class="bg-black rounded-md p-2">

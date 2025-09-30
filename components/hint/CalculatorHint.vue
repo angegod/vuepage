@@ -27,14 +27,14 @@ function init(){
 </script>
 <template>
     <Popper arrow placement="bottom-start" hover>
-        <div class="flex ml-1">
-            <span class="text-white cursor-help bg-black w-[20px] h-[20px] text-center rounded-xl">?</span>
+        <div class="flex justify-center items-center ml-1 bg-black w-[20px] h-[20px] rounded-xl">
+            <span class="text-white cursor-help">?</span>
         </div>
         <template #content>
              <div class="max-[500px]:w-[100%] mt-2 p-2 rounded-md bg-black/90" v-if="data !==null ">
                 <div>
                     <div class="flex">
-                        <span class="text-white font-bold text-md">2025時光牌bingo目標:</span>
+                        <span class="text-stone-400 font-bold text-md">2025時光牌bingo目標:</span>
                     </div>
                     <ul class="[&>li]:font-bold [&>li]:my-1 slide pl-5" id="info1">
                         <li class="text-amber-800 ">練滿1星[晨曦塔]&#215;{{ data[0].goal }}</li>
@@ -44,7 +44,7 @@ function init(){
                 </div>
                 <div class="my-2">
                     <div class="flex">
-                        <span class="text-white font-bold text-md">目前開放的時光牌數量:</span>
+                        <span class="text-stone-400 font-bold text-md">目前開放的時光牌數量:</span>
                     </div>
                     <ul class="[&>li]:font-bold [&>li]:my-1 [&>li]:text-md slide pl-5" id="info2">
                         <li class="text-amber-800 ">1星[晨曦塔]&#215;{{ data[0].open }}</li>
