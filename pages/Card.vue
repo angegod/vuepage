@@ -441,172 +441,170 @@
     });
 </script>
 <template>
-    <client-only>
-        <div class="Card [&>div]:w-4/5 [&>div]:mx-auto max-[500px]:[&>div]:w-5/6 pt-3" >
-            <div class="flex flex-row flex-wrap justify-between max-[400px]:flex-col">
-                <div class="flex flex-row max-[450px]:flex-col">
-                    <h1 class="text-[28px] font-bold text-red-600 mr-3">時光牌圖鑑</h1>
-                    <Switch ref="b1" @refresh="TextOrCondition" :text1="'條件搜尋'" :text2="'文字搜尋'"/>
-                </div>
-                <div class="max-[500px]:w-full">
-                    <button type="button" class="text-white border-b-white border-b-[1px]" @click="callcalculator">琉璃計算器</button>
+    <div class="Card [&>div]:w-4/5 [&>div]:mx-auto max-[500px]:[&>div]:w-5/6 pt-3" >
+        <div class="flex flex-row flex-wrap justify-between max-[400px]:flex-col">
+            <div class="flex flex-row max-[450px]:flex-col">
+                <h1 class="text-[28px] font-bold text-red-600 mr-3">時光牌圖鑑</h1>
+                <Switch ref="b1" @refresh="TextOrCondition" :text1="'條件搜尋'" :text2="'文字搜尋'"/>
+            </div>
+            <div class="max-[500px]:w-full">
+                <button type="button" class="text-white border-b-white border-b-[1px]" @click="callcalculator">琉璃計算器</button>
+            </div>
+        </div>
+        <div v-if="!isInput">
+            <div class="flex flex-col flex-wrap w-full mt-5">
+                <div><span class="text-white font-bold text-xl">系列</span></div>
+                <div class="[&>button]:mr-2 [&>button]:w-[10%] max-sm:[&>button]:w-[20%] [&>button]:min-w-[100px]
+                        max-[500px]:[&>button]:small max-[500px]:[&>button]:min-w-[100px]">
+                    <button type="button" class="btn series break-keep" v-on:click="clicked('series_1')">晨曦塔</button>
                 </div>
             </div>
-            <div v-if="!isInput">
-                <div class="flex flex-col flex-wrap w-full mt-5">
-                    <div><span class="text-white font-bold text-xl">系列</span></div>
-                    <div class="[&>button]:mr-2 [&>button]:w-[10%] max-sm:[&>button]:w-[20%] [&>button]:min-w-[100px]
-                            max-[500px]:[&>button]:small max-[500px]:[&>button]:min-w-[100px]">
-                        <button type="button" class="btn series break-keep" v-on:click="clicked('series_1')">晨曦塔</button>
-                    </div>
+            <div class="flex flex-col flex-wrap w-full mt-5">
+                <div class="flex flex-row align-middle">
+                    <span class="text-white font-bold text-xl mr-3">稀有度</span>           
                 </div>
-                <div class="flex flex-col flex-wrap w-full mt-5">
-                    <div class="flex flex-row align-middle">
-                        <span class="text-white font-bold text-xl mr-3">稀有度</span>           
-                    </div>
-                    <div class="flex flex-row">
-                        <button type="button" class="max-w-[70px] mr-2 relative inline-block rarity" v-for="i in 3" v-on:click="clicked(`rarity_${i}`)" :key="`rarity${i}`">
-                            <img :src="isAddable+`/images/rarity${i}.png`" :alt="`rarity${i}`" />
-                            <img :src="isAddable+'/images/checked.svg'" class="text-white top-[0px] right-0 absolute" />
-                        </button>
-                    </div>
-                </div>
-                <div class="flex flex-col flex-wrap w-full mt-5">
-                    <div class="flex flex-row items-center">
-                        <span class="text-white font-bold text-xl mr-3">功能位置</span>
-                        <EffectHint />           
-                    </div>
-                    <div class="flex flex-row [&>button]:mx-1">
-                        <button type="button" class="btn effect break-keep min-w-[100px] w-[15%]" v-on:click="clicked('effect_1')">即時效果</button>
-                        <button type="button" class="btn effect break-keep min-w-[100px] w-[15%]" v-on:click="clicked('effect_2')">回合效果</button>
-                        <button type="button" class="btn effect break-keep min-w-[100px] w-[15%]" v-on:click="clicked('effect_3')">連動效果</button>
-                    </div>
-                </div>
-                <div class="flex flex-col flex-wrap w-full mt-5 relative">
-                    <div class="flex flex-row align-middle">
-                        <span class="text-white font-bold text-xl mr-3 pt-1.5">功能</span>
-                        <Switch ref="b2" @refresh="" :text1="'使用Or搜尋'" :text2="'使用And搜尋'"/>
-                    </div>
-                    <div v-for="t in funcData" class="mt-5">
-                        <div>
-                            <span class="text-amber-600 font-bold text-xl">{{ t.typeName }}</span>
-                        </div>
-                        <div class="[&>button]:mr-2 [&>button]:w-[20%] max-[500px]:[&>button]:w-[40%] [&>button]:min-w-[200px]
-                                max-[500px]:[&>button]:small max-[500px]:[&>button]:min-w-[140px]">
-                            <button type="button"  v-for="func in t.data" class="btn func mb-2 min-w-[160px] min-h-[30px]" v-on:click="clicked(`func_${func.id}`)" :id="'btn'+func.id">{{func.name }}</button>
-                        </div> 
-                    </div>
-                </div>
-            </div>
-            <div v-else class="flex flex-col mt-3">
-                <span class="text-white">請輸入時光牌名稱關鍵字:</span>
-                <div class="flex flex-row items-center">
-                    <input type="text" placeholder="Keyword" class="rounded-md max-w-[200px] pl-3 max-h-[25px]" @keyup="event=>CardByText(event)" :disabled="gifShow"/>
-                    <CardHint />
-                    <img :src="isAddable+'/images/loading.gif'" alt="555" class="w-[50px] h-[30px]" v-if="gifShow"/>
-                </div>
-            </div>
-            <div class="flex flex-col flex-wrap mt-5" id="searchCard" v-show="isSearch">
                 <div class="flex flex-row">
-                    <span class="text-white font-bold text-xl">搜尋結果</span>
-                    <span class="text-amber-500 text-xl font-bold">{{`(共${targetCard.length}筆)`}}</span>
-                </div>
-                <div class="flex flex-row max-[500px]:flex-col 
-                        [&>button]:min-w-[200px]  max-[500px]:[&>button]:small max-[500px]:[&>button]:w-[150px] max-[500px]:[&>button]:min-w-[150px]">
-                    <button type="button" class="mr-2 sort px-2 my-2 flex flex-row justify-center items-center btn" @click="clicked('sort_1')">
-                        {{ (!sortCond.find((c)=>c.type==='Id')!.sort)?'編號:小':'編號:大' }}
-                        <img :src="isAddable+'/images/arrow_right.png'" class="w-[30px]" alt="left"/>
-                        {{ (!sortCond.find((c)=>c.type==='Id')!.sort)?`大`:'小' }}
+                    <button type="button" class="max-w-[70px] mr-2 relative inline-block rarity" v-for="i in 3" v-on:click="clicked(`rarity_${i}`)" :key="`rarity${i}`">
+                        <img :src="isAddable+`/images/rarity${i}.png`" :alt="`rarity${i}`" />
+                        <img :src="isAddable+'/images/checked.svg'" class="text-white top-[0px] right-0 absolute" />
                     </button>
-                    <button type="button" class="mr-2 sort px-2 my-2 flex flex-row justify-center items-center btn" @click="clicked('sort_2')">
-                        {{ (!sortCond.find((c)=>c.type==='Rarity')!.sort)?'稀有度:低':'稀有度:高' }}
-                        <img :src="isAddable+'/images/arrow_right.png'" class="w-[30px]" alt="left"/>
-                        {{ (!sortCond.find((c)=>c.type==='Rarity')!.sort)?'高':'低' }}
-                    </button>
-                </div>
-                <div class="flex flex-row flex-wrap max-[400px]:justify-evenly" v-if="targetCard.length!==0">
-                    <div v-for="card in targetCard" class="w-1/8 mr-3" :key="card.id">
-                        <div class="flex flex-col mb-3" >
-                            <div @click="clickHandle(card.id)">
-                                <LazyImage :imageLink="card.image" :id="card.id" @deleteCard="deleteCard"/>
-                            </div>
-                            <span 
-                                class="w-full text-center text-white"
-                                :class="{
-                                    'bg-amber-900': card.rarity === 1,
-                                    'bg-slate-500': card.rarity === 2,
-                                    'bg-yellow-600': card.rarity === 3
-                                }">
-                                {{ card.id }}
-                            </span>                        
-                        </div>
-                    </div>
-                </div>
-                <div class="flex flex-col" v-else-if="targetCard.length===0&&isSearch">
-                    <span class="text-red-500 text-xl mt-5 font-bold">查無搜尋結果!!</span>
-                    <span class="text-red-500 text-xl  font-bold">No Search Found!!</span>
-                    <img :src="isAddable+'/images/NotFound.webp'" width="150" height="150" alt="目前沒有匹配結果.No reults found." />
                 </div>
             </div>
-            <div>
-                <div class='overlay' id="overlay">
-                    <div class='popup max-[500px]:w-[80%] max-[500px]:min-w-[200px]' v-if="mode==='card'&&showCard">
-                        <div class='close' v-on:click="closeHandle">&#10006;</div>
-                        <div class="w-5/6 mx-auto mt-5 flex flex-row flex-wrap justify-between mb-5 max-[450px]:justify-center">
-                            <div class="w-2/5 min-w-[150px] max-[500px]:w-full">
-                                <div class="[&>span]:text-[20px] mb-3 text-center">
-                                    <span
-                                        class="w-full text-center font-bold"
-                                        :class="{
-                                            'text-amber-900': showCard.rarity === 1,
-                                            'text-slate-500': showCard.rarity === 2,
-                                            'text-yellow-600': showCard.rarity === 3
-                                        }">{{ showCard.name }}
-                                    </span>
-                                </div>
-                                <div
-                                    class="max-w-[150px] mx-auto"
-                                    :class="{
-                                        'imgbox1': showCard.rarity === 1,
-                                        'imgbox2': showCard.rarity === 2,
-                                        'imgbox3': showCard.rarity === 3
-                                    }"
-                                    v-if="showCard.rarity">
-                                    <img
-                                        :src="isAddable + showCard.fullimage"
-                                        :alt="showCard.name"
-                                        class="h-[40vh] min-w-[150px] max-[400px]:h-[45vh]"
-                                    />
-                                </div>
-
-                                
-                            </div>
-                            <div class="w-1/2 flex flex-col min-w-[150px] ml-2 max-[450px]:ml-0 max-[500px]:w-full mt-1">
-                                <div class="flex flex-row flex-wrap max-[500px]:mt-2 max-[500px]:justify-center">
-                                    <CardSection label="進場FP" :value="showCard.PointEnter" :rarity="showCard.rarity" />
-                                    <CardSection label="消耗FP" :value="showCard.PointConsume" :rarity="showCard.rarity" />
-                                    <CardSection label="補充FP" :value="showCard.PointGet" :rarity="showCard.rarity" />
-                                    <CardSection label="最大FP" :value="showCard.PointMax" :rarity="showCard.rarity" />
-                                </div>
-                                <CardEffectBlock title="即時效果" :effects="showCard.instantEffect" :rarity="showCard.rarity" />
-
-                                <CardEffectBlock title="回合效果" :effects="showCard.roundEffect" :rarity="showCard.rarity" />
-
-                                <CardEffectBlock title="連動效果" :effects="showCard.comboEffect" :rarity="showCard.rarity" :spread="showCard.spread" :isAddable="isAddable"
-                                    @spreadMove="spreadMove"
-                                    @spreadShow="spreadShow"
-                                    @spreadHide="spreadHide"/>
-                            </div>
-                        </div>
+            <div class="flex flex-col flex-wrap w-full mt-5">
+                <div class="flex flex-row items-center">
+                    <span class="text-white font-bold text-xl mr-3">功能位置</span>
+                    <EffectHint />           
+                </div>
+                <div class="flex flex-row [&>button]:mx-1">
+                    <button type="button" class="btn effect break-keep min-w-[100px] w-[15%]" v-on:click="clicked('effect_1')">即時效果</button>
+                    <button type="button" class="btn effect break-keep min-w-[100px] w-[15%]" v-on:click="clicked('effect_2')">回合效果</button>
+                    <button type="button" class="btn effect break-keep min-w-[100px] w-[15%]" v-on:click="clicked('effect_3')">連動效果</button>
+                </div>
+            </div>
+            <div class="flex flex-col flex-wrap w-full mt-5 relative">
+                <div class="flex flex-row align-middle">
+                    <span class="text-white font-bold text-xl mr-3 pt-1.5">功能</span>
+                    <Switch ref="b2" @refresh="" :text1="'使用Or搜尋'" :text2="'使用And搜尋'"/>
+                </div>
+                <div v-for="t in funcData" class="mt-5">
+                    <div>
+                        <span class="text-amber-600 font-bold text-xl">{{ t.typeName }}</span>
                     </div>
-                    <div class='popup max-[500px]:w-[80%] max-[500px]:min-w-[200px]' v-else-if="mode==='calculator'">
-                        <div class='close text-black' v-on:click="closeHandle">&#10006;</div>
-                        <Calculator />
-                    </div>
+                    <div class="[&>button]:mr-2 [&>button]:w-[20%] max-[500px]:[&>button]:w-[40%] [&>button]:min-w-[200px]
+                            max-[500px]:[&>button]:small max-[500px]:[&>button]:min-w-[140px]">
+                        <button type="button"  v-for="func in t.data" class="btn func mb-2 min-w-[160px] min-h-[30px]" v-on:click="clicked(`func_${func.id}`)" :id="'btn'+func.id">{{func.name }}</button>
+                    </div> 
                 </div>
             </div>
         </div>
-    </client-only>  
+        <div v-else class="flex flex-col mt-3">
+            <span class="text-white">請輸入時光牌名稱關鍵字:</span>
+            <div class="flex flex-row items-center">
+                <input type="text" placeholder="Keyword" class="rounded-md max-w-[200px] pl-3 max-h-[25px]" @keyup="event=>CardByText(event)" :disabled="gifShow"/>
+                <CardHint />
+                <img :src="isAddable+'/images/loading.gif'" alt="555" class="w-[50px] h-[30px]" v-if="gifShow"/>
+            </div>
+        </div>
+        <div class="flex flex-col flex-wrap mt-5" id="searchCard" v-show="isSearch">
+            <div class="flex flex-row">
+                <span class="text-white font-bold text-xl">搜尋結果</span>
+                <span class="text-amber-500 text-xl font-bold">{{`(共${targetCard.length}筆)`}}</span>
+            </div>
+            <div class="flex flex-row max-[500px]:flex-col 
+                    [&>button]:min-w-[200px]  max-[500px]:[&>button]:small max-[500px]:[&>button]:w-[150px] max-[500px]:[&>button]:min-w-[150px]">
+                <button type="button" class="mr-2 sort px-2 my-2 flex flex-row justify-center items-center btn" @click="clicked('sort_1')">
+                    {{ (!sortCond.find((c)=>c.type==='Id')!.sort)?'編號:小':'編號:大' }}
+                    <img :src="isAddable+'/images/arrow_right.png'" class="w-[30px]" alt="left"/>
+                    {{ (!sortCond.find((c)=>c.type==='Id')!.sort)?`大`:'小' }}
+                </button>
+                <button type="button" class="mr-2 sort px-2 my-2 flex flex-row justify-center items-center btn" @click="clicked('sort_2')">
+                    {{ (!sortCond.find((c)=>c.type==='Rarity')!.sort)?'稀有度:低':'稀有度:高' }}
+                    <img :src="isAddable+'/images/arrow_right.png'" class="w-[30px]" alt="left"/>
+                    {{ (!sortCond.find((c)=>c.type==='Rarity')!.sort)?'高':'低' }}
+                </button>
+            </div>
+            <div class="flex flex-row flex-wrap max-[400px]:justify-evenly" v-if="targetCard.length!==0">
+                <div v-for="card in targetCard" class="w-1/8 mr-3" :key="card.id">
+                    <div class="flex flex-col mb-3" >
+                        <div @click="clickHandle(card.id)">
+                            <LazyImage :imageLink="card.image" :id="card.id" @deleteCard="deleteCard"/>
+                        </div>
+                        <span 
+                            class="w-full text-center text-white"
+                            :class="{
+                                'bg-amber-900': card.rarity === 1,
+                                'bg-slate-500': card.rarity === 2,
+                                'bg-yellow-600': card.rarity === 3
+                            }">
+                            {{ card.id }}
+                        </span>                        
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col" v-else-if="targetCard.length===0&&isSearch">
+                <span class="text-red-500 text-xl mt-5 font-bold">查無搜尋結果!!</span>
+                <span class="text-red-500 text-xl  font-bold">No Search Found!!</span>
+                <img :src="isAddable+'/images/NotFound.webp'" width="150" height="150" alt="目前沒有匹配結果.No reults found." />
+            </div>
+        </div>
+        <div>
+            <div class='overlay' id="overlay">
+                <div class='popup max-[500px]:w-[80%] max-[500px]:min-w-[200px]' v-if="mode==='card'&&showCard">
+                    <div class='close' v-on:click="closeHandle">&#10006;</div>
+                    <div class="w-5/6 mx-auto mt-5 flex flex-row flex-wrap justify-between mb-5 max-[450px]:justify-center">
+                        <div class="w-2/5 min-w-[150px] max-[500px]:w-full">
+                            <div class="[&>span]:text-[20px] mb-3 text-center">
+                                <span
+                                    class="w-full text-center font-bold"
+                                    :class="{
+                                        'text-amber-900': showCard.rarity === 1,
+                                        'text-slate-500': showCard.rarity === 2,
+                                        'text-yellow-600': showCard.rarity === 3
+                                    }">{{ showCard.name }}
+                                </span>
+                            </div>
+                            <div
+                                class="max-w-[150px] mx-auto"
+                                :class="{
+                                    'imgbox1': showCard.rarity === 1,
+                                    'imgbox2': showCard.rarity === 2,
+                                    'imgbox3': showCard.rarity === 3
+                                }"
+                                v-if="showCard.rarity">
+                                <img
+                                    :src="isAddable + showCard.fullimage"
+                                    :alt="showCard.name"
+                                    class="h-[40vh] min-w-[150px] max-[400px]:h-[45vh]"
+                                />
+                            </div>
+
+                            
+                        </div>
+                        <div class="w-1/2 flex flex-col min-w-[150px] ml-2 max-[450px]:ml-0 max-[500px]:w-full mt-1">
+                            <div class="flex flex-row flex-wrap max-[500px]:mt-2 max-[500px]:justify-center">
+                                <CardSection label="進場FP" :value="showCard.PointEnter" :rarity="showCard.rarity" />
+                                <CardSection label="消耗FP" :value="showCard.PointConsume" :rarity="showCard.rarity" />
+                                <CardSection label="補充FP" :value="showCard.PointGet" :rarity="showCard.rarity" />
+                                <CardSection label="最大FP" :value="showCard.PointMax" :rarity="showCard.rarity" />
+                            </div>
+                            <CardEffectBlock title="即時效果" :effects="showCard.instantEffect" :rarity="showCard.rarity" />
+
+                            <CardEffectBlock title="回合效果" :effects="showCard.roundEffect" :rarity="showCard.rarity" />
+
+                            <CardEffectBlock title="連動效果" :effects="showCard.comboEffect" :rarity="showCard.rarity" :spread="showCard.spread" :isAddable="isAddable"
+                                @spreadMove="spreadMove"
+                                @spreadShow="spreadShow"
+                                @spreadHide="spreadHide"/>
+                        </div>
+                    </div>
+                </div>
+                <div class='popup max-[500px]:w-[80%] max-[500px]:min-w-[200px]' v-else-if="mode==='calculator'">
+                    <div class='close text-black' v-on:click="closeHandle">&#10006;</div>
+                    <Calculator />
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 <style scoped>
     @import '../assets/css/card.css';
