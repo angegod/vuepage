@@ -13,13 +13,7 @@ const store = useCardBtnStore();
 // 圖片前綴 (避免 SSR 錯誤)
 const isAddable = ref('');
 const config = useRuntimeConfig();
-
-if (process.client && location.href.includes(`https://angegod.github.io/${config.public.projectName}`)) {
-    isAddable.value = `/${config.public.projectName}`;
-
-}else{
-    isAddable.value = ``;
-}
+isAddable.value = (config.app.baseURL === '/')?'':config.app.baseURL; // Nuxt 會自動給正確值
 
 //往下提供前綴字串
 provide('frontpath', isAddable.value);
@@ -94,7 +88,6 @@ const startMatch = () => {
 }
 
 </script>
-
 <template>
    <header class="header">
         <div class="menu hidden flex-row  min-[600px]:flex [&>div]:my-2 [&>div]:pb-1" id="biggerHeader">
