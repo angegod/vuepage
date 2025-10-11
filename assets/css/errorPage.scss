@@ -1,0 +1,5 @@
+@use 'variable' as *;
+
+.main404{
+    @include MainSection;
+}

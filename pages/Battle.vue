@@ -28,33 +28,34 @@
     function imgClick(number:number){/* 賦予特殊紅框 並且將其他人的紅框給移除*/
         showable.value=true;
         let imagesALL=document.querySelectorAll<HTMLImageElement>(".monster_images")
+        if(imagesALL&&imagesALL.length>0){
+            imagesALL.forEach((img)=>img.classList.remove('isChoose'));//先清掉所有照片的紅框
 
-        
-        imagesALL.forEach((img)=>img.classList.remove('isChoose'));//先清掉所有照片的紅框
+            imagesALL[number-1].classList.add('isChoose');//再來將所有照片的紅框
 
-        imagesALL[number-1].classList.add('isChoose');//再來將所有照片的紅框
+            let detailImages=document.getElementById('battle_details_image') as HTMLImageElement | null;
+            if(detailImages){
+                if(!switchs.value){
+                    let newpath=isAddable.value+'/images/number'+number+'/battle_details.jpg';
+                    detailImages.src=newpath;
 
-        let detailImages=document.getElementById('battle_details_image') as HTMLImageElement | null;
-        if(detailImages){
-            if(!switchs.value){
-                let newpath=isAddable.value+'/images/number'+number+'/battle_details.jpg';
-                detailImages.src=newpath;
+                    target.value=myFile[number-1];
+                }else{
+                    let newpath=isAddable.value+'/images/ultimate/u'+number+'/battle_details.jpg';
 
-                target.value=myFile[number-1];
-            }else{
-                let newpath=isAddable.value+'/images/ultimate/u'+number+'/battle_details.jpg';
+                    detailImages.src=newpath;
 
-                detailImages.src=newpath;
+                    target.value=ultimate[number-1] as UltimateDetailsItem;
+                }
 
-                target.value=ultimate[number-1] as UltimateDetailsItem;
             }
 
+            //為了預防照片載入過久，這邊會先預設照片隱藏，並且使用loading.gif，直到照片完成loading
+            let loadingGif=document.getElementById('hidden_image');
+            detailImages!.classList.add('hidden');
+            loadingGif!.classList.remove('hidden');
         }
-
-        //為了預防照片載入過久，這邊會先預設照片隱藏，並且使用loading.gif，直到照片完成loading
-        let loadingGif=document.getElementById('hidden_image');
-        detailImages!.classList.add('hidden');
-        loadingGif!.classList.remove('hidden');
+        
 
     }
 
@@ -62,17 +63,15 @@
         let node=document.getElementById('battle_details_image') as HTMLImageElement;
         let hiddenImage=document.getElementById('hidden_image') as HTMLImageElement;
 
-        if(node.complete){
-
+        if(node&&node.complete){
             setTimeout(()=>{
-            
                 //顯示關卡資訊
                 hiddenImage.classList.add('hidden');
                 node.classList.remove('hidden');
             },2000);  
         }
         else{
-            console.log('fail to loaded')
+            console.log('fail to loaded');
         }
     }
    
@@ -128,7 +127,7 @@
                         <img :src="isAddable + `/images/ultimate/u${number+1}/Icon.png`" alt="5555" v-on:click="imgClick(number+1)" @error="showDefaultImg"/>
                     </div>
                 </div>
-                <div class="battle_description" v-if="showable">
+                <div class="w-full" v-if="showable">
                     <div>
                         <span class="font-bold text-red-800 text-3xl newfont">{{(target!=null)?target.name:''}}</span>
                     </div>
@@ -159,7 +158,7 @@
     </client-only>
 </template>
 <style scoped>
-    @import '../assets/css/battle.css';
+    @import '../assets/css/battle.scss';
     @font-face {
         font-family: 'cwTeXYen';
         font-style: normal;

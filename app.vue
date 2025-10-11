@@ -90,7 +90,7 @@ const startMatch = () => {
 </script>
 <template>
    <header class="header">
-        <div class="menu hidden flex-row  min-[600px]:flex [&>div]:my-2 [&>div]:pb-1" id="biggerHeader">
+        <div class="menu hidden flex-row min-[600px]:flex" id="biggerHeader">
             <div class="[&>a]:text-[25px] options link redText" @click="addDash(1)">
                 <NuxtLink to="/" >主頁</NuxtLink>
             </div>
@@ -108,7 +108,7 @@ const startMatch = () => {
                 text-white border-amber-800 w-[100px] rounded-md text-[20px]" @click="startMatch">開始匹配</button>
             </div>
         </div>
-        <div class="flex flex-row min-[600px]:hidden w-[100%] justify-between" id="smallHeader">
+        <div class="flex flex-row min-[600px]:hidden w-full justify-between" id="smallHeader">
             <div class="mt-2 ml-2">
                 <button @click="showMenu"><img :src="isAddable+'/images/menu.svg'" alt="menu" style="width: 25px;"/></button>
             </div>
@@ -139,8 +139,8 @@ const startMatch = () => {
     <Footers />
 </template>
 
-<style scoped>
-@import 'assets/css/menu.css';
+<style lang="scss" scoped>
+@use 'assets/css/menu.scss';
 
 
 </style>

@@ -15,9 +15,8 @@
     });
 </script>
 <template>
-    
     <div class="about">
-        <div class="main">
+        <div class="mx-auto w-[85%] h-auto pt-[50px]">
             <div class="subtitle">
                 <div class="images">
                     <img :src="isAddable+'/images/intro1.jpg'" alt="55555" width="500" height="300"/>
@@ -45,10 +44,10 @@
                 </div>
             </div>
             <div class="subtitle">
-                <div class="text mainarticle">
+                <div class="text w-full">
                     <p class="title">共同特點</p>
-                    <div class="contents_details" style="padding-top: 0px;">
-                        <ul style="padding-left: 0px;">
+                    <div class="ml-0 pt-0">
+                        <ul class="pl-0">
                             <li><span>1.8星召喚獸:</span>每個異變封王都是8星召喚獸，配合九封王可以進一步拉高隊伍整體的實血</li>
                             <li><span>2.核心隊伍技:</span>在受到敵人攻擊五次之後，將會自動生成"幽閉空間"，發動任意封王主動技能可以關閉核心</li>
                             <li><span>3.黑白隊伍技:</span>配合核心隊伍技，可以有相當多的戰術空間。比方說:黑八封對應到減傷80%!</li>
@@ -73,6 +72,6 @@
         </div>
     </div>
 </template>
-<style scoped>
-     @import '@/assets/css/intro.css';
+<style lang="scss" scoped>
+     @use '@/assets/css/intro.scss';
 </style>

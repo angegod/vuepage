@@ -2,23 +2,22 @@
   <div class="flex flex-row">
     <!-- 側邊選單 -->
     <div class="w-1/5 lists relative overflow-y-hidden max-sm:hidden mt-4">
-      <ul class="text-2xl noneDecoration " id="kingmenu">
-          <li><NuxtLink :to="'/King?id=1'" class="subpagesLink">一封王</NuxtLink></li>
-          <li><NuxtLink :to="'/King?id=2'" class="subpagesLink">二封王</NuxtLink></li>
-          <li><NuxtLink :to="'/King?id=3'" class="subpagesLink">三封王</NuxtLink></li>
-          <li><NuxtLink :to="'/King?id=4'" class="subpagesLink">四封王</NuxtLink></li>
-          <li><NuxtLink :to="'/King?id=5'" class="subpagesLink">五封王</NuxtLink></li>
-          <li><NuxtLink :to="'/King?id=6'" class="subpagesLink">六封王</NuxtLink></li>
-          <li><NuxtLink :to="'/King?id=7'" class="subpagesLink">七封王</NuxtLink></li>
-          <li><NuxtLink :to="'/King?id=8'" class="subpagesLink">八封王</NuxtLink></li>
-          <li><NuxtLink :to="'/King?id=9'" class="subpagesLink">九封王</NuxtLink></li>
-          <li><NuxtLink :to="'/King?id=10'" class="subpagesLink">十封王</NuxtLink></li>
-          <li><NuxtLink :to="'/test'" class="subpagesLink">姆姆</NuxtLink></li>
+      <ul class="text-2xl noneDecoration [&>li>a]:subpagesLink" id="kingmenu">
+          <li><NuxtLink :to="'/King?id=1'">一封王</NuxtLink></li>
+          <li><NuxtLink :to="'/King?id=2'">二封王</NuxtLink></li>
+          <li><NuxtLink :to="'/King?id=3'">三封王</NuxtLink></li>
+          <li><NuxtLink :to="'/King?id=4'">四封王</NuxtLink></li>
+          <li><NuxtLink :to="'/King?id=5'">五封王</NuxtLink></li>
+          <li><NuxtLink :to="'/King?id=6'">六封王</NuxtLink></li>
+          <li><NuxtLink :to="'/King?id=7'">七封王</NuxtLink></li>
+          <li><NuxtLink :to="'/King?id=8'">八封王</NuxtLink></li>
+          <li><NuxtLink :to="'/King?id=9'">九封王</NuxtLink></li>
+          <li><NuxtLink :to="'/King?id=10'">十封王</NuxtLink></li>
       </ul>
     </div>
 
     <!-- 輪播區域 -->
-    <div class="w-4/5 relative my-4 max-sm:mx-auto max-sm:w-[100%]">
+    <div class="w-4/5 relative my-4 max-sm:mx-auto max-sm:w-full">
       <carousel :autoplay="5000" :wrap-around="true">
         <slide v-for="index in 10" :key="index">
           <NuxtLink :to="`/King?id=${index}`">
@@ -32,7 +31,7 @@
   </div>
 
   <!-- 封王介紹 -->
-  <div class="flex flex-row flex-wrap [&>div]:max-md:w-[100%] [&>div]:max-sm:mx-auto" style="background-color: rgb(23,23,23);">
+  <div class="flex flex-row flex-wrap [&>div]:max-md:w-full [&>div]:max-sm:mx-auto" style="background-color: rgb(23,23,23);">
     <div class="w-2/5">
       <div class=" w-4/5 mx-auto images flex justify-center">
         <img
@@ -60,7 +59,7 @@
   </div>
 
   <!-- 時光牌介紹 -->
-  <div class="flex flex-row flex-wrap sm:flex-row [&>div]:max-md:w-[100%] [&>div]:max-sm:mx-auto mt-5" style="background-color: rgb(23,23,23);">
+  <div class="flex flex-row flex-wrap sm:flex-row [&>div]:max-md:w-full [&>div]:max-sm:mx-auto mt-5" style="background-color: rgb(23,23,23);">
     <div class="w-2/5">
       <div class=" w-4/5 mx-auto max-sm:h-[80vw]">
         <img :src="isAddable + '/images/bg1.png'" class="max-sm:h-[100vw]" style="max-width: 100%;" />
@@ -82,7 +81,9 @@
     </div>
   </div>
 </template>
-
+<style lang="scss" scoped>
+@use '../assets/css/home.scss';
+</style>
 <script lang="ts" setup>
     import { ref, onMounted } from 'vue';
     import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
@@ -120,6 +121,4 @@
         menu.classList.toggle('lists');
     };
 </script>
-<style scoped>
-@import '../assets/css/home.css';
-</style>
+

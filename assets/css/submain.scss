@@ -1,0 +1,170 @@
+@use 'variable' as *;
+
+.section {
+  @include MainSection(0);
+}
+
+.content {
+  @apply w-4/5 mx-auto pt-12;
+  height: calc(100% + 50px);
+}
+
+.monster_title label:nth-child(1) {
+  @apply text-3xl font-bold text-purple-600 mb-5;
+}
+
+.monster_main_images {
+  .max {
+    @apply block;
+  }
+
+  .min {
+    @apply hidden;
+  }
+}
+
+.monster_others {
+  @apply text-xl text-white font-bold;
+}
+
+.monster_details,
+.weapons_main .details,
+.images.max {
+  @apply w-full flex flex-row;
+}
+
+.weapons_main {
+  .description {
+    @apply w-[70%];
+  }
+}
+
+.images {
+  @apply w-3/5;
+
+  &.min {
+    @apply w-1/5 min-w-[200px];
+  }
+
+  &.max img {
+    @apply w-1/2;
+  }
+}
+
+.monster_details .description {
+  @apply text-white font-bold text-[20px] w-2/5 ml-[30px];
+}
+
+span img {
+  @apply w-[50px] h-[50px] align-middle;
+}
+
+.title {
+  @apply text-[25px] font-bold text-[rgb(172,21,21)];
+}
+
+.score {
+  @apply text-[25px] font-bold text-[rgb(222,187,30)];
+}
+
+.main_details {
+  @apply text-[25px] font-bold text-[rgb(117,110,110)];
+}
+
+/* === 響應式 === */
+@screen xl {
+  /* max-width: 1220px */
+  .monster_details {
+    @apply flex flex-col;
+  }
+
+  .monster_details .description {
+    @apply ml-2.5 w-3/5;
+  }
+
+  .images.max {
+    @apply flex flex-col;
+
+    img {
+      @apply w-full;
+    }
+  }
+
+  .weapons_main .details {
+    @apply flex-wrap;
+  }
+
+  .description.table {
+    @apply w-full;
+  }
+}
+
+@media (max-width: 1200px) {
+  .weapons_main .details .description {
+    @apply my-5;
+  }
+
+  .images.min {
+    @apply w-[15%] min-w-[200px];
+  }
+}
+
+@media (max-width: 900px) {
+  .weapons_main > .details > .images > img {
+    @apply w-[100px] h-[100px];
+  }
+
+  .weapons_main > .details > .images.min {
+    @apply w-[10%] mt-[30px] min-w-[100px];
+  }
+}
+
+@media (max-width: 850px) {
+  body {
+    @apply text-[15px];
+  }
+
+  .monster_details {
+    @apply flex flex-row;
+  }
+
+  .monster_main_images {
+    @apply w-[40%];
+  }
+
+  .monster_details .description {
+    @apply w-full;
+  }
+
+  .monster_main_images {
+    .max {
+      @apply hidden;
+    }
+
+    .min {
+      @apply block w-[150px];
+    }
+  }
+
+  ._monster_details {
+    @apply flex flex-row;
+  }
+}
+
+@media (max-width: 680px) {
+  .monster_details {
+    @apply flex flex-col;
+  }
+
+  .monster_details .description {
+    @apply mx-auto;
+  }
+
+  .weapons_main .details {
+    @apply flex flex-row flex-wrap;
+  }
+
+  .weapons_main .details .description:nth-child(2) {
+    @apply my-5 w-[75%] ml-2.5;
+  }
+}

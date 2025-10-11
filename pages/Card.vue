@@ -444,7 +444,7 @@
     <client-only>
         <div class="Card [&>div]:w-4/5 [&>div]:mx-auto max-[500px]:[&>div]:w-5/6 pt-3" >
             <div class="flex flex-row flex-wrap justify-between max-[400px]:flex-col">
-                <div class="flex flex-row max-[450px]:flex-col">
+                <div class="flex flex-row max-[350px]:flex-col">
                     <h1 class="text-[28px] font-bold text-red-600 mr-3">時光牌圖鑑</h1>
                     <Switch ref="b1" @refresh="TextOrCondition" :text1="'條件搜尋'" :text2="'文字搜尋'"/>
                 </div>
@@ -608,6 +608,6 @@
         </div>
     </client-only>
 </template>
-<style scoped>
-    @import '../assets/css/card.css';
+<style lang="scss" scoped>
+    @use '../assets/css/card.scss';
 </style>

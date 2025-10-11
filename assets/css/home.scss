@@ -1,0 +1,154 @@
+@tailwind components;
+$textColor:rgb(222, 156, 156);
+
+div{
+    position: relative;
+}
+
+@layer components{
+    .subpagesLink{
+        font-size: min(max(2.5vw,20px),30px);
+        text-decoration: none;
+        color:$textColor;
+
+        &:hover{
+            color: rgb(132, 117, 117);
+            cursor: pointer;
+        }
+    }
+}
+
+
+.carouselImg{
+    @apply w-4/5 h-[300px] mt-10;
+}
+.lists{
+    background-color: rgb(53, 14, 14);
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoQGK1KhzU0jjyGefYVLrL2ATeFbmzDNORqg&usqp=CAU');
+    background-blend-mode: color;
+    background-repeat: repeat;
+    background-size: 130%;
+    max-height: calc(600px + 2rem);
+}
+.hidden{
+    display: block;
+}
+
+.noneDecoration{
+    @apply overflow-y-scroll text-[30px] list-none;
+    height: 50vw;
+    max-height: calc(600px + 2rem);
+
+    &::-webkit-scrollbar {
+        width: 0 !important;
+    }
+
+    & li{
+        @apply my-5 mx-auto w-3/5 text-center font-bold;
+        height: 50px;
+        letter-spacing: 10px;   
+    }
+
+    & li:hover{
+        @apply cursor-pointer;
+        color: rgb(72, 64, 64);
+        
+    }
+}
+
+
+/*carousel css */
+.carImg{
+    width: 100%;
+    max-height: calc(600px);
+    height: 50vw;
+}
+
+.carousel__slide{
+    width: 100%;
+}
+
+/*主頁簡短介紹 */
+.introduction{
+    @apply h-[600px] w-full flex flex-row;
+    background-image: linear-gradient(to right,rgb(23, 23, 23),rgb(42, 30, 30));
+
+    & .images{
+        @apply w-2/5 ml-[10%];
+        
+        & img{
+            width: -webkit-fill-available;
+        }
+    }
+}
+
+.images:before {
+    display: block;
+    position: absolute;
+    content: "";
+    width: 100%;
+    min-width: 300px;
+    height: 100%;
+    box-shadow: 0px -2px 20px 50px rgb(23,23,23) inset;
+}
+
+.introduction .par{
+    @apply w-3/5 m-12;
+
+    & p{
+        @apply text-xl font-bold ml-2.5 text-white;
+        line-height: 50px;
+    }
+}
+
+/*在大視窗的狀況下無須顯示 */
+.material-symbols-outlined{
+    display: none;
+}
+
+.button {
+    @apply w-full mt-[100px] mb-[50px] text-center;
+
+    & button{
+        @apply border-none bg-transparent;
+
+        & a{
+            @apply border-white border-[5px] rounded-md text-white text-2xl no-underline;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            letter-spacing: 2px;
+        }
+        & a:hover{
+            color: $textColor;
+            border-color: $textColor;
+        }
+    }
+}
+
+    
+@media(max-width: 1000px){
+    .lists{
+        @apply w-1/5 max-w-[200px] min-w-[100px] z-50 h-[50vw];
+    }
+
+    .carouselImg{
+        @apply w-full h-[300px]
+    }
+
+    .noneDecoration{
+        @apply pl-2;
+
+        & li{
+            @apply w-[95%] pl-0;
+            letter-spacing: 0.1rem;
+        }
+    }
+
+
+    /*小視窗予以顯示 */
+    .material-symbols-outlined{
+        @apply block cursor-pointer absolute z-[101];
+        color: $textColor;
+    }
+
+}
+

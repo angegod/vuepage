@@ -1,0 +1,36 @@
+.switch {
+  @apply relative inline-block w-[60px] h-[30px];
+
+  input {
+    @apply hidden;
+  }
+
+  .slider {
+    @apply absolute cursor-pointer inset-0 bg-gray-300 transition-all duration-[400ms];
+
+    &::before {
+      content: "";
+      @apply absolute h-[24px] w-[24px] left-1 bottom-[3px] bg-white transition-all duration-[400ms];
+    }
+  }
+
+  input:checked + .slider {
+    @apply bg-[rgb(65,16,16)];
+  }
+
+  input:focus + .slider {
+    @apply shadow-[0_0_1px_rgb(65,16,16)];
+  }
+
+  input:checked + .slider::before {
+    @apply translate-x-[26px];
+  }
+
+  .slider.round {
+    @apply rounded-[34px];
+
+    &::before {
+      @apply rounded-full;
+    }
+  }
+}

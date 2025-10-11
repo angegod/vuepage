@@ -5,7 +5,9 @@ export default defineNuxtConfig({
     compatibilityDate: '2025-06-15',
     devtools: { enabled: true },
     modules: ['@pinia/nuxt'],
-    css: ['~/assets/css/tailwind.css'],
+    css: [
+      '~/assets/css/tailwind.css'
+    ],
     runtimeConfig: {
         public: {
           projectName: process.env.NODE_ENV === 'production' ? 'vuepage' : '',

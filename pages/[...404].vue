@@ -1,5 +1,5 @@
 <script setup>
-import "../assets/css/404.css";
+
 import { onMounted } from 'vue'
 
 onMounted(() => {
@@ -27,4 +27,7 @@ onMounted(() => {
         </div>
     </div>
 </template>
+<style lang="scss" scoped>
+@use "../assets/css/errorPage.scss";
+</style>
 

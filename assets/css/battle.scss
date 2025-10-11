@@ -1,0 +1,134 @@
+@use 'variable' as *;
+
+.battle{
+    @include MainSection;
+}
+
+.main{
+    @apply w-4/5 mx-auto;
+    height: calc(100% + 100px);
+}
+
+.monster_images_total{
+    @apply w-full mt-5 flex flex-row;
+    /* 滚动条的背景轨道 */
+    &::-webkit-scrollbar {
+        height: 10px !important;
+        border: none;
+        background-color: transparent;
+    }
+
+    /* 滚动条的滑块部分 */
+    &::-webkit-scrollbar-thumb {
+        background: #888 !important; /* 颜色 */
+        border-radius: 5px !important;/* 圆角 */
+    }
+}   
+
+.monster_images{
+    @apply flex justify-center items-center w-[12%] max-w-[100px] text-center h-[100px] mx-2.5 my-4;
+
+    & img:hover{
+        border: 7px solid rgb(65, 28, 28);
+        border-radius: 10px;
+        animation-duration: 0.5s;
+        animation-name: ImgBlink;
+        animation-iteration-count: infinite;
+        cursor: pointer;
+    }
+
+    &.isChoose img{
+        border:7px solid $SelectColor;
+        border-radius: 10px;
+    }
+
+    
+}
+
+
+.battle_totals{
+    @apply w-full h-auto my-5 pb-5;
+
+    & img{
+        @apply w-full;
+
+        &.errors{
+            @apply w-2/5;
+        }
+    }
+}
+
+
+.errors_text{
+    @apply text-xl font-bold text-[brown];
+}
+
+.achievement p span{
+    font-size: 20px;
+    font-weight: bold;
+
+    &:nth-child(1){
+        color: brown;
+    }
+
+    &:nth-child(3){
+        color: silver;
+    }
+
+    &:nth-child(5){
+        color: goldenrod;
+    }
+}
+
+/* 滑块部分的悬停效果 */
+::-webkit-scrollbar-thumb:active {
+    background: #333; 
+}
+
+@keyframes ImgBlink{
+    0%{
+        border-color: none;
+    }
+
+    50%{
+       border-color: $SelectColor;
+       
+    }
+    100%{
+        border-color: none;
+    }
+}
+
+@media(max-width:576px){    
+    .monster_images_total{
+        justify-content: space-evenly;
+    }
+
+   
+    #hidden_image{
+        max-height: 300px;
+    }
+    
+}
+
+@media(max-width:500px){
+
+    .monster_images{
+        margin :5px 5px;
+
+        & img{
+            max-width: 70px;
+            max-height: 70px;
+        }
+
+        &.isChoose img{
+            border:5px solid $SelectColor;
+            border-radius: 10px;
+        }
+    }
+
+    .monster_images_total{
+        display: flex;
+        flex-direction: row;
+    }   
+}

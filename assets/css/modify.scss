@@ -1,63 +1,33 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@use 'variable' as *;
 
 span{
     font-weight: bold;
 }
 
 .overlay {
-    height: auto;
-    position:fixed;
-    display:none;
-    top:0;
-    right:0;
-    bottom:0;
-    left:0;
-    background:rgba(0, 0, 0, 0.8);
-    z-index:999;
+    @apply fixed inset-0 z-[999] bg-black/80 hidden h-auto;
 }
 
 
 .close {
-    position: sticky;
-    top: 2px;
-    left: 100%;
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
-    color: black;
-    display: inline-block;
+    @apply sticky top-0.5 left-[100%] w-[25px] h-[25px] cursor-pointer text-black inline-block;
 }
+
 .popup {
-    position:absolute;
-    width:40%;
-    max-height: 500px;
-    top:10%;
-    left:0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 10px;
-    background:rgb(240,240,240);
+    @apply absolute w-2/5 max-w-[500px] top-[10%] left-0 right-0 mx-auto rounded-[10px] ;
+    @apply bg-white overflow-y-scroll;
     box-shadow: 0px 0px 10px 0px black;
     animation: slideshow 0.3s ease-in;
     min-width: 450px;
-    overflow-y: scroll;
     scrollbar-width: none;
- 
 }
 
 
 
 .main{
-    position: relative;
-    width:100%;
-    min-height: 500px;
+    @apply relative w-full min-h-[500px] pb-10 pt-5;
     height: calc(100% + 50px);
-    padding-bottom: 40px;
-    background-image: linear-gradient(to bottom,rgb(27, 25, 25) 0%,rgb(65, 28, 28) 70%,rgb(102, 12, 12) 90%);
-    padding-top:20px;
+    background-image: $globalBackGround;
 }
 
 .standwardLabel{
@@ -69,8 +39,6 @@ span{
     color:theme('colors.amber.600');
     font-size: theme('fontSize.base');
 }
-
-
 
 .right{
     border-left: 2px dotted rgb(164, 95, 21);
@@ -88,11 +56,11 @@ span{
     border-width: theme('borderWidth.2');
     border-style: solid;
     min-width: 50px;
-}
 
-.removeBtn:hover,.addBtn:hover{
-    color: theme('colors.white');
-    border-color: theme('borderColor.white');
+    &:hover{
+        color: theme('colors.white');
+        border-color: theme('borderColor.white');
+    }
 }
 
 .colorSelect{

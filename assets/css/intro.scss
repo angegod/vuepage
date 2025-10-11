@@ -1,0 +1,55 @@
+@use 'variable' as *;
+
+.about{
+    @include MainSection;
+}
+
+.subtitle{
+    @apply flex flex-row mb-[100px];
+}
+.text{
+    @apply text-white ml-5 text-xl;
+
+    & img{
+        @apply w-1/5 h-auto max-w-[80px];
+    }
+}
+
+.title{
+    @apply text-red-500 text-3xl font-bold my-0;
+}
+ul{
+    @apply list-none text-xl pl-10;
+
+    & li{
+        @apply mb-2.5;
+
+        & span{
+            color: rgb(119, 5, 176);
+            font-weight: bold;
+        }
+    }
+}
+
+@media(max-width:900px){
+    .subtitle{
+        flex-direction: column;
+       
+    }
+    .text{
+        margin-left: 0px;
+    }
+}
+@media(max-width:610px){
+    .images img{
+        width:100% ;
+        height: auto;
+    }
+    .text{
+        font-size: 20px;
+        margin-left: 0px;
+    }
+    .title{
+        font-size: 25px;
+    }
+}

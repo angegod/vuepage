@@ -77,23 +77,25 @@ onMounted(() => {
             <div class="flex flex-col justify-center">
                 <div class="mb-5 flex flex-row max-[1000px]:flex-col justify-evenly max-[850px]:mx-0">
                     <div class="monster_main_images mb-5 max-w-[600px] flex">
-                        <img :src="isAddable+details.mainImage" alt="5555" class="max"/>
-                        <img :src="isAddable+details.hideImage" alt="5555" class="min"/>
+                        <img :src="isAddable+details.mainImage" alt="maxImg" class="max"/>
+                        <img :src="isAddable+details.hideImage" alt="minImg" class="min"/>
                     </div>
                     <div class="flex flex-col [&>*]:mt-1 [&>*]:mb-1 max-w-[400px] ml-5 w-2/5  max-[1000px]:w-full max-[1000px]:ml-0">
                         <div class="font-bold">
                             <span :style="{color:details.color,fontSize:'25px'}">{{ details.monsterTitle }}</span>
                         </div>
-                        <span class="text-white text-[18px] font-bold">歸類於:{{ details.monsterOthers.belong }}</span>
-                        <span class="text-white text-[18px] font-bold">稀有度:{{ details.monsterOthers.rarity }}</span>
-                        <span class="text-white text-[18px] font-bold">取得於:{{ details.monsterOthers.howtoget }}</span>
+                        <div>
+                            <span class="text-white text-[18px] font-bold">歸類於:{{ details.monsterOthers.belong }}</span>
+                            <span class="text-white text-[18px] font-bold">稀有度:{{ details.monsterOthers.rarity }}</span>
+                            <span class="text-white text-[18px] font-bold">取得於:{{ details.monsterOthers.howtoget }}</span>
+                        </div>
                         <div class="flex flex-row flex-wrap [&>img]:w-12 [&>img]:h-12 items-center">
                             <span class="text-white text-[18px] font-bold">素材量:</span>
-                            <img :src="isAddable+details.monsterOthers.material.m1" alt=""/>
-                            <img :src="isAddable+details.monsterOthers.material.m1" alt=""/>
-                            <img :src="isAddable+details.monsterOthers.material.m1" alt=""/>
-                            <img :src="isAddable+details.monsterOthers.material.m2" alt=""/>
-                            <img :src="isAddable+details.monsterOthers.material.m2" alt=""/>
+                            <img :src="isAddable+details.monsterOthers.material.m1" alt="material"/>
+                            <img :src="isAddable+details.monsterOthers.material.m1" alt="material"/>
+                            <img :src="isAddable+details.monsterOthers.material.m1" alt="material"/>
+                            <img :src="isAddable+details.monsterOthers.material.m2" alt="material"/>
+                            <img :src="isAddable+details.monsterOthers.material.m2" alt="material"/>
                         </div>
                         <div class="flex flex-row items-center">
                             <span class="text-white text-[18px] font-bold">對應腐化:</span>
@@ -109,27 +111,27 @@ onMounted(() => {
                 </div>
                 <Intro :dataText="details.skill"/>
                 <div class="text-white font-bold mt-5 max-[450px]:text-[18px]">
-                    <p class="whitespace-pre-wrap">{{ details.mainDescription }}</p>
+                    <span class="whitespace-pre-wrap">{{ details.mainDescription }}</span>
                 </div>
                 <div class="score mt-2">
-                    <label for="">評分:{{details.rate}}/10</label>
+                    <span>評分:{{details.rate}}/10</span>
                 </div>
             </div>
-            <div style="margin-top: 50px;margin-bottom:50px;">
+            <div class="my-12">
                 <div class="title">
                     <span>專屬隊伍技能介紹</span>
                 </div>
-                <div class="flex flex-col mt-3" v-for="s in details.specialEffect">
-                    <div class="text-gray-500 font-bold text-[20px] max-[450px]:text-[16px]">
-                        <p class="whitespace-pre-wrap text-[20px] ">{{ s.mainDetails }}</p>
+                <div class="flex flex-col my-2" v-for="s in details.specialEffect">
+                    <div class="text-stone-500 bg-black/50 font-bold rounded-md p-2 w-fit text-xl max-[450px]:text-base">
+                        <p class="whitespace-pre-wrap text-xl">{{ s.mainDetails }}</p>
                     </div>
                     <div class="description mt-1">
-                        <p class="text-[18px] max-[450px]:text-[16px]">{{ s.mainDescription }}</p>
+                        <p class="text-base text-white font-bold">{{ s.mainDescription }}</p>
                     </div>
                 </div>
             </div>
             <div class="mb-5" style="padding-top: 10px;padding-bottom:10px;">
-                <div class="flex flex-row flex-wrap items-center justify-between [&>div]:ml-auto [&>div]:mr-auto max-md:flex-col max-xl:[&>div]:ml-[0px] max-xl:[&>div]:mr-[0px]">
+                <div class="flex flex-row flex-wrap items-center justify-between [&>div]:ml-auto [&>div]:mr-auto max-md:flex-col max-xl:[&>div]:ml-0 max-xl:[&>div]:mr-0">
                     <div class="w-1/2 flex flex-col  max-[1200px]:w-full" >
                         <div class="title">
                             <span>腐化龍刻技能介紹</span>
@@ -171,6 +173,6 @@ onMounted(() => {
         </div>
     </div>
 </template>
-<style scoped>
-    @import '../assets/css/submain.css';
+<style lang="scss" scoped>
+    @use '../assets/css/submain.scss';
 </style>

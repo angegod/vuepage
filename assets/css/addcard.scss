@@ -2,18 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-.removeBtn,.addBtn{
+//定義Btn介面
+%Btn{
     color:theme('colors.gray.600');
     border-color: theme('borderColor.gray.600');
     border-radius: theme('borderRadius.md');
     border-width: theme('borderWidth.2');
     border-style: solid;
     font-weight: theme('fontWeight.bold');
+
+    &:hover{
+        color: theme('colors.amber.900');
+        border-color: theme('borderColor.amber.900');
+    }
 }
 
-.removeBtn:hover,.addBtn:hover{
-    color: theme('colors.amber.900');
-    border-color: theme('borderColor.amber.900');
+
+.removeBtn,.addBtn{
+    @extend %Btn;
 }
 
 .selfInput{
@@ -56,16 +62,21 @@
   transform: translateX(100%);
 }
 
+
+@mixin imgBox($animationName){
+    animation: $animationName infinite 3s ease-in;
+}
+
 .imgbox1{
-    animation: rarity1_blink infinite 3s ease-in;
+    @include imgBox(rarity1_blink);
 }
 
 .imgbox2{
-    animation: rarity2_blink infinite 3s ease-in;
+    @include imgBox(rarity2_blink);
 }
 
 .imgbox3{
-    animation: rarity3_blink infinite 3s ease-in;
+    @include imgBox(rarity3_blink);
 }
 
 .spread{

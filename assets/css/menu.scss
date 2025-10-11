@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+$backGroundColor:rgb(67,47,47);
+$redTextColor:rgb(129, 5, 5);
+
+.header{
+  background-color: $backGroundColor;
+  position: sticky;
+  top: 0;
+  width: 100% ;
+  z-index: 600;  
+}
+
+.menu{
+  @apply text-gray-500 list-none mt-0 pl-10 pb-1.5;
+}
+
+%link{
+    margin-left: 20px;
+    margin-right: 20px;
+    font-weight: bold;
+    color:gray;
+    text-decoration: none;
+    word-break: keep-all;
+}
+
+.link{
+    @extend %link;
+
+    &.redText{
+        color: $redTextColor;
+    }
+}
+
+.sublink {
+    @extend %link;
+    border-bottom: 1px dotted gray;
+
+    &:last-child{
+        @apply border-b-0;
+    }
+
+    &.redText{
+        color: $redTextColor;
+    }
+}
+
+/* 排除最後一個 .sublink */
+/*.sublink:last-child {
+    border-bottom: none;
+}*/
+
+
+/*hover顯示 */
+a:hover{
+  color: white;
+}
+
+
+.subMenu{
+    @apply h-0 opacity-0 pointer-events-none transition-none;
+    transition: none;
+
+    &.expand{
+        @apply opacity-100 pointer-events-auto;
+        background-color: $backGroundColor;
+    }
+}
+
+#headerMenu{
+    @apply absolute top-0 left-[6%] z-[9999] h-fit;
+    background-color: $backGroundColor;
+    width: -webkit-fill-available;
+}
+
+
+
+
+

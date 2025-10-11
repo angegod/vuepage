@@ -33,7 +33,7 @@
   </div>
   
 </template>
-<style scoped>
+<style lang="scss" scoped>
 
-@import '../assets/css/switch.css';
+@use '../assets/css/switch.scss';
 </style>

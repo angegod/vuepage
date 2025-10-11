@@ -53,6 +53,6 @@ const props = defineProps<Props>();
     </div>
   </div>
 </template>
-<style scoped>
-  @import '../assets/css/card.css';
+<style lang="scss" scoped>
+  @use '../assets/css/card.scss';
 </style>

@@ -1,0 +1,12 @@
+
+//共用背景色
+$globalBackGround:linear-gradient(to bottom,rgb(27, 25, 25) 0%,rgb(65, 28, 28) 70%,rgb(102, 12, 12) 90%);
+
+$SelectColor:rgb(198, 30, 30);
+
+//共用模板區塊
+@mixin MainSection($mb:10rem){
+    @apply w-full h-auto;
+    padding-bottom: $mb;
+    background-image: $globalBackGround;
+}

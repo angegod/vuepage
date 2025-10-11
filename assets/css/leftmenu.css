@@ -36,7 +36,6 @@ a.subpagesLink:hover{
     margin-top:20px;
     margin-bottom: 20px;
     font-weight: bold;
-    /*background-color: rgb(136, 33, 33);*/
     width: 80%;
     letter-spacing: 10px;
     padding-left: 10px;
@@ -81,8 +80,6 @@ a img{
 
 .introduction .par{
     width: 60%;
-    /*background-color: blanchedalmond;
-    background-blend-mode: lighten;*/
     margin: 50px 100px 50px 100px;
 }
 .introduction .par p{

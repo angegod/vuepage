@@ -1,61 +1,66 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 .Card {
-  position: relative;
-  width: 100%;
+  @apply relative w-full pb-10;
   min-height: 800px;
   height: calc(100% + 50px);
-  padding-bottom: 40px;
   background-image: linear-gradient(to bottom, rgb(27, 25, 25) 0%, rgb(65, 28, 28) 70%, rgb(102, 12, 12) 90%);
 }
 
 .rarity {
-  opacity: 0.6;
+   @apply opacity-60;
+
+   &:hover,&.clicked{
+      @apply opacity-100
+   }
+
+   & img:nth-child(2){
+      @apply hidden;
+   }
+   &.clicked img:nth-child(2){
+      @apply block;
+   }
 }
 
-.rarity:hover,
-.rarity.clicked {
-  opacity: 1;
-}
 
-.rarity img:nth-child(2) {
-  display: none;
-}
+  // === 變數設定 === //
+  $color-gray: #9ca3af; // theme('colors.gray.400')
+  $color-black: #000000; // theme('colors.black')
+  $color-white: #ffffff; // theme('colors.white')
+  $color-amber: #f59e0b; // theme('colors.amber.500')
 
-.rarity.clicked img:nth-child(2) {
-  display: block;
-}
+  $font-base: 1rem;      // theme('fontSize.base')
+  $font-xl: 1.25rem;     // theme('fontSize.xl')
+  $radius-md: 0.375rem;  // theme('borderRadius.md')
 
-
+  // === 按鈕樣式 === //
   .btn {
-    color: gray;
-    font-size: 1.25rem; /* theme('fontSize.xl') */
-    border-color: #9ca3af; /* theme('colors.gray.400') */
-    border: 2px solid;
-    border-radius: 0.375rem; /* theme('borderRadius.md') */
+      color: gray;
+      font-size: $font-xl;
+      border: 2px solid $color-gray;
+      border-radius: $radius-md;
+
+      &:hover {
+        color: $color-white;
+        border-color: $color-white;
+      }
+
+      &.clicked {
+        color: $color-amber;
+        border-color: $color-amber;
+      }
+
+      &.small {
+        font-size: $font-base;
+      }
   }
 
+  // === 搜尋按鈕 === //
   .searchBtn {
-    color: #000000; /* theme('colors.black') */
-    font-size: 1.25rem; /* theme('fontSize.xl') */
-    border: 2px solid;
-    border-radius: 0.375rem; /* theme('borderRadius.md') */
+    color: $color-black;
+    font-size: $font-xl;
+    border: 2px solid currentColor; // 自動使用文字顏色
+    border-radius: $radius-md;
   }
 
-  .small {
-    font-size: 1rem; /* theme('fontSize.base') */
-  }
-
-  .btn:hover {
-    color: #ffffff; /* theme('colors.white') */
-    border-color: #ffffff; /* theme('colors.white') */
-  }
-
-  .btn.clicked {
-    color: #f59e0b; /* theme('colors.amber.500') */
-    border-color: #f59e0b; /* theme('colors.amber.500') */
-  }
 
   .condBtn {
     font-size: 20px;
@@ -85,7 +90,6 @@
     left:0;
     background:rgba(0, 0, 0, 0.8);
     z-index:999;
-
 }
 
 
