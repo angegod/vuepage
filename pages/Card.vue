@@ -40,6 +40,9 @@
     //排序方式
     let sortCond=ref<SortConditionItem[]>([{type:'Rarity',sort:false},{type:'Id',sort:false}]);//新增sort條件順序
 
+    //收合狀況
+    let expand = ref<boolean[]>([]);
+
 
     function checkData(){//避免資料更新時需要改動，預設檢查機制
         let count=0;
@@ -53,8 +56,12 @@
                     array.push([d.id,count]);
                     d.id=count;
                 }
-            })
+            });
+
+            //預設該分類為展開
+            expand.value.push(true);
         });
+
 
         Card.forEach(series => {
             series.card.forEach((c)=>{
@@ -67,9 +74,13 @@
                         modfiedNum.push(m[1]);//告訴系統說這個數字已經更改過了
                     }
                 })
-            })
+            });
         });
 
+    }
+
+    function isExpand(index:number){
+        expand.value[index] = !expand.value[index];
     }
 
 
@@ -487,14 +498,21 @@
                         <span class="text-white font-bold text-xl mr-3 pt-1.5">功能</span>
                         <Switch ref="b2" @refresh="" :text1="'使用Or搜尋'" :text2="'使用And搜尋'"/>
                     </div>
-                    <div v-for="t in funcData" class="mt-5">
-                        <div>
+                    <div v-for="(t,i) in funcData" class="mt-5">
+                        <div class="flex flex-row items-center">
                             <span class="text-amber-600 font-bold text-xl">{{ t.typeName }}</span>
+                            <button class="text-white ml-2 flex flex-row items-center" @click="isExpand(i)">
+                                <img :src="(expand[i])?`${isAddable}/images/arrow_drop_down.svg`:`${isAddable}/images/arrow_drop_up.svg`" 
+                                    width="30" height="30"
+                                    alt="expand" />
+                            </button>
                         </div>
-                        <div class="[&>button]:mr-2 [&>button]:w-[20%] max-[500px]:[&>button]:w-[40%] [&>button]:min-w-[200px]
-                                max-[500px]:[&>button]:small max-[500px]:[&>button]:min-w-[140px]">
-                            <button type="button"  v-for="func in t.data" class="btn func mb-2 min-w-[160px] min-h-[30px]" v-on:click="clicked(`func_${func.id}`)" :id="'btn'+func.id">{{func.name }}</button>
-                        </div> 
+                        <Transition name="fade">
+                            <div class="[&>button]:mr-2 [&>button]:w-[20%] max-[500px]:[&>button]:w-[40%] [&>button]:min-w-[200px]
+                                max-[500px]:[&>button]:small max-[500px]:[&>button]:min-w-[140px]" v-show="expand[i]">
+                                <button type="button"  v-for="func in t.data" class="btn func mb-2 min-w-[160px] min-h-[30px]" v-on:click="clicked(`func_${func.id}`)" :id="'btn'+func.id">{{func.name }}</button>
+                            </div>
+                        </Transition> 
                     </div>
                 </div>
             </div>
@@ -578,8 +596,6 @@
                                         class="h-[40vh] min-w-[150px] max-[400px]:h-[45vh]"
                                     />
                                 </div>
-
-                                
                             </div>
                             <div class="w-1/2 flex flex-col min-w-[150px] ml-2 max-[450px]:ml-0 max-[500px]:w-full mt-1">
                                 <div class="flex flex-row flex-wrap max-[500px]:mt-2 max-[500px]:justify-center">
