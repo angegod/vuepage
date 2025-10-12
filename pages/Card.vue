@@ -188,15 +188,13 @@
                 if(b2.value&&b2.value.getBool()){
                 
                     if(selectFunc.value.length!==0 && selectEffectType.value.length!==0){//如果有選入功能再做篩選，反之則不用篩選
-                        selectFunc.value.forEach((f)=>{
-                            selectable = selectEffectType.value.some(
-                                (key) => (item[key] ?? []).includes(f.id)
-                            );
-
-                            if (!selectable) {
-                                return;
-                            }
+                        selectable = selectEffectType.value.some(key => {
+                            const effectList = item[key] ?? [];
+                            return selectFunc.value.every(f => effectList.includes(f.id));
                         });
+
+                        if(!selectable)
+                            return;
                     }
                     //如果篩選符合結果則會
                     if(selectable)
