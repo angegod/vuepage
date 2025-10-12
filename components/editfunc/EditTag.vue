@@ -189,6 +189,6 @@ watch(
         </div>
     </div>
 </template>
-<style scoped>
-    @import '../../assets/css/modify.css';
+<style lang="scss" scoped>
+    @use '../../assets/css/modify.scss';
 </style>

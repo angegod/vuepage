@@ -97,8 +97,8 @@
     </div>
     
 </template>
-<style scoped>
-    @import '../../assets/css/modify.css';
+<style lang="scss" scoped>
+    @use '../../assets/css/modify.scss';
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button {
         -webkit-appearance: none;
