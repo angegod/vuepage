@@ -103,7 +103,7 @@ const startMatch = () => {
             <div class="[&>a]:text-[25px] options link" @click="addDash(4)">
                 <NuxtLink to="/card/">時光牌</NuxtLink>
             </div>
-            <div class="!p-0 !mb-1 !flex" v-if="showCardBtn">
+            <div class="!p-0 !flex" v-if="showCardBtn">
                 <button class="searchBtn bg-amber-800 
                 text-white border-amber-800 w-[100px] rounded-md text-[20px]" @click="startMatch">開始匹配</button>
             </div>
@@ -126,7 +126,7 @@ const startMatch = () => {
                     <NuxtLink to="/card/" >時光牌</NuxtLink>
                 </div>
             </div>
-            <div class="!p-0 !mb-1 !flex mr-1" v-if="showCardBtn">
+            <div class="!p-0 !flex mr-1" v-if="showCardBtn">
                 <button class="searchBtn bg-amber-800 
                 text-white border-amber-800 w-[100px] rounded-md text-[20px]" @click="startMatch">開始匹配</button>
             </div>
