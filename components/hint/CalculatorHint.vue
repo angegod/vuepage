@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 import Popper from 'vue3-popper';
-import Goal from '../../components/data/Goal.js';
-import Card from '../../components/data/Card.js';
+import Goal from '../../components/data/Goal.ts';
+import Card from '../../components/data/Card.ts';
 
 let data=ref(null);
 

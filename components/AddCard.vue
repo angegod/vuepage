@@ -13,6 +13,8 @@
         rarity: 1,
         image: '',
         tag: [],
+        comboTag:[],
+        roundTag:[],
         instantEffect: [],
         comboEffect: [],
         roundEffect:[],
@@ -55,6 +57,8 @@
             rarity: 1,
             image: '',
             tag: [],
+            comboTag:[],
+            roundTag:[],
             instantEffect: [],
             comboEffect: [],
             roundEffect:[],
@@ -344,6 +348,8 @@
             PointConsume:card.value.PointConsume,
             PointGet:card.value.PointGet,
             tag:card.value.tag,
+            comboTag:[],
+            roundTag:[],
             fullimage:card.value.fullimage,
             keyword:card.value.keyword,
             ...(card.value.spread ? { spread: card.value.spread } : {})
@@ -590,6 +596,6 @@
         
     </div>
 </template>
-<style scoped>
-@import '../assets/css/addcard.css';
+<style lang="scss" scoped>
+@use  '../assets/css/addcard.scss';
 </style>
