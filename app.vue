@@ -105,7 +105,7 @@ const startMatch = () => {
             </div>
             <div class="!p-0 !flex" v-if="showCardBtn">
                 <button class="searchBtn bg-amber-800 
-                text-white border-amber-800 w-[100px] rounded-md text-[20px]" @click="startMatch">開始匹配</button>
+                text-white border-amber-800 w-[100px] rounded-md text-xl" @click="startMatch">開始匹配</button>
             </div>
         </div>
         <div class="flex flex-row min-[600px]:hidden w-full justify-between" id="smallHeader">

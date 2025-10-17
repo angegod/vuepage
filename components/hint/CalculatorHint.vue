@@ -6,9 +6,6 @@ import Card from '../../components/data/Card.ts';
 
 let data=ref(null);
 
-//初始化
-init();
-
 
 function init(){
     data.value=Goal;
@@ -23,6 +20,11 @@ function init(){
         data.value[targetRarity-1].open = target.filter((c)=>c.rarity === targetRarity).length;
     }
 }
+
+onMounted(()=>{
+    //初始化
+    init();
+});
 
 </script>
 <template>

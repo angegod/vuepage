@@ -2,3 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+     /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+
+    .grayScrollBar::-webkit-scrollbar {
+        width:  10px;
+        height: 5px !important;
+        border: none;
+        background-color: transparent;
+    }
+
+    /* 滚动条的滑块部分 */
+    .grayScrollBar::-webkit-scrollbar-thumb {
+        width:  10px;
+        background: #888 !important; 
+        border-radius: 3px !important;
+    }
+}

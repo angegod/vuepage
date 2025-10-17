@@ -11,6 +11,7 @@
     import EffectHint from '@/components/hint/EffectHint.vue';
     import CardSection from '@/components/CardSection.vue';
     import CardEffectBlock from '@/components/CardEffectBlock.vue';
+    import CardKeyWord from '@/components/hint/CardKeyWord.vue';
     
     import { useCardBtnStore } from '../components/data/store.js';
     import type { CardByTextResultItem, CardItem, CardSeriesItem, SortConditionItem } from '@/interface/card.ts';
@@ -310,22 +311,24 @@
                             //targetCard.value.push(c);
                             added=true;
                         }
-                        //依關鍵字查詢
 
+                        //依關鍵字查詢
                         if(c.keyword!==undefined){
                             if(c.keyword.find((k)=>k.includes(keyword))!==undefined){
                                 added=true;
                             }
                         }
                        
-                        //依技能敘述查詢
-                        c.tag.forEach((t)=>{
-                            funcData.forEach((typeData)=>{
-                                typeData.data.forEach((d)=>{
-                                   if(d.id===t&&d.name.includes(keyword))
-                                        added=true; 
-                                   
-                                })
+                        //依技能敘述查詢 三個都檢查
+                        (["tag", "roundTag", "comboTag"] as const).forEach(tagType => {
+                            c[tagType].forEach(t => {
+                                funcData.forEach(typeData => {
+                                    typeData.data.forEach(d => {
+                                        if (d.id === t && d.name.includes(keyword)) {
+                                        added = true;
+                                        }
+                                    });
+                                });
                             });
                         });
 
@@ -423,7 +426,8 @@
 
     //監聽是否有按下按鈕
     const callsetData = () => {
-        setData();
+        if(!isInput.value)
+            setData();
     };
 
     let stopWatcher: (() => void) | null = null;
@@ -520,6 +524,12 @@
                     <input type="text" placeholder="Keyword" class="rounded-md max-w-[200px] pl-3 max-h-[25px]" @keyup="event=>CardByText(event)" :disabled="gifShow"/>
                     <CardHint />
                     <img :src="isAddable+'/images/loading.gif'" alt="555" class="w-[50px] h-[30px]" v-if="gifShow"/>
+                </div>
+                <div>
+                    <span class="text-stone-400 text-sm">輸入完關鍵字字眼後按下Enter鍵即可獲得結果!</span>
+                </div>
+                <div>
+                    <CardKeyWord :card="Card"/>
                 </div>
             </div>
             <div class="flex flex-col flex-wrap mt-5" id="searchCard" v-show="isSearch">
