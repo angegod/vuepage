@@ -99,6 +99,11 @@
     scrollbar-width: none;
 }
 
+.popup.calculator{
+    @apply w-1/5 h-[400px];
+    min-width: 350px;
+}
+
 .spread{
     width: 240px; /* 棋子盘宽度压缩到200px */
     height: 200px; /* 按比例设定的高度 */
@@ -146,8 +151,8 @@
 
 
 @keyframes slideshow{
-    from {height: 0;}
-    to {height: 500px;}
+    from {max-height: 0;}
+    to {max-height: 500px;}
 }
 
 @keyframes rarity3_blink{

@@ -29,7 +29,7 @@ onMounted(()=>{
         <div>
             <span class="text-red-600 font-bold text-lg">目前支援特殊關鍵字</span>
         </div>
-        <div class="flex flex-row flex-wrap max-h-[20vh] overflow-y-scroll w-2/5 max-[1000px]:w-full grayScrollBar bg-stone-700/90 rounded-md p-1">
+        <div class="CardKeyWord grayScrollBar">
             <div class="flex flex-col w-1/2 my-2" v-for="c in Card">
                 <div>
                     <span class="text-amber-500 font-bold">{{c.id +" "+ c.name }}</span>
@@ -43,7 +43,13 @@ onMounted(()=>{
     </div>    
 
 </template>
-<style scoped lang="scss">
+<style scoped>
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-
+.CardKeyWord{
+    @apply flex flex-row flex-wrap max-h-[20vh] overflow-y-scroll w-2/5 max-[1000px]:w-full ;
+    @apply bg-stone-700/90 border-black/80 border-[2px] rounded-md p-1;
+}
 </style>

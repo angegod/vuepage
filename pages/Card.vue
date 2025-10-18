@@ -281,13 +281,8 @@
         selectRarity.value=[];//被選擇的稀有度
         targetCard.value=[];//被選擇的卡片清單
         showCard.value=null;//顯示該卡詳細資訊
-
-        /*if(isInput.value)
-            eventBus.emit('HideBtn');
-        else
-            eventBus.emit('ShowBtn');*/
-        
-        //回歸到初次搜尋階段
+        selectEffectType.value=[];//時光牌篩選效果種類
+    
         isSearch.value=false;
     }
 
@@ -440,8 +435,13 @@
         stopWatcher = watch(
             () => store.isMatch,
             () => {
-                callsetData();
-                store.StopMatch();
+                //當目前需要匹配 才執行這個方法 避免陷入閉鎖
+                if(store.isMatch){
+                    callsetData();
+
+                    //將匹配狀態取消
+                    store.StopMatch();
+                }
             }
         );
     });
@@ -623,7 +623,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class='popup max-[500px]:w-[80%] max-[500px]:min-w-[200px]' v-else-if="mode==='calculator'">
+                    <div class='popup calculator max-[500px]:w-[80%] max-[500px]:min-w-[200px]' v-else-if="mode==='calculator'">
                         <div class='close text-black' v-on:click="closeHandle">&#10006;</div>
                         <Calculator />
                     </div>
