@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import Popper from 'vue3-popper';
 import Goal from '../../components/data/Goal.ts';
-import Card from '../../components/data/Card.ts';
+import Card from '../data/Card.ts';
 
 let data=ref(null);
 

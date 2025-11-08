@@ -5,7 +5,7 @@ span{
 }
 
 .overlay {
-    @apply fixed inset-0 z-[999] bg-black/80 hidden h-auto;
+    @apply fixed inset-0 z-[999] bg-black/80 h-auto;
 }
 
 
@@ -14,7 +14,7 @@ span{
 }
 
 .popup {
-    @apply absolute w-2/5 max-w-[500px] top-[10%] left-0 right-0 mx-auto rounded-[10px] ;
+    @apply absolute min-w-[500px] w-2/5 top-[10%] left-0 right-0 mx-auto rounded-[10px] ;
     @apply bg-white overflow-y-scroll;
     box-shadow: 0px 0px 10px 0px black;
     animation: slideshow 0.3s ease-in;

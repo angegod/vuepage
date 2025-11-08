@@ -1680,6 +1680,109 @@ let Card:CardSeriesItem[] = [
           85
         ],
         "PointEnter": 8
+      },
+      {
+        "id": 48,
+        "name": "甦醒的妖刀",
+        "rarity": 1,
+        "image": "/images/card/icon/1_48.png",
+        "instantEffect": [
+          "該回合增加 4 連擊 (Combo)"
+        ],
+        "comboEffect": [
+          "自身無視「十字限盾」"
+        ],
+        "roundEffect": [
+          "將自身直行的符石轉化為暗符石",
+          "自身以 30% 攻擊力追打暗屬性攻擊 10 次"
+        ],
+        "PointMax": 4,
+        "PointConsume": 2,
+        "PointGet": 2,
+        "fullimage": "/images/card/image/1_48.png",
+        "keyword": [
+          "",
+          "妖刀"
+        ],
+        "tag": [
+          18
+        ],
+        "roundTag": [
+          52,
+          73
+        ],
+        "comboTag": [
+          8
+        ],
+        "PointEnter": 4
+      },
+      {
+        "id": 49,
+        "name": "終命一彈",
+        "rarity": 2,
+        "image": "/images/card/icon/1_49.png",
+        "instantEffect": [
+          "自身為魔族成員，自身技能 CD -3"
+        ],
+        "comboEffect": [
+          "自身無視指定減傷抗性敵技",
+          "自身以 100% 攻擊力追打五屬性攻擊各 1 次"
+        ],
+        "roundEffect": [
+          "隊伍不會被封鎖主動技能"
+        ],
+        "PointMax": 6,
+        "PointConsume": 3,
+        "PointGet": 2,
+        "fullimage": "/images/card/image/1_49.png",
+        "keyword": [
+          "拿破崙"
+        ],
+        "tag": [
+          36
+        ],
+        "roundTag": [
+          65
+        ],
+        "comboTag": [
+          12,
+          54
+        ],
+        "PointEnter": 6
+      },
+      {
+        "id": 50,
+        "name": "機密查錄",
+        "rarity": 1,
+        "image": "/images/card/icon/1_50.png",
+        "instantEffect": [
+          "提升 100% 龍脈儀能量"
+        ],
+        "comboEffect": [
+          "自身以 200% 攻擊力追打火屬性攻擊 1 次",
+          "自身以 200% 攻擊力追打光屬性攻擊 1 次"
+        ],
+        "roundEffect": [
+          "自身無視「固定連擊盾」"
+        ],
+        "PointMax": 4,
+        "PointConsume": 1,
+        "PointGet": 2,
+        "fullimage": "/images/card/image/1_50.png",
+        "keyword": [
+          ""
+        ],
+        "tag": [
+          19
+        ],
+        "roundTag": [
+          2
+        ],
+        "comboTag": [
+          49,
+          51
+        ],
+        "PointEnter": 4
       }
     ]
   }

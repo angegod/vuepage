@@ -51,6 +51,7 @@
     let searchWord='';
 
     let popup=ref<InstanceType<typeof AddCard>>();
+    let showAddCardWindow = ref<boolean>(false);
 
     //功能列表
     let editFunc=ref([{
@@ -345,26 +346,23 @@
    
 
     function addCard(){
-        if(popup.value){
-            let overlay = document.getElementById('overlay') as HTMLDivElement;
-
-            overlay.style.display='block';
-            popup.value.setFunc(func.value);
-        }
+        showAddCardWindow.value = true;
     }
 
     function closeHandle(){
-        let overlay = document.getElementById('overlay') as HTMLDivElement;
-        overlay.style.display='none';
+        showAddCardWindow.value = false;
     }
 
     function changeEditMode(modeName:string){
         editMode.value=modeName;
     }
 
+    //從添加卡片獲取最新的卡片陣列資訊
     function changeCardDataFromChild(data:CardItem[]){
+        console.log('獲得卡片更動!!');
         Card.value = data;
         CardArray.value=JSON.parse(JSON.stringify(Card)) as CardItem[];
+
     }
 
     //監聽targetCard在任一子物件中是否有被修改過?
@@ -540,10 +538,10 @@
             </Carousel>
         </div>
         
-        <div class='overlay' id="overlay">
+        <div class='overlay' v-if="showAddCardWindow">
             <div class='popup max-[500px]:w-[80%] max-[500px]:min-w-[200px]'>
                 <div class='close' v-on:click="closeHandle">&#10006;</div>
-                <AddCard ref="popup" :max="CardArray.length+1" :func="func" @close="closeHandle" @updateCard="changeCardDataFromChild"/>
+                <AddCard ref="popup" @close="closeHandle" @updateCard="changeCardDataFromChild"/>
             </div>
         </div>
     </div>

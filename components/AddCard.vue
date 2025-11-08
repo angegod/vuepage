@@ -4,9 +4,8 @@
     import type { CardItem } from '@/interface/card';
     import type { funcDataItem, skillItem } from '@/interface/funcData';
     import type { fileDataItem } from '@/interface/modify';
+    import { useModifyStore } from './store/modifyData';
     
-    let props = defineProps(['max','func']);
-
     let card=ref<CardItem>({
         id: 0,
         name: '',
@@ -25,7 +24,7 @@
         keyword: [],
         PointEnter: 2,
     });
-    let func=ref<funcDataItem[]>([]);
+    
     
     let step=ref<number>(1);//處於哪個步驟 初始為1
     let iconInput=ref<fileDataItem|null>(null);//縮圖上傳
@@ -38,6 +37,10 @@
     let instantEffect=ref<string[]>(['']);//此區塊暫時默認只寫一個
 
     const emit = defineEmits(['close','updateCard']);
+    const modifyStore = useModifyStore();
+
+    //獲得CardArray最新資訊
+    const {CardArray,func} = storeToRefs(modifyStore);
     
     //初始化 包括還原
     function init(){
@@ -51,8 +54,9 @@
         comboEffect.value = [''];
         instantEffect.value = [''];
 
+        console.log(CardArray.value);
         card.value={
-            id: 0,
+            id: CardArray.value.length+1,
             name: '',
             rarity: 1,
             image: '',
@@ -209,6 +213,7 @@
 
     //步驟進行
     async function nextStep(){
+        console.log(step.value);
         if(step.value <3){
             step.value +=1;
             return;
@@ -225,6 +230,7 @@
                 return;       
             }else{
                 setCardPreview();
+                console.log(card.value);
                 step.value +=1;
                 return;
             }
@@ -232,7 +238,7 @@
         
         
         //送出資料 由於有兩張照片 所以會先分批跟api溝通
-        if(step.value===4 && iconInput.value && imageInput.value && spreadInput.value){
+        if(step.value===4 && iconInput.value && imageInput.value){
             console.log('step4');
             step.value+=1;
 
@@ -291,10 +297,12 @@
             await axios.post('http://localhost:5000/card/add',json).then((response)=>{
                 alert('新卡片已添加');
                 emit('close','');
-                emit('updateCard',response.data)              
+                //emit('updateCard',response.data)
+                
+                CardArray.value.push(card.value);
+                console.log(CardArray.value);
                
                 init();
-                console.log(card.value);
             });
         }
     }
@@ -303,7 +311,7 @@
     function setCardPreview(){
         //設定編號
         if(card.value.id===undefined)
-            card.value.id=props.max;
+            card.value.id = CardArray.value.length+1;
 
         //設定卡片敘述
         card.value.roundEffect=roundEffect.value;
@@ -370,6 +378,11 @@
     });
     
 
+    onMounted(()=>{
+        //初始化
+        init();
+    })
+
 </script>
 <template>
     <div class="h-[450px] pl-5 ">
@@ -382,7 +395,7 @@
                     </div>
                     <div class="mt-3 flex flex-row items-baseline">
                         <span class="text-lg mr-1">卡片編號:</span>
-                        <span>{{ max }}</span>
+                        <span>{{ CardArray.length+1 }}</span>
                         
                     </div>
                     <div class="flex flex-col mt-5">

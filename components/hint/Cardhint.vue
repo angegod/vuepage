@@ -9,7 +9,7 @@ import Popper from 'vue3-popper'
             <span class="text-white cursor-pointer bg-black w-[20px] h-[20px] text-center rounded-xl">?</span>
         </div>
         <template #content>
-            <div class="w-4/5 mt-2 flex flex-col bg-[rgb(67,47,47)] rounded-md p-2" >
+            <div class="w-4/5 mt-2 flex flex-col bg-[rgb(67,47,47)] border-2 border-black/70 rounded-md p-2" >
                 <span class="text-amber-600 font-bold text-xl">簡單說明:</span>
                 <ul class="[&>li]:text-white list-decimal pl-5">
                     <li>使用方式:輸入所想要篩選的關鍵字，按下enter鍵即可看到對應結果</li>
