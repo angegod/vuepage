@@ -2,7 +2,7 @@
     import { inject,ref,provide } from 'vue';
     import axios from 'axios';
     import type { CardItem } from '@/interface/card';
-    import type { funcDataItem, skillItem } from '@/interface/funcData';
+    import type { funcDataItem, skillItem ,showSkillItem, TagType } from '@/interface/funcData';
     import type { fileDataItem } from '@/interface/modify';
     import { useModifyStore } from './store/modifyData';
     
@@ -30,8 +30,13 @@
     let iconInput=ref<fileDataItem|null>(null);//縮圖上傳
     let imageInput=ref<fileDataItem|null>(null);//預覽圖上傳
     let spreadInput=ref<fileDataItem|null>(null);//盤面圖 如果有必要的話
+    let selectTagType=ref<TagType>('tag');
 
-    let showSkill=ref<skillItem[]>([]);
+    let showSkill=ref<showSkillItem>({
+        tag:[],
+        roundTag:[],
+        comboTag:[]
+    });
     let roundEffect=ref<string[]>(['']);
     let comboEffect=ref<string[]>(['']);
     let instantEffect=ref<string[]>(['']);//此區塊暫時默認只寫一個
@@ -48,8 +53,13 @@
         iconInput.value = null;
         imageInput.value = null;
         spreadInput.value = null;
+        selectTagType.value = 'tag';
 
-        showSkill.value = [];
+        showSkill.value = {
+            tag:[],
+            roundTag:[],
+            comboTag:[]
+        };
         roundEffect.value = [''];
         comboEffect.value = [''];
         instantEffect.value = [''];
@@ -151,38 +161,82 @@
         }
     }
 
+    function changeTagType(event: Event) {
+        const value = (event.target as HTMLSelectElement).value as TagType;
+        selectTagType.value = value;
+    }
     //新增技能
-    function addTag(){
+    function addTag() {
+        if(!showSkill.value) return;
+
         let tagSelect = document.getElementById('tagSelect2') as HTMLSelectElement;
-        let tagIndex=parseInt(tagSelect.value);
-        let targetTag = {} as skillItem;
+        let tagIndex = parseInt(tagSelect.value);
 
-        func.value.forEach((type)=>{
-            let t=type.data.find((f)=>f.id===tagIndex);
-            if(t===undefined)
-                return;
-            targetTag=t;
+        if (!tagIndex) return;
 
+        let targetTag: skillItem | undefined;
+
+        // 找到對應 skillItem
+        func.value.forEach((type) => {
+            const t = type.data.find((f) => f.id === tagIndex);
+            if (t) targetTag = t;
         });
-        if(showSkill.value.includes(targetTag)||tagIndex===0){
+
+        if (!targetTag) return;
+
+        const typeKey = selectTagType.value as 'tag' | 'roundTag' | 'comboTag';
+        if (!typeKey) {
+            console.warn("請先選擇技能標籤類型");
             return;
         }
-        showSkill.value.push(targetTag);
-        showSkill.value=showSkill.value.sort((a:skillItem,b:skillItem)=>{return a.id-b.id});
-        
-        if(card.value.tag===undefined){
-            card.value.tag=[];
+
+        // 初始化陣列
+        if (!card.value[typeKey]) {
+            card.value[typeKey] = [];
         }
-        card.value.tag.push(tagIndex);
-        card.value.tag=card.value.tag.sort((a,b)=>{return a-b});
+
+        // card 已存在就不加入
+        if (card.value[typeKey].includes(tagIndex)) return;
+
+        // showSkill 是否已存在
+        if (!showSkill.value[typeKey].some(s => s.id === targetTag!.id)) {
+            showSkill.value[typeKey].push(targetTag!);
+            showSkill.value[typeKey].sort((a, b) => a.id - b.id);
+        }
+
+        // card 寫入
+        card.value[typeKey].push(tagIndex);
+        card.value[typeKey].sort((a, b) => a - b);
     }
 
+
+
     //移除技能
-    function removeTag(tagId:number){
-        card.value.tag = card.value.tag.filter((t)=>t!==tagId);
-        showSkill.value = showSkill.value.filter((t)=>t.id!==tagId);
-        console.log(showSkill);
+    function removeTag(tagId: number) {
+        if(!showSkill.value) return;
+
+        const typeKey = selectTagType.value as 'tag' | 'roundTag' | 'comboTag';
+
+        // 如果沒有選類型，不操作
+        if (!typeKey) {
+            console.warn("請先選擇技能標籤類型");
+            return;
+        }
+
+        // 該類型尚未初始化
+        if (!card.value[typeKey]) {
+            return;
+        }
+
+        // 從該類別中移除
+        card.value[typeKey] = card.value[typeKey].filter((t) => t !== tagId);
+
+        // 移除 showSkill 顯示內容
+        showSkill.value[typeKey] = showSkill.value[typeKey].filter((t) => t.id !== tagId);
+
+        console.log(card.value[typeKey]);    
     }
+
 
     //新增關鍵字
     function addKeyword(event:KeyboardEvent){
@@ -238,8 +292,9 @@
         
         
         //送出資料 由於有兩張照片 所以會先分批跟api溝通
-        if(step.value===4 && iconInput.value && imageInput.value){
+        if(step.value === 4 && iconInput.value && imageInput.value){
             console.log('step4');
+
             step.value+=1;
 
             //先上傳縮圖
@@ -309,6 +364,8 @@
 
     //設置卡片預覽
     function setCardPreview(){
+        if(!showSkill.value) return;
+
         //設定編號
         if(card.value.id===undefined)
             card.value.id = CardArray.value.length+1;
@@ -333,13 +390,20 @@
        
 
         //將技能儲存縮短成只有編號
-        let tag=[] as number[];
+        /*let tag = [] as number[];
+        let roundTag = [] as number[];
+        let comboTag = [] as number[];*/
 
-        showSkill.value.forEach((s:skillItem)=>{
-            tag.push(s.id);
+        (["tag", "roundTag", "comboTag"] as const).forEach((type)=>{
+            let targetTagList = [] as number[];
+            
+            showSkill.value[type].forEach((s:skillItem)=>{
+                targetTagList.push(s.id);
+            });
+
+            card.value[type] = targetTagList;
+            console.log(card.value);            
         });
-
-        card.value.tag=tag;
 
 
         //調整物件屬性順序
@@ -356,8 +420,8 @@
             PointConsume:card.value.PointConsume,
             PointGet:card.value.PointGet,
             tag:card.value.tag,
-            comboTag:[],
-            roundTag:[],
+            comboTag:card.value.comboTag,
+            roundTag:card.value.roundTag,
             fullimage:card.value.fullimage,
             keyword:card.value.keyword,
             ...(card.value.spread ? { spread: card.value.spread } : {})
@@ -461,6 +525,13 @@
                             <span>技能標籤</span>
                         </div>
                         <div>
+                            <select class="colorSelect w-[150px]" @change="changeTagType">
+                                <option :value="'tag'">即時標籤</option>
+                                <option :value="'roundTag'">回合標籤</option>
+                                <option :value="'comboTag'">連動標籤</option>
+                            </select>
+                        </div>
+                        <div>
                             <select class="colorSelect w-[150px]" id="tagSelect2">
                                 <option :value="0">{{'請選擇'}}</option>
                                 <optgroup v-for="types in func" :label="types.typeName">
@@ -470,7 +541,7 @@
                             <button class="rounded-sm bg-gray-600 min-w-[50px] text-white" @click="addTag()">新增</button>
                         </div>
                         <div class="flex flex-col">
-                            <div class="flex flex-row justify-between" v-for="skill in showSkill">
+                            <div class="flex flex-row justify-between" v-for="skill in showSkill[selectTagType]">
                                 <span>{{skill.id +" "+skill.name }}</span>
                                 <button class="removeBtn" @click="removeTag(skill.id)">移除</button>
                             </div> 
@@ -513,6 +584,7 @@
                         <span>卡片關鍵字:</span>
                         <input type="text" class="selfInput" placeholder="輸入完成後按Enter"
                             @keydown="addKeyword"/>
+                        <span class="text-md text-gray-500">輸入完成後請按下Enter</span>
                         <span v-for="t in card.keyword">{{ t }}</span>
                     </div>
                     <div class="my-2">

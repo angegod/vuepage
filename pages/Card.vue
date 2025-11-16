@@ -320,7 +320,7 @@
                                 funcData.forEach(typeData => {
                                     typeData.data.forEach(d => {
                                         if (d.id === t && d.name.includes(keyword)) {
-                                        added = true;
+                                            added = true;
                                         }
                                     });
                                 });

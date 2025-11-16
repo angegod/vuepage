@@ -510,9 +510,9 @@
             </div>
             
         </div>
-        <div class="w-3/5 mx-auto my-3">
-            <button class="removeBtn min-w-[150px] mb-3" v-on:click="SaveClick()">儲存</button>
-            <button class="removeBtn min-w-[150px] mb-3" v-on:click="RecoverClick()">還原</button>
+        <div class="w-3/5 mx-auto my-3 flex gap-3">
+            <button class="removeBtn min-w-[150px]" v-on:click="SaveClick()">儲存</button>
+            <button class="removeBtn min-w-[150px]" v-on:click="RecoverClick()">還原</button>
         </div>
         <div class="slide w-4/5 mx-auto mt-3 pt-3">
             <div class="ml-5 mb-3">

@@ -47,6 +47,10 @@
     min-width: 150px;
 }
 
+.colorSelect:active{
+    border:none;
+}
+
 
 .step-enter-active, .step-leave-active {
   transition: transform 0.5s ease;

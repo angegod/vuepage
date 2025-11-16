@@ -10,3 +10,11 @@ export interface skillItem{
     name: string,
     delete?:boolean
 }
+
+export interface showSkillItem{
+    tag:skillItem[],
+    roundTag:skillItem[],
+    comboTag:skillItem[]
+}
+
+export type TagType = 'tag' | 'roundTag' | 'comboTag';
