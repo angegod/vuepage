@@ -31,6 +31,7 @@
     let imageInput=ref<fileDataItem|null>(null);//預覽圖上傳
     let spreadInput=ref<fileDataItem|null>(null);//盤面圖 如果有必要的話
     let selectTagType=ref<TagType>('tag');
+    let isAddable = ref<string>("");
 
     let showSkill=ref<showSkillItem>({
         tag:[],
@@ -49,6 +50,7 @@
     
     //初始化 包括還原
     function init(){
+        isAddable.value = inject('frontpath') as string;
         step.value = 1;
         iconInput.value = null;
         imageInput.value = null;
@@ -542,8 +544,13 @@
                         </div>
                         <div class="flex flex-col">
                             <div class="flex flex-row justify-between" v-for="skill in showSkill[selectTagType]">
-                                <span>{{skill.id +" "+skill.name }}</span>
-                                <button class="removeBtn" @click="removeTag(skill.id)">移除</button>
+                                <div class="flex flex-row gap-2">
+                                    <span class="w-5">{{skill.id}}</span>
+                                    <span>{{skill.name }}</span>
+                                </div>
+                                <button @click="removeTag(skill.id)">
+                                    <img :src="isAddable+'/images/delete.svg'" width="20" height="20" alt="delete" />
+                                </button>
                             </div> 
                         </div>
                     </div>
@@ -578,15 +585,15 @@
                         </div>
                         <input type="number" id="pointEnter" class="inputNum" :min="1" :max="8" required @change="event=>card.PointEnter = parseInt((event.target as HTMLInputElement).value)"/>
                     </div>
-                </div>
-                <div class="w-1/2">
-                    <div class="flex flex-col">
+                    <div class="flex flex-col mt-3">
                         <span>卡片關鍵字:</span>
-                        <input type="text" class="selfInput" placeholder="輸入完成後按Enter"
+                        <input type="text" class="selfInput w-[200px]" placeholder="輸入完成後按Enter"
                             @keydown="addKeyword"/>
-                        <span class="text-md text-gray-500">輸入完成後請按下Enter</span>
+                        <span class="text-xs text-gray-500">輸入完成後請按下Enter</span>
                         <span v-for="t in card.keyword">{{ t }}</span>
                     </div>
+                </div>
+                <div class="w-1/2">
                     <div class="my-2">
                         <span>盤面圖:</span>
                         <button @click="callClick('spreadInput')" class="max-w-[100px] addBtn px-2">上傳</button>

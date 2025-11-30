@@ -1,27 +1,28 @@
 <script lang="ts">
-    import { ref } from 'vue';
-    import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
-    import 'vue3-carousel/dist/carousel.css';
+import { ref } from 'vue';
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
+import 'vue3-carousel/dist/carousel.css';
 
-    import type { CardItem } from '@/interface/card';
-    import type { funcDataItem, skillItem } from '@/interface/funcData';
+import type { CardItem } from '@/interface/card';
+import type { funcDataItem, skillItem } from '@/interface/funcData';
 
-    // Carousel 實例
-    const cardSlide = ref<any>(null);
 
-    // 處理跳頁
-    function slideItem(event: Event, length: number) {
-        const target = event.target as HTMLInputElement;
-        const val = Number(target.value);
+// Carousel 實例
+const cardSlide = ref<any>(null);
 
-        if (isNaN(val) || val > length || val <= 0) {
-            alert("該編號卡片資料沒有找到!!");
-            return;
-        }
+// 處理跳頁
+function slideItem(event: Event, length: number) {
+    const target = event.target as HTMLInputElement;
+    const val = Number(target.value);
 
-        // 呼叫 carousel 的 slideTo 方法
-        cardSlide.value?.slideTo(val - 1);
+    if (isNaN(val) || val > length || val <= 0) {
+        alert("該編號卡片資料沒有找到!!");
+        return;
     }
+
+    // 呼叫 carousel 的 slideTo 方法
+    cardSlide.value?.slideTo(val - 1);
+}
 </script>
 <script lang="ts" setup>
     import { inject,provide,defineModel,watch } from 'vue';
@@ -30,6 +31,7 @@
     import EditBasic from '@/components/editfunc/EditBasic.vue';
     import EditKeyword from '@/components/editfunc/EditKeyword.vue';
     import EditTag from '@/components/editfunc/EditTag.vue';
+    import EditImage from '@/components/editfunc/EditImage.vue';
 
     import {useModifyStore} from '@/components/store/modifyData.ts';
 
@@ -52,6 +54,9 @@
 
     let popup=ref<InstanceType<typeof AddCard>>();
     let showAddCardWindow = ref<boolean>(false);
+
+    //編輯圖片子元件
+    const imgEditorRef = ref<InstanceType<typeof EditImage> | null>(null);
 
     //功能列表
     let editFunc=ref([{
@@ -155,13 +160,14 @@
         targetCard.keyword=target;
     }
 
-    function SaveClick(){
+    async function SaveClick(){
         if(!confirm("將會儲存你所做的所有更改，如果確定覆蓋則按確定")){
             return;
         }
         //將資料推送後端 該系列全部直接全部覆蓋
         try{            
-            
+            await imgEditorRef.value?.saveImageEdit();
+
             let json={
                 getId:seriesId.value,//告訴他要覆蓋哪個系列的?
                 newData:CardArray.value//更動過的資料 
@@ -185,6 +191,7 @@
         targetCard.value = CardArray.value.find((c)=>c.id===selectCardId.value) as CardItem;
 
         changeShowSkill();
+        imgEditorRef.value?.initImage();
     }
 
     function deleteCard(){
@@ -215,8 +222,10 @@
 
         targetCard.value = CardArray.value.find((c)=>c.id === selectCardId.value) as CardItem;
 
-        
         changeShowSkill();
+
+        //還原圖片更改
+        imgEditorRef.value?.initImage();
     }
 
     function changeShowSkill(){
@@ -461,6 +470,9 @@
             <div class="w-2/5 pl-3 right mt-5 h-[500px] relative " v-if="editMode == 'edit_keyword' && targetCard">
                 <EditKeyword v-model:card="targetCard"/>
             </div>
+            <div class="w-2/5 pl-3 right mt-5 h-[500px] relative " v-if="editMode == 'edit_img' && targetCard">
+                <EditImage ref="imgEditorRef"/>
+            </div>
             <div class="w-2/5 pl-3 right mt-5 h-[500px] relative " v-if="editMode == 'edit_description' && targetCard">
                 <div>
                     <span class="text-amber-800 text-[18px]">效果敘述</span>
@@ -516,7 +528,7 @@
         </div>
         <div class="slide w-4/5 mx-auto mt-3 pt-3">
             <div class="ml-5 mb-3">
-                <span class="text-white">請輸入要卡片編號:</span>
+                <span class="text-white">請輸入要檢視的卡片編號:</span>
                 <div class="flex flex-row">
                     <input type="number" class="w-[100px] rounded-md text-center" @change="event=>slideItem(event,CardArray.length)"/>
                     <button class="addBtn ml-3 px-3" @click="()=>addCard()">添加卡片</button>

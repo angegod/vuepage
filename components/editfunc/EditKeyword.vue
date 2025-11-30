@@ -40,18 +40,20 @@
         props.card.keyword=target;
     }
 
+
 </script>
 <template>
-    <span class="standwardLabel">關鍵字管理</span>
-    <div>
-        <input type="text" v-bind:value="searchWord" placeholder="搜尋關鍵字" @input=" event=>searchWordChange(event)" class="colorSelect"/>
-        <button class="rounded-sm bg-gray-600 min-w-[50px] text-white" v-on:click="addWord()">新增</button>
+    <div class="flex flex-row">
+        <span class="standwardLabel">關鍵字管理</span>
+        <button class="addBtn ml-3" v-on:click="addWord()">新增</button>
     </div>
     <div v-if="props.card.keyword!==undefined && props.card.keyword.length !== 0" class="overflow-y-scroll hiddenScrollbar">
         <div v-for="(k,i) in props.card.keyword" class="flex flex-row my-2">
-            <div class="text-white min-w-[200px]" v-if="k!==''"><span >{{ k }}</span></div>
+            <div class="text-white min-w-[150px]" v-if="k!==''"><span >{{ k }}</span></div>
             <div v-if="k!==''">
-                <button class="removeBtn" :id="'btns'+i" v-on:click="removeWord(i)">移除</button>
+                <button :id="'btns'+i" v-on:click="removeWord(i)">
+                    <img :src="isAddable+'/images/delete.svg'" width="20" height="20" alt="delete" />
+                </button>
             </div>
         </div>
     </div>

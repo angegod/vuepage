@@ -13,6 +13,7 @@ let {func,funcData,CardArray,selectCardId,showSkill,targetCard} = storeToRefs(st
 let targetTagLst = ref<number[]>([]);
 
 let selectTagLst = ref<funcDataItem[]>(JSON.parse(JSON.stringify(funcData.value)));
+let isAddable = ref<string>("");
 
 //標籤選擇Element
 let tagSelect = ref<string>('0');
@@ -145,6 +146,7 @@ function updateTargetTagList() {
 
 
 onMounted(()=>{
+    isAddable.value = inject('frontpath') as string;
     updateTargetTagList();
 });
 
@@ -182,7 +184,9 @@ watch(
                     <div class="w-1/5"><span class="text-white">{{ skill.id }}</span></div>
                     <div class="w-2/5"><span class="text-white">{{ skill.name }}</span></div>
                     <div class="w-2/5">
-                        <button class="removeBtn" :id="'btns'+i" v-on:click="removeTag(i)">移除</button>
+                        <button :id="'btns'+i" v-on:click="removeTag(i)">
+                            <img :src="isAddable+'/images/delete.svg'" width="20" height="20" alt="delete" />
+                        </button>
                     </div>
                 </div> 
             </div>
