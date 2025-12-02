@@ -1783,6 +1783,42 @@ let Card:CardSeriesItem[] = [
           51
         ],
         "PointEnter": 4
+      },
+      {
+        "id": 51,
+        "name": "午後茶香",
+        "rarity": 2,
+        "image": "/images/card/icon/1_51.png",
+        "instantEffect": [
+          "自身為妖族成員，自身技能 CD -4"
+        ],
+        "roundEffect": [
+          "自身無視「攻前盾」",
+          "自身攻擊傷害無視「起結有序」"
+        ],
+        "comboEffect": [
+          "\t\n自身擊中敵人後魅惑敵人，持續 1 回合",
+          "自身以 100% 攻擊力追打五屬性攻擊各 1 次"
+        ],
+        "PointMax": 6,
+        "PointEnter": 6,
+        "PointConsume": 3,
+        "PointGet": 2,
+        "tag": [
+          40
+        ],
+        "comboTag": [
+          54,
+          86
+        ],
+        "roundTag": [
+          10,
+          16
+        ],
+        "fullimage": "/images/card/image/1_51.png",
+        "keyword": [
+          "曼陀羅"
+        ]
       }
     ]
   }

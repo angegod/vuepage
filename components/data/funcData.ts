@@ -477,9 +477,13 @@ let funcData:funcDataItem[] = [
         "typeId": 9,
         "id": 85,
         "name": "點燃狀態"
+      },
+      {
+        "typeId": 9,
+        "id": 86,
+        "name": "魅惑狀態"
       }
     ]
   }
 ];
-
 export default funcData;
