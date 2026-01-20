@@ -91,7 +91,7 @@
 }
 
 .popup {
-    @apply absolute w-2/5 h-[500px] top-[10%] left-0 right-0 mx-auto;
+    @apply absolute w-1/2 max-w-[600px] h-[500px] top-[10%] left-0 right-0 mx-auto;
     @apply rounded-[10px] bg-white overflow-y-scroll;
     box-shadow: 0px 0px 10px 0px black;
     animation: slideshow 0.3s ease-in;

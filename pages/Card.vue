@@ -44,6 +44,9 @@
     //收合狀況
     let expand = ref<boolean[]>([]);
 
+    //彈出視窗
+    const modalRef = ref<HTMLElement | null>(null)
+
 
     function checkData(){//避免資料更新時需要改動，預設檢查機制
         let count=0;
@@ -260,7 +263,6 @@
         });
         mode.value='card';
         let overlay = document.getElementById('overlay') as HTMLDivElement;
-        console.log(overlay.style);
         overlay.style.display="block";
         
     }
@@ -406,6 +408,20 @@
         }
     }
 
+
+    function handleClickOutside(e: MouseEvent) {
+        // 沒有展開就不處理
+        if (!mode.value) return
+
+        // 點擊目標不在卡片 / modal 裡 → 關閉
+        if (
+            modalRef.value &&
+            !modalRef.value.contains(e.target as Node)
+        ) {
+            closeHandle()
+        }
+    }
+
     provide('setData',setData);
     
     //meta Tag
@@ -432,6 +448,8 @@
 
         checkData();
 
+        document.addEventListener('click', handleClickOutside);
+
         stopWatcher = watch(
             () => store.isMatch,
             () => {
@@ -447,6 +465,7 @@
     });
 
     onUnmounted(() => {
+        document.removeEventListener('click', handleClickOutside);
         if (stopWatcher) {
             stopWatcher(); 
             stopWatcher = null;
@@ -553,7 +572,7 @@
                 <div class="flex flex-row flex-wrap max-[400px]:justify-evenly" v-if="targetCard.length!==0">
                     <div v-for="card in targetCard" class="w-1/8 mr-3" :key="card.id">
                         <div class="flex flex-col mb-3" >
-                            <div @click="clickHandle(card.id)">
+                            <div @click.stop="clickHandle(card.id)">
                                 <LazyImage :imageLink="card.image" :id="card.id" @deleteCard="deleteCard"/>
                             </div>
                             <span 
@@ -576,7 +595,7 @@
             </div>
             <div>
                 <div class='overlay' id="overlay">
-                    <div class='popup max-[500px]:w-[80%] max-[500px]:min-w-[200px]' v-if="mode==='card'&&showCard">
+                    <div class='popup max-[500px]:w-[80%] max-[500px]:min-w-[200px]' v-if="mode==='card'&&showCard" ref="modalRef">
                         <div class='close' v-on:click="closeHandle">&#10006;</div>
                         <div class="w-5/6 mx-auto mt-5 flex flex-row flex-wrap justify-between mb-5 max-[450px]:justify-center">
                             <div class="w-2/5 min-w-[150px] max-[700px]:w-full">
