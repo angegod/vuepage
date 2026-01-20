@@ -579,7 +579,7 @@
                     <div class='popup max-[500px]:w-[80%] max-[500px]:min-w-[200px]' v-if="mode==='card'&&showCard">
                         <div class='close' v-on:click="closeHandle">&#10006;</div>
                         <div class="w-5/6 mx-auto mt-5 flex flex-row flex-wrap justify-between mb-5 max-[450px]:justify-center">
-                            <div class="w-2/5 min-w-[150px] max-[500px]:w-full">
+                            <div class="w-2/5 min-w-[150px] max-[700px]:w-full">
                                 <div class="[&>span]:text-[20px] mb-3 text-center">
                                     <span
                                         class="w-full text-center font-bold"
@@ -605,8 +605,8 @@
                                     />
                                 </div>
                             </div>
-                            <div class="w-1/2 flex flex-col min-w-[150px] ml-2 max-[450px]:ml-0 max-[500px]:w-full mt-1">
-                                <div class="flex flex-row flex-wrap max-[500px]:mt-2 max-[500px]:justify-center">
+                            <div class="w-1/2 flex flex-col min-w-[150px] ml-2 max-[450px]:ml-0 max-[700px]:w-full mt-1">
+                                <div class="flex flex-row flex-wrap max-[700px]:mt-2 max-[700px]:justify-center">
                                     <CardSection label="進場FP" :value="showCard.PointEnter" :rarity="showCard.rarity" />
                                     <CardSection label="消耗FP" :value="showCard.PointConsume" :rarity="showCard.rarity" />
                                     <CardSection label="補充FP" :value="showCard.PointGet" :rarity="showCard.rarity" />
