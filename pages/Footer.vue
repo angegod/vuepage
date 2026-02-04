@@ -1,8 +1,8 @@
 <template>
     <div class="footer [&>span]:m-3">
-        <span>&copy; 2025 <a href="https://home.gamer.com.tw/profile/index.php?&owner=ange0733" class="underline">Ange</a></span>
+        <span>&copy; 2026 <a href="https://home.gamer.com.tw/profile/index.php?&owner=ange0733" class="underline">Ange</a></span>
         <span> Website created by Ange. All rights reserved.</span>
-        <span>Data latest Updated at 2025/09/06</span>
+        <span>Data latest Updated at 2026/02/04</span>
     </div>
 </template>
 <style scoped>
