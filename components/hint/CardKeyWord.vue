@@ -10,7 +10,7 @@ function init(){
 
     CardArray.forEach((s)=>{
         s.card.forEach((c)=>{
-            if(c.keyword[0]!==""){
+            if(c.keyword&&c.keyword.length>0&&c.keyword[0]!==""){
                 Card.value.push(c);
             }
         })
