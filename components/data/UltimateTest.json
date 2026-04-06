@@ -1,8 +1,8 @@
 {
-    "id":6,
-    "stageName":"以砲響拉開帷幕 災厄級",
-    "stageLimit":"必須以單一種族成員進場",
-    "backgroundSkill":"無法提升當前生命力",
+    "id":9,
+    "stageName":"未來的火種 災厄級",
+    "stageLimit":"隊伍中只能有光或暗屬性成員",
+    "backgroundSkill":"消除【正方 3x3】+ 1 重「靈罩」",
     "wave":[
     {
         "waveId":1,

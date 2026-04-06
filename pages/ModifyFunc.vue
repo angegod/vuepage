@@ -336,7 +336,7 @@ onMounted(()=>{
 </script>
 <template>
     <div class="main">
-        <div class="mx-auto w-4/5">
+        <div class="mx-auto w-4/5 pt-3">
             <div>
                 <span class="text-red-500 text-2xl font-bold">技能管理</span>
             </div>

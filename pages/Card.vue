@@ -523,7 +523,7 @@
                         <div class="flex flex-row items-center">
                             <span class="text-amber-600 font-bold text-xl">{{ t.typeName }}</span>
                             <button class="text-white ml-2 flex flex-row items-center" @click="isExpand(i)">
-                                <img :src="(expand[i])?`${isAddable}/images/arrow_drop_down.svg`:`${isAddable}/images/arrow_drop_up.svg`" 
+                                <img :src="(!expand[i])?`${isAddable}/images/arrow_drop_down.svg`:`${isAddable}/images/arrow_drop_up.svg`" 
                                     width="30" height="30"
                                     alt="expand" />
                             </button>
