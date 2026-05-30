@@ -27,10 +27,10 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          37
+          38
         ],
         "roundTag": [
-          24
+          25
         ],
         "comboTag": [
           2
@@ -59,10 +59,10 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          37
+          38
         ],
         "roundTag": [
-          24
+          25
         ],
         "comboTag": [
           7
@@ -91,10 +91,10 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          37
+          38
         ],
         "roundTag": [
-          24
+          25
         ],
         "comboTag": [
           1
@@ -123,13 +123,13 @@ let Card:CardSeriesItem[] = [
           "全補"
         ],
         "tag": [
-          26
+          27
         ],
         "roundTag": [
-          25
+          26
         ],
         "comboTag": [
-          26
+          27
         ],
         "PointEnter": 4
       },
@@ -156,11 +156,11 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          21
+          22
         ],
         "roundTag": [
-          57,
-          66
+          58,
+          67
         ],
         "comboTag": [
           2
@@ -190,14 +190,14 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          21
+          22
         ],
         "roundTag": [
           7,
-          53
+          54
         ],
         "comboTag": [
-          24
+          25
         ],
         "PointEnter": 6
       },
@@ -224,11 +224,11 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          21
+          22
         ],
         "roundTag": [
-          56,
-          66
+          57,
+          67
         ],
         "comboTag": [
           7
@@ -258,11 +258,11 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          21
+          22
         ],
         "roundTag": [
-          52,
-          67
+          53,
+          68
         ],
         "comboTag": [
           1
@@ -292,14 +292,14 @@ let Card:CardSeriesItem[] = [
           "蒼壁"
         ],
         "tag": [
-          21
+          22
         ],
         "roundTag": [
-          27,
-          67
+          28,
+          68
         ],
         "comboTag": [
-          37
+          38
         ],
         "PointEnter": 6
       },
@@ -327,15 +327,15 @@ let Card:CardSeriesItem[] = [
           "夏馬西牌"
         ],
         "tag": [
-          30
+          31
         ],
         "roundTag": [
           8,
-          52,
-          74
+          53,
+          75
         ],
         "comboTag": [
-          24
+          25
         ],
         "PointEnter": 8
       },
@@ -361,13 +361,13 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          37
+          38
         ],
         "roundTag": [
-          75
+          76
         ],
         "comboTag": [
-          58
+          59
         ],
         "PointEnter": 4
       },
@@ -393,10 +393,10 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          37
+          38
         ],
         "roundTag": [
-          77
+          78
         ],
         "comboTag": [
           3
@@ -425,13 +425,13 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          37
+          38
         ],
         "roundTag": [
-          78
+          79
         ],
         "comboTag": [
-          56
+          57
         ],
         "PointEnter": 4
       },
@@ -458,14 +458,14 @@ let Card:CardSeriesItem[] = [
           "華曦牌"
         ],
         "tag": [
-          42
+          43
         ],
         "roundTag": [
           3,
           9
         ],
         "comboTag": [
-          54
+          55
         ],
         "PointEnter": 6
       },
@@ -492,11 +492,11 @@ let Card:CardSeriesItem[] = [
           "緋音牌"
         ],
         "tag": [
-          41
+          42
         ],
         "roundTag": [
-          64,
-          70
+          65,
+          71
         ],
         "comboTag": [
           1
@@ -527,15 +527,15 @@ let Card:CardSeriesItem[] = [
           "龐貝"
         ],
         "tag": [
-          30
+          31
         ],
         "roundTag": [
           1,
           10,
-          53
+          54
         ],
         "comboTag": [
-          24
+          25
         ],
         "PointEnter": 8
       },
@@ -562,11 +562,11 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          21
+          22
         ],
         "roundTag": [
           11,
-          61
+          62
         ],
         "comboTag": [
           1
@@ -596,12 +596,12 @@ let Card:CardSeriesItem[] = [
           "恩莉兒牌"
         ],
         "tag": [
-          22
+          23
         ],
         "roundTag": [
-          57,
-          64,
-          71
+          58,
+          65,
+          72
         ],
         "comboTag": [
           7
@@ -630,13 +630,13 @@ let Card:CardSeriesItem[] = [
           "直傷"
         ],
         "tag": [
-          23
+          24
         ],
         "roundTag": [
           7
         ],
         "comboTag": [
-          37
+          38
         ],
         "PointEnter": 4
       },
@@ -669,18 +669,18 @@ let Card:CardSeriesItem[] = [
           "蚩尤"
         ],
         "tag": [
-          30
+          31
         ],
         "roundTag": [
           2,
           12,
-          69
+          70
         ],
         "comboTag": [
-          24,
-          81,
-          84,
-          86
+          25,
+          82,
+          85,
+          87
         ],
         "PointEnter": 8
       },
@@ -706,13 +706,13 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          34
+          35
         ],
         "roundTag": [
           10
         ],
         "comboTag": [
-          24
+          25
         ],
         "PointEnter": 4
       },
@@ -738,13 +738,13 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          35
+          36
         ],
         "roundTag": [
           3
         ],
         "comboTag": [
-          24
+          25
         ],
         "PointEnter": 4
       },
@@ -771,10 +771,10 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          32
+          33
         ],
         "roundTag": [
-          69
+          70
         ],
         "comboTag": [
           9,
@@ -807,15 +807,15 @@ let Card:CardSeriesItem[] = [
           "卑彌呼"
         ],
         "tag": [
-          38
+          39
         ],
         "roundTag": [
           1,
-          27
+          28
         ],
         "comboTag": [
           3,
-          24
+          25
         ],
         "PointEnter": 6
       },
@@ -844,16 +844,16 @@ let Card:CardSeriesItem[] = [
           "涅索伊"
         ],
         "tag": [
-          39
+          40
         ],
         "roundTag": [
           2,
-          37,
-          45
+          38,
+          46
         ],
         "comboTag": [
           10,
-          24
+          25
         ],
         "PointEnter": 6
       },
@@ -882,7 +882,7 @@ let Card:CardSeriesItem[] = [
           "拉普牌"
         ],
         "tag": [
-          30
+          31
         ],
         "roundTag": [
           4,
@@ -890,11 +890,11 @@ let Card:CardSeriesItem[] = [
           6,
           7,
           13,
-          55
+          56
         ],
         "comboTag": [
           8,
-          24
+          25
         ],
         "PointEnter": 8
       },
@@ -922,15 +922,15 @@ let Card:CardSeriesItem[] = [
           "刻琿"
         ],
         "tag": [
-          23
+          24
         ],
         "roundTag": [
-          28,
-          66
+          29,
+          67
         ],
         "comboTag": [
           1,
-          24
+          25
         ],
         "PointEnter": 6
       },
@@ -961,15 +961,15 @@ let Card:CardSeriesItem[] = [
           "方荼"
         ],
         "tag": [
-          26
+          27
         ],
         "roundTag": [
-          77
+          78
         ],
         "comboTag": [
-          82,
           83,
-          86
+          84,
+          87
         ],
         "PointEnter": 4
       },
@@ -996,11 +996,11 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          22
+          23
         ],
         "roundTag": [
-          60,
-          62
+          61,
+          63
         ],
         "comboTag": [
           3
@@ -1030,14 +1030,14 @@ let Card:CardSeriesItem[] = [
           "瑪米圖"
         ],
         "tag": [
-          30,
-          32
+          31,
+          33
         ],
         "roundTag": [
-          21
+          22
         ],
         "comboTag": [
-          29
+          30
         ],
         "PointEnter": 4
       },
@@ -1069,17 +1069,17 @@ let Card:CardSeriesItem[] = [
           "雪萊"
         ],
         "tag": [
-          49
+          50
         ],
         "roundTag": [
           10,
-          69
+          70
         ],
         "comboTag": [
-          24,
-          83,
-          85,
-          86
+          25,
+          84,
+          86,
+          87
         ],
         "PointEnter": 6
       },
@@ -1108,16 +1108,16 @@ let Card:CardSeriesItem[] = [
           "司路域"
         ],
         "tag": [
-          30
+          31
         ],
         "roundTag": [
           3,
-          28,
-          58
+          29,
+          59
         ],
         "comboTag": [
-          24,
-          88
+          25,
+          89
         ],
         "PointEnter": 8
       },
@@ -1143,13 +1143,13 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          23
+          24
         ],
         "roundTag": [
-          65
+          66
         ],
         "comboTag": [
-          24
+          25
         ],
         "PointEnter": 4
       },
@@ -1181,17 +1181,17 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          48
+          49
         ],
         "roundTag": [
           2,
-          24
+          25
         ],
         "comboTag": [
           16,
-          82,
-          85,
-          87
+          83,
+          86,
+          88
         ],
         "PointEnter": 6
       },
@@ -1218,14 +1218,14 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          21
+          22
         ],
         "roundTag": [
-          57,
-          79
+          58,
+          80
         ],
         "comboTag": [
-          24
+          25
         ],
         "PointEnter": 4
       },
@@ -1251,13 +1251,13 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          68
+          69
         ],
         "roundTag": [
-          37
+          38
         ],
         "comboTag": [
-          24
+          25
         ],
         "PointEnter": 4
       },
@@ -1290,18 +1290,18 @@ let Card:CardSeriesItem[] = [
           "大魔女"
         ],
         "tag": [
-          50
+          51
         ],
         "roundTag": [
-          21,
-          66,
-          67
+          22,
+          67,
+          68
         ],
         "comboTag": [
-          24,
-          83,
+          25,
           84,
-          87
+          85,
+          88
         ],
         "PointEnter": 6
       },
@@ -1330,16 +1330,16 @@ let Card:CardSeriesItem[] = [
           "砲響牌"
         ],
         "tag": [
-          30
+          31
         ],
         "roundTag": [
           11,
           14,
-          54
+          55
         ],
         "comboTag": [
           17,
-          24
+          25
         ],
         "PointEnter": 8
       },
@@ -1367,15 +1367,15 @@ let Card:CardSeriesItem[] = [
           "卡西爾"
         ],
         "tag": [
-          21
+          22
         ],
         "roundTag": [
-          37,
-          66
+          38,
+          67
         ],
         "comboTag": [
           10,
-          24
+          25
         ],
         "PointEnter": 6
       },
@@ -1402,14 +1402,14 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          30
+          31
         ],
         "roundTag": [
           9,
           15
         ],
         "comboTag": [
-          24
+          25
         ],
         "PointEnter": 4
       },
@@ -1441,17 +1441,17 @@ let Card:CardSeriesItem[] = [
           "德古拉"
         ],
         "tag": [
-          47
+          48
         ],
         "roundTag": [
-          28,
-          69
+          29,
+          70
         ],
         "comboTag": [
           16,
-          81,
-          85,
-          87
+          82,
+          86,
+          88
         ],
         "PointEnter": 6
       },
@@ -1479,15 +1479,15 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          34
+          35
         ],
         "roundTag": [
           1,
-          54,
-          55
+          55,
+          56
         ],
         "comboTag": [
-          24
+          25
         ],
         "PointEnter": 4
       },
@@ -1514,14 +1514,14 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          37
+          38
         ],
         "roundTag": [
           10,
-          60
+          61
         ],
         "comboTag": [
-          24
+          25
         ],
         "PointEnter": 4
       },
@@ -1555,18 +1555,18 @@ let Card:CardSeriesItem[] = [
           "一願牌"
         ],
         "tag": [
-          31
+          32
         ],
         "roundTag": [
           9,
-          71,
-          72
+          72,
+          73
         ],
         "comboTag": [
-          83,
           84,
-          86,
-          89
+          85,
+          87,
+          90
         ],
         "PointEnter": 8
       },
@@ -1593,14 +1593,14 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          23
+          24
         ],
         "roundTag": [
           2,
-          24
+          25
         ],
         "comboTag": [
-          26
+          27
         ],
         "PointEnter": 6
       },
@@ -1627,14 +1627,14 @@ let Card:CardSeriesItem[] = [
           "卡蜜拉牌"
         ],
         "tag": [
-          30
+          31
         ],
         "roundTag": [
-          69
+          70
         ],
         "comboTag": [
           12,
-          24
+          25
         ],
         "PointEnter": 4
       },
@@ -1664,8 +1664,8 @@ let Card:CardSeriesItem[] = [
           "阿圖姆牌"
         ],
         "tag": [
-          23,
-          51
+          24,
+          52
         ],
         "roundTag": [
           4,
@@ -1676,8 +1676,8 @@ let Card:CardSeriesItem[] = [
           17
         ],
         "comboTag": [
-          24,
-          90
+          25,
+          91
         ],
         "PointEnter": 8
       },
@@ -1705,11 +1705,11 @@ let Card:CardSeriesItem[] = [
           "妖刀"
         ],
         "tag": [
-          21
+          22
         ],
         "roundTag": [
-          56,
-          78
+          57,
+          79
         ],
         "comboTag": [
           8
@@ -1739,14 +1739,14 @@ let Card:CardSeriesItem[] = [
           "拿破崙"
         ],
         "tag": [
-          40
+          41
         ],
         "roundTag": [
-          69
+          70
         ],
         "comboTag": [
           12,
-          58
+          59
         ],
         "PointEnter": 6
       },
@@ -1773,14 +1773,14 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          22
+          23
         ],
         "roundTag": [
           2
         ],
         "comboTag": [
-          53,
-          55
+          54,
+          56
         ],
         "PointEnter": 4
       },
@@ -1808,15 +1808,15 @@ let Card:CardSeriesItem[] = [
           "曼陀羅"
         ],
         "tag": [
-          44
+          45
         ],
         "roundTag": [
           10,
           16
         ],
         "comboTag": [
-          58,
-          91
+          59,
+          92
         ],
         "PointEnter": 6
       },
@@ -1845,16 +1845,16 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          68
+          69
         ],
         "roundTag": [
           3,
-          53,
-          54
+          54,
+          55
         ],
         "comboTag": [
           12,
-          24
+          25
         ],
         "PointEnter": 4
       },
@@ -1883,16 +1883,16 @@ let Card:CardSeriesItem[] = [
           ""
         ],
         "tag": [
-          34,
-          37
+          35,
+          38
         ],
         "roundTag": [
-          28,
-          58
+          29,
+          59
         ],
         "comboTag": [
           13,
-          24
+          25
         ],
         "PointEnter": 4
       },
@@ -1927,20 +1927,20 @@ let Card:CardSeriesItem[] = [
           "普羅米修斯"
         ],
         "tag": [
-          36
+          37
         ],
         "roundTag": [
           10,
           17,
-          21,
-          57
+          22,
+          58
         ],
         "comboTag": [
           18,
           19,
-          82,
           83,
-          86
+          84,
+          87
         ],
         "PointEnter": 8
       },
@@ -1952,34 +1952,36 @@ let Card:CardSeriesItem[] = [
         "instantEffect": [
           "提升 100% 龍脈儀能量"
         ],
-        "roundEffect": [
-          "自身無視「二屬盾」、「三屬盾」、「四屬盾」及「五屬盾」",
-          "自身攻擊力提升 300%"
-        ],
         "comboEffect": [
           "自身技能 CD -2",
           "自身無視指定減傷抗性敵技"
         ],
+        "roundEffect": [
+          "自身無視「二屬盾」、「三屬盾」、「四屬盾」及「五屬盾」",
+          "自身攻擊力提升 300%"
+        ],
         "PointMax": 6,
-        "PointEnter": 6,
         "PointConsume": 3,
         "PointGet": 2,
-        "tag": [
-          22
+        "fullimage": "/images/card/image/1_55.png",
+        "keyword": [
+          ""
         ],
-        "comboTag": [
-          12,
-          37
+        "tag": [
+          23
         ],
         "roundTag": [
           4,
           5,
           6,
           7,
-          24
+          25
         ],
-        "fullimage": "/images/card/image/1_55.png",
-        "keyword": []
+        "comboTag": [
+          12,
+          38
+        ],
+        "PointEnter": 6
       },
       {
         "id": 56,
@@ -1989,27 +1991,29 @@ let Card:CardSeriesItem[] = [
         "instantEffect": [
           "自身發動攻擊前對敵方造成 50000000 點無屬性傷害 1 次"
         ],
-        "roundEffect": [
-          "所受自身種族傷害減少 100%"
-        ],
         "comboEffect": [
           "敵人行動 CD +1"
         ],
+        "roundEffect": [
+          "所受自身種族傷害減少 100%"
+        ],
         "PointMax": 4,
-        "PointEnter": 4,
         "PointConsume": 2,
         "PointGet": 2,
-        "tag": [
-          23
+        "fullimage": "/images/card/image/1_56.png",
+        "keyword": [
+          ""
         ],
-        "comboTag": [
-          29
+        "tag": [
+          24
         ],
         "roundTag": [
-          27
+          28
         ],
-        "fullimage": "/images/card/image/1_56.png",
-        "keyword": []
+        "comboTag": [
+          30
+        ],
+        "PointEnter": 4
       },
       {
         "id": 57,
@@ -2020,39 +2024,157 @@ let Card:CardSeriesItem[] = [
           "解除自身被封鎖主動技能",
           "自身進入 3 回合亢奮狀態"
         ],
+        "comboEffect": [
+          "自身攻擊力提升 150%",
+          "自身擊中敵人後石化敵人，持續 3 回合"
+        ],
         "roundEffect": [
           "增加 15 連擊 (Combo)",
           "場上位置不受「碎裂」技能影響",
           "自身無視「全版消除盾」",
           "自身無視「首殺盾」"
         ],
-        "comboEffect": [
-          "自身攻擊力提升 150%",
-          "自身擊中敵人後石化敵人，持續 3 回合"
-        ],
         "PointMax": 8,
-        "PointEnter": 8,
         "PointConsume": 2,
         "PointGet": 2,
-        "tag": [
-          30,
-          68
+        "fullimage": "/images/card/image/1_57.png",
+        "keyword": [
+          ""
         ],
-        "comboTag": [
-          24,
-          92
+        "tag": [
+          31,
+          69
         ],
         "roundTag": [
           14,
           20,
-          21,
-          73
+          22,
+          74
         ],
-        "fullimage": "/images/card/image/1_57.png",
+        "comboTag": [
+          25,
+          93
+        ],
+        "PointEnter": 8
+      },
+      {
+        "id": 58,
+        "name": "記憶盡頭的重逢",
+        "rarity": 2,
+        "image": "/images/card/icon/1_58.png",
+        "instantEffect": [
+          "自身為水屬性成員，自身技能 CD -4"
+        ],
+        "roundEffect": [
+          "自身攻擊力提升 100%",
+          "自身無視「固定連擊盾」"
+        ],
+        "comboEffect": [
+          "自身以 50% 攻擊力追打水屬性攻擊 10 次",
+          "自身無視「反首消符石盾」"
+        ],
+        "PointMax": 6,
+        "PointEnter": 6,
+        "PointConsume": 2,
+        "PointGet": 2,
+        "tag": [
+          47
+        ],
+        "comboTag": [
+          11,
+          53
+        ],
+        "roundTag": [
+          2,
+          25
+        ],
+        "fullimage": "/images/card/image/1_58.png",
+        "keyword": []
+      },
+      {
+        "id": 59,
+        "name": "永不落幕的舞台劇",
+        "rarity": 2,
+        "image": "/images/card/icon/1_59.png",
+        "instantEffect": [
+          "自身為神族成員，自身技能 CD -3"
+        ],
+        "roundEffect": [
+          "減少 90% 所受傷害",
+          "自身以 50% 攻擊力追打光屬性攻擊 5 次",
+          "自身以 50% 攻擊力追打暗屬性攻擊 5 次"
+        ],
+        "comboEffect": [
+          "回合結束時，\n將單數直行的符石轉化為光強化符石，\n將雙數直行的符石轉化為心強化符石",
+          "自身無視「全消盾」"
+        ],
+        "PointMax": 6,
+        "PointEnter": 6,
+        "PointConsume": 3,
+        "PointGet": 2,
+        "tag": [
+          40
+        ],
+        "comboTag": [
+          13,
+          84,
+          86,
+          87
+        ],
+        "roundTag": [
+          28,
+          56,
+          57
+        ],
+        "fullimage": "/images/card/image/1_59.png",
+        "keyword": [],
+        "spread": {
+          "image": "/images/card/spread/1_59.png",
+          "index": 1
+        }
+      },
+      {
+        "id": 60,
+        "name": "薪火未滅",
+        "rarity": 3,
+        "image": "/images/card/icon/1_60.png",
+        "instantEffect": [
+          "提升 100% 龍脈儀能量"
+        ],
+        "roundEffect": [
+          "自身無視「二屬盾」、「三屬盾」、「四屬盾」及「五屬盾",
+          "增加 11 連擊 (Combo)",
+          "迴避每個敵人的首次攻擊",
+          "自身無視「首殺盾」"
+        ],
+        "comboEffect": [
+          "敵人行動 CD +2",
+          "自身無視「首消粒數盾」"
+        ],
+        "PointMax": 8,
+        "PointEnter": 8,
+        "PointConsume": 4,
+        "PointGet": 2,
+        "tag": [
+          23
+        ],
+        "comboTag": [
+          21,
+          30
+        ],
+        "roundTag": [
+          4,
+          5,
+          6,
+          7,
+          20,
+          22,
+          29
+        ],
+        "fullimage": "/images/card/image/1_60.png",
         "keyword": []
       }
     ]
   }
 ] ;
-
 export default Card;

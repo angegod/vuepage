@@ -386,7 +386,7 @@
         if(spreadIndexInput.value === null){
             card.value.spread={
                 index:parseInt(spreadIndexInput.value),
-                image:`/images/card/image/${card.value.id}.png`
+                image:`/images/card/spread/${card.value.id}.png`
             };
         }
        
