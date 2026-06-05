@@ -119,6 +119,9 @@
                         <Switch ref="b1" :hideable="true" @refresh="clicked" />
                     </div>
                 </div>
+                <div>
+                    <span class="text-yellow-500 font-bold">目前關卡資訊暫停更新，敬請見諒!!</span>
+                </div>
                 <div class="monster_images_total overflow-x-scroll flex flex-row mb-5">
                     <div class="monster_images" v-for="(battle,number) in myFile" v-if="!switchs">
                         <img :src="isAddable + `/images/number${number+1}/hideImage.jpg`" alt="5555" v-on:click="imgClick(number+1)" @error="showDefaultImg"/>

@@ -1,6 +1,4 @@
-import type { CardItem, CardSeriesItem } from "@/interface/card";
-
-let Card:CardSeriesItem[] = [
+let Card = [
   {
     "seriesId": 1,
     "seriesName": "晨曦塔",
@@ -120,7 +118,7 @@ let Card:CardSeriesItem[] = [
         "PointGet": 2,
         "fullimage": "/images/card/image/1_4.png",
         "keyword": [
-          "全補"
+          ""
         ],
         "tag": [
           27
@@ -626,9 +624,7 @@ let Card:CardSeriesItem[] = [
         "PointConsume": 2,
         "PointGet": 2,
         "fullimage": "/images/card/image/1_19.png",
-        "keyword": [
-          "直傷"
-        ],
+        "keyword": [],
         "tag": [
           24
         ],
@@ -957,7 +953,6 @@ let Card:CardSeriesItem[] = [
           "index": 1
         },
         "keyword": [
-          "全補",
           "方荼"
         ],
         "tag": [
@@ -2065,31 +2060,33 @@ let Card:CardSeriesItem[] = [
         "instantEffect": [
           "自身為水屬性成員，自身技能 CD -4"
         ],
-        "roundEffect": [
-          "自身攻擊力提升 100%",
-          "自身無視「固定連擊盾」"
-        ],
         "comboEffect": [
           "自身以 50% 攻擊力追打水屬性攻擊 10 次",
           "自身無視「反首消符石盾」"
         ],
+        "roundEffect": [
+          "自身攻擊力提升 100%",
+          "自身無視「固定連擊盾」"
+        ],
         "PointMax": 6,
-        "PointEnter": 6,
         "PointConsume": 2,
         "PointGet": 2,
+        "fullimage": "/images/card/image/1_58.png",
+        "keyword": [
+          ""
+        ],
         "tag": [
           47
-        ],
-        "comboTag": [
-          11,
-          53
         ],
         "roundTag": [
           2,
           25
         ],
-        "fullimage": "/images/card/image/1_58.png",
-        "keyword": []
+        "comboTag": [
+          11,
+          53
+        ],
+        "PointEnter": 6
       },
       {
         "id": 59,
@@ -2099,21 +2096,33 @@ let Card:CardSeriesItem[] = [
         "instantEffect": [
           "自身為神族成員，自身技能 CD -3"
         ],
+        "comboEffect": [
+          "回合結束時，\n將單數直行的符石轉化為光強化符石，\n將雙數直行的符石轉化為心強化符石",
+          "自身無視「全消盾」"
+        ],
         "roundEffect": [
           "減少 90% 所受傷害",
           "自身以 50% 攻擊力追打光屬性攻擊 5 次",
           "自身以 50% 攻擊力追打暗屬性攻擊 5 次"
         ],
-        "comboEffect": [
-          "回合結束時，\n將單數直行的符石轉化為光強化符石，\n將雙數直行的符石轉化為心強化符石",
-          "自身無視「全消盾」"
-        ],
         "PointMax": 6,
-        "PointEnter": 6,
         "PointConsume": 3,
         "PointGet": 2,
+        "fullimage": "/images/card/image/1_59.png",
+        "spread": {
+          "image": "/images/card/spread/1_59.png",
+          "index": 1
+        },
+        "keyword": [
+          ""
+        ],
         "tag": [
           40
+        ],
+        "roundTag": [
+          28,
+          56,
+          57
         ],
         "comboTag": [
           13,
@@ -2121,17 +2130,7 @@ let Card:CardSeriesItem[] = [
           86,
           87
         ],
-        "roundTag": [
-          28,
-          56,
-          57
-        ],
-        "fullimage": "/images/card/image/1_59.png",
-        "keyword": [],
-        "spread": {
-          "image": "/images/card/spread/1_59.png",
-          "index": 1
-        }
+        "PointEnter": 6
       },
       {
         "id": 60,
@@ -2141,26 +2140,25 @@ let Card:CardSeriesItem[] = [
         "instantEffect": [
           "提升 100% 龍脈儀能量"
         ],
+        "comboEffect": [
+          "敵人行動 CD +2",
+          "自身無視「首消粒數盾」"
+        ],
         "roundEffect": [
           "自身無視「二屬盾」、「三屬盾」、「四屬盾」及「五屬盾",
           "增加 11 連擊 (Combo)",
           "迴避每個敵人的首次攻擊",
           "自身無視「首殺盾」"
         ],
-        "comboEffect": [
-          "敵人行動 CD +2",
-          "自身無視「首消粒數盾」"
-        ],
         "PointMax": 8,
-        "PointEnter": 8,
         "PointConsume": 4,
         "PointGet": 2,
+        "fullimage": "/images/card/image/1_60.png",
+        "keyword": [
+          ""
+        ],
         "tag": [
           23
-        ],
-        "comboTag": [
-          21,
-          30
         ],
         "roundTag": [
           4,
@@ -2171,10 +2169,14 @@ let Card:CardSeriesItem[] = [
           22,
           29
         ],
-        "fullimage": "/images/card/image/1_60.png",
-        "keyword": []
+        "comboTag": [
+          21,
+          30
+        ],
+        "PointEnter": 8
       }
     ]
   }
 ] ;
-export default Card;
+
+export default Card ;

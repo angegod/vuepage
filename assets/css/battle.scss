@@ -26,7 +26,7 @@
 }   
 
 .monster_images{
-    @apply flex justify-center items-center w-[12%] max-w-[100px] text-center h-[100px] mx-2.5 my-4;
+    @apply flex justify-center items-center w-[12%] max-w-[100px] min-w-[80px] text-center h-[100px] mx-2.5 my-4;
 
     & img:hover{
         border: 7px solid rgb(65, 28, 28);

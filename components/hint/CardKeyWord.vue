@@ -15,7 +15,6 @@ function init(){
             }
         })
     });
-    console.log(Card);
 }
 
 
@@ -47,7 +46,7 @@ onMounted(()=>{
 
 .CardKeyWord{
     @apply flex flex-row flex-wrap max-h-[20vh] overflow-y-scroll w-2/5 max-[1000px]:w-full ;
-    @apply bg-stone-700/90 border-black/80 border-[2px] rounded-md p-1;
+    @apply bg-stone-700/90 border-stone-600/90 border-[2px] rounded-md p-1;
 
     & > div{
         @apply flex flex-col w-1/2 py-2 px-1 border-dotted border-b-2 border-r-2 even:border-r-0

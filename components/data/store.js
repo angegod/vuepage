@@ -2,7 +2,8 @@ import { defineStore } from 'pinia'
 
 export const useCardBtnStore = defineStore('CardButton', {
     state: () => ({
-        Cardbutton:false,
+        //控制頂端按鈕顯示與否
+        Cardbutton:true,
         isMatch:false
     }),
     actions: {

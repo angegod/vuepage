@@ -19,9 +19,17 @@ isAddable.value = (config.app.baseURL === '/')?'':config.app.baseURL; // Nuxt �
 provide('frontpath', isAddable.value);
 
 
+function normalizePath(path: string) {
+    path = path.toLowerCase();
+    path = path.split('?')[0].split('#')[0];
+    return path.endsWith('/') ? path : `${path}/`;
+}
+
 // 選單狀態與卡片按鈕狀態
 const show = ref(store.Cardbutton);
-const showCardBtn = ref(false)
+const showCardBtn = computed(() => {
+    return normalizePath(route.path) === '/card/' && store.Cardbutton;
+});
 
 onMounted(() => {
     show.value = window.innerWidth < 500
@@ -42,8 +50,7 @@ watch(
 function updateHeader(path: string) {
     show.value = window.innerWidth < 500;
 
-    path = path.toLowerCase(); // 先轉小寫
-    if (!path.endsWith('/')) path += '/';
+    path = normalizePath(path);
     
     const map: Record<string, number> = {
         '/': 1,
@@ -57,7 +64,7 @@ function updateHeader(path: string) {
         addDash(index);
     }
 
-    showCardBtn.value = path === '/card/';
+    //showCardBtn.value = ((path === '/card/')&&store.Cardbutton);
 }
 
 function showMenu() {

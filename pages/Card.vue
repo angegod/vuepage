@@ -22,14 +22,14 @@
     //圖片前綴字串
     const isAddable=ref<string>('');
 
-    let seriesIndex=ref<number[]>([]);//時光牌系列代號
+    let seriesIndex=ref<number[]>([1]);//時光牌系列代號 直接鎖死系列1，因為目前只有一個系列的卡牌，如果之後有新增系列再開放選擇
     let selectFunc=ref<skillItem[]>([]);//將被點選的解盾選項加入在此 默認使用And
     let selectRarity=ref<number[]>([]);//被選擇的稀有度
     let targetCard=ref<CardItem[]>([]);//被選擇的卡片清單
     let showCard=ref<CardItem|null>(null);//顯示該卡詳細資訊
     type EffectKey = "tag" | "roundTag" | "comboTag";
 
-    let selectEffectType = ref<EffectKey[]>([]);
+    let selectEffectType = ref<EffectKey[]>(["tag", "roundTag", "comboTag"]);//被選擇的技能位置種類 默認全選
 
     let b1=ref<InstanceType<typeof Switch>>();
     let b2=ref<InstanceType<typeof Switch>>();
@@ -240,17 +240,17 @@
         // 根據使用者定義排序條件 做重新排序
         sortCond.value.forEach((c) => {
             targetCard.value = [...targetCard.value].sort((a: CardItem, b: CardItem) => {
-            const order = c.sort ? -1 : 1;
+                const order = c.sort ? -1 : 1;
 
-            if (c.type === 'Id') {
-                // 用 id 排序
-                return (a.id - b.id) * order;
-            } else if (c.type === 'Rarity') {
-                // 用稀有度排序
-                return (a.rarity - b.rarity) * order;
-            }
+                if (c.type === 'Id') {
+                    // 用 id 排序
+                    return (a.id - b.id) * order;
+                } else if (c.type === 'Rarity') {
+                    // 用稀有度排序
+                    return (a.rarity - b.rarity) * order;
+                }
 
-            return 0; // 🔑 保險 return，避免 TS 報錯
+                return 0; //保險 return，避免 TS 報錯    
             });
         });
     }
@@ -286,6 +286,7 @@
         selectEffectType.value=[];//時光牌篩選效果種類
     
         isSearch.value=false;
+        store.Cardbutton=!isInput.value;
     }
 
     function CardByText(event:KeyboardEvent){
@@ -445,9 +446,8 @@
 
     onMounted(() => {
         isAddable.value = inject('frontpath') as string;
-
+  
         checkData();
-
         document.addEventListener('click', handleClickOutside);
 
         stopWatcher = watch(
@@ -489,7 +489,7 @@
                     <div><span class="text-white font-bold text-xl">系列</span></div>
                     <div class="[&>button]:mr-2 [&>button]:w-[10%] max-sm:[&>button]:w-[20%] [&>button]:min-w-[100px]
                             max-[500px]:[&>button]:small max-[500px]:[&>button]:min-w-[100px]">
-                        <button type="button" class="btn series break-keep" v-on:click="clicked('series_1')">晨曦塔</button>
+                        <button type="button" class="btn series break-keep clicked">晨曦塔</button>
                     </div>
                 </div>
                 <div class="flex flex-col flex-wrap w-full mt-5">
@@ -509,9 +509,9 @@
                         <EffectHint />           
                     </div>
                     <div class="flex flex-row [&>button]:mx-1">
-                        <button type="button" class="btn effect break-keep min-w-[100px] w-[15%]" v-on:click="clicked('effect_1')">即時效果</button>
-                        <button type="button" class="btn effect break-keep min-w-[100px] w-[15%]" v-on:click="clicked('effect_2')">回合效果</button>
-                        <button type="button" class="btn effect break-keep min-w-[100px] w-[15%]" v-on:click="clicked('effect_3')">連動效果</button>
+                        <button type="button" class="btn effect break-keep min-w-[100px] w-[15%] clicked" v-on:click="clicked('effect_1')">即時效果</button>
+                        <button type="button" class="btn effect break-keep min-w-[100px] w-[15%] clicked" v-on:click="clicked('effect_2')">回合效果</button>
+                        <button type="button" class="btn effect break-keep min-w-[100px] w-[15%] clicked" v-on:click="clicked('effect_3')">連動效果</button>
                     </div>
                 </div>
                 <div class="flex flex-col flex-wrap w-full mt-5 relative">
@@ -569,7 +569,7 @@
                         {{ (!sortCond.find((c)=>c.type==='Rarity')!.sort)?'高':'低' }}
                     </button>
                 </div>
-                <div class="flex flex-row flex-wrap max-[400px]:justify-evenly" v-if="targetCard.length!==0">
+                <div class="flex flex-row flex-wrap max-[400px]:gap-4" v-if="targetCard.length!==0">
                     <div v-for="card in targetCard" class="w-1/8 mr-3" :key="card.id">
                         <div class="flex flex-col mb-3" >
                             <div @click.stop="clickHandle(card.id)">

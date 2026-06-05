@@ -19,7 +19,7 @@ let description=[{
             <span class="text-white cursor-help">?</span>
         </div>
         <template #content>
-            <div class="bg-black rounded-md p-2 border-[2px] border-gray-700">
+            <div class="bg-stone-700/90 rounded-md p-2 border-[2px] border-gray-700">
                 <div>
                     <span class="text-stone-500">此區塊可以選擇下方篩選的功能只能出現在哪個效果裏頭，以下是每個效果觸發時機的簡述:</span>
                 </div>
