@@ -33,7 +33,7 @@ onMounted(()=>{
             <span class="text-white cursor-help">?</span>
         </div>
         <template #content>
-             <div class="max-[500px]:w-[100%] mt-2 p-2 rounded-md bg-black/90" v-if="data !==null ">
+             <div class="max-[500px]:w-[100%] mt-2 p-2 rounded-md bg-black/90 border-gray-700 border-[2px]" v-if="data !==null ">
                 <div>
                     <div class="flex">
                         <span class="text-stone-400 font-bold text-md">2025時光牌bingo目標:</span>

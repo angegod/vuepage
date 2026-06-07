@@ -278,12 +278,12 @@
     function TextOrCondition(){
         isInput.value=!isInput.value;
         //清空系列跟標籤選擇
-        seriesIndex.value=[];//時光牌系列代號
+        seriesIndex.value=[1];//時光牌系列代號
         selectFunc.value=[];//將被點選的解盾選項加入在此 默認使用And
         selectRarity.value=[];//被選擇的稀有度
         targetCard.value=[];//被選擇的卡片清單
         showCard.value=null;//顯示該卡詳細資訊
-        selectEffectType.value=[];//時光牌篩選效果種類
+        selectEffectType.value=['comboTag','roundTag','tag'];//時光牌篩選效果種類
     
         isSearch.value=false;
         store.Cardbutton=!isInput.value;
