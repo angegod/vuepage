@@ -2174,6 +2174,40 @@ let Card = [
           30
         ],
         "PointEnter": 8
+      },
+      {
+        "id": 61,
+        "name": "誓律背後的黑暗",
+        "rarity": 2,
+        "image": "/images/card/icon/1_61.png",
+        "instantEffect": [
+          "自身增加 2 回合亢奮狀態"
+        ],
+        "roundEffect": [
+          "增加 10 連擊 (Combo)",
+          "迴避所有敵人攻擊"
+        ],
+        "comboEffect": [
+          "自身技能 CD -2",
+          "自身無視「首殺盾」"
+        ],
+        "PointMax": 6,
+        "PointEnter": 6,
+        "PointConsume": 3,
+        "PointGet": 2,
+        "tag": [
+          31
+        ],
+        "comboTag": [
+          20,
+          38
+        ],
+        "roundTag": [
+          22,
+          29
+        ],
+        "fullimage": "/images/card/image/1_61.png",
+        "keyword": []
       }
     ]
   }

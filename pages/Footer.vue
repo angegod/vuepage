@@ -2,7 +2,7 @@
     <div class="footer [&>span]:m-3">
         <span>&copy; 2026 <a href="https://home.gamer.com.tw/profile/index.php?&owner=ange0733" class="underline">Ange</a></span>
         <span> Website created by Ange. All rights reserved.</span>
-        <span>Data latest Updated at 2026/06/05</span>
+        <span>Data latest Updated at 2026/06/10</span>
     </div>
 </template>
 <style scoped>
