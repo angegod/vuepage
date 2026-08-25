@@ -45,7 +45,11 @@
     let expand = ref<boolean[]>([]);
 
     //彈出視窗
-    const modalRef = ref<HTMLElement | null>(null)
+    const modalRef = ref<HTMLElement | null>(null);
+
+    
+    //擱置模式
+    const unused = ref<boolean>(false);
 
 
     function checkData(){//避免資料更新時需要改動，預設檢查機制
@@ -474,7 +478,7 @@
 </script>
 <template>
     <client-only>
-        <div class="Card [&>div]:w-4/5 [&>div]:mx-auto max-[500px]:[&>div]:w-5/6 pt-3" >
+        <div class="Card [&>div]:w-4/5 [&>div]:mx-auto max-[500px]:[&>div]:w-5/6 pt-3">
             <div class="flex flex-row flex-wrap justify-between max-[400px]:flex-col">
                 <div class="flex flex-row max-[350px]:flex-col">
                     <h1 class="text-[28px] font-bold text-red-600 mr-3">時光牌圖鑑</h1>
@@ -484,6 +488,7 @@
                     <button type="button" class="text-white border-b-white border-b-[1px]" @click="callcalculator">琉璃計算器</button>
                 </div>
             </div>
+            <Info :isUnused="unused"/>
             <div v-if="!isInput">
                 <div class="flex flex-col flex-wrap w-full mt-5">
                     <div><span class="text-white font-bold text-xl">系列</span></div>
@@ -649,6 +654,7 @@
                 </div>
             </div>
         </div>
+        
     </client-only>
 </template>
 <style lang="scss" scoped>

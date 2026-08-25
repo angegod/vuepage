@@ -259,7 +259,7 @@
 
         if(Number(spreadIndex)>0){
             let spreadData = {
-                image:`/images/card/image/1_${card.value.id}.png`,
+                image:`/images/card/spread/1_${card.value.id}.png`,
                 index:spreadIndex
             }
 

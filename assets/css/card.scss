@@ -5,6 +5,12 @@
   background-image: linear-gradient(to bottom, rgb(27, 25, 25) 0%, rgb(65, 28, 28) 70%, rgb(102, 12, 12) 90%);
 }
 
+.CardUnused{
+  @apply relative w-full pb-10;
+  min-height: 500px;
+  background-image: linear-gradient(to bottom, rgb(27, 25, 25) 0%, rgb(65, 28, 28) 70%, rgb(102, 12, 12) 90%);
+}
+
 .rarity {
    @apply opacity-60;
 

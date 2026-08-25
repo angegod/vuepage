@@ -1,4 +1,6 @@
-let Card = [
+import type { CardSeriesItem } from "@/interface/card";
+
+let Card:CardSeriesItem[] = [
   {
     "seriesId": 1,
     "seriesName": "晨曦塔",
@@ -624,7 +626,9 @@ let Card = [
         "PointConsume": 2,
         "PointGet": 2,
         "fullimage": "/images/card/image/1_19.png",
-        "keyword": [],
+        "keyword": [
+          ""
+        ],
         "tag": [
           24
         ],
@@ -1800,7 +1804,7 @@ let Card = [
         "PointGet": 2,
         "fullimage": "/images/card/image/1_51.png",
         "keyword": [
-          "曼陀羅"
+          ""
         ],
         "tag": [
           45
@@ -1919,7 +1923,11 @@ let Card = [
           "index": 1
         },
         "keyword": [
-          "普羅米修斯"
+          "普羅米修斯",
+          "",
+          "",
+          "",
+          ""
         ],
         "tag": [
           37
@@ -2183,34 +2191,159 @@ let Card = [
         "instantEffect": [
           "自身增加 2 回合亢奮狀態"
         ],
-        "roundEffect": [
-          "增加 10 連擊 (Combo)",
-          "迴避所有敵人攻擊"
-        ],
         "comboEffect": [
           "自身技能 CD -2",
           "自身無視「首殺盾」"
         ],
+        "roundEffect": [
+          "增加 10 連擊 (Combo)",
+          "迴避所有敵人攻擊"
+        ],
         "PointMax": 6,
-        "PointEnter": 6,
         "PointConsume": 3,
         "PointGet": 2,
+        "fullimage": "/images/card/image/1_61.png",
+        "keyword": [
+          ""
+        ],
         "tag": [
           31
-        ],
-        "comboTag": [
-          20,
-          38
         ],
         "roundTag": [
           22,
           29
         ],
-        "fullimage": "/images/card/image/1_61.png",
-        "keyword": []
+        "comboTag": [
+          20,
+          38
+        ],
+        "PointEnter": 6
+      },
+      {
+        "id": 62,
+        "name": "窺探心界",
+        "rarity": 3,
+        "image": "/images/card/icon/1_62.png",
+        "instantEffect": [
+          "自身發動攻擊前對敵方造成 200000000 點無屬性傷害 2 次",
+          "所有成員技能 CD -2"
+        ],
+        "comboEffect": [
+          "敵人行動 CD +2",
+          "回合結束時，\n將單數橫行的符石轉化為火強化符石，\n將雙數橫行的符石轉化為心強化符石"
+        ],
+        "roundEffect": [
+          "自身攻擊力提升 150%",
+          "自身無視「十字限盾」",
+          "自身無視「L字限盾」",
+          "自身無視「T字限盾」"
+        ],
+        "PointMax": 8,
+        "PointConsume": 4,
+        "PointGet": 2,
+        "fullimage": "/images/card/image/1_62.png",
+        "spread": {
+          "image": "/images/card/spread/1_62.png",
+          "index": 2
+        },
+        "keyword": [
+          "曼陀羅"
+        ],
+        "tag": [
+          24,
+          52
+        ],
+        "roundTag": [
+          8,
+          18,
+          19,
+          25
+        ],
+        "comboTag": [
+          30,
+          82,
+          86,
+          88
+        ],
+        "PointEnter": 8
+      },
+      {
+        "id": 63,
+        "name": "魔祭的序幕",
+        "rarity": 2,
+        "image": "/images/card/icon/1_63.png",
+        "instantEffect": [
+          "該回合增加 7 連擊 (Combo)"
+        ],
+        "comboEffect": [
+          "\t\n自身以 100% 攻擊力追打五屬性攻擊各 7 次"
+        ],
+        "roundEffect": [
+          "自身無視指定減傷抗性敵技",
+          "自身攻擊傷害無視「起結有序」"
+        ],
+        "PointMax": 6,
+        "PointConsume": 2,
+        "PointGet": 2,
+        "fullimage": "/images/card/image/1_63.png",
+        "keyword": [
+          "",
+          "",
+          "",
+          ""
+        ],
+        "tag": [
+          22
+        ],
+        "roundTag": [
+          12,
+          16
+        ],
+        "comboTag": [
+          59
+        ],
+        "PointEnter": 6
+      },
+      {
+        "id": 64,
+        "name": "破罪陣線",
+        "rarity": 2,
+        "image": "/images/card/icon/1_64.png",
+        "instantEffect": [
+          "自身進入 2 回合亢奮狀態",
+          "自身技能 CD -2"
+        ],
+        "comboEffect": [
+          "自身攻擊力提升 150%",
+          "自身無視「首消組數屬性符石盾」"
+        ],
+        "roundEffect": [
+          "自身攻擊力提升 300%",
+          "「灼熱地型」傷害減少 100%"
+        ],
+        "PointMax": 6,
+        "PointConsume": 2,
+        "PointGet": 2,
+        "fullimage": "/images/card/image/1_64.png",
+        "keyword": [
+          ""
+        ],
+        "tag": [
+          31,
+          38
+        ],
+        "roundTag": [
+          25,
+          72
+        ],
+        "comboTag": [
+          17,
+          25
+        ],
+        "PointEnter": 6
       }
     ]
   }
 ] ;
 
-export default Card ;
+export default Card;
