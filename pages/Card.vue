@@ -196,10 +196,10 @@
                 if(b2.value&&b2.value.getBool()){
                 
                     if(selectFunc.value.length!==0 && selectEffectType.value.length!==0){//如果有選入功能再做篩選，反之則不用篩選
-                        selectable = selectEffectType.value.some(key => {
-                            const effectList = item[key] ?? [];
-                            return selectFunc.value.every(f => effectList.includes(f.id));
-                        });
+                        const selectedTags = new Set(
+                            selectEffectType.value.flatMap(key => item[key] ?? [])
+                        );
+                        selectable = selectFunc.value.every(f => selectedTags.has(f.id));
 
                         if(!selectable)
                             return;
