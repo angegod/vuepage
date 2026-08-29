@@ -1,6 +1,6 @@
 import type { CardSeriesItem } from "@/interface/card";
 
-let Card:CardSeriesItem[] = [
+let Card :CardSeriesItem[] = [
   {
     "seriesId": 1,
     "seriesName": "晨曦塔",
@@ -331,7 +331,7 @@ let Card:CardSeriesItem[] = [
         ],
         "roundTag": [
           8,
-          53,
+          60,
           75
         ],
         "comboTag": [
@@ -599,7 +599,6 @@ let Card:CardSeriesItem[] = [
           23
         ],
         "roundTag": [
-          58,
           65,
           72
         ],
@@ -2153,7 +2152,7 @@ let Card:CardSeriesItem[] = [
           "自身無視「首消粒數盾」"
         ],
         "roundEffect": [
-          "自身無視「二屬盾」、「三屬盾」、「四屬盾」及「五屬盾",
+          "自身無視「二屬盾」、「三屬盾」、「四屬盾」及「五屬盾」",
           "增加 11 連擊 (Combo)",
           "迴避每個敵人的首次攻擊",
           "自身無視「首殺盾」"

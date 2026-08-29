@@ -21,7 +21,7 @@ export default defineNuxtConfig({
     },
     ssr: true, 
     app: {
-        baseURL: process.env.NODE_ENV === 'production' ? '/vuepage/' : '/',
+        baseURL: process.env.NODE_ENV === 'production' ? 'vuepage/' : '/',
         head: {
             link: [
               { rel: 'icon', type: 'image/x-icon', href: '/vuepage/favicon.ico' }, // 預設格式
